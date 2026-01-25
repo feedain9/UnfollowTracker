@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UnfollowTracker</title>
+  <link rel="stylesheet" href="styles/popup.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="url(#gradient)" stroke-width="2"/>
+          <path d="M8 12L11 15L16 9" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#667eea"/>
+              <stop offset="100%" stop-color="#764ba2"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">UnfollowTracker</span>
+      </div>
+      <button class="btn-icon" id="settingsBtn" title="Settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Status Bar -->
+    <div class="status-bar" id="statusBar">
+      <div class="status-indicator offline"></div>
+      <span class="status-text">Not connected to Instagram</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number" id="followersCount">--</span>
+          <span class="stat-label">Followers</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="followingCount">--</span>
+          <span class="stat-label">Following</span>
+        </div>
+        <div class="stat-card accent">
+          <span class="stat-number" id="unfollowersCount">--</span>
+          <span class="stat-label">Don't follow back</span>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <button class="btn-primary" id="scanBtn">
+        <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <span>Scan my account</span>
+      </button>
+
+      <!-- Progress -->
+      <div class="progress-section hidden" id="progressSection">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-text" id="progressText">Scanning followers...</p>
+      </div>
+
+      <!-- Results -->
+      <div class="results-section hidden" id="resultsSection">
+        <div class="results-header">
+          <h3>People who don't follow you back</h3>
+          <button class="btn-secondary" id="exportBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            Export
+          </button>
+        </div>
+        <div class="results-list" id="resultsList">
+          <!-- Users will be injected here -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Open Instagram to start scanning</p>
+    </footer>
+  </div>
+
+  <script src="scripts/popup.js"></script>
+</body>
+</html>
