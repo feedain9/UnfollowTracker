@@ -19,7 +19,7 @@ class UnfollowTrackerPopup {
       resultsSection: document.getElementById('resultsSection'),
       resultsList: document.getElementById('resultsList'),
       exportBtn: document.getElementById('exportBtn'),
-      settingsBtn: document.getElementById('settingsBtn'),
+      themeToggle: document.getElementById('themeToggle'),
     };
 
     this.isScanning = false;
@@ -29,6 +29,9 @@ class UnfollowTrackerPopup {
   }
 
   async init() {
+    // Load theme preference
+    await this.loadTheme();
+
     // Check if we're on Instagram
     await this.checkInstagramTab();
 
@@ -42,6 +45,23 @@ class UnfollowTrackerPopup {
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       this.handleMessage(message);
     });
+  }
+
+  async loadTheme() {
+    try {
+      const { theme } = await chrome.storage.local.get('theme');
+      const savedTheme = theme || 'dark';
+      document.body.setAttribute('data-theme', savedTheme);
+    } catch (error) {
+      document.body.setAttribute('data-theme', 'dark');
+    }
+  }
+
+  toggleTheme() {
+    const currentTheme = document.body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', newTheme);
+    chrome.storage.local.set({ theme: newTheme });
   }
 
   async checkInstagramTab() {
@@ -86,7 +106,7 @@ class UnfollowTrackerPopup {
   setupEventListeners() {
     this.elements.scanBtn.addEventListener('click', () => this.startScan());
     this.elements.exportBtn.addEventListener('click', () => this.exportResults());
-    this.elements.settingsBtn.addEventListener('click', () => this.openSettings());
+    this.elements.themeToggle.addEventListener('click', () => this.toggleTheme());
   }
 
   async startScan() {
@@ -201,22 +221,43 @@ class UnfollowTrackerPopup {
   createUserElement(user) {
     const div = document.createElement('div');
     div.className = 'user-item';
+
+    // Get initials for fallback avatar
+    const initials = this.getInitials(user.full_name || user.username);
+
     div.innerHTML = `
-      <img
-        class="user-avatar"
-        src="${user.profile_pic_url || 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\'%3E%3Ccircle cx=\'12\' cy=\'12\' r=\'10\' fill=\'%23333\'/%3E%3C/svg%3E'}"
-        alt="${user.username}"
-        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\'%3E%3Ccircle cx=\\'12\\' cy=\\'12\\' r=\\'10\\' fill=\\'%23333\\'/%3E%3C/svg%3E'"
-      />
-      <div class="user-info">
-        <span class="user-name">${user.full_name || user.username}</span>
-        <span class="user-handle">@${user.username}</span>
+      <div class="user-avatar-wrapper">
+        <div class="user-avatar-fallback">${initials}</div>
+        <img class="user-avatar" alt="${user.username}" />
       </div>
-      <button class="btn-unfollow" data-username="${user.username}">Unfollow</button>
+      <div class="user-info">
+        <span class="user-name">${this.escapeHtml(user.full_name || user.username)}</span>
+        <span class="user-handle">@${this.escapeHtml(user.username)}</span>
+      </div>
+      <button class="btn-unfollow" data-username="${this.escapeHtml(user.username)}">Unfollow</button>
     `;
 
-    // Add click handler for profile
-    div.querySelector('.user-info').addEventListener('click', () => {
+    // Load image with proper error handling
+    const img = div.querySelector('.user-avatar');
+    const fallback = div.querySelector('.user-avatar-fallback');
+
+    if (user.profile_pic_url) {
+      img.onload = () => {
+        img.style.opacity = '1';
+        fallback.style.opacity = '0';
+      };
+      img.onerror = () => {
+        img.style.display = 'none';
+        fallback.style.opacity = '1';
+      };
+      img.src = user.profile_pic_url;
+    } else {
+      img.style.display = 'none';
+      fallback.style.opacity = '1';
+    }
+
+    // Add click handler for profile (whole item clickable)
+    div.addEventListener('click', () => {
       chrome.tabs.create({ url: `https://www.instagram.com/${user.username}/` });
     });
 
@@ -227,6 +268,20 @@ class UnfollowTrackerPopup {
     });
 
     return div;
+  }
+
+  getInitials(name) {
+    return name
+      .split(/[\s._]+/)
+      .slice(0, 2)
+      .map((part) => part.charAt(0).toUpperCase())
+      .join('');
+  }
+
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
 
   async unfollowUser(username, element) {
@@ -264,11 +319,6 @@ class UnfollowTrackerPopup {
     a.click();
 
     URL.revokeObjectURL(url);
-  }
-
-  openSettings() {
-    // TODO: Implement settings panel
-    this.showToast('Settings coming soon!');
   }
 
   setStatus(type, text) {
