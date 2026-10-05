@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const { createHash } = require("node:crypto");
 const copy = require("../site/content");
 const articles = require("../site/articles");
 const config = require("../site/publication.json");
@@ -7,6 +8,11 @@ const { loadPosts } = require("../site/posts");
 const posts = loadPosts();
 const root = path.resolve(__dirname, "..");
 const out = path.join(root, "dist/site");
+const assetFiles = Object.fromEntries(["css", "js"].map((extension) => {
+  const content = fs.readFileSync(path.join(root, `site/assets/site.${extension}`));
+  const hash = createHash("sha256").update(content).digest("hex").slice(0, 12);
+  return [extension, `site.${hash}.${extension}`];
+}));
 const production = process.argv.includes("--production");
 const base = new URL(config.siteUrl);
 if (
@@ -175,7 +181,7 @@ function documentPage(lang, route, title, description, body, article = false, po
               }
             : {}),
         };
-  const html = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="${production ? "index,follow" : "noindex,nofollow"}"><link rel="canonical" href="${url}"><link rel="alternate" hreflang="fr" href="${base.origin}/fr/${route}"><link rel="alternate" hreflang="en" href="${base.origin}/en/${route}"><link rel="alternate" hreflang="x-default" href="${base.origin}/fr/${route}"><meta name="theme-color" content="#0b0b0e"><meta property="og:type" content="${article ? "article" : "website"}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url}"><meta property="og:site_name" content="UnfollowTracker"><meta property="og:locale" content="${lang === "fr" ? "fr_FR" : "en_US"}"><meta property="og:image" content="${base.origin}/assets/og-${lang}.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/png" href="/assets/icon32.png"><link rel="preload" href="/assets/manrope-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/site.css">${schema ? `<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>` : ""}<script defer src="/assets/site.js"></script></head><body>${header(lang, route)}${body}${footer(lang)}</body></html>`;
+  const html = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="${production ? "index,follow" : "noindex,nofollow"}"><link rel="canonical" href="${url}"><link rel="alternate" hreflang="fr" href="${base.origin}/fr/${route}"><link rel="alternate" hreflang="en" href="${base.origin}/en/${route}"><link rel="alternate" hreflang="x-default" href="${base.origin}/fr/${route}"><meta name="theme-color" content="#0b0b0e"><meta property="og:type" content="${article ? "article" : "website"}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url}"><meta property="og:site_name" content="UnfollowTracker"><meta property="og:locale" content="${lang === "fr" ? "fr_FR" : "en_US"}"><meta property="og:image" content="${base.origin}/assets/og-${lang}.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/png" href="/assets/icon32.png"><link rel="preload" href="/assets/manrope-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/${assetFiles.css}">${schema ? `<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>` : ""}<script defer src="/assets/${assetFiles.js}"></script></head><body>${header(lang, route)}${body}${footer(lang)}</body></html>`;
   const dest = path.join(out, lang, route);
   fs.mkdirSync(dest, { recursive: true });
   fs.writeFileSync(path.join(dest, "index.html"), html);
@@ -211,6 +217,9 @@ fs.mkdirSync(out, { recursive: true });
 fs.cpSync(path.join(root, "site/assets"), path.join(out, "assets"), {
   recursive: true,
 });
+for (const extension of ["css", "js"]) {
+  fs.copyFileSync(path.join(root, `site/assets/site.${extension}`), path.join(out, "assets", assetFiles[extension]));
+}
 fs.copyFileSync(
   path.join(root, "assets/fonts/manrope-latin.woff2"),
   path.join(out, "assets/manrope-latin.woff2"),
