@@ -3,6 +3,8 @@ const path = require("node:path");
 const copy = require("../site/content");
 const articles = require("../site/articles");
 const config = require("../site/publication.json");
+const { loadPosts } = require("../site/posts");
+const posts = loadPosts();
 const root = path.resolve(__dirname, "..");
 const out = path.join(root, "dist/site");
 const production = process.argv.includes("--production");
@@ -74,7 +76,7 @@ function header(lang, page = "") {
 }
 function footer(lang) {
   const t = copy[lang];
-  return `<footer class="site-footer wrap"><div class="footer-top"><div><a class="brand" href="/${lang}/">${brand()}</a><p>${t.footerTagline}</p></div><div class="footer-column"><h2>${t.footerProduct}</h2><a href="/${lang}/#extension">${t.nav[0]}</a><a href="/${lang}/#fonctionnement">${t.nav[1]}</a><a href="/${lang}/#installation">${lang === "fr" ? "Installation" : "Installation"}</a></div><div class="footer-column"><h2>${t.footerResources}</h2><a href="/${lang}/getting-started/">${t.guide}</a><a href="/${lang}/guides/non-followers/">${lang === "fr" ? "Comprendre les résultats" : "Understand your results"}</a><a href="/${lang}/guides/scan-troubleshooting/">${lang === "fr" ? "Résoudre un blocage" : "Troubleshoot a scan"}</a></div><div class="footer-column"><h2>${t.footerLegal}</h2><a href="/${lang}/privacy/">${t.privacy}</a><a href="/${lang}/legal/">${t.legal}</a>${config.supportEmail ? `<a href="mailto:${esc(config.supportEmail)}">Contact</a>` : ""}</div></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} UnfollowTracker</span><span>${t.unaffiliated}</span></div></footer>`;
+  return `<footer class="site-footer wrap"><div class="footer-top"><div><a class="brand" href="/${lang}/">${brand()}</a><p>${t.footerTagline}</p></div><div class="footer-column"><h2>${t.footerProduct}</h2><a href="/${lang}/#extension">${t.nav[0]}</a><a href="/${lang}/#fonctionnement">${t.nav[1]}</a><a href="/${lang}/#installation">${lang === "fr" ? "Installation" : "Installation"}</a></div><div class="footer-column"><h2>${t.footerResources}</h2><a href="/${lang}/blog/">Blog Instagram</a><a href="/${lang}/getting-started/">${t.guide}</a><a href="/${lang}/guides/non-followers/">${lang === "fr" ? "Comprendre les résultats" : "Understand your results"}</a><a href="/${lang}/guides/scan-troubleshooting/">${lang === "fr" ? "Résoudre un blocage" : "Troubleshoot a scan"}</a></div><div class="footer-column"><h2>${t.footerLegal}</h2><a href="/${lang}/privacy/">${t.privacy}</a><a href="/${lang}/legal/">${t.legal}</a>${config.supportEmail ? `<a href="mailto:${esc(config.supportEmail)}">Contact</a>` : ""}</div></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} UnfollowTracker</span><span>${t.unaffiliated}</span></div></footer>`;
 }
 const names = [
   ["Léa Morel", "lea.morel", "LM"],
@@ -135,18 +137,20 @@ function legal(lang) {
   return `<h1>${copy[lang].legal}</h1><h2>${fr ? "Éditeur" : "Publisher"}</h2>${contact(lang)}${config.publisherRegistration ? `<p>${esc(config.publisherRegistration)}</p>` : ""}${config.publisherAddress ? `<p>${esc(config.publisherAddress)}</p>` : ""}<h2>${fr ? "Hébergement" : "Hosting"}</h2><p>${config.hostingName ? esc(config.hostingName) : fr ? "Le site est en préparation. Les informations sur son hébergeur seront ajoutées avant sa mise en ligne publique." : "The site is being prepared. Hosting details will be provided before public launch."}</p><h2>${fr ? "Indépendance et disponibilité" : "Independence and availability"}</h2><p>${copy[lang].unaffiliated} ${fr ? "Instagram peut modifier ou limiter l’accès à ses services. UnfollowTracker ne garantit pas une disponibilité permanente ni l’absence de restrictions de compte." : "Instagram may change or limit access to its services. UnfollowTracker does not guarantee continuous availability or freedom from account restrictions."}</p><h2>${fr ? "Crédits" : "Credits"}</h2><p>Manrope — <a href="https://github.com/google/fonts/tree/main/ofl/manrope">SIL Open Font License</a>. ${fr ? "Photographies de démonstration" : "Demonstration photography"} — <a href="https://unsplash.com/license">Unsplash</a>.</p>`;
 }
 const routes = [];
-function documentPage(lang, route, title, description, body, article = false) {
+const lastModified = new Map();
+function documentPage(lang, route, title, description, body, article = false, post = null) {
   const url = `${base.origin}/${lang}/${route}`;
   const t = copy[lang];
   const schema = article
     ? {
         "@context": "https://schema.org",
-        "@type": "Article",
+        "@type": post ? "BlogPosting" : "Article",
         headline: title,
         inLanguage: lang,
-        dateModified: "2026-10-05",
+        dateModified: post ? post.updatedAt : "2026-10-05",
+        ...(post ? { datePublished: post.publishedAt, image: `${base.origin}/assets/og-${lang}.png` } : {}),
         mainEntityOfPage: url,
-        author: { "@type": "Organization", name: "UnfollowTracker" },
+        author: { "@type": "Organization", name: config.publisherName, url: `${base.origin}/${lang}/legal/` },
       }
     : route
       ? null
@@ -176,7 +180,33 @@ function documentPage(lang, route, title, description, body, article = false) {
   fs.mkdirSync(dest, { recursive: true });
   fs.writeFileSync(path.join(dest, "index.html"), html);
   routes.push(url);
+  if (post) lastModified.set(url, post.updatedAt);
 }
+function displayDate(value, lang) {
+  return new Intl.DateTimeFormat(lang === "fr" ? "fr-FR" : "en-GB", { dateStyle: "long", timeZone: "UTC" }).format(new Date(value));
+}
+function blogPages(lang) {
+  const fr = lang === "fr";
+  const size = 12;
+  const count = Math.max(1, Math.ceil(posts.length / size));
+  for (let page = 1; page <= count; page++) {
+    const route = page === 1 ? "blog/" : `blog/page/${page}/`;
+    const title = `${fr ? "Conseils et guides Instagram" : "Instagram tips and guides"}${page > 1 ? ` · ${page}` : ""}`;
+    const description = fr ? "Des réponses pratiques pour comprendre vos abonnements Instagram, lire vos résultats et utiliser UnfollowTracker." : "Practical answers to understand Instagram follows, interpret your results and use UnfollowTracker.";
+    const items = posts.slice((page - 1) * size, page * size).map((post) => `<article><p class="article-updated"><time datetime="${post.publishedAt}">${displayDate(post.publishedAt, lang)}</time></p><h2><a href="/${lang}/blog/${post.slug}/">${esc(post[lang].title)}</a></h2><p>${esc(post[lang].description)}</p></article>`).join("");
+    const paging = count > 1 ? `<nav aria-label="${fr ? "Pages du blog" : "Blog pages"}">${Array.from({ length: count }, (_, i) => `<a ${i + 1 === page ? 'aria-current="page" ' : ""}href="/${lang}/blog/${i ? `page/${i + 1}/` : ""}">${i + 1}</a>`).join(" · ")}</nav>` : "";
+    const body = `<main id="main" class="article wrap"><a class="text-link article-back" href="/${lang}/">${copy[lang].back}</a><h1>${title}</h1><p class="article-lead">${description}</p>${items || `<p>${fr ? "Les premiers articles arrivent bientôt. En attendant, découvrez nos guides pratiques." : "The first articles are coming soon. Explore our practical guides in the meantime."}</p><p><a href="/${lang}/guides/non-followers/">${copy[lang].guideTitles[0]}</a></p>`}${paging}</main>`;
+    documentPage(lang, route, `${title} | UnfollowTracker`, description, body);
+  }
+  for (const post of posts) {
+    const entry = post[lang];
+    const sections = entry.sections.map((section) => `<section><h2>${esc(section.heading)}</h2>${section.paragraphs.map((p) => `<p>${esc(p)}</p>`).join("")}${["steps", "bullets"].map((kind) => section[kind]?.length ? `<${kind === "steps" ? "ol" : "ul"}>${section[kind].map((item) => `<li>${esc(item)}</li>`).join("")}</${kind === "steps" ? "ol" : "ul"}>` : "").join("")}${section.sources?.length ? `<p>${fr ? "Sources" : "Sources"} : ${section.sources.map((i) => `<a href="${esc(post.sources[i - 1].url)}">${esc(post.sources[i - 1].title)}</a>`).join(" · ")}</p>` : ""}</section>`).join("");
+    const body = `<main id="main" class="article wrap"><a class="text-link article-back" href="/${lang}/blog/">${fr ? "Tous les articles" : "All articles"}</a><article><h1>${esc(entry.title)}</h1><p class="article-lead">${esc(entry.lead)}</p><p class="article-updated">${esc(config.publisherName)} · ${fr ? "Publié le" : "Published"} <time datetime="${post.publishedAt}">${displayDate(post.publishedAt, lang)}</time>${post.updatedAt !== post.publishedAt ? ` · ${fr ? "Mis à jour le" : "Updated"} <time datetime="${post.updatedAt}">${displayDate(post.updatedAt, lang)}</time>` : ""}</p>${sections}<h2>${fr ? "Pour aller plus loin" : "Further reading"}</h2><ul>${entry.related.map((link) => `<li><a href="/${lang}/${link.route}">${esc(link.label)}</a></li>`).join("")}</ul><h2>${fr ? "Sources et méthode" : "Sources and method"}</h2><p>${fr ? "Cet article est rédigé et vérifié avec l’aide d’outils d’IA à partir des sources ci-dessous. Il ne constitue pas une documentation officielle d’Instagram. Signalez une erreur à" : "This article is written and checked with AI tools using the sources below. It is not official Instagram documentation. Report an error to"} <a href="mailto:${esc(config.supportEmail)}">${esc(config.supportEmail)}</a>.</p><ul>${post.sources.map((source) => `<li><a href="${esc(source.url)}">${esc(source.title)}</a> — ${fr ? "consulté le" : "accessed"} ${displayDate(source.checkedAt, lang)}</li>`).join("")}</ul></article><div class="article-next">${cta(lang)}</div></main>`;
+    documentPage(lang, `blog/${post.slug}/`, `${entry.title} | UnfollowTracker`, entry.description, body, true, post);
+  }
+}
+// Remove generated output so drafts, deleted posts and old pagination cannot linger.
+fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
 fs.cpSync(path.join(root, "site/assets"), path.join(out, "assets"), {
   recursive: true,
@@ -196,6 +226,7 @@ fs.copyFileSync(
 for (const lang of ["fr", "en"]) {
   const t = copy[lang];
   documentPage(lang, "", t.title, t.description, landing(lang));
+  blogPages(lang);
   const pages = [
     {
       route: "privacy/",
@@ -232,6 +263,13 @@ for (const lang of ["fr", "en"]) {
     local,
   );
 }
+for (const post of posts) {
+  for (const lang of ["fr", "en"]) {
+    for (const link of post[lang].related) {
+      if (!routes.includes(`${base.origin}/${lang}/${link.route}`)) throw new Error(`Broken article link: ${lang}/${link.route}`);
+    }
+  }
+}
 fs.writeFileSync(
   path.join(out, "index.html"),
   '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=/fr/"><title>UnfollowTracker</title></head><body><a href="/fr/">Français</a> · <a href="/en/">English</a></body></html>',
@@ -248,7 +286,7 @@ fs.writeFileSync(
 );
 fs.writeFileSync(
   path.join(out, "sitemap.xml"),
-  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${(production ? routes.filter((url) => !url.endsWith("/legal/")) : []).map((url) => `<url><loc>${url}</loc></url>`).join("")}</urlset>`,
+  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${(production ? routes.filter((url) => !url.endsWith("/legal/")) : []).map((url) => `<url><loc>${url}</loc>${lastModified.has(url) ? `<lastmod>${lastModified.get(url)}</lastmod>` : ""}</url>`).join("")}</urlset>`,
 );
 fs.writeFileSync(path.join(out, "_redirects"), "/ /fr/ 302\n");
 fs.writeFileSync(
