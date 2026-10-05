@@ -1,17 +1,33 @@
 ---
 name: UnfollowTracker
-description: Warm dark surfaces, clear reciprocal-follow results, and a coral-to-purple ring.
+description: An ivory website with violet actions and coral accents, alongside a themeable browser panel.
 colors:
-  site-bg: "#0b0b0e"
-  site-text: "#fff8f4"
-  site-muted: "#b4adb3"
-  site-quiet: "#a0979f"
-  site-line: "#2c272d"
-  site-coral: "#ffb19c"
-  site-button-ink: "#181114"
-  ring-peach: "#fdba94"
-  ring-coral: "#f57b70"
-  ring-purple: "#9c67bb"
+  site-bg: "#fffcfa"
+  site-text: "#292332"
+  site-muted: "#665e6d"
+  site-quiet: "#716776"
+  site-line: "#e4d9e2"
+  site-coral: "#b44542"
+  site-button-ink: "#ffffff"
+  site-surface: "#ffffff"
+  site-purple: "#8241a5"
+  site-purple-hover: "#6d318f"
+  site-lavender: "#f4edf8"
+  site-peach: "#fff1e9"
+  site-scrollbar: "#b7a5bb"
+  site-reciprocal: "#427652"
+  ring-tip: "#e64955"
+  ring-line: "#c135841a"
+  ring-glow: "#833ab414"
+  site-hero-glow: "#f777371c"
+  site-browser-shadow: "#49325255"
+  site-menu-shadow: "#4932521f"
+  demo-text: "#fff8f4"
+  demo-coral: "#ffb19c"
+  demo-button-ink: "#181114"
+  ring-peach: "#f77737"
+  ring-coral: "#c13584"
+  ring-purple: "#833ab4"
   panel-bg: "#0c0c0e"
   panel-surface: "#151518"
   panel-raised: "#1e1e22"
@@ -33,24 +49,24 @@ colors:
   selection-rust: "#a44133"
   panel-scrim: "#0009"
   policy-muted: "#bcb8bd"
-  site-outline: "#61504e"
-  site-outline-hover: "#392423"
-  site-outline-hover-line: "#aa7165"
-  site-trust: "#c7bdc4"
-  site-feature-line: "#3c292d"
-  site-feature-copy: "#c3b6bf"
-  site-feature-note: "#d6b2a7"
-  site-step-line: "#534045"
-  site-faq-icon: "#d5b7ba"
-  site-faq-copy: "#c8bdc7"
-  site-closing-line: "#70443c"
-  site-closing-glow: "#6a322b"
-  site-closing-copy: "#e2bfb9"
-  site-closing-note: "#deb5ab"
-  site-article-copy: "#c0b4bf"
-  site-article-line: "#44313e"
-  site-article-heading: "#f3cac0"
-  site-menu-line: "#51404c"
+  site-outline: "#997da6"
+  site-outline-hover: "#f4edf8"
+  site-outline-hover-line: "#8241a5"
+  site-trust: "#665e6d"
+  site-feature-line: "#e4d9e2"
+  site-feature-copy: "#665e6d"
+  site-feature-note: "#b44542"
+  site-step-line: "#997da6"
+  site-faq-icon: "#8241a5"
+  site-faq-copy: "#665e6d"
+  site-closing-line: "#eacabd"
+  site-closing-glow: "#fbe6dd"
+  site-closing-copy: "#665e6d"
+  site-closing-note: "#b44542"
+  site-article-copy: "#665e6d"
+  site-article-line: "#e4d9e2"
+  site-article-heading: "#292332"
+  site-menu-line: "#e4d9e2"
 typography:
   display:
     fontFamily: "Manrope, sans-serif"
@@ -149,12 +165,12 @@ spacing:
   xxl: "32px"
 components:
   button-site-primary:
-    backgroundColor: "{colors.site-text}"
+    backgroundColor: "{colors.site-purple}"
     textColor: "{colors.site-button-ink}"
     rounded: "{rounded.control}"
     padding: "13px 24px"
   button-site-primary-hover:
-    backgroundColor: "{colors.site-coral}"
+    backgroundColor: "{colors.site-purple-hover}"
   button-site-outline:
     backgroundColor: "transparent"
     textColor: "{colors.site-text}"
@@ -206,12 +222,12 @@ components:
 
 **Creative North Star: "Clarity, alongside you"**
 
-UnfollowTracker uses warm near-black, off-white, a restrained coral accent, and its existing open coral-to-purple ring. Manrope carries both the spacious website and the compact browser panel. The result is quiet and practical: a clear result, a visible next action, and enough separation to read names and status without decoration competing with them. The North Star is descriptive shorthand for the built artifacts, not a newly approved identity or design comp.
+UnfollowTracker pairs an ivory website with violet actions, restrained coral accents, and its existing open orange-to-magenta-to-purple ring. The browser panel retains its independent dark and light themes. Manrope carries both the spacious website and the compact browser panel. The result is quiet and practical: a clear result, a visible next action, and enough separation to read names and status without decoration competing with them. The North Star is descriptive shorthand for the built artifacts, not a newly approved identity or design comp.
 
 The same identity supports two densities. The website gives the product demonstrations room; the extension fits working controls into a narrow browser panel. A light panel theme changes the neutral and accent roles while preserving structure. The reference-led page composition and each surface's mode belong in [the surface brief](.impeccable/surfaces/site-index-html.md), not in the global identity.
 
 **Key Characteristics:**
-- Warm dark neutrals and off-white text, with an equivalent light panel palette.
+- An ivory marketing canvas with charcoal text, pale peach and lavender surfaces, and a separate light/dark panel palette.
 - A distinctive open ring; simple stroke SVGs for functional icons.
 - One type family, tight large headlines, tabular result numbers, and calm body copy.
 - Tonal surfaces, thin boundaries, moderate corners, and restrained responsive feedback.
@@ -219,19 +235,22 @@ The same identity supports two densities. The website gives the product demonstr
 
 Recorded from `site/assets/site.css`, `site/assets/site.js`, `scripts/build-site.js`, `src/popup.html`, `src/styles/popup.css`, `src/scripts/popup.js`, `src/scripts/i18n.js`, and the site content on 5 October 2026. Visual references: [desktop](.impeccable/review/desktop.png) (1440 × 6163), [desktop hero](.impeccable/review/desktop-hero.png) (1440 × 1000), [mobile](.impeccable/review/mobile.png) (390 × 7578), [French dark panel](.impeccable/review/panel-results-fr.png) and [English light panel](.impeccable/review/panel-light-en.png) (both 360 × 800). The finish review accepted the prepared visual artifacts. Native Brave panel placement and the actual deployment configuration remain release prerequisites; this document does not claim deployment or new live-browser verification.
 
+Visual refinement on 6 October 2026: the owner requested a lighter landing page closer to the logo. Only website color roles and the browser theme color changed; layout, typography, content, extension themes and interactions remain intact. The surface brief and sidecar carry the same color direction.
+
 ## Colors
 
-Warm black and ivory carry the interface; peach coral draws attention without becoming the background of every action.
+Warm ivory and charcoal make the website bright and readable. Violet anchors the heading and main actions; coral provides smaller emphasis. The product demonstrations retain the real panel’s dark palette within clearly bounded frames.
 
 ### Primary
 
-- **Site coral** highlights the second hero line, useful icons, textual links, hover feedback, and demonstration results.
+- **Site purple** highlights the second hero line and fills primary website actions; a deeper purple supplies hover feedback.
+- **Site coral** highlights useful icons, textual links, focus and comparison results. Pale peach and lavender carry section backgrounds without lowering text contrast.
 - **Panel coral** marks the non-reciprocal count, active scan progress, and focus. **Light panel rust** fills those same roles on pale surfaces.
-- Primary buttons rest in the opposite neutral: ivory on dark surfaces, dark on the light panel. Coral enters on hover.
+- Website primary buttons use white text on violet. The extension and its dark demonstrations retain neutral primary buttons and coral hover feedback.
 
 ### Secondary
 
-- **Ring peach, coral, and purple** form the existing identity mark. The website uses a broken conic gradient with a small detached tip and an inset matching its surface. The extension uses its supplied raster logo. Purple is not a general control accent.
+- **Ring orange, magenta, purple and coral tip** echo the supplied raster identity. The website uses a broken conic gradient with a small detached tip and an inset matching its surface. Purple also connects website actions to the logo; the extension uses its supplied raster logo unchanged.
 
 ### Tertiary
 
@@ -242,11 +261,11 @@ Warm black and ivory carry the interface; peach coral draws attention without be
 - **Site background, text, muted, quiet, and line** separate the canvas, main reading, supporting copy, annotation, and boundaries.
 - **Panel background, surface, and raised** establish the canvas, stat cards/search/dialog, and hover/avatar-fallback layers. **Panel text, muted, and line** remain distinct in both themes.
 
-**The Accent Has a Job Rule.** Use coral for the result, emphasis, links, focus, or responsive feedback. Keep default primary actions neutral and high contrast.
+**The Accent Has a Job Rule.** On the website, use violet for primary actions and hero emphasis, and coral for supporting emphasis, links and focus. Keep each accent readable against ivory and tinted surfaces. Product illustrations use their own dark theme roles.
 
 **The Theme Roles Rule.** Switch the complete panel palette together. Preserve the muted/text/border hierarchy and use the darker rust accent in the light theme.
 
-The YAML records reused source values. Demo-only scenery colors and the unused website salmon variable are deliberately not promoted into the shared palette. Sidecar tonal ramps are synthesized previews, not additional production tokens. The frontmatter also records live selection, dialog, policy, article, FAQ, outline-button and closing-section roles previously omitted from the token layer. Scenery-only colors remain scoped exceptions.
+The YAML records reused source values. Demo-only scenery colors remain scoped to the product illustrations. Sidecar tonal ramps are synthesized previews, not additional production tokens. The frontmatter also records live selection, dialog, policy, article, FAQ, outline-button and closing-section roles previously omitted from the token layer. Scenery-only colors remain scoped exceptions.
 
 ## Typography
 
@@ -282,9 +301,9 @@ Depth comes primarily from tonal changes and thin boundaries. The panel's cards,
 
 ### Shadow Vocabulary
 
-- **Browser demonstration:** `0 35px 80px -40px #000`, a wide shadow under the large browser frame.
+- **Browser demonstration:** `0 35px 80px -40px #49325255`, a wide shadow under the large browser frame.
 - **Overlapping miniature window:** `0 16px 45px #09040855`, reinforcing the front window in the persistence illustration.
-- **Open mobile navigation:** `0 15px 40px #0008`, separating the expanded menu from page content.
+- **Open mobile navigation:** `0 15px 40px #4932521f`, separating the expanded menu from page content.
 - **Modal backdrop:** `#0009`, with a bordered panel surface and no panel shadow.
 
 **The Tonal First Rule.** Use surface color and a one-pixel boundary for routine working containers. Reserve shadow for the website's visibly layered objects and open navigation.
@@ -299,9 +318,9 @@ Circles identify avatars, connection dots, and the ring. The ring remains open a
 
 ### Buttons
 
-Direct, readable, and neutral at rest. Website actions have a 50px minimum height; the compact header variant has a 39px minimum. Panel primary actions fill their available width with a 46px minimum height. Secondary panel actions have a 32px minimum and a thin border. Compact row actions use the smaller radius and fit the narrow list.
+Direct and readable: violet website actions and neutral panel actions. Website actions have a 50px minimum height; the compact header variant has a 39px minimum. Panel primary actions fill their available width with a 46px minimum height. Secondary panel actions have a 32px minimum and a thin border. Compact row actions use the smaller radius and fit the narrow list.
 
-Hover styling is restricted to devices that report hover. Primary controls turn coral; secondary panel and icon buttons take the raised surface. Presses scale enabled main controls to 0.98. Website transitions use 180ms with `cubic-bezier(0.16, 1, 0.3, 1)`; panel controls use 160ms ease-out. Disabled panel buttons have half opacity and no active feedback. Site demo buttons disable during replay and show progress text.
+Hover styling is restricted to devices that report hover. Website primary controls deepen to violet; panel primary controls turn coral. Secondary panel and icon buttons take the raised surface. Presses scale enabled main controls to 0.98. Website transitions use 180ms with `cubic-bezier(0.16, 1, 0.3, 1)`; panel controls use 160ms ease-out. Disabled panel buttons have half opacity and no active feedback. Site demo buttons disable during replay and show progress text.
 
 ### Inputs / Fields
 
@@ -344,7 +363,7 @@ Privacy is explained in nearby copy and complete localized pages: comparison and
 
 ### Do:
 
-- **Do** preserve the open ring, Manrope, warm neutrals, and role-based coral emphasis across both themes.
+- **Do** preserve the open ring, Manrope, warm neutrals, and defined violet/coral roles. Keep the website light and product demonstrations scoped to their own theme.
 - **Do** keep names, handles, result counts, status, and actions visibly distinct in narrow panels.
 - **Do** retain keyboard focus, native disclosure/dialog semantics, localized accessible labels, and reduced-motion behavior.
 - **Do** show whether data is a real complete snapshot or a fictional demonstration, alongside the relevant interface.
@@ -353,7 +372,7 @@ Privacy is explained in nearby copy and complete localized pages: comparison and
 ### Don't:
 
 - **Don't** turn miniature demonstration labels into the default typography for working controls or reading text.
-- **Don't** convert the ring's purple into an unrelated second action palette or fill every container with coral.
+- **Don't** fill every container with saturated brand color or let the demonstration’s dark palette become the website canvas.
 - **Don't** communicate connection, progress, or result meaning with color alone.
 - **Don't** replace per-account confirmation with an automatic or bulk unfollow control.
 - **Don't** imply historical unfollow detection, mobile extension support, guaranteed availability, or an existing store listing.

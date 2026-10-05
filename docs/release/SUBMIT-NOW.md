@@ -4,7 +4,7 @@ Le propriétaire a autorisé la soumission. Le navigateur connecté bloque l’a
 
 ## Fichier à importer
 
-Dans [le tableau de bord du propriétaire](https://chrome.google.com/webstore/devconsole/8f5cb986-87d0-436a-8570-16e07303d819), choisir le nouvel élément ou la fiche UnfollowTracker existante, puis importer `dist/unfollowtracker-1.1.0.zip`. Ne pas créer une deuxième fiche si la première existe déjà.
+Dans [le tableau de bord du propriétaire](https://chrome.google.com/webstore/devconsole/8f5cb986-87d0-436a-8570-16e07303d819/ckkgnnifiojkmmfmeejeebafldholdnc/edit), compléter la fiche existante **ckkgnnifiojkmmfmeejeebafldholdnc** fournie le 6 octobre 2026, puis importer si nécessaire `dist/unfollowtracker-1.1.0.zip`. Ne pas créer une deuxième fiche si la première existe déjà.
 
 Archive : 22 fichiers, 82 269 octets, version 1.1.0, manifeste à la racine.
 
