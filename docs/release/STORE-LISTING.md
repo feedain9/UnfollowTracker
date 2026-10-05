@@ -62,9 +62,9 @@ French and English, dark and light themes. Desktop Chrome 116 or later. Independ
 
 ## Liens à renseigner lors de la soumission
 
-- Accueil prévu : `https://unfollow.yadulink.com/fr/` ou `/en/`.
-- Confidentialité prévue : `https://unfollow.yadulink.com/fr/privacy/` ou `/en/privacy/`.
+- Accueil : `https://unfollow.yadulink.com/fr/` ou `/en/`.
+- Confidentialité : `https://unfollow.yadulink.com/fr/privacy/` ou `/en/privacy/`.
 - Support : support@yadulink.com. Éditeur : AVICLICK (Yadulink).
-- Lien de boutique : attribué par le Chrome Web Store ; le reporter dans `site/publication.json` dès qu’il existe.
+- Lien de boutique : attribué par le Chrome Web Store ; le reporter dans `site/publication.json` lorsque la fiche est publique et permet effectivement l’installation.
 
-Ces URL sont une configuration préparée. Leur hébergement n’a pas été publié dans cette intervention.
+Le site et ces politiques sont hébergés publiquement sur Cloudflare Pages depuis le 5 octobre 2026. Le lien d’installation reste désactivé jusqu’à l’acceptation et la disponibilité publique de la fiche du store.

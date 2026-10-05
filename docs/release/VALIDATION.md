@@ -1,6 +1,6 @@
 # Validation de préparation — 5 octobre 2026
 
-Version 1.1.0 préparée, sans soumission au store ni déploiement public.
+Version 1.1.0 préparée. Site déployé sur Cloudflare Pages et domaine actif ; soumission au Chrome Web Store bloquée par la restriction du navigateur sur le pilotage de cette interface.
 
 ## Vérifications effectuées
 
@@ -12,14 +12,14 @@ Version 1.1.0 préparée, sans soumission au store ni déploiement public.
 | `npm run test:avatars` | Réussi dans une extension MV3 isolée : chargement direct ou depuis l’onglet Instagram, photos expirées/absentes, hôtes non autorisés, cache mémoire après changement de langue, conservation du scan. Aucune requête réelle ni requête API. |
 | `npm run test:site` | Réussi : FR/EN, liens et ancres, clavier, démonstration persistante, export fictif, FAQ, navigation mobile, largeurs responsives, données structurées, contenu sans JavaScript ; aucune requête externe. |
 | Aperçu dans Brave | Landing locale ouverte et contenu visible, avec lien de contact Yadulink. |
-| Builds aperçu / production | 14 pages localisées chacun. Aperçu fermé à l’indexation ; copie indexable conservée dans `dist/site-production`. La génération ne déploie rien. |
+| Builds aperçu / production | 18 pages localisées chacun, avec le blog et son premier article FR/EN. Aperçu fermé à l’indexation ; copie indexable conservée dans `dist/site-production`. La génération ne déploie rien. |
 | Archive | 22 fichiers, manifeste à la racine, notices et licences présentes, intégrité ZIP vérifiée. Aucune dépendance, donnée de test, note interne ou donnée de compte réel incluse. |
 | `git diff --check` | Réussi. |
 
-Empreinte de l’archive préparée `dist/unfollowtracker-1.1.0.zip` (82 270 octets) :
+Empreinte de l’archive préparée `dist/unfollowtracker-1.1.0.zip` (82 269 octets) :
 
 ```text
-39ea7bf12a81c3cb026d146e5b9b5f868755c21b7efc2ab07058c190689ec342
+1613fca0a0f690723b6e717c4864f6c2c35cc33ca7c8807fc2e6e0bc61f918dd
 ```
 
 La commande d’empaquetage régénère aussi le fichier `.sha256`, à consulter après toute modification future.
@@ -49,3 +49,14 @@ La version 1.1.0 n’a pas été validée dans le panneau natif de la session Br
 Les tests ne garantissent pas la disponibilité future des endpoints Instagram. Aucune action de désabonnement n’a été exécutée sur un compte réel pendant cette préparation.
 
 L’identité publique reprend Yadulink à la demande du propriétaire. La publication a ensuite été autorisée le 5 octobre : l’hébergement retenu est Cloudflare Pages, et les politiques publiques comme les politiques intégrées à l’archive ont été mises à jour en conséquence. Le statut effectif du domaine et du store doit être vérifié au terme du déploiement.
+
+## Mise en ligne — 5 octobre 2026
+
+- Cloudflare Pages relié à `feedain9/UnfollowTracker`, branche `main`, domaine `unfollow.yadulink.com` actif avec SSL. Ajout de ce seul nom à la liste des hôtes autorisés dans la règle Host ; aucun autre hôte, action ou critère modifié.
+- Contrôle HTTPS public : pages FR/EN, politiques, mentions légales, blog, article FR/EN, JavaScript et police répondent 200 ; page inexistante 404. Canonical exact, `index,follow`, robots ouvert et sitemap de 16 URL.
+- Quatre tests éditoriaux supplémentaires réussis : traductions, références, dates et liens sûrs, exclusion brouillons/futur, intentions dupliquées. Tests site étendus aux deux articles, BlogPosting, alternates et absence de débordement mobile ; lint et `git diff --check` réussis.
+- Premier passage Superset réel : run `0fda692a-d173-4583-84ed-74f22dbf9e30`, article JSON export FR/EN, commit `db04666cdc947e62d8a7986e99bd1b52b8e79ce9`. Publication HTTPS et sitemap vérifiés. La commande de logs conserve l’état technique `dispatched` pour ce terminal interactif ; le terminal de l’agent affiche le travail achevé. Le résultat public a été vérifié séparément.
+- Déclencheur actif vérifié dans `automations get` : quotidien à 09:00 Europe/Zurich sur le Mac configuré. Premier prochain lancement prévu le 6 octobre 2026. La disponibilité du poste reste nécessaire.
+- La restriction Chrome « The extensions gallery cannot be scripted » empêche toute soumission automatique dans le tableau de bord connecté. Le ZIP final, les visuels et les champs sont disponibles dans `SUBMIT-NOW.md`. Aucune soumission ni acceptation du store ne sont revendiquées.
+
+Capture de la page réellement publiée : `.impeccable/review/published-landing.jpg` (locale, non incluse dans le ZIP de l’extension).

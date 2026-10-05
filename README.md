@@ -40,7 +40,7 @@ npm run build
 
 `npm run build` produces `dist/site/` and `dist/unfollowtracker-1.1.0.zip` with a SHA-256 file. The archive contains only extension files and relevant third-party notices. Native canvas is only needed for the historical optional icon generator, not normal builds.
 
-## Publication preparation
+## Publication and daily articles
 
 **Nothing is deployed or submitted by these commands.** The site defaults to prelaunch with `noindex`; installation links become live when `site/publication.json` contains the real Chrome Web Store URL. Production builds require public publisher/support/hosting details and generate the sitemap and indexable pages.
 
@@ -50,7 +50,11 @@ npm run build
 - [Weespy reference analysis](docs/weespy-reference-audit.md)
 - [SEO strategy](docs/seo/SEO-STRATEGY.md) and [domain research](docs/seo/DOMAINS.md)
 
-Suggested configurable host: `unfollow.yadulink.com`. Publisher/support details reuse Yadulink as requested. Native live Brave panel placement, hosting configuration and store submission remain release steps.
+The landing page is live at [unfollow.yadulink.com](https://unfollow.yadulink.com/fr/), hosted on Cloudflare Pages. The `unfollowtracker` project deploys every push to `main` with `node scripts/build-site.js --production`, output `dist/site` and `SKIP_DEPENDENCY_INSTALL=true`. Publisher/support details reuse Yadulink as requested.
+
+A Superset Codex automation writes and publishes one article in French and English daily at 09:00 Europe/Zurich, in a fresh project workspace. It runs on the configured Mac, which must be available with Superset. The first run published the JSON export guide. See the [editorial workflow](docs/seo/DAILY-PUBLISHING.md) and [topic calendar](docs/seo/CONTENT-CALENDAR.md). Posts are structured JSON in `site/posts/`; the builder validates both languages, dates, citations, unique intent and internal links. Drafts and future-dated posts stay out of the public build.
+
+The Chrome Web Store console refuses browser automation. The extension has **not been submitted**; the [complete submission kit](docs/release/SUBMIT-NOW.md) is ready for the account holder. Keep `storeUrl` null until the extension is actually available for installation.
 
 ## Files
 

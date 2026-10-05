@@ -1,6 +1,6 @@
 # Dossier de publication — UnfollowTracker 1.1.0
 
-L’extension et le site sont préparés. Aucun achat, changement DNS, hébergement public ni envoi au Chrome Web Store n’a été effectué.
+Le site est publié sur https://unfollow.yadulink.com depuis le 5 octobre 2026. L’archive 1.1.0 et le dossier du store sont prêts ; aucun envoi au Chrome Web Store n’a abouti car le navigateur refuse le pilotage de cette interface (« The extensions gallery cannot be scripted »).
 
 ## Artefacts et commandes
 
@@ -52,7 +52,7 @@ La validation visuelle du panneau natif dans la session Brave de l’utilisateur
 
 ## Site et sous-domaine
 
-Configuration dans `site/publication.json`. Cible préparée : `https://unfollow.yadulink.com` ; aucun sous-domaine n’a été créé. Les informations publiques de l’éditeur et de l’hébergeur reprennent celles de Yadulink, à la demande de l’utilisateur ; voir `PUBLICATION-IDENTITY.md`. La clé `storeUrl` reste nulle jusqu’à l’existence d’une fiche officielle ; les CTA restent honnêtement en prépublication.
+Configuration dans `site/publication.json`. Domaine public : `https://unfollow.yadulink.com`, CNAME vers `unfollowtracker.pages.dev`, HTTPS actif. Les informations publiques de l’éditeur et de l’hébergeur reprennent celles de Yadulink, à la demande de l’utilisateur ; voir `PUBLICATION-IDENTITY.md`. La clé `storeUrl` reste nulle jusqu’à la disponibilité publique d’une fiche officielle permettant l’installation ; les CTA restent honnêtement en prépublication.
 
 Pour l’aperçu : `npm run site:dev`, puis `http://localhost:4173/fr/` ou `/en/`.
 
@@ -62,9 +62,10 @@ L’hébergeur doit servir `index.html` dans les répertoires, une vraie répons
 
 Après la mise en ligne autorisée : vérifier canoniques et alternates sur l’URL finale, la politique publique, l’absence de `noindex`, le sitemap et les réponses HTTP ; ajouter la propriété Search Console. Après acceptation du store : renseigner `storeUrl`, régénérer puis déployer le site, et vérifier le bouton d’installation.
 
-## Décisions encore nécessaires
+## Exploitation et prochaine étape
 
-- Configuration Azure effective (dont journaux et proxy éventuel) et validation du sous-domaine proposé.
-- Dernière recette du panneau natif sur Chrome/Brave.
-- Compte développeur et paramètres de distribution du Chrome Web Store.
-- Relecture et autorisation de soumettre/publier. La préparation seule ne garantit pas l’acceptation du store ni la stabilité future des endpoints Instagram.
+Le projet Cloudflare Pages `unfollowtracker` est lié au dépôt `feedain9/UnfollowTracker`, branche `main`. Chaque push lance `node scripts/build-site.js --production`, sert `dist/site` et utilise `SKIP_DEPENDENCY_INSTALL=true`. La règle de sécurité Host a reçu uniquement le nom `unfollow.yadulink.com` dans la liste des hôtes publics autorisés ; la condition `.php`, les autres hôtes et les autres protections restent identiques.
+
+L’automatisation Superset « UnfollowTracker — article quotidien » (ID `5ef77198-81f8-4fbd-b12b-0755ef7f8f05`) exécute Codex chaque jour à 09:00 Europe/Zurich, dans un nouvel espace du projet. Elle fonctionne sur le Mac configuré, qui doit être disponible avec Superset. Voir `docs/seo/DAILY-PUBLISHING.md`. Le premier article est envoyé automatiquement dans les deux langues.
+
+La seule opération de publication restant bloquée par l’outil est le formulaire du Chrome Web Store. Voir `SUBMIT-NOW.md` pour le ZIP, les textes, les images, les liens publics et les instructions de test. L’autorisation de soumettre a déjà été donnée ; aucune nouvelle autorisation générale n’est attendue. Le store devra ensuite examiner la version. Ne pas annoncer l’extension comme installable avant sa mise en ligne effective.

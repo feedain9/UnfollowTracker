@@ -171,6 +171,17 @@ async function main() {
     await plain.goto(`${origin}/fr/`);
     assert.equal(await plain.locator("h1").isVisible(), true);
     assert.equal(await plain.locator(".guide-links a").count(), 3);
+    // Published articles can contain long JSON examples and source titles.
+    for (const lang of ["fr", "en"]) {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.goto(`${origin}/${lang}/blog/export-instagram-results-json/`);
+      assert.equal(await page.locator("h1").count(), 1);
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `Blog overflow: ${lang}`);
+      const schema = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
+      assert.equal(schema["@type"], "BlogPosting");
+      assert.equal(schema.datePublished, "2026-10-05");
+      assert.equal(await page.locator('a[hreflang]').getAttribute("href"), `/${lang === "fr" ? "en" : "fr"}/blog/export-instagram-results-json/`);
+    }
     console.log(
       "PASS: FR/EN, real links/anchors, keyboard tabs, persistent demonstration, scan, export, FAQ, mobile navigation, responsive widths, structured data, no external requests, HTML without JS.",
     );

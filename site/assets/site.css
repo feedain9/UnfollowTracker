@@ -1451,6 +1451,7 @@ details > p {
   padding-top: 55px;
 }
 .article {
+  overflow-wrap: anywhere;
   max-width: 780px;
   padding-top: 55px;
   padding-bottom: 10px;

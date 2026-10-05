@@ -1,6 +1,6 @@
 # Publication éditoriale quotidienne
 
-Autorisation du propriétaire le 5 octobre 2026 : rédaction et publication automatiques, en français et en anglais. Cadence prévue : un sujet par jour à 09:00, Europe/Zurich. Un sujet produit deux versions linguistiques, pas deux articles concurrents.
+Autorisation du propriétaire le 5 octobre 2026 : rédaction et publication automatiques, en français et en anglais. Cadence active : un sujet par jour à 09:00, Europe/Zurich. Un sujet produit deux versions linguistiques, pas deux articles concurrents.
 
 ## Destination et déploiement
 
@@ -59,3 +59,16 @@ Le JSON est du contenu texte, jamais du code ni du HTML. Les textes sont échapp
 - Si une vérification factuelle reste impossible ou que l’agent ne trouve aucun sujet utile, ne rien publier et expliquer la raison dans le compte rendu Superset. Aucune notification privée externe n’est autorisée par cette procédure.
 
 Sources de méthode : [Google — contenu utile](https://developers.google.com/search/docs/fundamentals/creating-helpful-content), [Google — utilisation de l’IA générative](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content), [Cloudflare — intégration Git](https://developers.cloudflare.com/pages/configuration/git-integration/).
+
+## Automatisation activée
+
+ID Superset : `5ef77198-81f8-4fbd-b12b-0755ef7f8f05`. Déclencheur vérifié : `FREQ=DAILY;BYHOUR=9;BYMINUTE=0`, fuseau `Europe/Zurich`, agent `codex`, projet `5758adc0-c190-4011-be97-2e0d193083e4`, espace neuf par exécution. Premier passage réel validé le 5 octobre 2026 avec le guide d’export JSON (commit `db04666`).
+
+Commandes de suivi :
+
+```sh
+superset automations get 5ef77198-81f8-4fbd-b12b-0755ef7f8f05
+superset automations logs 5ef77198-81f8-4fbd-b12b-0755ef7f8f05
+```
+
+Une réponse 403 d’un client de contrôle ne prouve pas que la page est hors ligne : vérifier les événements Cloudflare et le résultat avec un client HTTP standard ou le navigateur. Ne pas désactiver les protections, falsifier une identité de bot ni contourner une demande de vérification pour terminer un contrôle.
