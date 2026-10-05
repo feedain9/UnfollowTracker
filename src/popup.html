@@ -1,93 +1,193 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UnfollowTracker</title>
-  <link rel="stylesheet" href="styles/popup.css">
-</head>
-<body data-theme="dark">
-  <div class="app">
-    <!-- Header -->
-    <header class="header">
-      <div class="logo">
-        <img class="logo-icon" src="../assets/icons/logo-24.png" alt="Logo" />
-        <span class="logo-text">UnfollowTracker</span>
-      </div>
-      <button class="btn-icon" id="themeToggle" title="Toggle theme">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="5"/>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        </svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-        </svg>
-      </button>
-    </header>
-
-    <!-- Status Bar -->
-    <div class="status-bar" id="statusBar">
-      <div class="status-indicator offline"></div>
-      <span class="status-text">Not connected to Instagram</span>
-    </div>
-
-    <!-- Main Content -->
-    <main class="main">
-      <!-- Stats Cards -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <span class="stat-number" id="followersCount">--</span>
-          <span class="stat-label">Followers</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UnfollowTracker</title>
+    <link rel="stylesheet" href="styles/popup.css" />
+  </head>
+  <body data-theme="dark">
+    <div class="app">
+      <header class="header">
+        <div class="logo">
+          <img
+            src="../assets/icons/logo-24.png"
+            width="24"
+            height="24"
+            alt=""
+          /><span>UnfollowTracker</span>
         </div>
-        <div class="stat-card">
-          <span class="stat-number" id="followingCount">--</span>
-          <span class="stat-label">Following</span>
-        </div>
-        <div class="stat-card accent">
-          <span class="stat-number" id="unfollowersCount">--</span>
-          <span class="stat-label">Don't follow back</span>
-        </div>
-      </div>
-
-      <!-- Action Button -->
-      <button class="btn-primary" id="scanBtn">
-        <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-        <span>Scan my account</span>
-      </button>
-
-      <!-- Progress -->
-      <div class="progress-section hidden" id="progressSection">
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <p class="progress-text" id="progressText">Scanning followers...</p>
-      </div>
-
-      <!-- Results -->
-      <div class="results-section hidden" id="resultsSection">
-        <div class="results-header">
-          <h3>People who don't follow you back</h3>
-          <button class="btn-secondary" id="exportBtn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        <div class="header-actions">
+          <select id="languageSelect" aria-label="Language">
+            <option value="en">EN</option>
+            <option value="fr">FR</option></select
+          ><button class="btn-icon" id="themeToggle" aria-label="Change theme">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <path d="M20.7 13A9 9 0 0 1 11 3.3 9 9 0 1 0 20.7 13Z" />
             </svg>
-            Export
           </button>
         </div>
-        <div class="results-list" id="resultsList">
-          <!-- Users will be injected here -->
-        </div>
+      </header>
+      <div class="status-bar" id="statusBar" role="status" aria-live="polite">
+        <span class="status-indicator offline"></span
+        ><span class="status-text">Connecting to Instagram…</span>
       </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <p>Open Instagram to start scanning</p>
-    </footer>
-  </div>
-
-  <script src="scripts/popup.js"></script>
-</body>
+      <main class="main">
+        <section
+          class="connect-section hidden"
+          id="connectSection"
+          aria-labelledby="connectTitle"
+        >
+          <div class="connection-mark" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle
+                cx="17.5"
+                cy="6.5"
+                r=".7"
+                fill="currentColor"
+                stroke="none"
+              />
+            </svg>
+          </div>
+          <h1 id="connectTitle" data-i18n="connectTitle">
+            Your Instagram, alongside you.
+          </h1>
+          <p data-i18n="connectBody">
+            Open Instagram and sign in there. Then start a scan here, whenever
+            you’re ready.
+          </p>
+          <button
+            class="btn-primary"
+            id="openInstagramBtn"
+            data-i18n="openInstagram"
+          >
+            Open Instagram
+          </button>
+        </section>
+        <div class="stats-grid" aria-label="Instagram">
+          <div class="stat-card">
+            <span class="stat-number" id="followersCount">--</span
+            ><span class="stat-label" data-i18n="followers">Followers</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="followingCount">--</span
+            ><span class="stat-label" data-i18n="following">Following</span>
+          </div>
+          <div class="stat-card accent">
+            <span class="stat-number" id="unfollowersCount">--</span
+            ><span class="stat-label" data-i18n="nonreciprocal"
+              >Don’t follow back</span
+            >
+          </div>
+        </div>
+        <button class="btn-primary" id="scanBtn" disabled>
+          <span data-i18n="scan">Scan my account</span
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path d="m21 21-5-5" />
+            <circle cx="10" cy="10" r="7" />
+          </svg>
+        </button>
+        <div
+          class="progress-section hidden"
+          id="progressSection"
+          role="status"
+          aria-live="polite"
+        >
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <p class="progress-text" id="progressText"></p>
+        </div>
+        <p class="scan-details hidden" id="scanDetails"></p>
+        <p class="hint" id="scanDisclosure" data-i18n="disclosure">
+          Starting a scan reads your followers and following through your
+          Instagram session and saves the latest complete result in this
+          browser.
+        </p>
+        <section
+          class="results-section hidden"
+          id="resultsSection"
+          aria-labelledby="resultsHeading"
+        >
+          <div class="results-header">
+            <h2 id="resultsHeading" data-i18n="results">
+              Don’t follow you back
+            </h2>
+            <button class="btn-secondary" id="exportBtn" data-i18n="export">
+              Export
+            </button>
+          </div>
+          <input
+            type="search"
+            id="searchInput"
+            autocomplete="off"
+            aria-label="Search results"
+            placeholder="Search a name or username"
+          />
+          <div class="results-list" id="resultsList"></div>
+          <button
+            class="btn-secondary hidden"
+            id="showMoreBtn"
+            data-i18n="more"
+          >
+            Show more
+          </button>
+          <p class="hint" data-i18n="snapshot">
+            A comparison of current lists, not a history of who unfollowed you.
+          </p>
+        </section>
+      </main>
+      <footer class="footer">
+        <p data-i18n="footer">
+          Keep the Instagram tab open during the scan. You can switch tabs or
+          close this panel.
+        </p>
+        <div class="footer-links">
+          <a
+            id="privacyLink"
+            href="privacy.html"
+            target="_blank"
+            data-i18n="privacy"
+            >Privacy</a
+          ><button id="clearDataBtn" data-i18n="clear">
+            Delete saved scans
+          </button>
+        </div>
+      </footer>
+    </div>
+    <dialog
+      id="confirmDialog"
+      aria-labelledby="dialogTitle"
+      aria-describedby="dialogBody"
+    >
+      <h2 id="dialogTitle"></h2>
+      <p id="dialogBody"></p>
+      <div class="dialog-actions">
+        <button class="btn-secondary" id="dialogCancel" data-i18n="cancel">
+          Cancel</button
+        ><button class="btn-primary" id="dialogConfirm"></button>
+      </div>
+    </dialog>
+    <script src="scripts/i18n.js"></script>
+    <script src="scripts/popup.js"></script>
+  </body>
 </html>

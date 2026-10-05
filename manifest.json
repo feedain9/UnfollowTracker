@@ -1,24 +1,25 @@
 {
   "manifest_version": 3,
   "name": "UnfollowTracker",
-  "version": "1.0.0",
-  "description": "Discover who unfollowed you on Instagram with one click.",
+  "version": "1.1.0",
+  "minimum_chrome_version": "116",
+  "description": "__MSG_extensionDescription__",
   "permissions": [
-    "activeTab",
     "storage",
-    "scripting"
+    "scripting",
+    "sidePanel"
   ],
   "host_permissions": [
     "https://www.instagram.com/*"
   ],
   "action": {
-    "default_popup": "src/popup.html",
     "default_icon": {
       "16": "assets/icons/icon16.png",
       "32": "assets/icons/icon32.png",
       "48": "assets/icons/icon48.png",
       "128": "assets/icons/icon128.png"
-    }
+    },
+    "default_title": "UnfollowTracker"
   },
   "icons": {
     "16": "assets/icons/icon16.png",
@@ -31,10 +32,20 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.instagram.com/*"],
-      "js": ["src/scripts/content.js"],
-      "css": ["src/styles/inject.css"],
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "src/scripts/content.js"
+      ],
+      "css": [
+        "src/styles/inject.css"
+      ],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "default_locale": "en",
+  "side_panel": {
+    "default_path": "src/popup.html"
+  }
 }

@@ -1,0 +1,42 @@
+@font-face {
+  font-family: Manrope;
+  src: url("../../assets/fonts/manrope-latin.woff2") format("woff2");
+  font-weight: 400 800;
+  font-display: swap;
+}
+html {
+  color-scheme: dark;
+  background: #0c0c0e;
+  color: #faf7f4;
+  font:
+    15px/1.8 Manrope,
+    sans-serif;
+}
+body {
+  max-width: 720px;
+  padding: 32px 24px;
+  margin: auto;
+}
+h1 {
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+h2 {
+  margin-top: 38px;
+  font-size: 22px;
+}
+p {
+  color: #bcb8bd;
+}
+a {
+  color: #ffad98;
+  text-underline-offset: 4px;
+}
+a:focus-visible {
+  outline: 2px solid #ffad98;
+  outline-offset: 4px;
+}
+.article-lead {
+  font-size: 20px;
+}

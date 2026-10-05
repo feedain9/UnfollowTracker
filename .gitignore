@@ -25,3 +25,7 @@ npm-debug.log*
 # Temporary files
 *.tmp
 *.temp
+
+# Local review evidence and caches
+.impeccable/review/
+.seo-cache/

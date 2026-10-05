@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "env": { "browser": true, "es2022": true },
+  "extends": "eslint:recommended",
+  "parserOptions": { "ecmaVersion": 2022 },
+  "globals": { "chrome": "readonly" },
+  "rules": { "no-unused-vars": ["error", { "args": "none" }] },
+  "overrides": [{ "files": ["tests/**/*.js", "scripts/**/*.js", "site/content.js", "site/articles.js"], "env": { "node": true } }]
+}

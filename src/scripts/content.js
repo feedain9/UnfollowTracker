@@ -1,388 +1,429 @@
-/**
- * UnfollowTracker - Content Script
- * Injected into Instagram pages to scan followers/following
- */
+/** Scan in the Instagram tab; closing the popup must not stop or lose a scan. */
+(() => {
+  // The popup can inject into a tab opened before extension installation.
+  if (globalThis.__unfollowTrackerScanner) return;
 
-class InstagramScanner {
-  constructor() {
-    this.followers = [];
-    this.following = [];
-    this.unfollowers = [];
-    this.isScanning = false;
-    this.userInfo = null;
-
-    this.config = {
-      requestDelay: 2000, // 2 seconds between requests to avoid rate limiting
-      scrollDelay: 500,
-      maxRetries: 3,
-    };
-
-    this.init();
-  }
-
-  init() {
-    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      this.handleMessage(message, sendResponse);
-      return true;
-    });
-
-    console.log('[UnfollowTracker] Content script loaded');
-  }
-
-  async handleMessage(message, sendResponse) {
-    switch (message.action) {
-      case 'startScan':
-        await this.startScan();
-        break;
-
-      case 'unfollow':
-        await this.unfollowUser(message.username);
-        break;
-
-      case 'getStatus':
-        sendResponse({ isScanning: this.isScanning });
-        break;
+  class InstagramApiError extends Error {
+    constructor(message, status = 0) {
+      super(message);
+      this.status = status;
     }
   }
 
-  async startScan() {
-    if (this.isScanning) {
-      console.log('[UnfollowTracker] Scan already in progress');
-      return;
-    }
-
-    this.isScanning = true;
-    this.followers = [];
-    this.following = [];
-
-    try {
-      // Get LOGGED IN user info (not the profile page we're viewing)
-      this.userInfo = await this.getLoggedInUserInfo();
-
-      if (!this.userInfo) {
-        throw new Error('Could not get user info. Make sure you\'re logged in.');
-      }
-
-      console.log(`[UnfollowTracker] Starting scan for @${this.userInfo.username} (your account)`);
-      console.log(`[UnfollowTracker] Followers: ${this.userInfo.follower_count}, Following: ${this.userInfo.following_count}`);
-
-      // Get followers
-      this.sendProgress('Fetching followers', 0, this.userInfo.follower_count || 0);
-      this.followers = await this.getFollowers(this.userInfo.pk || this.userInfo.id);
-
-      // Get following
-      this.sendProgress('Fetching following', 0, this.userInfo.following_count || 0);
-      this.following = await this.getFollowing(this.userInfo.pk || this.userInfo.id);
-
-      // Calculate unfollowers
-      this.unfollowers = this.calculateUnfollowers();
-
-      chrome.runtime.sendMessage({
-        type: 'scanComplete',
-        data: {
-          followers: this.followers,
-          following: this.following,
-          unfollowers: this.unfollowers,
-        },
-      });
-
-      console.log(`[UnfollowTracker] Scan complete. Found ${this.unfollowers.length} unfollowers`);
-    } catch (error) {
-      console.error('[UnfollowTracker] Scan error:', error);
-      chrome.runtime.sendMessage({
-        type: 'scanError',
-        error: error.message,
-      });
-    } finally {
+  class InstagramScanner {
+    constructor() {
       this.isScanning = false;
-    }
-  }
+      this.isUnfollowing = false;
+      this.accountId = null;
+      this.scanId = null;
+      this.progress = null;
+      this.error = null;
+      this.avatarCache = new Map();
+      this.avatarQueue = [];
+      this.activeAvatars = 0;
+      this.config = {
+        requestDelay: 2000,
+        batchDelay: 10000,
+        maxRetries: 3,
+        rateLimitDelay: 30000,
+        maxCooldown: 300000,
+        requestTimeout: 30000,
+        pageLimits: { following: 250, followers: 1500 },
+      };
 
-  async getLoggedInUserInfo() {
-    // Method 1: Get user ID from cookie and fetch user info
-    const userId = this.getLoggedInUserId();
-
-    if (!userId) {
-      throw new Error('Not logged in to Instagram');
-    }
-
-    console.log(`[UnfollowTracker] Found logged in user ID: ${userId}`);
-
-    try {
-      // Use the user ID to get full user info
-      const response = await fetch(`https://www.instagram.com/api/v1/users/${userId}/info/`, {
-        headers: this.getHeaders(),
-        credentials: 'include',
+      chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+        if (message.action === 'getStatus') {
+          sendResponse(this.getStatus());
+        } else if (message.action === 'startScan') {
+          // Acknowledge immediately, not after a potentially minutes-long scan.
+          sendResponse(this.startScan(message.accountId));
+        } else if (message.action === 'unfollow') {
+          this.unfollowUser(message).then(sendResponse, (error) => {
+            sendResponse({ ok: false, error: error.message });
+          });
+          return true;
+        } else if (message.action === 'loadAvatar') {
+          this.loadAvatar(message).then(sendResponse, () => sendResponse({ ok: false }));
+          return true;
+        }
+        return false;
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.user) {
-          return data.user;
-        }
-      }
-    } catch (e) {
-      console.log('[UnfollowTracker] Method 1 failed, trying method 2...');
     }
 
-    // Method 2: Try getting from web_profile_info with username from page data
-    try {
-      const username = await this.getLoggedInUsername();
-      if (username) {
-        const response = await fetch(`https://www.instagram.com/api/v1/users/web_profile_info/?username=${username}`, {
-          headers: this.getHeaders(),
-          credentials: 'include',
+    getStatus() {
+      const accountId = this.getLoggedInUserId();
+      const sameAccount = accountId === this.accountId;
+      return {
+        ok: true,
+        panelProtocol: 3,
+        accountId,
+        scanId: sameAccount ? this.scanId : null,
+        isScanning: sameAccount && this.isScanning,
+        progress: sameAccount ? this.progress : null,
+        error: sameAccount ? this.error : null,
+      };
+    }
+
+    startScan(expectedAccountId) {
+      const accountId = this.getLoggedInUserId();
+      if (!accountId || accountId !== expectedAccountId) {
+        return { ok: false, error: 'Your Instagram account changed. Reopen the extension and try again.' };
+      }
+      if (this.isScanning) {
+        return this.accountId === accountId
+          ? { ok: true, scanId: this.scanId, accountId }
+          : { ok: false, error: 'The previous account scan is stopping. Please try again shortly.' };
+      }
+      if (this.isUnfollowing) {
+        return { ok: false, error: 'Wait for the unfollow request to finish before scanning.' };
+      }
+      this.accountId = accountId;
+      this.scanId = crypto.randomUUID();
+      this.isScanning = true;
+      this.error = null;
+      this.progress = { phase: 'Starting scan', current: 0, total: null, percentage: 0 };
+      this.scanPromise = this.runScan();
+      return { ok: true, scanId: this.scanId, accountId };
+    }
+
+    async runScan() {
+      try {
+        await this.backgroundRequest({ action: 'registerScan' });
+        // The profile-info endpoint can return 429 while the friendship lists
+        // remain accessible. Like upstream, scan the lists directly using the
+        // already verified session owner; no profile request is needed.
+        const following = await this.getFriendships('following');
+        await this.sleep(this.config.requestDelay);
+        const followers = await this.getFriendships('followers');
+        this.assertAccount();
+        const followerIds = new Set(followers.map((user) => user.id));
+        const data = {
+          accountId: this.accountId,
+          scanId: this.scanId,
+          username: null,
+          complete: true,
+          lastScan: Date.now(),
+          followers,
+          following,
+          unfollowers: following.filter((user) => !followerIds.has(user.id)),
+        };
+        // Save in the service worker before announcing success to the popup.
+        await this.backgroundRequest({ action: 'saveScan', data });
+        this.isScanning = false;
+        this.progress = null;
+        this.notify({ type: 'scanComplete', data });
+      } catch (error) {
+        this.error = error.message;
+        this.isScanning = false;
+        this.progress = null;
+        this.notify({ type: 'scanError', error: error.message });
+      }
+    }
+
+    async getFriendships(kind) {
+      const users = new Map();
+      const seenCursors = new Set();
+      let cursor = null;
+      const phase = kind === 'following' ? 'Fetching following' : 'Fetching followers';
+      const rangeStart = kind === 'following' ? 0 : 45;
+      const rangeSize = kind === 'following' ? 45 : 50;
+      const publishProgress = () => {
+        const fraction = 1 - 1 / (1 + users.size / 150);
+        this.sendProgress({
+          phase,
+          current: users.size,
+          total: null,
+          percentage: Math.round(rangeStart + Math.min(fraction, 0.98) * rangeSize),
         });
+      };
+      publishProgress();
 
-        if (response.ok) {
-          const data = await response.json();
-          if (data.data?.user) {
-            return data.data.user;
+      for (let page = 0; page < this.config.pageLimits[kind]; page++) {
+        const query = new URLSearchParams({ count: '50' });
+        if (cursor !== null) query.set('max_id', cursor);
+        const data = await this.requestJson(`/api/v1/friendships/${this.accountId}/${kind}/?${query}`, {}, kind);
+        if (!Array.isArray(data.users)) {
+          throw new Error(`Instagram returned an invalid ${kind} list. Please try again later.`);
+        }
+        const limited = kind === 'following' ? data.should_limit_list_of_followings : data.should_limit_list_of_followers;
+        if (limited === true || (kind === 'following' && Number(data.hidden_following_account_count) > 0)) {
+          throw new Error(`Instagram is hiding part of your ${kind} list. The scan is incomplete; your last complete results are preserved.`);
+        }
+        const previousSize = users.size;
+        for (const raw of data.users) {
+          const id = this.normalizeId(raw);
+          if (typeof raw.username !== 'string' || !/^[a-zA-Z0-9._]+$/.test(raw.username)) {
+            throw new Error(`Instagram returned an invalid account in your ${kind} list.`);
           }
+          users.set(id, {
+            id,
+            username: raw.username,
+            full_name: typeof raw.full_name === 'string' ? raw.full_name : '',
+            profile_pic_url: typeof raw.profile_pic_url === 'string' ? raw.profile_pic_url : '',
+            is_verified: Boolean(raw.is_verified),
+          });
+        }
+        publishProgress();
+
+        const next = data.next_max_id == null ? '' : String(data.next_max_id);
+        const hasMore = Boolean(next) && data.has_more !== false;
+        if (!hasMore) {
+          // Without a separate total, a missing continuation cursor cannot
+          // establish that a list advertised as incomplete is finished.
+          if (data.has_more === true && !next) {
+            throw new Error(`Instagram returned an incomplete ${kind} list (${users.size} received, but the next page is missing). Please try again later.`);
+          }
+          return Array.from(users.values());
+        }
+        if (users.size === previousSize || seenCursors.has(next)) {
+          throw new Error(`Instagram stopped advancing through your ${kind} list. The scan is incomplete; try again later.`);
+        }
+        seenCursors.add(next);
+        cursor = next;
+        if (page + 1 < this.config.pageLimits[kind]) {
+          await this.sleep(this.config.requestDelay + ((page + 1) % 5 === 0 ? this.config.batchDelay : 0));
         }
       }
-    } catch (e) {
-      console.log('[UnfollowTracker] Method 2 failed');
+      throw new Error(`The ${kind} scan reached its page limit. Incomplete results were not saved.`);
     }
 
-    return null;
-  }
-
-  getLoggedInUserId() {
-    // Get user ID from ds_user_id cookie
-    const match = document.cookie.match(/ds_user_id=(\d+)/);
-    return match ? match[1] : null;
-  }
-
-  async getLoggedInUsername() {
-    // Try to find username from various sources
-
-    // Method 1: From __meta element in page
-    try {
-      const scripts = document.querySelectorAll('script[type="application/json"]');
-      for (const script of scripts) {
+    async requestJson(path, options = {}, listKind = null) {
+      const retries = options.method === 'POST' ? 0 : this.config.maxRetries;
+      for (let attempt = 0; attempt <= retries; attempt++) {
+        this.assertAccount();
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), this.config.requestTimeout);
+        let retryDelay = null;
         try {
-          const data = JSON.parse(script.textContent);
-          if (data?.require) {
-            const str = JSON.stringify(data);
-            const match = str.match(/"viewer":\s*\{[^}]*"username":\s*"([^"]+)"/);
-            if (match) return match[1];
-          }
-        } catch (e) {}
-      }
-    } catch (e) {}
-
-    // Method 2: From profile link in sidebar/navigation
-    try {
-      // Look for the profile link which usually has the username
-      const profileLinks = document.querySelectorAll('a[href^="/"]');
-      const userId = this.getLoggedInUserId();
-
-      for (const link of profileLinks) {
-        const href = link.getAttribute('href');
-        // Profile links are usually /{username}/ format
-        if (href && href.match(/^\/[a-zA-Z0-9._]+\/?$/)) {
-          const potentialUsername = href.replace(/\//g, '');
-          // Skip common routes
-          if (!['explore', 'direct', 'reels', 'stories', 'accounts', 'about'].includes(potentialUsername)) {
-            // Verify this is the logged in user by checking if the link leads to a profile
-            // This is a heuristic - the profile link is usually in specific locations
-            if (link.querySelector('img[alt*="profile"]') || link.closest('[role="navigation"]')) {
-              return potentialUsername;
+          const response = await fetch(`https://www.instagram.com${path}`, {
+            ...options,
+            headers: { ...this.getHeaders(), ...options.headers },
+            credentials: 'same-origin',
+            cache: 'no-store',
+            signal: controller.signal,
+          });
+          this.assertAccount();
+          if (response.status === 429) {
+            const retryAfter = response.headers.get('Retry-After');
+            const serverDelay = retryAfter === null ? 0 : /^\d+(\.\d+)?$/.test(retryAfter)
+              ? Number(retryAfter) * 1000
+              : Math.max(0, Date.parse(retryAfter) - Date.now()) || 0;
+            retryDelay = Math.max(this.config.rateLimitDelay * 2 ** attempt, serverDelay);
+            if (attempt === retries || retryDelay > this.config.maxCooldown) {
+              throw new InstagramApiError(`Instagram is limiting requests${listKind ? ` for your ${listKind} list` : ''} (HTTP 429). Please try again later; your last complete scan is preserved.`, 429);
             }
+          } else {
+            if ([401, 403].includes(response.status) || response.redirected) {
+              throw new InstagramApiError('Open Instagram and sign in or complete its verification, then try again.', response.status);
+            }
+            if (!response.ok) {
+              throw new InstagramApiError(`Instagram returned HTTP ${response.status}. Please try again later.`, response.status);
+            }
+            let data;
+            try {
+              data = await response.json();
+            } catch (error) {
+              if (error.name === 'AbortError') throw error;
+              throw new Error('Instagram returned an unreadable response. Open Instagram, check your session and try again.');
+            }
+            this.assertAccount();
+            if (!data || typeof data !== 'object' || Array.isArray(data)) {
+              throw new Error('Instagram returned an invalid response. Please try again later.');
+            }
+            if (data.challenge || data.checkpoint_url || /login_required|challenge_required|checkpoint_required/.test(data.message || '')) {
+              throw new InstagramApiError('Open Instagram and sign in or complete its verification, then try again.', 403);
+            }
+            if (data.status && data.status !== 'ok') {
+              throw new Error('Instagram could not complete the request. Please check Instagram and try again later.');
+            }
+            return data;
           }
+        } catch (error) {
+          if (error.name === 'AbortError') {
+            throw new Error('Instagram took too long to respond. Please try again.');
+          }
+          throw error;
+        } finally {
+          clearTimeout(timeout);
         }
+        await this.waitForCooldown(retryDelay);
       }
-    } catch (e) {}
+    }
 
-    // Method 3: Make an API call to get current user
-    try {
-      const response = await fetch('https://www.instagram.com/api/v1/accounts/current_user/', {
-        headers: this.getHeaders(),
-        credentials: 'include',
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.user?.username) {
-          return data.user.username;
-        }
+    async waitForCooldown(delay) {
+      const progress = this.progress;
+      for (let seconds = Math.ceil(delay / 1000); seconds > 0; seconds--) {
+        this.assertAccount();
+        this.sendProgress({ ...progress, retryInSeconds: seconds });
+        await this.sleep(1000);
       }
-    } catch (e) {}
+      this.sendProgress(progress);
+    }
 
-    return null;
-  }
-
-  async getFollowers(userId) {
-    const followers = [];
-    let maxId = null;
-    let hasMore = true;
-
-    while (hasMore) {
+    async unfollowUser(message) {
+      if (this.isScanning || this.isUnfollowing) {
+        throw new Error('Wait for the current request or scan to finish.');
+      }
+      const accountId = this.getLoggedInUserId();
+      if (!accountId || message.accountId !== accountId) {
+        throw new Error('Your Instagram account changed. Reopen the extension and scan again.');
+      }
+      this.isUnfollowing = true;
+      this.accountId = accountId;
       try {
-        let url = `https://www.instagram.com/api/v1/friendships/${userId}/followers/?count=50`;
-        if (maxId) {
-          url += `&max_id=${maxId}`;
-        }
-
-        const response = await fetch(url, {
-          headers: this.getHeaders(),
-          credentials: 'include',
+        const key = `scanResult:${accountId}`;
+        const snapshot = (await chrome.storage.local.get(key))[key];
+        const user = snapshot?.complete && snapshot.accountId === accountId && snapshot.scanId === message.scanId
+          ? snapshot.unfollowers.find((entry) => entry.id === message.userId && entry.username === message.username)
+          : null;
+        if (!user) throw new Error('These results are out of date. Run a complete scan before unfollowing.');
+        const data = await this.requestJson(`/api/v1/friendships/destroy/${user.id}/`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: '',
         });
-
-        if (!response.ok) {
-          if (response.status === 429) {
-            console.log('[UnfollowTracker] Rate limited, waiting...');
-            await this.sleep(5000);
-            continue;
-          }
-          throw new Error(`Failed to fetch followers: ${response.status}`);
+        if (data.status !== 'ok' || data.friendship_status?.following !== false) {
+          throw new Error('Instagram did not confirm the unfollow. Check the profile before trying again.');
         }
-
-        const data = await response.json();
-
-        if (data.users) {
-          data.users.forEach((user) => {
-            followers.push({
-              id: user.pk?.toString() || user.id,
-              username: user.username,
-              full_name: user.full_name,
-              profile_pic_url: user.profile_pic_url,
-              is_verified: user.is_verified,
-            });
-          });
-        }
-
-        hasMore = !!data.next_max_id;
-        maxId = data.next_max_id;
-
-        this.sendProgress('Fetching followers', followers.length, this.userInfo.follower_count || followers.length);
-
-        await this.sleep(this.config.requestDelay);
-      } catch (error) {
-        console.error('[UnfollowTracker] Error fetching followers:', error);
-        throw error;
+        const result = await this.backgroundRequest({
+          action: 'unfollowComplete',
+          scanId: message.scanId,
+          userId: user.id,
+        });
+        return { ok: true, data: result.data };
+      } finally {
+        this.isUnfollowing = false;
       }
     }
 
-    return followers;
-  }
+    async loadAvatar({ accountId, url }) {
+      const sameAccount = () => accountId && accountId === this.getLoggedInUserId();
+      if (!sameAccount() || typeof url !== 'string' || url.length > 4096) return { ok: false };
+      const image = new URL(url);
+      if (image.protocol !== 'https:' || image.username || image.password || image.port ||
+          !/(^|\.)(cdninstagram\.com|fbcdn\.net)$/.test(image.hostname)) return { ok: false };
 
-  async getFollowing(userId) {
-    const following = [];
-    let maxId = null;
-    let hasMore = true;
+      if (this.avatarAccountId !== accountId) {
+        this.avatarCache.clear();
+        this.avatarAccountId = accountId;
+      }
+      if (!this.avatarCache.has(url)) {
+        // Memory only: avoid re-downloading a photo when results are re-rendered.
+        // Failed/expired images also stay cached, so they cannot cause a retry loop.
+        if (this.avatarCache.size >= 64) this.avatarCache.delete(this.avatarCache.keys().next().value);
+        const pending = new Promise((resolve) => {
+          this.avatarQueue.push(async () => {
+            try {
+              resolve(sameAccount() ? await this.fetchAvatar(image.href) : null);
+            } catch { resolve(null); }
+          });
+        });
+        this.avatarCache.set(url, pending);
+        this.drainAvatarQueue();
+      }
+      const dataUrl = await this.avatarCache.get(url);
+      return dataUrl && sameAccount() ? { ok: true, dataUrl } : { ok: false };
+    }
 
-    while (hasMore) {
+    drainAvatarQueue() {
+      while (this.activeAvatars < 3 && this.avatarQueue.length) {
+        this.activeAvatars++;
+        this.avatarQueue.shift()().finally(() => {
+          this.activeAvatars--;
+          this.drainAvatarQueue();
+        });
+      }
+    }
+
+    async fetchAvatar(url) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+      const maxBytes = 256 * 1024;
       try {
-        let url = `https://www.instagram.com/api/v1/friendships/${userId}/following/?count=50`;
-        if (maxId) {
-          url += `&max_id=${maxId}`;
-        }
-
+        // Some CDN photos cannot be embedded from a chrome-extension origin.
+        // Use the Instagram tab's ordinary CORS context, without session cookies
+        // or API headers. No proxy, host permission, or security override needed.
         const response = await fetch(url, {
-          headers: this.getHeaders(),
-          credentials: 'include',
+          mode: 'cors', credentials: 'omit', referrerPolicy: 'strict-origin',
+          redirect: 'error', signal: controller.signal,
         });
-
-        if (!response.ok) {
-          if (response.status === 429) {
-            console.log('[UnfollowTracker] Rate limited, waiting...');
-            await this.sleep(5000);
-            continue;
+        const type = response.headers.get('content-type')?.split(';')[0].trim().toLowerCase();
+        if (!response.ok || !/^image\/(jpeg|png|webp|avif|gif)$/.test(type) ||
+            Number(response.headers.get('content-length')) > maxBytes) return null;
+        const reader = response.body.getReader();
+        let size = 0;
+        let binary = '';
+        let chunk = await reader.read();
+        while (!chunk.done) {
+          const { value } = chunk;
+          size += value.byteLength;
+          if (size > maxBytes) return null;
+          for (let offset = 0; offset < value.length; offset += 8192) {
+            binary += String.fromCharCode(...value.subarray(offset, offset + 8192));
           }
-          throw new Error(`Failed to fetch following: ${response.status}`);
+          chunk = await reader.read();
         }
-
-        const data = await response.json();
-
-        if (data.users) {
-          data.users.forEach((user) => {
-            following.push({
-              id: user.pk?.toString() || user.id,
-              username: user.username,
-              full_name: user.full_name,
-              profile_pic_url: user.profile_pic_url,
-              is_verified: user.is_verified,
-            });
-          });
-        }
-
-        hasMore = !!data.next_max_id;
-        maxId = data.next_max_id;
-
-        this.sendProgress('Fetching following', following.length, this.userInfo.following_count || following.length);
-
-        await this.sleep(this.config.requestDelay);
-      } catch (error) {
-        console.error('[UnfollowTracker] Error fetching following:', error);
-        throw error;
+        return size ? `data:${type};base64,${btoa(binary)}` : null;
+      } finally {
+        controller.abort();
+        clearTimeout(timeout);
       }
     }
 
-    return following;
-  }
-
-  calculateUnfollowers() {
-    const followerIds = new Set(this.followers.map((f) => f.id));
-    return this.following.filter((f) => !followerIds.has(f.id));
-  }
-
-  async unfollowUser(username) {
-    try {
-      const response = await fetch(`https://www.instagram.com/api/v1/users/web_profile_info/?username=${username}`, {
-        headers: this.getHeaders(),
-        credentials: 'include',
-      });
-
-      if (!response.ok) {
-        throw new Error('Could not get user info');
+    normalizeId(user) {
+      const id = user?.pk_id ?? user?.pk ?? user?.id;
+      if ((typeof id === 'number' && !Number.isSafeInteger(id)) || !/^\d+$/.test(String(id))) {
+        throw new Error('Instagram returned an invalid account ID. The scan cannot be completed reliably.');
       }
+      return String(id);
+    }
 
-      const data = await response.json();
-      const userId = data.data.user.id;
+    getCookie(name) {
+      return document.cookie.split(';').map((part) => part.trim()).find((part) => part.startsWith(`${name}=`))?.slice(name.length + 1) || '';
+    }
 
-      const unfollowResponse = await fetch(`https://www.instagram.com/api/v1/friendships/destroy/${userId}/`, {
-        method: 'POST',
-        headers: {
-          ...this.getHeaders(),
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        credentials: 'include',
-      });
+    getLoggedInUserId() {
+      const id = this.getCookie('ds_user_id');
+      return /^\d+$/.test(id) ? id : null;
+    }
 
-      if (!unfollowResponse.ok) {
-        throw new Error('Failed to unfollow');
+    assertAccount() {
+      if (!this.accountId || this.getLoggedInUserId() !== this.accountId) {
+        throw new Error('Your Instagram account changed during the request. Reopen the extension and scan again.');
       }
+    }
 
-      console.log(`[UnfollowTracker] Unfollowed @${username}`);
-    } catch (error) {
-      console.error('[UnfollowTracker] Unfollow error:', error);
+    getHeaders() {
+      return {
+        Accept: '*/*',
+        'X-CSRFToken': this.getCookie('csrftoken'),
+        'X-IG-App-ID': '936619743392459',
+        'X-ASBD-ID': '129477',
+        'X-IG-WWW-Claim': sessionStorage.getItem('www-claim-v2') || '0',
+        'X-Requested-With': 'XMLHttpRequest',
+      };
+    }
+
+    async backgroundRequest(message) {
+      const response = await chrome.runtime.sendMessage({ accountId: this.accountId, scanId: this.scanId, ...message });
+      if (!response?.ok) throw new Error(response?.error || 'Unable to save scan state. Reload Instagram and try again.');
+      return response;
+    }
+
+    notify(message) {
+      // Progress/completion must not fail just because the popup is closed.
+      chrome.runtime.sendMessage({ accountId: this.accountId, scanId: this.scanId, ...message }).catch(() => {});
+    }
+
+    sendProgress(progress) {
+      this.progress = progress;
+      this.notify({ type: 'scanProgress', data: progress });
+    }
+
+    sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
     }
   }
 
-  getHeaders() {
-    const csrfToken = document.cookie.match(/csrftoken=([^;]+)/)?.[1] || '';
-
-    return {
-      'X-CSRFToken': csrfToken,
-      'X-IG-App-ID': '936619743392459',
-      'X-ASBD-ID': '129477',
-      'X-IG-WWW-Claim': sessionStorage.getItem('www-claim-v2') || '0',
-      'X-Requested-With': 'XMLHttpRequest',
-    };
-  }
-
-  sendProgress(phase, current, total) {
-    chrome.runtime.sendMessage({
-      type: 'scanProgress',
-      data: { phase, current, total },
-    });
-  }
-
-  sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-}
-
-new InstagramScanner();
+  globalThis.__unfollowTrackerScanner = new InstagramScanner();
+})();
