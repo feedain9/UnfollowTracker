@@ -1,6 +1,6 @@
 # Validation de préparation — 5 octobre 2026
 
-Version 1.1.0 préparée. Site déployé sur Cloudflare Pages et domaine actif ; soumission au Chrome Web Store bloquée par la restriction du navigateur sur le pilotage de cette interface.
+Version 1.1.0 préparée et soumise au Chrome Web Store le 6 octobre 2026, en attente d’examen avec publication automatique après approbation. Site déployé sur Cloudflare Pages et domaine actif. Les vérifications techniques ci-dessous restent celles de la préparation du 5 octobre ; la soumission ne vaut pas validation du fonctionnement dans la session Instagram réelle.
 
 ## Vérifications effectuées
 
@@ -44,7 +44,7 @@ Le contrôle Stop a ensuite signalé les valeurs absentes de la documentation da
 
 Le [correctif des photos de profil](PROFILE-PHOTOS.md) s’appuie aussi sur un diagnostic réseau de la page Instagram réelle dans Brave : une photo échoue depuis un autre site, mais répond HTTP 200 depuis Instagram en CORS sans cookies. Le test d’intégration reproduit cette différence avec des données fictives. Cela valide le mécanisme de chargement ; cela ne remplace pas la recette du panneau natif ci-dessous.
 
-La version 1.1.0 n’a pas été validée dans le panneau natif de la session Brave réelle. Le contrôle d’approbation automatique avait refusé l’accès à l’URL interne de l’extension ; aucune méthode de contournement n’a été utilisée. La recette réelle décrite dans `PUBLISHING.md` reste nécessaire avant soumission.
+La version 1.1.0 n’a pas été validée dans le panneau natif de la session Brave réelle. Le contrôle d’approbation automatique avait refusé l’accès à l’URL interne de l’extension ; aucune méthode de contournement n’a été utilisée. La recette réelle décrite dans `PUBLISHING.md` reste à effectuer. La soumission ultérieure du formulaire HTTPS du Web Store par CUA ne valide pas ce panneau.
 
 Les tests ne garantissent pas la disponibilité future des endpoints Instagram. Aucune action de désabonnement n’a été exécutée sur un compte réel pendant cette préparation.
 
@@ -57,6 +57,13 @@ L’identité publique reprend Yadulink à la demande du propriétaire. La publi
 - Quatre tests éditoriaux supplémentaires réussis : traductions, références, dates et liens sûrs, exclusion brouillons/futur, intentions dupliquées. Tests site étendus aux deux articles, BlogPosting, alternates et absence de débordement mobile ; lint et `git diff --check` réussis.
 - Premier passage Superset réel : run `0fda692a-d173-4583-84ed-74f22dbf9e30`, article JSON export FR/EN, commit `db04666cdc947e62d8a7986e99bd1b52b8e79ce9`. Publication HTTPS et sitemap vérifiés. La commande de logs conserve l’état technique `dispatched` pour ce terminal interactif ; le terminal de l’agent affiche le travail achevé. Le résultat public a été vérifié séparément.
 - Déclencheur actif vérifié dans `automations get` : quotidien à 09:00 Europe/Zurich sur le Mac configuré. Premier prochain lancement prévu le 6 octobre 2026. La disponibilité du poste reste nécessaire.
-- La restriction Chrome « The extensions gallery cannot be scripted » empêche toute soumission automatique dans le tableau de bord connecté. Le ZIP final, les visuels et les champs sont disponibles dans `SUBMIT-NOW.md`. Aucune soumission ni acceptation du store ne sont revendiquées.
+- Le pilotage DOM du tableau de bord avait échoué avec « The extensions gallery cannot be scripted ». Cette restriction technique a ensuite été distinguée du mode ordinateur natif, qui a permis de remplir et soumettre le formulaire HTTPS autorisé.
 
 Capture de la page réellement publiée : `.impeccable/review/published-landing.jpg` (locale, non incluse dans le ZIP de l’extension).
+
+## Soumission au Chrome Web Store — 6 octobre 2026
+
+- Package 1.1.0 vérifié dans la fiche existante `ckkgnnifiojkmmfmeejeebafldholdnc` ; descriptions et captures FR/EN, icône, vignette promotionnelle, liens, permissions, déclarations de données et instructions de test enregistrés.
+- Distribution gratuite, publique, toutes les régions. Publication automatique après examen et approbation activée.
+- Google a confirmé « Votre extension a été envoyée pour examen » ; état affiché : **En attente d’examen**. Aucune approbation ni disponibilité publique n’est revendiquée.
+- Capture locale de cette confirmation : `.impeccable/review/store-submitted.jpg`. Le lien `storeUrl` reste nul jusqu’à une fiche publique effectivement installable.

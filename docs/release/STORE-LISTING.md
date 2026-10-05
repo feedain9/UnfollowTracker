@@ -1,6 +1,6 @@
-# Chrome Web Store — contenus prêts à relire
+# Chrome Web Store — contenus soumis
 
-Version préparée : **1.1.0**. Aucune soumission effectuée. Le produit et toutes les fonctionnalités décrites sont gratuits. Ne pas ajouter de faux avis, de promesse « aucun risque » ou de suivi historique.
+Version **1.1.0 soumise le 6 octobre 2026**, état vérifié : **En attente d’examen**. Descriptions et captures française et anglaise enregistrées ; publication automatique après approbation activée. Fiche : `ckkgnnifiojkmmfmeejeebafldholdnc`. Le produit et toutes les fonctionnalités décrites sont gratuits. Ne pas ajouter de faux avis, de promesse « aucun risque » ou de suivi historique.
 
 ## Français
 
@@ -60,11 +60,11 @@ French and English, dark and light themes. Desktop Chrome 116 or later. Independ
 
 `site/assets/og-fr.png` et `og-en.png` sont les aperçus sociaux 1200 × 630 px du site. Ils ne sont pas des captures de fonctionnalités.
 
-## Liens à renseigner lors de la soumission
+## Liens renseignés lors de la soumission
 
-- Accueil : `https://unfollow.yadulink.com/fr/` ou `/en/`.
-- Confidentialité : `https://unfollow.yadulink.com/fr/privacy/` ou `/en/privacy/`.
-- Support : support@yadulink.com. Éditeur : AVICLICK (Yadulink).
+- Accueil : `https://unfollow.yadulink.com/en/` (version française accessible depuis le site).
+- Confidentialité : `https://unfollow.yadulink.com/en/privacy/`.
+- Assistance : `https://unfollow.yadulink.com/en/getting-started/` ; contact public : support@yadulink.com. Éditeur : AVICLICK (Yadulink).
 - Lien de boutique : attribué par le Chrome Web Store ; le reporter dans `site/publication.json` lorsque la fiche est publique et permet effectivement l’installation.
 
 Le site et ces politiques sont hébergés publiquement sur Cloudflare Pages depuis le 5 octobre 2026. Le lien d’installation reste désactivé jusqu’à l’acceptation et la disponibilité publique de la fiche du store.

@@ -1,10 +1,12 @@
-# Soumettre UnfollowTracker 1.1.0
+# Soumission UnfollowTracker 1.1.0
 
-Le propriétaire a autorisé la soumission. Le navigateur connecté bloque l’automatisation de la console du Web Store avec « The extensions gallery cannot be scripted ». La soumission n’a donc pas eu lieu. Ces opérations doivent être effectuées directement dans le tableau de bord ; les fichiers et les textes sont prêts.
+Version **1.1.0 envoyée pour examen le 6 octobre 2026**, depuis la session Brave du propriétaire avec le pilotage natif CUA. Google a affiché « Votre extension a été envoyée pour examen » et l’état **En attente d’examen**. L’option **publier automatiquement une fois examiné et approuvé** est activée. L’extension n’est pas encore approuvée ni disponible à l’installation publique.
 
-## Fichier à importer
+La restriction de script DOM de la galerie ne bloquait pas le formulaire en mode ordinateur. Les descriptions et captures FR/EN, l’icône, la vignette promotionnelle, les déclarations de confidentialité et les instructions de test ont été enregistrées avant cet envoi. Distribution : **Sans frais**, **Public**, **Toutes les régions**. Capture locale de confirmation : `.impeccable/review/store-submitted.jpg` (non publiée dans le dépôt).
 
-Dans [le tableau de bord du propriétaire](https://chrome.google.com/webstore/devconsole/8f5cb986-87d0-436a-8570-16e07303d819/ckkgnnifiojkmmfmeejeebafldholdnc/edit), compléter la fiche existante **ckkgnnifiojkmmfmeejeebafldholdnc** fournie le 6 octobre 2026, puis importer si nécessaire `dist/unfollowtracker-1.1.0.zip`. Ne pas créer une deuxième fiche si la première existe déjà.
+## Package soumis
+
+Fiche existante **ckkgnnifiojkmmfmeejeebafldholdnc** dans [le tableau de bord du propriétaire](https://chrome.google.com/webstore/devconsole/8f5cb986-87d0-436a-8570-16e07303d819/ckkgnnifiojkmmfmeejeebafldholdnc/edit). La version 1.1.0 déjà importée a été vérifiée sur la page Package ; aucune deuxième fiche n’a été créée. Archive locale correspondante : `dist/unfollowtracker-1.1.0.zip`.
 
 Archive : 22 fichiers, 82 269 octets, version 1.1.0, manifeste à la racine.
 
@@ -13,9 +15,9 @@ SHA-256 : `1613fca0a0f690723b6e717c4864f6c2c35cc33ca7c8807fc2e6e0bc61f918dd`.
 ## Fiche publique
 
 - Nom : **UnfollowTracker**.
-- Langue par défaut du manifeste : anglais. Ajouter la traduction française.
+- Langue par défaut du manifeste : anglais ; traduction française enregistrée.
 - Descriptions courte et détaillée des deux langues : [STORE-LISTING.md](STORE-LISTING.md).
-- Catégorie conseillée : Social & Communication, ou sa catégorie sociale équivalente proposée par le tableau de bord actuel.
+- Catégorie sélectionnée dans le tableau de bord : **Réseaux sociaux**.
 - Prix : gratuit ; visibilité publique ; aucune restriction géographique demandée par le propriétaire.
 - Site : `https://unfollow.yadulink.com/en/` ; version française `https://unfollow.yadulink.com/fr/`.
 - Support : `https://unfollow.yadulink.com/en/getting-started/`, email `support@yadulink.com`.
@@ -24,9 +26,17 @@ SHA-256 : `1613fca0a0f690723b6e717c4864f6c2c35cc33ca7c8807fc2e6e0bc61f918dd`.
 
 ## Pratiques de confidentialité
 
-Recopier la finalité unique et les justifications de `sidePanel`, `storage`, `scripting` et de l’accès à Instagram depuis [PRIVACY-AND-PERMISSIONS.md](PRIVACY-AND-PERMISSIONS.md). Aucun code distant n’est exécuté. Déclarer le traitement des données identifiantes, de session et des listes sociales selon les catégories exactes du formulaire ; leur traitement local ne signifie pas « aucune donnée ». Les listes ne sont ni vendues ni envoyées à un serveur UnfollowTracker. Les trois engagements de non-vente, d’usage conforme à la finalité et d’absence d’usage pour le crédit correspondent au code préparé.
+Finalité unique et justifications de `sidePanel`, `storage`, `scripting` et de l’accès à Instagram enregistrées en anglais, conformément à [PRIVACY-AND-PERMISSIONS.md](PRIVACY-AND-PERMISSIONS.md). Code distant : **Non**. Catégories cochées : informations personnelles identifiantes, informations d’authentification, historique Web et contenu du site Web. L’historique Web correspond uniquement au repérage de l’URL de l’onglet Instagram ; aucun historique général n’est enregistré. Les trois engagements de non-vente, d’usage conforme à la finalité et d’absence d’usage pour le crédit sont cochés.
 
-## Instructions pour l’équipe de vérification — texte anglais
+## Instructions enregistrées pour l’équipe de vérification
+
+Le formulaire limite ce champ à 500 caractères. Le texte suivant de 455 caractères a été enregistré. Les champs d’identifiant et de mot de passe sont vides : l’équipe utilise son propre compte Instagram, sans identifiants du propriétaire.
+
+```text
+No UnfollowTracker login or subscription. Use Chrome 116+ and an Instagram account controlled by the reviewer; sign in directly on instagram.com. Open the side panel, select Scan my account, and keep Instagram open. Check search, profile links and JSON export; cancel the per-account Unfollow confirmation. Test FR/EN and light/dark modes. Instagram rate limits/challenges are shown without bypass. Guide: https://unfollow.yadulink.com/en/getting-started/
+```
+
+## Guide de vérification détaillé — référence interne
 
 ```text
 UnfollowTracker is a free desktop extension with a persistent side panel. It compares the current follower and following lists of the Instagram account already signed in within the user's browser. It does not offer historical unfollower tracking or bulk unfollowing.
@@ -44,6 +54,8 @@ Instagram may return a rate limit or require a security challenge. The extension
 Code, styles and fonts are packaged locally. Instagram requests go directly to Instagram. Profile images load from authorized Instagram/Meta image hosts. The publisher receives no follower lists, authentication tokens, passwords, advertising data or analytics. Full policy: https://unfollow.yadulink.com/en/privacy/
 ```
 
-Enregistrer chaque section, corriger les éventuels champs manquants signalés par le tableau de bord, puis choisir **Soumettre pour examen**. Une soumission est terminée seulement lorsque le tableau de bord affiche l’état d’examen. Une éventuelle vérification du compte développeur ou acceptation contractuelle devra être faite par le titulaire du compte.
+## Après l’examen
+
+Attendre la décision de Google. Ne pas annuler ni renvoyer la version déjà en attente sans motif. Si Google demande une correction, conserver son motif exact et préparer les changements correspondants.
 
 Après validation publique : récupérer l’URL officielle de la fiche, la renseigner dans `site/publication.json` à la clé `storeUrl`, vérifier les tests et pousser sur `main`. Cela active les boutons d’installation lors du déploiement suivant. Le fait d’obtenir un identifiant de brouillon ou un état « en examen » ne suffit pas à activer ce lien.

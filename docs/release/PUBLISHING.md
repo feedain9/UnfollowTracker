@@ -1,6 +1,6 @@
 # Dossier de publication — UnfollowTracker 1.1.0
 
-Le site est publié sur https://unfollow.yadulink.com depuis le 5 octobre 2026. L’archive 1.1.0 et le dossier du store sont prêts ; aucun envoi au Chrome Web Store n’a abouti car le navigateur refuse le pilotage de cette interface (« The extensions gallery cannot be scripted »).
+Le site est publié sur https://unfollow.yadulink.com depuis le 5 octobre 2026. La version 1.1.0 a été soumise au Chrome Web Store le 6 octobre via le pilotage natif CUA dans Brave. Google confirme l’état **En attente d’examen** ; la publication automatique après approbation est activée. Le lien d’installation du site reste en prépublication tant que la fiche n’est pas publiquement installable.
 
 ## Artefacts et commandes
 
@@ -36,7 +36,7 @@ Le dossier historique de ce poste est `/Users/feedain/Documents/github/UnfollowT
 
 Dans `brave://extensions`, recharger UnfollowTracker depuis le dossier réellement chargé, puis recharger l’onglet Instagram. Le manifeste passe du popup à un panneau global. Cliquer sur l’icône pour l’ouvrir. La position gauche/droite reste un réglage du navigateur : l’API ne doit pas prétendre forcer un choix utilisateur. [Documentation Side Panel](https://developer.chrome.com/docs/extensions/reference/api/sidePanel).
 
-## Recette manuelle avant soumission
+## Recette manuelle sur Instagram réel — restant à effectuer
 
 Les tests automatisés utilisent des réponses Instagram synthétiques et une extension Manifest V3 réellement chargée dans un profil de test. Ils ne remplacent pas cette recette sur les versions publiques de Chrome et Brave :
 
@@ -68,4 +68,4 @@ Le projet Cloudflare Pages `unfollowtracker` est lié au dépôt `feedain9/Unfol
 
 L’automatisation Superset « UnfollowTracker — article quotidien » (ID `5ef77198-81f8-4fbd-b12b-0755ef7f8f05`) exécute Codex chaque jour à 09:00 Europe/Zurich, dans un nouvel espace du projet. Elle fonctionne sur le Mac configuré, qui doit être disponible avec Superset. Voir `docs/seo/DAILY-PUBLISHING.md`. Le premier article est envoyé automatiquement dans les deux langues.
 
-La seule opération de publication restant bloquée par l’outil est le formulaire du Chrome Web Store. Voir `SUBMIT-NOW.md` pour le ZIP, les textes, les images, les liens publics et les instructions de test. L’autorisation de soumettre a déjà été donnée ; aucune nouvelle autorisation générale n’est attendue. Le store devra ensuite examiner la version. Ne pas annoncer l’extension comme installable avant sa mise en ligne effective.
+La prochaine étape dépend de l’examen par Google. Voir `SUBMIT-NOW.md` pour l’état de soumission, le ZIP, les textes, les images, les liens publics et les instructions de test réellement enregistrées. En cas d’approbation, la publication sera automatique. Vérifier ensuite que la fiche permet l’installation, renseigner son URL officielle dans `site/publication.json` et déployer ce changement. Ne pas annoncer l’extension comme installable avant sa mise en ligne effective.

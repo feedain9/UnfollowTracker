@@ -1,6 +1,6 @@
 # Déclarations de données et permissions
 
-État : description du code 1.1.0, à reporter dans la console au moment de la soumission. Ce document ne constitue pas une approbation du Chrome Web Store.
+État : déclarations du code 1.1.0 enregistrées dans la console puis soumises le 6 octobre 2026. L’examen est en attente ; ce document ne constitue pas une approbation du Chrome Web Store.
 
 ## Finalité unique
 
@@ -32,12 +32,14 @@ Les URL d’avatar ne sont chargées que si elles utilisent HTTPS et un domaine 
 
 ## Déclaration dans la console
 
+Catégories cochées lors de la soumission : **informations personnelles identifiantes**, **informations d’authentification**, **historique Web**, **contenu du site Web**. La catégorie historique Web décrit ici uniquement l’URL de l’onglet Instagram utilisée pour le retrouver, sans enregistrement d’un historique général. Les catégories santé, finances, communications personnelles, localisation et activité de l’utilisateur sont décochées ; aucun suivi des clics, frappes ou mouvements n’est effectué. Code distant : **Non**. Les trois attestations de non-vente, d’usage limité à la finalité et d’absence d’usage pour le crédit sont cochées.
+
 Ne pas déclarer « aucune donnée traitée » sous prétexte que le traitement est local. Examiner les catégories proposées avec les éléments ci-dessus : informations identifiantes (noms, pseudos, identifiants), informations d’authentification utilisées dans la session, contenu du site (listes sociales), activité de navigation limitée au repérage de l’onglet Instagram. Aucune donnée financière, de santé, de localisation, de message privé ou de navigation sur d’autres sites n’est utilisée.
 
 La [FAQ officielle de Chrome sur les données utilisateur](https://developer.chrome.com/docs/webstore/program-policies/user-data-faq) demande d’expliquer le traitement même lorsqu’il reste local et de fournir une politique de confidentialité. Les textes livrés décrivent finalités, stockage, destinataires, durée et suppression, avec la déclaration « Limited Use ». La notice avant le premier scan rend le traitement visible dans le produit.
 
 Les engagements à reporter, s’ils correspondent toujours à la version soumise : pas de vente de données ; pas d’utilisation hors de la finalité décrite ; pas de traitement à des fins de solvabilité ; pas de publicité ciblée ; pas d’accès humain par l’éditeur aux listes. Toute future intégration d’analytics, service distant ou synchronisation nécessitera de revoir ces textes et déclarations.
 
-## À compléter avant de rendre les politiques publiques
+## Coordonnées des politiques publiques
 
 Les coordonnées publiques reprennent Yadulink à la demande de l’utilisateur : AVICLICK (Yadulink), SAS, SIREN 979 514 627 ; 40 rue Alexandre Dumas, 75011 Paris, France ; support@yadulink.com. L’hébergement choisi pour cette landing page est Cloudflare Pages, conformément à l’autorisation de publication du 5 octobre 2026. Voir [les sources de publication](PUBLICATION-IDENTITY.md). La génération de production vérifie la présence des informations requises. Le site est livré sans formulaire, cookie analytique ni appel tiers.
