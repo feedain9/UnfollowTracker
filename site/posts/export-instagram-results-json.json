@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "slug": "export-instagram-results-json",
+  "intent": "exporter et comprendre le fichier JSON des comptes non réciproques",
+  "status": "published",
+  "publishedAt": "2026-10-05",
+  "updatedAt": "2026-10-05",
+  "sources": [
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/327a951128e52e97e215dfb2be84a07705dab5e9/src/scripts/popup.js",
+      "title": "UnfollowTracker — code du panneau, exportResults et suppression des scans",
+      "checkedAt": "2026-10-05"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/storage",
+      "title": "Chrome for Developers — stockage local des extensions",
+      "checkedAt": "2026-10-05"
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+      "title": "MDN — format JSON et syntaxe",
+      "checkedAt": "2026-10-05"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/327a951128e52e97e215dfb2be84a07705dab5e9/src/scripts/background.js",
+      "title": "UnfollowTracker — conservation des scans complets par compte",
+      "checkedAt": "2026-10-05"
+    }
+  ],
+  "fr": {
+    "title": "Export JSON Instagram : lire et conserver les résultats UnfollowTracker",
+    "description": "Comprenez les champs du fichier JSON, les dates du scan et de l’export, et la différence entre le fichier téléchargé et les résultats enregistrés.",
+    "lead": "Le bouton « Exporter » télécharge un fichier JSON des comptes qui ne vous suivent pas en retour dans le résultat chargé. Il comprend les dates du scan et de l’export, le compte concerné et les pseudonymes, noms et liens des profils. Ce fichier est une copie indépendante des scans conservés dans l’extension.",
+    "sections": [
+      {
+        "heading": "Ce que contient exactement le fichier",
+        "paragraphs": [
+          "Le nom proposé est unfollowers-AAAA-MM-JJ.json. Malgré le mot « unfollowers », il s’agit de comptes non réciproques : le fichier ne prouve pas qu’une personne vous suivait auparavant. La date du nom de fichier est calculée en UTC ; elle peut différer de votre date locale près de minuit."
+        ],
+        "bullets": [
+          "exportDate : moment du téléchargement, au format ISO en UTC.",
+          "lastScan : date du scan associé au résultat, au même format. Elle peut être antérieure à exportDate.",
+          "account : pseudonyme du compte scanné s’il est disponible dans le résultat, sinon identifiant du compte.",
+          "unfollowersCount : nombre d’entrées exportées.",
+          "unfollowers : liste d’objets contenant username (pseudonyme), fullName (nom affiché) et profileUrl (lien Instagram)."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "Exporter la liste chargée, même si la recherche est active",
+        "paragraphs": [
+          "L’export utilise toute la liste de résultats chargée, pas seulement les lignes visibles ou les correspondances du champ de recherche. Si vous recherchez un pseudonyme parmi dix résultats, le fichier conserve les dix entrées. Le bouton est désactivé lorsque la liste non réciproque est vide.",
+          "L’export ne comprend ni la liste complète des abonnés et abonnements, ni leurs compteurs, ni les photos, ni les identifiants individuels des profils listés. Il ne contient pas de mot de passe ou de cookie."
+        ],
+        "steps": [
+          "Vérifiez le compte concerné et la date du dernier scan complet dans le panneau.",
+          "Cliquez sur « Exporter » et retrouvez le fichier dans les téléchargements de votre navigateur.",
+          "Ouvrez une copie dans un éditeur de texte pour lire les champs sans changer l’original."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "Lire un exemple fictif",
+        "paragraphs": [
+          "JSON est un format texte structuré : les accolades regroupent les champs et les crochets délimitent une liste. Aucun compte réel n’est utilisé dans l’exemple suivant.",
+          "Exemple fictif : {\"exportDate\":\"2026-10-05T18:15:00.000Z\",\"lastScan\":\"2026-10-05T18:00:00.000Z\",\"account\":\"compte_exemple\",\"unfollowersCount\":1,\"unfollowers\":[{\"username\":\"profil_fictif\",\"fullName\":\"Profil fictif\",\"profileUrl\":\"https://www.instagram.com/profil_fictif/\"}]}",
+          "Ici, le téléchargement a lieu quinze minutes après le scan. L’unique entrée représente un compte non réciproque dans ce résultat ; 18:15 n’est pas l’heure d’un désabonnement. Le suffixe Z indique UTC. Comparez surtout lastScan à la date du résultat que vous souhaitez conserver."
+        ],
+        "sources": [
+          1,
+          3
+        ]
+      },
+      {
+        "heading": "Où restent les données après l’export ?",
+        "paragraphs": [
+          "Le fichier est créé dans le navigateur, sans envoi de cette liste à un serveur UnfollowTracker. Le navigateur gère sa destination : consultez son historique de téléchargements pour retrouver le dossier choisi. Si vous choisissez un dossier synchronisé par un service cloud, cette synchronisation dépend de vos propres réglages.",
+          "Le dernier scan complet reste séparément dans le stockage local de l’extension. « Effacer les scans enregistrés » retire les scans conservés par l’extension, mais ne supprime pas les fichiers déjà téléchargés. Pour supprimer la copie JSON, effacez-la aussi dans son dossier et dans toute copie que vous avez créée."
+        ],
+        "sources": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "heading": "Conserver une copie ne met pas les résultats à jour",
+        "paragraphs": [
+          "Le JSON ne se rafraîchit pas lorsque vos relations Instagram changent. Un nouveau scan peut produire une nouvelle liste ; un scan interrompu laisse le dernier résultat complet disponible. Vérifiez donc lastScan avant d’utiliser un export ancien.",
+          "Cette version n’importe pas ce JSON ni l’archive officielle Instagram et ne compare pas plusieurs fichiers pour établir un historique de désabonnements. Évitez de déposer votre liste dans un outil en ligne si vous souhaitez la conserver sur votre appareil. La publication de l’extension sur le Chrome Web Store est encore en préparation."
+        ],
+        "sources": [
+          1,
+          4
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre les comptes non réciproques",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Retrouver un résultat après un scan interrompu",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Comprendre le stockage de vos données",
+        "route": "privacy/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Instagram JSON export: read and keep your UnfollowTracker results",
+    "description": "Understand the JSON fields, scan and export timestamps, and the difference between a downloaded file and results saved in the extension.",
+    "lead": "“Export” downloads a JSON file of accounts that do not follow you back in the loaded result. It includes scan and export timestamps, the scanned account, and each listed profile’s username, display name and link. The file is a separate copy from scans stored in the extension.",
+    "sections": [
+      {
+        "heading": "Exactly what the file contains",
+        "paragraphs": [
+          "The suggested filename is unfollowers-YYYY-MM-DD.json. Despite “unfollowers” in the name, these are non-reciprocal accounts: the file does not prove that anyone followed you previously. The filename date uses UTC, so it may differ from your local date near midnight."
+        ],
+        "bullets": [
+          "exportDate: the download timestamp, in ISO format using UTC.",
+          "lastScan: the scan timestamp associated with the result, in the same format. It can be earlier than exportDate.",
+          "account: the scanned account’s username if available in the result, otherwise its account ID.",
+          "unfollowersCount: the number of exported entries.",
+          "unfollowers: a list of objects with username, fullName (display name) and profileUrl (Instagram link)."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "Export the loaded list, even with a search active",
+        "paragraphs": [
+          "Export uses the entire loaded result list, including entries hidden by search or beyond the visible rows. Searching for one username in ten results still exports all ten entries. The export button is disabled when the non-reciprocal list is empty.",
+          "The file does not include the full follower and following lists, their totals, photos or the individual IDs of listed profiles. It contains no password or cookie."
+        ],
+        "steps": [
+          "Check the scanned account and the latest complete scan date in the panel.",
+          "Click “Export” and locate the file in your browser’s downloads.",
+          "Open a copy in a text editor to read its fields without changing the original."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "Read a fictional example",
+        "paragraphs": [
+          "JSON is structured text: braces group fields and brackets contain a list. The following example uses no real account data.",
+          "Fictional example: {\"exportDate\":\"2026-10-05T18:15:00.000Z\",\"lastScan\":\"2026-10-05T18:00:00.000Z\",\"account\":\"example_account\",\"unfollowersCount\":1,\"unfollowers\":[{\"username\":\"fictional_profile\",\"fullName\":\"Fictional Profile\",\"profileUrl\":\"https://www.instagram.com/fictional_profile/\"}]}",
+          "Here, the download happens fifteen minutes after the scan. The single entry represents a non-reciprocal account in that result; 18:15 is not the time of an unfollow. The Z suffix means UTC. Check lastScan against the result date you intended to keep."
+        ],
+        "sources": [
+          1,
+          3
+        ]
+      },
+      {
+        "heading": "Where does the data stay after export?",
+        "paragraphs": [
+          "The browser creates the file without sending this list to an UnfollowTracker server. Your browser handles the destination; use its download history to find the chosen folder. If you choose a folder synced by a cloud service, that syncing follows your own settings.",
+          "The latest complete scan remains separately in local extension storage. “Delete saved scans” removes scans kept by the extension but does not delete files you already downloaded. To remove the JSON copy, delete it from its folder and from any other copies you created."
+        ],
+        "sources": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "heading": "Keeping a copy does not refresh the results",
+        "paragraphs": [
+          "The JSON does not update when your Instagram relationships change. A new scan can produce a new list; an interrupted scan leaves the latest complete result available. Check lastScan before relying on an older export.",
+          "This version does not import this JSON or the official Instagram archive, and does not compare files to build an unfollow history. Avoid uploading the list to an online tool if you want to keep it on your device. The extension’s Chrome Web Store publication is still being prepared."
+        ],
+        "sources": [
+          1,
+          4
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand non-reciprocal accounts",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Find your result after an interrupted scan",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Understand how your data is stored",
+        "route": "privacy/"
+      }
+    ]
+  }
+}
