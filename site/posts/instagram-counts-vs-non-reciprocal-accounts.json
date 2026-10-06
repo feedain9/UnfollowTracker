@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "slug": "instagram-counts-vs-non-reciprocal-accounts",
+  "intent": "comprendre le calcul du nombre de non-réciproques avec des compteurs égaux et un exemple à quatre comptes",
+  "status": "published",
+  "publishedAt": "2026-10-06",
+  "updatedAt": "2026-10-06",
+  "sources": [
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/d32176c96181e4e40a1ee5da7e90b06b09f9b625/src/scripts/content.js",
+      "title": "UnfollowTracker — comparaison des identifiants dans runScan",
+      "checkedAt": "2026-10-06"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/d32176c96181e4e40a1ee5da7e90b06b09f9b625/src/scripts/popup.js",
+      "title": "UnfollowTracker — compteurs du résultat dans applyResults",
+      "checkedAt": "2026-10-06"
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+      "title": "MDN — ensembles JavaScript, appartenance et différence",
+      "checkedAt": "2026-10-06"
+    }
+  ],
+  "fr": {
+    "title": "Pourquoi les compteurs Instagram ne donnent pas le nombre de non-réciproques",
+    "description": "Deux compteurs égaux peuvent cacher des abonnements non réciproques. Un exemple à quatre profils explique le calcul et les résultats du panneau.",
+    "lead": "Soustraire votre nombre d’abonnés à votre nombre d’abonnements ne compte pas les profils qui ne vous suivent pas en retour. Cette soustraction mélange deux groupes : les comptes que vous suivez sans retour et ceux qui vous suivent sans que vous les suiviez. Il faut comparer les membres des deux listes.",
+    "sections": [
+      {
+        "heading": "Quatre profils fictifs, deux compteurs égaux",
+        "paragraphs": [
+          "Supposons que vous suiviez Alex, Camille et Lou. Vos abonnés sont Camille, Lou et Noor. Vous avez donc trois abonnements et trois abonnés : la soustraction donne zéro. Pourtant, Alex ne vous suit pas en retour. Noor vous suit, mais vous ne suivez pas Noor. Aucun compte réel n’est utilisé ici."
+        ],
+        "bullets": [
+          "Alex : vous le suivez ; il ne vous suit pas. Il appartient au résultat non réciproque.",
+          "Camille et Lou : vous vous suivez mutuellement. Ils sont présents dans les deux listes.",
+          "Noor : vous ne le suivez pas ; il vous suit. Il ne fait pas partie du résultat recherché."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "Ce que mesure réellement la soustraction",
+        "paragraphs": [
+          "Les relations réciproques sont comptées une fois de chaque côté et s’annulent dans la soustraction. Le nombre d’abonnements moins le nombre d’abonnés est donc égal au nombre de comptes que vous suivez sans retour, moins le nombre de comptes qui vous suivent sans retour de votre part.",
+          "Dans notre exemple, cela donne 1 − 1 = 0. Le nombre recherché reste 1. Si deux autres profils vous suivent sans que vous les suiviez, vous avez trois abonnements et cinq abonnés : 3 − 5 = −2, toujours avec Alex comme unique compte non réciproque. Même avoir davantage d’abonnés n’implique pas que tous vos abonnements soient réciproques.",
+          "La soustraction ne donnerait le bon nombre que si chaque abonné était aussi un compte que vous suivez, pour les mêmes listes au même moment. Les compteurs seuls ne permettent pas de vérifier cette condition."
+        ],
+        "sources": [
+          3
+        ]
+      },
+      {
+        "heading": "Le calcul effectué par UnfollowTracker",
+        "paragraphs": [
+          "Le scan rassemble les identifiants des abonnés, puis examine chaque compte de vos abonnements. Il garde ceux dont l’identifiant est absent des abonnés. Il compare donc l’appartenance aux listes, pas les totaux ni les noms affichés.",
+          "Le panneau affiche les tailles des listes obtenues dans le résultat complet : abonnés, abonnements et comptes non réciproques. Pour notre exemple fictif, ces trois valeurs seraient 3, 3 et 1. La recherche filtre les profils affichés ; elle ne transforme pas le compteur du résultat en différence arithmétique."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Comment vérifier votre résultat",
+        "paragraphs": [
+          "Pour un profil précis, cherchez son pseudonyme dans vos abonnés sur Instagram en vérifiant le compte connecté. Pour comprendre un résultat du panneau, examinez sa date et sa liste plutôt que de reconstruire celle-ci à partir des deux compteurs."
+        ],
+        "steps": [
+          "Vérifiez le compte concerné et la date du dernier scan complet.",
+          "Consultez la liste des comptes qui ne vous suivent pas en retour ; recherchez un profil si nécessaire.",
+          "Si vous souhaitez actualiser les données, lancez manuellement un scan et gardez l’onglet Instagram connecté ouvert.",
+          "Avant de vous désabonner, consultez le profil. Une absence de réciprocité ne vous oblige à aucune action."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Les limites restent celles des listes lues",
+        "paragraphs": [
+          "Cette explication suppose que vous comparez les mêmes listes au même moment. Le scan lit les listes successivement : des relations peuvent changer pendant cette lecture. Il ne peut pas reconstituer des informations qu’Instagram ne fournit pas. Lorsqu’il détecte une restriction ou une réponse incomplète, il conserve le résultat complet précédent au lieu de le remplacer.",
+          "Un résultat enregistré peut donc être plus ancien que votre consultation. Sa date est celle du scan, pas celle d’un désabonnement. Alex peut ne vous avoir jamais suivi : le calcul ne fournit aucun historique. La publication de l’extension sur le Chrome Web Store est encore en préparation."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre les comptes non réciproques",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Distinguer non-réciprocité et désabonnement",
+        "route": "guides/unfollowers-vs-non-followers/"
+      },
+      {
+        "label": "Lire et conserver un export JSON",
+        "route": "blog/export-instagram-results-json/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Why Instagram counts do not tell you how many accounts do not follow back",
+    "description": "Equal follower and following counts can hide non-reciprocal accounts. A four-profile example explains the calculation and the panel’s results.",
+    "lead": "Subtracting your follower count from your following count does not count the accounts that do not follow you back. It mixes two groups: accounts you follow without a follow back, and accounts that follow you without you following them. You need to compare the members of both lists.",
+    "sections": [
+      {
+        "heading": "Four fictional profiles, two equal counts",
+        "paragraphs": [
+          "Suppose you follow Alex, Camille and Lou. Your followers are Camille, Lou and Noor. You have three following and three followers, so subtraction gives zero. Yet Alex does not follow you back. Noor follows you, but you do not follow Noor. This example uses no real account data."
+        ],
+        "bullets": [
+          "Alex: you follow them; they do not follow you. They belong in the non-reciprocal result.",
+          "Camille and Lou: you follow each other. They appear in both lists.",
+          "Noor: you do not follow them; they follow you. They are outside the result you are looking for."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "What subtraction actually measures",
+        "paragraphs": [
+          "Mutual follows are counted once on each side and cancel out in the subtraction. Following minus followers therefore equals the number of accounts you follow without a follow back, minus the number that follow you without a follow back from you.",
+          "In our example, that is 1 − 1 = 0. The count you want is still 1. If two more profiles follow you without you following them, you have three following and five followers: 3 − 5 = −2, with Alex still the only account that does not follow back. Having more followers does not mean all your follows are mutual.",
+          "Subtraction would give the correct count only if every follower was also someone you follow, using the same lists at the same moment. Counts alone cannot establish that condition."
+        ],
+        "sources": [
+          3
+        ]
+      },
+      {
+        "heading": "How UnfollowTracker calculates the result",
+        "paragraphs": [
+          "The scan collects follower IDs, then checks each account in your following list. It keeps accounts whose IDs are absent from the followers. It compares list membership, rather than totals or display names.",
+          "The panel shows the sizes of the lists in the complete result: followers, following and accounts that do not follow back. Our fictional example would display 3, 3 and 1. Search filters the profiles shown; it does not turn the result count into an arithmetic difference."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "How to check your result",
+        "paragraphs": [
+          "For a specific profile, search for its username in your Instagram followers, making sure you are signed into the correct account. To understand a panel result, check its date and list rather than trying to reconstruct it from the two totals."
+        ],
+        "steps": [
+          "Check the scanned account and the latest complete scan date.",
+          "Read the list of accounts that do not follow back; search for a profile if needed.",
+          "To refresh the data, start a scan manually and keep the signed-in Instagram tab open.",
+          "Visit the profile before deciding to unfollow. A one-way follow does not require you to take action."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "The result is limited by the lists read",
+        "paragraphs": [
+          "This explanation assumes you compare the same lists at the same moment. The scan reads the lists in sequence, so relationships may change during that process. It cannot reconstruct information Instagram does not provide. When it detects a restriction or an incomplete response, it keeps the previous complete result instead of replacing it.",
+          "A saved result may therefore be older than your visit. Its date is the scan date, not the date of an unfollow. Alex may never have followed you: this calculation provides no history. The extension’s Chrome Web Store release is still in preparation."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand non-reciprocal accounts",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Distinguish non-followers from unfollowers",
+        "route": "guides/unfollowers-vs-non-followers/"
+      },
+      {
+        "label": "Read and keep a JSON export",
+        "route": "blog/export-instagram-results-json/"
+      }
+    ]
+  }
+}
