@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "slug": "switch-instagram-account-saved-results",
+  "intent": "retrouver le résultat enregistré du bon compte Instagram après un changement de session",
+  "status": "published",
+  "publishedAt": "2026-10-07",
+  "updatedAt": "2026-10-07",
+  "sources": [
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/9bcf77ed42992aa8a4771fdf54f9eaae26a71a0e/src/scripts/popup.js",
+      "title": "UnfollowTracker — connexion au compte, chargement local et export",
+      "checkedAt": "2026-10-07"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/9bcf77ed42992aa8a4771fdf54f9eaae26a71a0e/tests/sidepanel.test.js",
+      "title": "UnfollowTracker — test du changement de compte dans le panneau",
+      "checkedAt": "2026-10-07"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/storage",
+      "title": "Chrome for Developers — stockage local des extensions",
+      "checkedAt": "2026-10-07"
+    }
+  ],
+  "fr": {
+    "title": "Changer de compte Instagram : retrouver le bon résultat enregistré",
+    "description": "Vos scans sont séparés par compte Instagram. Voici comment retrouver la bonne liste, vérifier sa date et éviter de confondre deux exports.",
+    "lead": "UnfollowTracker charge le dernier résultat complet du compte détecté dans son onglet Instagram connecté. Quand le panneau détecte un autre compte, il retire la liste précédente et cherche le résultat de ce compte. Changer de compte ne lance pas automatiquement un scan et ne fusionne pas les listes.",
+    "sections": [
+      {
+        "heading": "Deux comptes, deux résultats distincts",
+        "paragraphs": [
+          "Exemple fictif : vous avez scanné compte_photo lundi et compte_atelier mardi dans la même installation de l’extension. Lorsque vous revenez à compte_photo sur Instagram et que le panneau reconnaît cette session, il charge son résultat de lundi. Le scan de mardi appartient à compte_atelier ; il ne rend pas celui de compte_photo plus récent.",
+          "Si aucun résultat complet n’est enregistré pour le compte détecté, le panneau ne doit pas afficher la liste de l’autre compte à sa place. Le test du changement de compte vérifie que les anciennes lignes et le résultat chargé sont retirés."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Retrouver la liste voulue",
+        "paragraphs": [
+          "Le panneau se connecte à un onglet Instagram de sa fenêtre. S’il est déjà lié à un onglet encore présent, il le conserve en priorité : activer un autre onglet Instagram ne garantit donc pas un changement d’onglet source. Pour éviter une ambiguïté, utilisez un seul onglet Instagram dans cette fenêtre.",
+          "Après un changement de session, laissez la page finir de charger et revenez au panneau. Sa connexion est revérifiée notamment au retour du focus et lors des événements des onglets. Il ne faut pas interpréter les lignes encore visibles pendant une transition comme une nouvelle comparaison."
+        ],
+        "sources": [
+          1
+        ],
+        "steps": [
+          "Vérifiez sur Instagram que le compte connecté est celui dont vous voulez consulter les résultats.",
+          "Gardez son onglet Instagram ouvert dans la même fenêtre que le panneau ; fermez les autres onglets Instagram de cette fenêtre après la fin de tout scan en cours.",
+          "Rouvrez le panneau si nécessaire, puis vérifiez le compte concerné et la date du dernier scan complet.",
+          "Si aucun résultat n’existe ou si vous voulez actualiser la liste, lancez manuellement un scan et gardez l’onglet connecté ouvert."
+        ]
+      },
+      {
+        "heading": "Un résultat ancien peut être le bon résultat",
+        "paragraphs": [
+          "Revenir à un compte ne met pas son scan à jour. La date affichée reste celle du résultat enregistré ; elle ne correspond ni au changement de session ni à un désabonnement. Une liste vide après un scan complet peut être un résultat valide, tandis que l’absence de résultat enregistré ne permet pas de conclure que tout le monde vous suit en retour.",
+          "Ces résultats sont conservés dans le stockage local de cette installation de l’extension. Ils ne sont pas synchronisés par UnfollowTracker entre vos appareils ou profils de navigateur. La suppression de l’extension efface son stockage local, selon la documentation Chrome."
+        ],
+        "sources": [
+          1,
+          3
+        ]
+      },
+      {
+        "heading": "Vérifier le compte avant un export ou une suppression",
+        "paragraphs": [
+          "L’export JSON copie le résultat chargé. Son champ account contient le pseudonyme enregistré s’il est disponible, sinon l’identifiant du compte ; lastScan donne la date du scan. Les deux comptes peuvent produire le même nom de fichier si vous les exportez le même jour : le nom seul ne suffit pas à distinguer les listes.",
+          "« Effacer les scans enregistrés » concerne tous les comptes conservés par l’extension, pas seulement le compte actuellement connecté. Cette commande ne supprime pas les JSON déjà téléchargés. Conservez séparément les copies que vous souhaitez garder et vérifiez leur champ account.",
+          "L’extension compare les relations actuelles au moment du scan, sans historique des désabonnements. Sa publication sur le Chrome Web Store est encore en préparation."
+        ],
+        "sources": [
+          1
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Lire les champs d’un export JSON",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Comprendre un scan interrompu",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Commencer avec le panneau",
+        "route": "getting-started/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Switching Instagram accounts: find the right saved result",
+    "description": "Scans are kept separately for each Instagram account. Find the right list, check its date and tell two JSON exports apart.",
+    "lead": "UnfollowTracker loads the latest complete result for the account detected in its connected Instagram tab. When the panel detects a different account, it clears the previous list and looks for that account’s result. Switching accounts does not automatically start a scan or merge the lists.",
+    "sections": [
+      {
+        "heading": "Two accounts, two separate results",
+        "paragraphs": [
+          "Fictional example: you scanned photo_account on Monday and studio_account on Tuesday in the same extension installation. When you return to photo_account on Instagram and the panel recognizes that session, it loads Monday’s result. Tuesday’s scan belongs to studio_account; it does not make photo_account’s result any newer.",
+          "If no complete result is saved for the detected account, the panel must not show the other account’s list instead. The account-switch test checks that the old rows and loaded result are cleared."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Find the list you meant to open",
+        "paragraphs": [
+          "The panel connects to an Instagram tab in its browser window. If its previously connected tab is still present, it takes priority: activating another Instagram tab does not guarantee that the panel changes its source tab. Use a single Instagram tab in that window to avoid ambiguity.",
+          "After changing sessions, let the page finish loading and return to the panel. It rechecks the connection when focus returns and in response to tab events, among other checks. Rows still visible during a transition should not be read as a new comparison."
+        ],
+        "sources": [
+          1
+        ],
+        "steps": [
+          "Check on Instagram that you are signed in to the account whose results you want.",
+          "Keep its Instagram tab open in the same window as the panel; close other Instagram tabs in that window after any running scan has finished.",
+          "Reopen the panel if needed, then check the relevant account and latest complete scan date.",
+          "If no result exists or you want a fresh list, start a scan manually and keep the signed-in tab open."
+        ]
+      },
+      {
+        "heading": "An older result can still be the right one",
+        "paragraphs": [
+          "Returning to an account does not refresh its scan. The displayed date belongs to the saved result, not the session switch or an unfollow event. An empty list after a complete scan can be valid; having no saved result does not mean everyone follows you back.",
+          "Results stay in local storage for this extension installation. UnfollowTracker does not sync them across devices or browser profiles. Removing the extension clears its local storage, as documented by Chrome."
+        ],
+        "sources": [
+          1,
+          3
+        ]
+      },
+      {
+        "heading": "Check the account before exporting or deleting",
+        "paragraphs": [
+          "The JSON export copies the loaded result. Its account field contains the saved username when available, otherwise the account ID; lastScan gives the scan date. Both accounts can produce the same suggested filename if exported on the same day, so the filename alone cannot identify the list.",
+          "“Delete saved scans” applies to all accounts stored by the extension, not just the currently connected account. It does not delete JSON files already downloaded. Keep any copies you need separately and check their account field.",
+          "The extension compares current relationships at scan time, without an unfollow history. Its Chrome Web Store publication is still being prepared."
+        ],
+        "sources": [
+          1
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Read the fields in a JSON export",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Understand an interrupted scan",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Get started with the panel",
+        "route": "getting-started/"
+      }
+    ]
+  }
+}
