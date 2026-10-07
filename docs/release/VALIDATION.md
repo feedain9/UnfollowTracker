@@ -1,6 +1,6 @@
 # Validation de préparation — 5 octobre 2026
 
-Version 1.1.0 préparée et soumise au Chrome Web Store le 6 octobre 2026, en attente d’examen avec publication automatique après approbation. Site déployé sur Cloudflare Pages et domaine actif. Les vérifications techniques ci-dessous restent celles de la préparation du 5 octobre ; la soumission ne vaut pas validation du fonctionnement dans la session Instagram réelle.
+Version 1.1.0 préparée, soumise au Chrome Web Store le 6 octobre 2026 et publiquement installable le 7 octobre 2026. Site déployé sur Cloudflare Pages et domaine actif. Les vérifications techniques ci-dessous restent celles de la préparation du 5 octobre ; la soumission ne vaut pas validation du fonctionnement dans la session Instagram réelle.
 
 ## Vérifications effectuées
 
@@ -66,4 +66,10 @@ Capture de la page réellement publiée : `.impeccable/review/published-landing.
 - Package 1.1.0 vérifié dans la fiche existante `ckkgnnifiojkmmfmeejeebafldholdnc` ; descriptions et captures FR/EN, icône, vignette promotionnelle, liens, permissions, déclarations de données et instructions de test enregistrés.
 - Distribution gratuite, publique, toutes les régions. Publication automatique après examen et approbation activée.
 - Google a confirmé « Votre extension a été envoyée pour examen » ; état affiché : **En attente d’examen**. Aucune approbation ni disponibilité publique n’est revendiquée.
-- Capture locale de cette confirmation : `.impeccable/review/store-submitted.jpg`. Le lien `storeUrl` reste nul jusqu’à une fiche publique effectivement installable.
+- Capture locale de cette confirmation : `.impeccable/review/store-submitted.jpg`. À ce stade de la soumission, le lien `storeUrl` restait nul jusqu’à une fiche publique effectivement installable.
+
+## Disponibilité publique — 7 octobre 2026
+
+La fiche publique `https://chromewebstore.google.com/detail/unfollowtracker/ckkgnnifiojkmmfmeejeebafldholdnc` a été consultée sans session Google. Elle affiche « Add to Chrome », la version 1.1.0, une mise à jour au 7 octobre 2026, l’éditeur Yadulink et les langues anglais/français. Cette observation confirme la disponibilité à l’installation. `storeUrl` est désormais configuré dans le site.
+
+Vérifications de l’activation du site : lint et quatre tests éditoriaux réussis ; test navigateur FR/EN réussi, y compris les liens internes, les interactions et les largeurs 320–2560 px. Génération de production réussie : quatre liens d’installation par langue vers la fiche officielle, données structurées de téléchargement gratuit, absence de la note de prépublication, guides datés du 7 octobre et sitemap cohérent.

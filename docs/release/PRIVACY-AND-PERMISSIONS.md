@@ -1,6 +1,6 @@
 # Déclarations de données et permissions
 
-État : déclarations du code 1.1.0 enregistrées dans la console puis soumises le 6 octobre 2026. L’examen est en attente ; ce document ne constitue pas une approbation du Chrome Web Store.
+État : déclarations du code 1.1.0 enregistrées dans la console puis soumises le 6 octobre 2026. La fiche officielle est publiquement installable depuis le 7 octobre 2026. Ce document décrit les déclarations du développeur ; l’approbation du store ne garantit pas la disponibilité des réponses Instagram.
 
 ## Finalité unique
 

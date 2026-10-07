@@ -255,7 +255,10 @@ for (const lang of ["fr", "en"]) {
     ...articles[lang],
   ];
   for (const page of pages) {
-    const body = `<main id="main" class="article wrap"><a class="text-link article-back" href="/${lang}/">${t.back}</a>${page.body}<p class="article-updated">${t.updated}</p><div class="article-next"><a class="text-link" href="/${lang}/#installation">${lang === "fr" ? "Découvrir l’extension gratuite" : "Explore the free extension"}${icon("arrow")}</a></div></main>`;
+    const updated = page.updatedAt
+      ? `${lang === "fr" ? "Mis à jour le" : "Updated"} ${displayDate(page.updatedAt, lang)}`
+      : t.updated;
+    const body = `<main id="main" class="article wrap"><a class="text-link article-back" href="/${lang}/">${t.back}</a>${page.body}<p class="article-updated">${updated}</p><div class="article-next"><a class="text-link" href="/${lang}/#installation">${lang === "fr" ? "Découvrir l’extension gratuite" : "Explore the free extension"}${icon("arrow")}</a></div></main>`;
     documentPage(
       lang,
       page.route,
@@ -264,6 +267,8 @@ for (const lang of ["fr", "en"]) {
       body,
       page.route.startsWith("guides/"),
     );
+    if (page.updatedAt)
+      lastModified.set(`${base.origin}/${lang}/${page.route}`, page.updatedAt);
   }
   // Same truthful policy bundled with the extension; no remote scripts or font imports.
   const local = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${t.privacy} · UnfollowTracker</title><link rel="stylesheet" href="styles/privacy.css"></head><body><nav><a href="privacy.html#fr">Français</a> · <a href="privacy-en.html">English</a></nav><main>${privacy(lang)}</main></body></html>`;

@@ -1,6 +1,6 @@
-# Soumission UnfollowTracker 1.1.0
+# Publication UnfollowTracker 1.1.0
 
-Version **1.1.0 envoyée pour examen le 6 octobre 2026**, depuis la session Brave du propriétaire avec le pilotage natif CUA. Google a affiché « Votre extension a été envoyée pour examen » et l’état **En attente d’examen**. L’option **publier automatiquement une fois examiné et approuvé** est activée. L’extension n’est pas encore approuvée ni disponible à l’installation publique.
+Version **1.1.0 envoyée pour examen le 6 octobre 2026**, depuis la session Brave du propriétaire avec le pilotage natif CUA. Google a affiché « Votre extension a été envoyée pour examen » et l’état **En attente d’examen**. L’option **publier automatiquement une fois examiné et approuvé** est activée. **Publication publique vérifiée le 7 octobre 2026** : la [fiche officielle](https://chromewebstore.google.com/detail/unfollowtracker/ckkgnnifiojkmmfmeejeebafldholdnc) affiche « Add to Chrome », la version 1.1.0 et l’éditeur Yadulink.
 
 La restriction de script DOM de la galerie ne bloquait pas le formulaire en mode ordinateur. Les descriptions et captures FR/EN, l’icône, la vignette promotionnelle, les déclarations de confidentialité et les instructions de test ont été enregistrées avant cet envoi. Distribution : **Sans frais**, **Public**, **Toutes les régions**. Capture locale de confirmation : `.impeccable/review/store-submitted.jpg` (non publiée dans le dépôt).
 
@@ -54,8 +54,8 @@ Instagram may return a rate limit or require a security challenge. The extension
 Code, styles and fonts are packaged locally. Instagram requests go directly to Instagram. Profile images load from authorized Instagram/Meta image hosts. The publisher receives no follower lists, authentication tokens, passwords, advertising data or analytics. Full policy: https://unfollow.yadulink.com/en/privacy/
 ```
 
-## Après l’examen
+## Après publication
 
-Attendre la décision de Google. Ne pas annuler ni renvoyer la version déjà en attente sans motif. Si Google demande une correction, conserver son motif exact et préparer les changements correspondants.
+L’URL publique est renseignée dans `site/publication.json` à la clé `storeUrl`. Elle active les boutons d’installation FR/EN et les données structurées de téléchargement. Les guides et articles ne présentent plus la sortie comme à venir.
 
-Après validation publique : récupérer l’URL officielle de la fiche, la renseigner dans `site/publication.json` à la clé `storeUrl`, vérifier les tests et pousser sur `main`. Cela active les boutons d’installation lors du déploiement suivant. Le fait d’obtenir un identifiant de brouillon ou un état « en examen » ne suffit pas à activer ce lien.
+Pour une prochaine version, conserver la même fiche, augmenter la version du manifeste, reconstruire et vérifier l’archive, puis soumettre le nouveau package. La disponibilité publique du store reste distincte de la recette Instagram réelle documentée dans `VALIDATION.md`.

@@ -1,6 +1,6 @@
 # Dossier de publication — UnfollowTracker 1.1.0
 
-Le site est publié sur https://unfollow.yadulink.com depuis le 5 octobre 2026. La version 1.1.0 a été soumise au Chrome Web Store le 6 octobre via le pilotage natif CUA dans Brave. Google confirme l’état **En attente d’examen** ; la publication automatique après approbation est activée. Le lien d’installation du site reste en prépublication tant que la fiche n’est pas publiquement installable.
+Le site est publié sur https://unfollow.yadulink.com depuis le 5 octobre 2026. La version 1.1.0 a été soumise au Chrome Web Store le 6 octobre via le pilotage natif CUA dans Brave. La [fiche officielle](https://chromewebstore.google.com/detail/unfollowtracker/ckkgnnifiojkmmfmeejeebafldholdnc) a été vérifiée publiquement installable le 7 octobre 2026 : bouton « Add to Chrome », version 1.1.0, éditeur Yadulink. Les liens d’installation FR/EN sont configurés vers cette fiche.
 
 ## Artefacts et commandes
 
@@ -52,15 +52,15 @@ La validation visuelle du panneau natif dans la session Brave de l’utilisateur
 
 ## Site et sous-domaine
 
-Configuration dans `site/publication.json`. Domaine public : `https://unfollow.yadulink.com`, CNAME vers `unfollowtracker.pages.dev`, HTTPS actif. Les informations publiques de l’éditeur et de l’hébergeur reprennent celles de Yadulink, à la demande de l’utilisateur ; voir `PUBLICATION-IDENTITY.md`. La clé `storeUrl` reste nulle jusqu’à la disponibilité publique d’une fiche officielle permettant l’installation ; les CTA restent honnêtement en prépublication.
+Configuration dans `site/publication.json`. Domaine public : `https://unfollow.yadulink.com`, CNAME vers `unfollowtracker.pages.dev`, HTTPS actif. Les informations publiques de l’éditeur et de l’hébergeur reprennent celles de Yadulink, à la demande de l’utilisateur ; voir `PUBLICATION-IDENTITY.md`. La clé `storeUrl` contient l’URL officielle du Chrome Web Store, vérifiée publiquement installable le 7 octobre 2026 ; les CTA proposent l’installation gratuite.
 
 Pour l’aperçu : `npm run site:dev`, puis `http://localhost:4173/fr/` ou `/en/`.
 
-Pour le dossier indexable : `npm run build:site:production`. Cette commande génère un robots.txt ouvert, les pages avec `index,follow` et le sitemap. Elle ne déploie rien. Le mode prépublication du store peut rester actif si l’on décide d’ouvrir d’abord le site.
+Pour le dossier indexable : `npm run build:site:production`. Cette commande génère un robots.txt ouvert, les pages avec `index,follow` et le sitemap. Elle ne déploie rien. Un éventuel retour en prépublication nécessite de remettre `storeUrl` à `null` et de vérifier les textes publics correspondants.
 
 L’hébergeur doit servir `index.html` dans les répertoires, une vraie réponse 404, le HTTPS et les redirections. `_headers` et `_redirects` sont fournis pour les hébergeurs compatibles ; sur un autre serveur, reporter ces règles dans sa configuration. Mapper le sous-domaine à la cible DNS indiquée par l’hébergeur choisi. Ne pas modifier les enregistrements du domaine racine qui servent l’outil de prospection.
 
-Après la mise en ligne autorisée : vérifier canoniques et alternates sur l’URL finale, la politique publique, l’absence de `noindex`, le sitemap et les réponses HTTP ; ajouter la propriété Search Console. Après acceptation du store : renseigner `storeUrl`, régénérer puis déployer le site, et vérifier le bouton d’installation.
+À chaque déploiement : vérifier canoniques et alternates sur l’URL finale, la politique publique, l’absence de `noindex`, le sitemap, les réponses HTTP et les liens d’installation. La propriété Search Console reste un suivi SEO distinct.
 
 ## Exploitation et prochaine étape
 
@@ -68,4 +68,4 @@ Le projet Cloudflare Pages `unfollowtracker` est lié au dépôt `feedain9/Unfol
 
 L’automatisation Superset « UnfollowTracker — article quotidien » (ID `5ef77198-81f8-4fbd-b12b-0755ef7f8f05`) exécute Codex chaque jour à 09:00 Europe/Zurich, dans un nouvel espace du projet. Elle fonctionne sur le Mac configuré, qui doit être disponible avec Superset. Voir `docs/seo/DAILY-PUBLISHING.md`. Le premier article est envoyé automatiquement dans les deux langues.
 
-La prochaine étape dépend de l’examen par Google. Voir `SUBMIT-NOW.md` pour l’état de soumission, le ZIP, les textes, les images, les liens publics et les instructions de test réellement enregistrées. En cas d’approbation, la publication sera automatique. Vérifier ensuite que la fiche permet l’installation, renseigner son URL officielle dans `site/publication.json` et déployer ce changement. Ne pas annoncer l’extension comme installable avant sa mise en ligne effective.
+La première version est publiée. Voir `SUBMIT-NOW.md` pour le relevé de soumission et de publication, le ZIP, les textes, les images, les liens publics et les instructions de test enregistrées. Toute prochaine mise à jour du package passe par la fiche existante et un nouvel examen. La recette réelle du panneau Brave reste une validation distincte de la publication.

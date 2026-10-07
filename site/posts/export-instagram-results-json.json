@@ -4,7 +4,7 @@
   "intent": "exporter et comprendre le fichier JSON des comptes non réciproques",
   "status": "published",
   "publishedAt": "2026-10-05",
-  "updatedAt": "2026-10-05",
+  "updatedAt": "2026-10-07",
   "sources": [
     {
       "url": "https://github.com/feedain9/UnfollowTracker/blob/327a951128e52e97e215dfb2be84a07705dab5e9/src/scripts/popup.js",
@@ -91,7 +91,7 @@
         "heading": "Conserver une copie ne met pas les résultats à jour",
         "paragraphs": [
           "Le JSON ne se rafraîchit pas lorsque vos relations Instagram changent. Un nouveau scan peut produire une nouvelle liste ; un scan interrompu laisse le dernier résultat complet disponible. Vérifiez donc lastScan avant d’utiliser un export ancien.",
-          "Cette version n’importe pas ce JSON ni l’archive officielle Instagram et ne compare pas plusieurs fichiers pour établir un historique de désabonnements. Évitez de déposer votre liste dans un outil en ligne si vous souhaitez la conserver sur votre appareil. La publication de l’extension sur le Chrome Web Store est encore en préparation."
+          "Cette version n’importe pas ce JSON ni l’archive officielle Instagram et ne compare pas plusieurs fichiers pour établir un historique de désabonnements. Évitez de déposer votre liste dans un outil en ligne si vous souhaitez la conserver sur votre appareil."
         ],
         "sources": [
           1,
@@ -178,7 +178,7 @@
         "heading": "Keeping a copy does not refresh the results",
         "paragraphs": [
           "The JSON does not update when your Instagram relationships change. A new scan can produce a new list; an interrupted scan leaves the latest complete result available. Check lastScan before relying on an older export.",
-          "This version does not import this JSON or the official Instagram archive, and does not compare files to build an unfollow history. Avoid uploading the list to an online tool if you want to keep it on your device. The extension’s Chrome Web Store publication is still being prepared."
+          "This version does not import this JSON or the official Instagram archive, and does not compare files to build an unfollow history. Avoid uploading the list to an online tool if you want to keep it on your device."
         ],
         "sources": [
           1,

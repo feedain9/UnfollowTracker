@@ -4,7 +4,7 @@
   "intent": "comprendre le calcul du nombre de non-réciproques avec des compteurs égaux et un exemple à quatre comptes",
   "status": "published",
   "publishedAt": "2026-10-06",
-  "updatedAt": "2026-10-06",
+  "updatedAt": "2026-10-07",
   "sources": [
     {
       "url": "https://github.com/feedain9/UnfollowTracker/blob/d32176c96181e4e40a1ee5da7e90b06b09f9b625/src/scripts/content.js",
@@ -83,7 +83,7 @@
         "heading": "Les limites restent celles des listes lues",
         "paragraphs": [
           "Cette explication suppose que vous comparez les mêmes listes au même moment. Le scan lit les listes successivement : des relations peuvent changer pendant cette lecture. Il ne peut pas reconstituer des informations qu’Instagram ne fournit pas. Lorsqu’il détecte une restriction ou une réponse incomplète, il conserve le résultat complet précédent au lieu de le remplacer.",
-          "Un résultat enregistré peut donc être plus ancien que votre consultation. Sa date est celle du scan, pas celle d’un désabonnement. Alex peut ne vous avoir jamais suivi : le calcul ne fournit aucun historique. La publication de l’extension sur le Chrome Web Store est encore en préparation."
+          "Un résultat enregistré peut donc être plus ancien que votre consultation. Sa date est celle du scan, pas celle d’un désabonnement. Alex peut ne vous avoir jamais suivi : le calcul ne fournit aucun historique."
         ],
         "sources": [
           1,
@@ -167,7 +167,7 @@
         "heading": "The result is limited by the lists read",
         "paragraphs": [
           "This explanation assumes you compare the same lists at the same moment. The scan reads the lists in sequence, so relationships may change during that process. It cannot reconstruct information Instagram does not provide. When it detects a restriction or an incomplete response, it keeps the previous complete result instead of replacing it.",
-          "A saved result may therefore be older than your visit. Its date is the scan date, not the date of an unfollow. Alex may never have followed you: this calculation provides no history. The extension’s Chrome Web Store release is still in preparation."
+          "A saved result may therefore be older than your visit. Its date is the scan date, not the date of an unfollow. Alex may never have followed you: this calculation provides no history."
         ],
         "sources": [
           1,

@@ -42,7 +42,7 @@ npm run build
 
 ## Publication and daily articles
 
-**Nothing is deployed or submitted by these commands.** The site defaults to prelaunch with `noindex`; installation links become live when `site/publication.json` contains the real Chrome Web Store URL. Production builds require public publisher/support/hosting details and generate the sitemap and indexable pages.
+**Nothing is deployed or submitted by these commands.** Preview builds use `noindex`; installation links use the official Chrome Web Store URL in `site/publication.json`. Production builds require public publisher/support/hosting details and generate the sitemap and indexable pages.
 
 - [Publication checklist and browser acceptance](docs/release/PUBLISHING.md)
 - [French and English store listing](docs/release/STORE-LISTING.md)
@@ -54,7 +54,7 @@ The landing page is live at [unfollow.yadulink.com](https://unfollow.yadulink.co
 
 A Superset Codex automation writes and publishes one article in French and English daily at 09:00 Europe/Zurich, in a fresh project workspace. It runs on the configured Mac, which must be available with Superset. The first run published the JSON export guide. See the [editorial workflow](docs/seo/DAILY-PUBLISHING.md) and [topic calendar](docs/seo/CONTENT-CALENDAR.md). Posts are structured JSON in `site/posts/`; the builder validates both languages, dates, citations, unique intent and internal links. Drafts and future-dated posts stay out of the public build.
 
-The Chrome Web Store console refuses browser automation. The extension has **not been submitted**; the [complete submission kit](docs/release/SUBMIT-NOW.md) is ready for the account holder. Keep `storeUrl` null until the extension is actually available for installation.
+UnfollowTracker **1.1.0 is published** on the [Chrome Web Store](https://chromewebstore.google.com/detail/unfollowtracker/ckkgnnifiojkmmfmeejeebafldholdnc). The public listing, publisher Yadulink and “Add to Chrome” button were verified on 7 October 2026. The landing page and its French/English installation links use that official listing. See the [publication record](docs/release/SUBMIT-NOW.md).
 
 ## Files
 

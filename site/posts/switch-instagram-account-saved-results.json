@@ -70,7 +70,7 @@
         "paragraphs": [
           "L’export JSON copie le résultat chargé. Son champ account contient le pseudonyme enregistré s’il est disponible, sinon l’identifiant du compte ; lastScan donne la date du scan. Les deux comptes peuvent produire le même nom de fichier si vous les exportez le même jour : le nom seul ne suffit pas à distinguer les listes.",
           "« Effacer les scans enregistrés » concerne tous les comptes conservés par l’extension, pas seulement le compte actuellement connecté. Cette commande ne supprime pas les JSON déjà téléchargés. Conservez séparément les copies que vous souhaitez garder et vérifiez leur champ account.",
-          "L’extension compare les relations actuelles au moment du scan, sans historique des désabonnements. Sa publication sur le Chrome Web Store est encore en préparation."
+          "L’extension compare les relations actuelles au moment du scan, sans historique des désabonnements."
         ],
         "sources": [
           1
@@ -140,7 +140,7 @@
         "paragraphs": [
           "The JSON export copies the loaded result. Its account field contains the saved username when available, otherwise the account ID; lastScan gives the scan date. Both accounts can produce the same suggested filename if exported on the same day, so the filename alone cannot identify the list.",
           "“Delete saved scans” applies to all accounts stored by the extension, not just the currently connected account. It does not delete JSON files already downloaded. Keep any copies you need separately and check their account field.",
-          "The extension compares current relationships at scan time, without an unfollow history. Its Chrome Web Store publication is still being prepared."
+          "The extension compares current relationships at scan time, without an unfollow history."
         ],
         "sources": [
           1

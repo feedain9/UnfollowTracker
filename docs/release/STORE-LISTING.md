@@ -1,6 +1,6 @@
 # Chrome Web Store — contenus soumis
 
-Version **1.1.0 soumise le 6 octobre 2026**, état vérifié : **En attente d’examen**. Descriptions et captures française et anglaise enregistrées ; publication automatique après approbation activée. Fiche : `ckkgnnifiojkmmfmeejeebafldholdnc`. Le produit et toutes les fonctionnalités décrites sont gratuits. Ne pas ajouter de faux avis, de promesse « aucun risque » ou de suivi historique.
+Version **1.1.0 soumise le 6 octobre 2026**, puis **publiée le 7 octobre 2026** : la fiche publique affiche « Add to Chrome ». Descriptions et captures française et anglaise enregistrées ; publication automatique après approbation activée. Fiche : `ckkgnnifiojkmmfmeejeebafldholdnc`. Le produit et toutes les fonctionnalités décrites sont gratuits. Ne pas ajouter de faux avis, de promesse « aucun risque » ou de suivi historique.
 
 ## Français
 
@@ -65,6 +65,6 @@ French and English, dark and light themes. Desktop Chrome 116 or later. Independ
 - Accueil : `https://unfollow.yadulink.com/en/` (version française accessible depuis le site).
 - Confidentialité : `https://unfollow.yadulink.com/en/privacy/`.
 - Assistance : `https://unfollow.yadulink.com/en/getting-started/` ; contact public : support@yadulink.com. Éditeur : AVICLICK (Yadulink).
-- Lien de boutique : attribué par le Chrome Web Store ; le reporter dans `site/publication.json` lorsque la fiche est publique et permet effectivement l’installation.
+- Boutique : `https://chromewebstore.google.com/detail/unfollowtracker/ckkgnnifiojkmmfmeejeebafldholdnc`, renseignée dans `site/publication.json`.
 
-Le site et ces politiques sont hébergés publiquement sur Cloudflare Pages depuis le 5 octobre 2026. Le lien d’installation reste désactivé jusqu’à l’acceptation et la disponibilité publique de la fiche du store.
+Le site et ces politiques sont hébergés publiquement sur Cloudflare Pages depuis le 5 octobre 2026. La disponibilité publique et le bouton d’installation du store ont été vérifiés le 7 octobre 2026 ; le site configure maintenant ce lien officiel.
