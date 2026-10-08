@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "slug": "delete-saved-instagram-scans",
+  "intent": "effacer tous les scans locaux sans confondre suppression des résultats, exports et relations Instagram",
+  "status": "published",
+  "publishedAt": "2026-10-08",
+  "updatedAt": "2026-10-08",
+  "sources": [
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/454f0f6bbde4ca79a4c74a7fd6d3ba36e091e318/src/scripts/popup.js",
+      "title": "UnfollowTracker — clearSavedData, confirmation, préférences et exportResults",
+      "checkedAt": "2026-10-08"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/storage",
+      "title": "Chrome for Developers — stockage des extensions et suppression de clés",
+      "checkedAt": "2026-10-08"
+    }
+  ],
+  "fr": {
+    "title": "Effacer les scans Instagram enregistrés : ce qui disparaît et ce qui reste",
+    "description": "Supprimez les scans locaux de tous vos comptes dans UnfollowTracker. Découvrez ce qui reste : exports JSON, préférences et abonnements Instagram.",
+    "lead": "« Effacer les scans enregistrés » supprime les résultats conservés par UnfollowTracker pour tous les comptes de cette installation, après confirmation. Cette commande ne supprime pas vos exports JSON et ne modifie pas vos abonnements Instagram. Vos choix de langue et de thème restent enregistrés.",
+    "sections": [
+      {
+        "heading": "Une suppression pour tous les comptes, pas seulement le compte connecté",
+        "paragraphs": [
+          "Les derniers scans complets sont conservés dans le stockage local de l’extension, séparément par compte. La commande efface tous ces résultats, ainsi que les anciennes données de scan encore présentes et les états de scan enregistrés pour la session. Elle ne se limite pas à la liste affichée.",
+          "Exemple fictif : vous avez un résultat pour compte_photo et un autre pour compte_atelier. Confirmer la suppression depuis compte_photo retire les deux résultats enregistrés dans cette installation. Cela ne supprime aucun des deux comptes Instagram."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Comment effacer les résultats en gardant une copie utile",
+        "paragraphs": [
+          "Si vous souhaitez conserver une liste non réciproque, exportez-la avant la suppression. L’export copie le résultat chargé ; il ne sauvegarde pas toutes les listes complètes d’abonnés et d’abonnements. Pour plusieurs comptes, vérifiez chaque résultat et exportez séparément ceux que vous voulez garder."
+        ],
+        "sources": [
+          1
+        ],
+        "steps": [
+          "Attendez la fin de tout scan ou désabonnement en cours.",
+          "Si nécessaire, exportez les résultats voulus et vérifiez le compte et la date du scan dans les fichiers.",
+          "Dans le panneau, cliquez sur « Effacer les scans enregistrés ».",
+          "Lisez la confirmation : toutes les listes enregistrées sont concernées. Annulez si vous voulez les conserver, ou confirmez avec « Effacer les scans ».",
+          "Après la suppression, le panneau retire le résultat chargé et affiche « Scans enregistrés effacés »."
+        ]
+      },
+      {
+        "heading": "Pourquoi la suppression peut être bloquée",
+        "paragraphs": [
+          "La commande ne s’exécute pas pendant un scan ou un désabonnement en cours dans le panneau. Après confirmation, elle vérifie aussi les états de scan de la session : si un scan est encore marqué en cours, notamment dans une autre fenêtre, elle demande d’attendre au lieu d’effacer les données.",
+          "Attendez la fin du travail en cours avant de réessayer. La suppression sert à retirer les résultats enregistrés ; ce n’est pas une commande pour interrompre un scan ni un moyen de lever une restriction Instagram."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "Ce qui reste après avoir confirmé",
+        "paragraphs": [
+          "Les fichiers JSON déjà téléchargés restent dans leur dossier. Dans notre exemple, un export de compte_photo reste lisible même si les résultats des deux comptes ont été effacés dans l’extension. Supprimez ce fichier séparément, ainsi que les copies ou synchronisations que vous avez créées, si vous ne souhaitez plus le conserver.",
+          "La langue et le thème sont conservés : la commande retire les données de scan sélectionnées, sans vider tout le stockage de l’extension. Elle n’envoie aucune demande de désabonnement à Instagram et ne vous déconnecte pas de votre session Instagram.",
+          "La suppression agit dans cette installation de l’extension. Elle ne va pas effacer les résultats d’une autre installation, d’un autre profil de navigateur ou d’un autre appareil."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Après la suppression, aucun résultat ne signifie pas zéro non-réciproque",
+        "paragraphs": [
+          "L’absence de scan enregistré ne permet pas de savoir qui vous suit en retour. Vous pouvez lancer manuellement un nouveau scan depuis un onglet Instagram connecté et le garder ouvert pendant la lecture. La suppression ne lance pas ce scan automatiquement.",
+          "Le prochain résultat complet décrira les listes lues lors de ce nouveau scan. Il ne restaurera pas l’ancien résultat et ne reconstituera pas un historique de désabonnements. Un export conservé reste une copie datée indépendante ; cette version ne le réimporte pas."
+        ],
+        "sources": [
+          1
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre et conserver un export JSON",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Retrouver le résultat du bon compte",
+        "route": "blog/switch-instagram-account-saved-results/"
+      },
+      {
+        "label": "Comprendre le stockage des données",
+        "route": "privacy/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Delete saved Instagram scans: what is removed and what stays",
+    "description": "Remove local scans for all your accounts in UnfollowTracker. Learn what stays: JSON exports, preferences and your Instagram following.",
+    "lead": "“Delete saved scans” removes results stored by UnfollowTracker for all accounts in this installation, after confirmation. It does not delete your JSON exports or change who you follow on Instagram. Your language and theme preferences remain saved.",
+    "sections": [
+      {
+        "heading": "Deletion covers every saved account, not just the signed-in account",
+        "paragraphs": [
+          "The latest complete scans are kept in the extension’s local storage, separately for each account. The command removes all these results, any remaining legacy scan data and saved session scan states. It is not limited to the list currently displayed.",
+          "Fictional example: you have one result for photo_account and another for studio_account. Confirming deletion while using photo_account removes both saved results in this installation. It does not delete either Instagram account."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Delete results while keeping a useful copy",
+        "paragraphs": [
+          "If you want to keep a non-reciprocal list, export it before deleting. Export copies the loaded result; it does not back up the full follower and following lists. For multiple accounts, check each result and export the ones you need separately."
+        ],
+        "sources": [
+          1
+        ],
+        "steps": [
+          "Wait for any scan or unfollow operation to finish.",
+          "If needed, export the results you want and check the account and scan timestamp in the files.",
+          "In the panel, click “Delete saved scans”.",
+          "Read the confirmation: it covers all saved lists. Cancel to keep them, or confirm with “Delete scans”.",
+          "After deletion, the panel clears the loaded result and displays “Saved scans deleted”."
+        ]
+      },
+      {
+        "heading": "Why deletion may be blocked",
+        "paragraphs": [
+          "The command does not run while the panel is scanning or performing an unfollow. After confirmation, it also checks session scan states: if a scan is still marked as running, including one in another window, it asks you to wait instead of deleting data.",
+          "Let the current work finish before trying again. Deletion removes saved results; it is not a command to interrupt a scan or lift an Instagram restriction."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "What remains after confirmation",
+        "paragraphs": [
+          "Downloaded JSON files stay in their folders. In our example, an export from photo_account remains readable even after both accounts’ results have been removed from the extension. Delete that file separately, along with any copies or synced copies you created, if you no longer want to keep it.",
+          "Language and theme preferences remain: the command removes selected scan data rather than clearing all extension storage. It sends no unfollow request to Instagram and does not sign you out of your Instagram session.",
+          "Deletion applies to this extension installation. It does not erase results in another installation, browser profile or device."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Having no saved result does not mean everyone follows back",
+        "paragraphs": [
+          "Having no saved scan cannot tell you who follows you back. You can manually start a new scan with a signed-in Instagram tab and keep it open while the lists are read. Deleting saved results does not start this scan automatically.",
+          "The next complete result will describe the lists read during that new scan. It will not restore the old result or reconstruct an unfollow history. A retained export remains a separate, dated copy; this version does not import it."
+        ],
+        "sources": [
+          1
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand and keep a JSON export",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Find the right account’s saved result",
+        "route": "blog/switch-instagram-account-saved-results/"
+      },
+      {
+        "label": "Understand data storage",
+        "route": "privacy/"
+      }
+    ]
+  }
+}
