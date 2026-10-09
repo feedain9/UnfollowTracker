@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "slug": "missing-instagram-profile-photo",
+  "intent": "comprendre les initiales et les photos de profil absentes sans en déduire un blocage ou un désabonnement",
+  "status": "published",
+  "publishedAt": "2026-10-09",
+  "updatedAt": "2026-10-09",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/4ae9c2811578c3ab9e76b571f4096c21026a2f6c/src/scripts/popup.js",
+      "title": "UnfollowTracker — affichage des initiales, chargement des photos et exportResults",
+      "checkedAt": "2026-10-09"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/4ae9c2811578c3ab9e76b571f4096c21026a2f6c/src/scripts/content.js",
+      "title": "UnfollowTracker — comparaison par identifiant, loadAvatar et cache mémoire",
+      "checkedAt": "2026-10-09"
+    }
+  ],
+  "fr": {
+    "title": "Photo de profil Instagram absente : que signifient les initiales dans les résultats ?",
+    "description": "Une photo absente dans UnfollowTracker ne prouve ni blocage ni désabonnement. Comprenez les initiales, les liens d’image et les vérifications utiles.",
+    "lead": "Les initiales dans une ligne UnfollowTracker indiquent que la photo n’est pas affichée. Elles ne prouvent pas que le profil vous a bloqué, a supprimé son compte ou s’est désabonné. La comparaison utilise les identifiants des comptes dans les listes Instagram ; le chargement des photos est une opération séparée.",
+    "sections": [
+      {
+        "heading": "Les initiales sont un affichage de remplacement",
+        "paragraphs": [
+          "Chaque ligne commence par les initiales du nom affiché, ou du pseudonyme si le nom manque. Si une photo se charge, elle remplace visuellement ces initiales. En attendant le chargement, ou si celui-ci échoue, les initiales restent visibles.",
+          "Exemple fictif : la ligne de profil_fictif affiche PF au lieu d’une photo. Cette ligne appartient au résultat parce que son identifiant figure dans vos abonnements et pas dans les abonnés lus pendant le scan. PF ne donne aucune information supplémentaire sur la relation avec ce profil."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Pourquoi une photo peut manquer",
+        "paragraphs": [
+          "Une adresse d’image absente ou invalide laisse les initiales en place. Le panneau accepte uniquement certaines adresses HTTPS des serveurs d’images Instagram et Meta. Une image indisponible, une adresse expirée ou un chargement refusé peut également empêcher l’affichage. Le panneau ne présente pas de diagnostic permettant de distinguer toutes ces causes.",
+          "Il essaie d’abord de charger l’image directement. Si cela échoue et que la connexion est disponible, il demande à l’onglet Instagram connecté de charger cette même image. Si cette tentative échoue aussi, il garde les initiales. Les téléchargements de secours sont limités en durée et en taille ; ils n’envoient pas de cookies au serveur d’images."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Que vérifier sans multiplier les scans",
+        "paragraphs": [
+          "Vérifiez le pseudonyme et la date du dernier scan complet avant d’interpréter une ligne. Une photo absente n’est pas une raison suffisante pour vous désabonner ou relancer immédiatement plusieurs scans.",
+          "Les réponses du chargement de secours, y compris les échecs, sont mises en cache en mémoire dans l’onglet Instagram, avec une limite de 64 adresses. Fermer puis rouvrir seulement le panneau ne garantit donc pas une nouvelle tentative pour la même adresse."
+        ],
+        "sources": [
+          1,
+          2
+        ],
+        "steps": [
+          "Ouvrez le profil depuis son pseudonyme pour consulter ce qu’Instagram vous montre directement.",
+          "Gardez l’onglet Instagram connecté ouvert si vous souhaitez utiliser le chargement de secours.",
+          "Si le résultat est ancien et que vous souhaitez actualiser les listes, lancez un nouveau scan manuellement ; il peut obtenir une adresse de photo plus récente, sans garantir son affichage.",
+          "Si un scan est en cours, attendez sa fin avant de recharger ou fermer Instagram : ces actions interrompent le scan."
+        ]
+      },
+      {
+        "heading": "Une photo et un résultat ne sont pas la même preuve",
+        "paragraphs": [
+          "L’extension compare les identifiants des abonnements et des abonnés, pas les photos. Une photo réussie ne garantit pas que le résultat enregistré est récent ; une photo absente ne transforme pas un résultat en historique de désabonnements.",
+          "L’export JSON ne contient ni les photos ni leurs adresses. Il conserve les pseudonymes, noms affichés et liens de profil des comptes non réciproques, avec le compte concerné et les dates du scan et de l’export. Le fichier reste donc lisible même si une photo ne s’affiche pas dans le panneau."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre les comptes non réciproques",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Lire un export JSON",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Résoudre un scan interrompu",
+        "route": "guides/scan-troubleshooting/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Missing Instagram profile photo: what do initials in your results mean?",
+    "description": "A missing photo in UnfollowTracker does not prove a block or an unfollow. Understand initials, image links and useful checks.",
+    "lead": "Initials in an UnfollowTracker row mean the photo is not being displayed. They do not prove that the profile blocked you, deleted its account or unfollowed you. The comparison uses account IDs in Instagram’s lists; loading profile photos is a separate operation.",
+    "sections": [
+      {
+        "heading": "Initials are a fallback display",
+        "paragraphs": [
+          "Each row starts with initials from the display name, or the username if the name is missing. A successfully loaded photo visually replaces those initials. While loading, or if loading fails, the initials remain visible.",
+          "Fictional example: fictional_profile displays FP instead of a photo. The row belongs in the result because its ID appears in your following but not in the followers read during the scan. FP adds no information about your relationship with that profile."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Why a photo may be missing",
+        "paragraphs": [
+          "A missing or invalid image address leaves initials in place. The panel only accepts certain HTTPS addresses from Instagram and Meta image servers. An unavailable image, an expired address or a rejected request may also prevent display. The panel does not provide a diagnosis that distinguishes all these causes.",
+          "It first tries loading the image directly. If that fails and the connection is available, it asks the connected Instagram tab to load the same image. If that attempt also fails, it keeps the initials. These fallback downloads have time and size limits and send no cookies to the image server."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "What to check without repeatedly scanning",
+        "paragraphs": [
+          "Check the username and latest complete scan date before interpreting a row. A missing photo alone is not a reason to unfollow someone or immediately start several scans.",
+          "Fallback image responses, including failures, are cached in memory in the Instagram tab, with a limit of 64 addresses. Closing and reopening only the panel therefore does not guarantee a fresh attempt for the same address."
+        ],
+        "sources": [
+          1,
+          2
+        ],
+        "steps": [
+          "Open the profile through its username to see what Instagram shows you directly.",
+          "Keep the signed-in Instagram tab open if you want fallback image loading to be available.",
+          "If the result is old and you want fresh lists, start a new scan manually. It may obtain a newer photo address, without guaranteeing display.",
+          "If a scan is running, let it finish before reloading or closing Instagram: those actions interrupt the scan."
+        ]
+      },
+      {
+        "heading": "A photo and a result provide different information",
+        "paragraphs": [
+          "The extension compares follower and following IDs, not photos. A successfully loaded photo does not guarantee that a saved result is recent; a missing photo does not turn a result into an unfollow history.",
+          "The JSON export includes neither photos nor their addresses. It keeps usernames, display names and profile links for non-reciprocal accounts, along with the scanned account and scan and export timestamps. The file therefore remains readable even if a photo does not appear in the panel."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand non-reciprocal accounts",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Read a JSON export",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Troubleshoot an interrupted scan",
+        "route": "guides/scan-troubleshooting/"
+      }
+    ]
+  }
+}
