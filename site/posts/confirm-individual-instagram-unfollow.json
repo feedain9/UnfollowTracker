@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "slug": "confirm-individual-instagram-unfollow",
+  "intent": "vérifier un profil et annuler ou confirmer un désabonnement individuel en comprenant la mise à jour et les erreurs",
+  "status": "published",
+  "publishedAt": "2026-10-10",
+  "updatedAt": "2026-10-10",
+  "sources": [
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/01a07c65cfde3cb3cd26163d1c45c4dfdd6399f3/src/scripts/popup.js",
+      "title": "UnfollowTracker — lien de profil, dialogue de confirmation et exportResults",
+      "checkedAt": "2026-10-10"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/01a07c65cfde3cb3cd26163d1c45c4dfdd6399f3/src/scripts/content.js",
+      "title": "UnfollowTracker — contrôles du compte et confirmation du désabonnement par Instagram",
+      "checkedAt": "2026-10-10"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/01a07c65cfde3cb3cd26163d1c45c4dfdd6399f3/src/scripts/background.js",
+      "title": "UnfollowTracker — mise à jour du résultat enregistré après désabonnement",
+      "checkedAt": "2026-10-10"
+    }
+  ],
+  "fr": {
+    "title": "Désabonnement Instagram individuel : vérifier le profil et confirmer dans UnfollowTracker",
+    "description": "Ouvrez le bon profil, annulez ou confirmez un désabonnement individuel et comprenez les résultats mis à jour ou les erreurs dans UnfollowTracker.",
+    "lead": "Dans UnfollowTracker, cliquer sur « Ne plus suivre » ouvre une confirmation pour un seul compte. Vous pouvez choisir « Annuler » avant l’envoi de la demande. Confirmer modifie réellement vos abonnements Instagram ; ouvrir le profil depuis la liste permet d’abord de vérifier votre choix.",
+    "sections": [
+      {
+        "heading": "Vérifier le compte avant de décider",
+        "paragraphs": [
+          "Regardez le compte Instagram concerné et la date du dernier scan complet. Le résultat indique qui ne vous suivait pas en retour dans les listes lues ; il ne prouve pas un désabonnement passé et ne vous oblige pas à retirer ces comptes.",
+          "Dans une ligne de résultat, le lien du profil ouvre Instagram dans un nouvel onglet. Vérifiez le pseudonyme, plutôt que de vous fier seulement au nom affiché ou à la photo. Gardez aussi l’onglet Instagram connecté utilisé par l’extension ouvert pour l’action."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Annuler avant l’envoi, ou confirmer un seul profil",
+        "paragraphs": [
+          "Le dialogue affiche le pseudonyme sélectionné et précise que seul ce compte sera retiré. « Annuler » ferme ce dialogue sans lancer le désabonnement. Ce choix annule la confirmation en attente ; il ne restaure pas un abonnement déjà retiré."
+        ],
+        "sources": [
+          1
+        ],
+        "steps": [
+          "Cliquez sur « Ne plus suivre » dans la ligne du compte voulu.",
+          "Relisez le pseudonyme dans « Ne plus suivre ce compte ? ».",
+          "Choisissez « Annuler » si vous hésitez, ou « Ne plus suivre » pour envoyer la demande à Instagram.",
+          "Attendez le résultat affiché avant toute autre action."
+        ]
+      },
+      {
+        "heading": "Un exemple fictif : consulter suffit parfois",
+        "paragraphs": [
+          "Vous suivez profil_atelier, présent dans votre liste non réciproque. Vous ouvrez son profil et appréciez toujours ses publications. Si vous avez ensuite ouvert la confirmation, choisissez « Annuler » : vous continuez à suivre ce compte et la ligne reste dans le résultat.",
+          "Si vous confirmez plutôt le retrait de profil_atelier et qu’Instagram le confirme, l’extension retire ce profil des abonnements et des non-réciproques du résultat enregistré. Elle ne retire pas les autres profils et ne modifie pas votre liste d’abonnés."
+        ],
+        "sources": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "heading": "Pourquoi la date du scan ne change pas après le retrait",
+        "paragraphs": [
+          "Après confirmation par Instagram et enregistrement réussi, le panneau affiche le résultat mis à jour et un message de succès. Cette mise à jour retire l’entrée concernée ; elle ne relit pas toutes les relations Instagram. La date du dernier scan reste celle de la comparaison initiale.",
+          "Un JSON exporté auparavant reste une copie indépendante et peut encore contenir le profil retiré. Un nouvel export utilise le résultat chargé après la mise à jour. Pour obtenir une comparaison récente de toutes les listes, lancez manuellement un nouveau scan et gardez l’onglet Instagram ouvert pendant sa lecture."
+        ],
+        "sources": [
+          1,
+          3
+        ]
+      },
+      {
+        "heading": "Si le bouton est indisponible ou la confirmation échoue",
+        "paragraphs": [
+          "Les boutons de désabonnement sont désactivés lorsque le panneau n’est pas connecté, pendant un scan ou pendant un autre désabonnement. L’extension vérifie également le compte connecté et le résultat associé avant d’envoyer la demande. Un changement de compte ou de scan peut empêcher l’action.",
+          "Si Instagram ne confirme pas le retrait, vérifiez le profil avant de réessayer. Une erreur peut aussi survenir après qu’Instagram a confirmé l’action, si le résultat enregistré a changé entre-temps : relancez alors un scan pour actualiser la liste. Un message d’erreur ne suffit donc pas à conclure que votre abonnement est inchangé.",
+          "Il n’y a pas de commande de désabonnement en masse ni de garantie de disponibilité des requêtes Instagram. Respectez les restrictions et vérifications affichées par Instagram ; multiplier les tentatives n’est pas une solution."
+        ],
+        "sources": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre les comptes non réciproques",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Lire et conserver un export JSON",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Retrouver le bon résultat après un changement de compte",
+        "route": "blog/switch-instagram-account-saved-results/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Unfollow one Instagram account: check the profile and confirm in UnfollowTracker",
+    "description": "Check the right profile, cancel or confirm an individual unfollow, and understand updated results or errors in UnfollowTracker.",
+    "lead": "In UnfollowTracker, clicking “Unfollow” opens a confirmation for one account. You can choose “Cancel” before the request is sent. Confirming changes who you follow on Instagram; opening the profile from the list lets you check your choice first.",
+    "sections": [
+      {
+        "heading": "Check the account before deciding",
+        "paragraphs": [
+          "Check the Instagram account the result belongs to and the last complete scan date. The result shows who did not follow you back in the lists read during that scan. It does not prove a past unfollow or mean you need to stop following those accounts.",
+          "The profile link in each result row opens Instagram in a new tab. Check the username instead of relying only on a display name or photo. Also keep the signed-in Instagram tab used by the extension open for the action."
+        ],
+        "sources": [
+          1,
+          2
+        ]
+      },
+      {
+        "heading": "Cancel before sending, or confirm one profile",
+        "paragraphs": [
+          "The dialog shows the selected username and explains that only this account will be unfollowed. “Cancel” closes the dialog without starting the unfollow. It cancels the pending confirmation; it does not restore a follow that has already been removed."
+        ],
+        "sources": [
+          1
+        ],
+        "steps": [
+          "Click “Unfollow” in the row for the account you want.",
+          "Read the username again in “Unfollow this account?”.",
+          "Choose “Cancel” if unsure, or “Unfollow” to send the request to Instagram.",
+          "Wait for the displayed outcome before taking another action."
+        ]
+      },
+      {
+        "heading": "A fictional example: viewing the profile may be enough",
+        "paragraphs": [
+          "You follow studio_profile, which appears in your non-reciprocal list. You open its profile and still enjoy its posts. If you then opened the confirmation, choose “Cancel”: you keep following the account and its row remains in the result.",
+          "If you instead confirm unfollowing studio_profile and Instagram confirms it, the extension removes that profile from the saved result’s following and non-reciprocal lists. It does not remove other profiles or change your followers list."
+        ],
+        "sources": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "heading": "Why the scan date stays the same after an unfollow",
+        "paragraphs": [
+          "Once Instagram confirms the action and the updated result is saved successfully, the panel displays the updated result and a success message. This update removes the selected entry; it does not reread every Instagram relationship. The last scan date remains the date of the original comparison.",
+          "A previously exported JSON file remains a separate copy and may still contain the removed profile. A new export uses the loaded result after the update. To get a fresh comparison of all lists, manually start a new scan and keep the Instagram tab open while it reads them."
+        ],
+        "sources": [
+          1,
+          3
+        ]
+      },
+      {
+        "heading": "If the button is unavailable or confirmation fails",
+        "paragraphs": [
+          "Unfollow buttons are disabled when the panel is disconnected, during a scan or while another unfollow is in progress. The extension also checks the signed-in account and associated result before sending the request. A changed account or scan can prevent the action.",
+          "If Instagram does not confirm the unfollow, check the profile before trying again. An error can also occur after Instagram confirmed the action if the saved result changed in the meantime: run a new scan to refresh the list. An error message alone therefore does not establish that you still follow the account.",
+          "There is no bulk unfollow command or guarantee that Instagram requests will remain available. Respect any restrictions or verification steps Instagram displays; repeated attempts are not a solution."
+        ],
+        "sources": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand non-reciprocal accounts",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Read and keep a JSON export",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Find the right result after switching accounts",
+        "route": "blog/switch-instagram-account-saved-results/"
+      }
+    ]
+  }
+}
