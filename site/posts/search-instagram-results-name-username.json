@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "slug": "search-instagram-results-name-username",
+  "intent": "retrouver un profil dans les non-réciproques par nom ou pseudonyme et comprendre les limites du filtre de recherche",
+  "status": "published",
+  "publishedAt": "2026-10-11",
+  "updatedAt": "2026-10-11",
+  "sources": [
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/ede335bfca9a8e32fb99a61b75326067a76e5de8/src/scripts/popup.js",
+      "title": "UnfollowTracker — recherche, affichage des profils et exportResults",
+      "checkedAt": "2026-10-11"
+    }
+  ],
+  "fr": {
+    "title": "Rechercher un compte Instagram dans les résultats : nom ou pseudonyme ?",
+    "description": "Retrouvez un profil dans les non-réciproques : recherche par nom ou pseudo, résultats masqués, absence de correspondance et export de la liste complète.",
+    "lead": "Le champ « Rechercher un nom ou un pseudo » filtre les comptes non réciproques du résultat chargé dans UnfollowTracker. Il cherche dans le pseudonyme et le nom affiché, sans distinguer les majuscules des minuscules. Il ne recherche pas tous les comptes Instagram et ne lance pas un nouveau scan.",
+    "sections": [
+      {
+        "heading": "Deux textes différents dans chaque ligne",
+        "paragraphs": [
+          "La ligne affiche le nom du profil, ou son pseudonyme si le nom est absent, puis le pseudonyme précédé de @. Le lien du profil est construit à partir du pseudonyme. Un nom affiché peut être partagé par plusieurs personnes : relisez le pseudonyme avant de choisir un profil.",
+          "La recherche teste si le texte saisi est présent dans le pseudonyme ou le nom enregistré. Vous pouvez saisir une partie du texte. Les espaces au début et à la fin de votre saisie sont ignorés ; les accents, points et tirets bas ne sont pas supprimés. Saisissez le pseudonyme sans @ : ce symbole est ajouté à l’affichage, mais ne fait pas partie du pseudonyme recherché."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "Un exemple fictif : retrouver le bon Camille",
+        "paragraphs": [
+          "Supposons que votre résultat contienne atelier_camille, nommé « Camille Atelier », et camille_photo, nommé « Camille Photo ». La recherche camille affiche les deux ; ATELIER retrouve le premier malgré les majuscules. La recherche camille_photo permet de cibler le second.",
+          "Si le nom enregistré est « Élodie », la recherche elodie ne correspond pas à ce nom accentué. Elle peut toutefois correspondre au pseudonyme si celui-ci contient elodie. Essayez le pseudonyme exact plutôt que de conclure que le profil est absent."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "Filtrer toute la liste, puis afficher davantage",
+        "paragraphs": [
+          "Le filtre s’applique à toute la liste non réciproque chargée avant de limiter le nombre de lignes affichées. Un profil au-delà des premières lignes peut donc être retrouvé directement. Une nouvelle saisie ramène l’affichage à un maximum de 50 correspondances ; « Voir plus » en ajoute jusqu’à 50 à chaque clic."
+        ],
+        "sources": [
+          1
+        ],
+        "steps": [
+          "Vérifiez le compte concerné et la date du dernier scan complet.",
+          "Saisissez une partie du nom ou le pseudonyme sans @.",
+          "Si plusieurs profils correspondent, comparez leurs pseudonymes et ouvrez le profil voulu.",
+          "Effacez la recherche pour retrouver la liste complète ; utilisez « Voir plus » si nécessaire."
+        ]
+      },
+      {
+        "heading": "Aucune correspondance ne signifie pas aucun abonnement",
+        "paragraphs": [
+          "Le message d’absence de correspondance concerne seulement le filtre dans ce résultat. Le profil peut être réciproque, absent de vos abonnements lus, ou enregistré sous un autre texte. La recherche seule ne permet pas de déterminer laquelle de ces situations s’applique.",
+          "Le filtre utilise les noms du résultat chargé, sans vérifier en direct un changement de nom sur Instagram. Si le scan est ancien, consultez les listes sur Instagram ou lancez manuellement un nouveau scan en gardant son onglet connecté ouvert. Un résultat non réciproque ne prouve pas un désabonnement passé."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "La recherche ne réduit pas le fichier exporté",
+        "paragraphs": [
+          "Filtrer ne supprime aucune entrée enregistrée et ne modifie aucun abonnement Instagram. « Exporter » utilise toute la liste non réciproque chargée, y compris les comptes masqués par la recherche ou non encore affichés.",
+          "Dans notre exemple, si la liste complète contient douze profils et que camille_photo est le seul résultat visible, le JSON exporte toujours les douze profils. La recherche sert à consulter un résultat ; elle ne crée pas un export limité à la sélection."
+        ],
+        "sources": [
+          1
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre les comptes non réciproques",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Lire les champs du fichier exporté",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Retrouver le résultat du bon compte",
+        "route": "blog/switch-instagram-account-saved-results/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Search Instagram results by display name or username in UnfollowTracker",
+    "description": "Find a profile in your non-reciprocal results: name and username search, hidden rows, no matches and exporting the complete list.",
+    "lead": "The “Search a name or username” field filters non-reciprocal accounts in the result loaded by UnfollowTracker. It searches both usernames and display names without distinguishing uppercase from lowercase. It does not search all of Instagram or start a new scan.",
+    "sections": [
+      {
+        "heading": "Two different names in each row",
+        "paragraphs": [
+          "Each row shows the display name, or the username if no name is available, followed by the username with an @ prefix. The profile link is built from the username. Several people can share a display name, so check the username before choosing a profile.",
+          "Search checks whether your text appears within the saved username or display name. Partial text works. Spaces at the start and end of your query are ignored; accents, periods and underscores are not removed. Enter usernames without @: that symbol is added for display but is not part of the searched username."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "A fictional example: finding the right Camille",
+        "paragraphs": [
+          "Suppose your result includes atelier_camille, named “Camille Atelier”, and camille_photo, named “Camille Photo”. Searching camille shows both; ATELIER finds the first despite the uppercase letters. Searching camille_photo lets you target the second.",
+          "If the saved display name is “Élodie”, elodie does not match that accented name. It can still match the username if that contains elodie. Try the exact username before concluding that the profile is absent."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "Search the whole list, then show more",
+        "paragraphs": [
+          "The filter runs across the entire loaded non-reciprocal list before limiting the rows displayed. You can therefore find a profile beyond the initial rows directly. Changing the query returns the display to a maximum of 50 matches; each click on “Show more” adds up to another 50."
+        ],
+        "sources": [
+          1
+        ],
+        "steps": [
+          "Check the account the result belongs to and the latest complete scan date.",
+          "Type part of the name or the username without @.",
+          "If several profiles match, compare their usernames and open the profile you want.",
+          "Clear the query to return to the complete list; use “Show more” if needed."
+        ]
+      },
+      {
+        "heading": "No match does not mean you do not follow the account",
+        "paragraphs": [
+          "The no-match message only describes the filter within this result. The profile might follow you back, be absent from the following list read during the scan, or be saved under different text. Search alone cannot establish which situation applies.",
+          "The filter uses names from the loaded result without checking live Instagram name changes. If the scan is old, check the lists on Instagram or manually run a new scan while keeping its signed-in tab open. A non-reciprocal result does not prove a past unfollow."
+        ],
+        "sources": [
+          1
+        ]
+      },
+      {
+        "heading": "Search does not narrow the exported file",
+        "paragraphs": [
+          "Filtering removes no saved entries and changes no Instagram relationships. “Export” uses the entire loaded non-reciprocal list, including accounts hidden by search or not yet displayed.",
+          "In our example, if the full list contains twelve profiles and camille_photo is the only visible match, the JSON still exports all twelve. Search helps you browse a result; it does not create an export limited to the selection."
+        ],
+        "sources": [
+          1
+        ]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand non-reciprocal accounts",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Read the exported file fields",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Find the right account’s saved result",
+        "route": "blog/switch-instagram-account-saved-results/"
+      }
+    ]
+  }
+}
