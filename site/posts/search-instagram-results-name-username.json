@@ -40,7 +40,7 @@
       {
         "heading": "Filtrer toute la liste, puis afficher davantage",
         "paragraphs": [
-          "Le filtre s’applique à toute la liste non réciproque chargée avant de limiter le nombre de lignes affichées. Un profil au-delà des premières lignes peut donc être retrouvé directement. Une nouvelle saisie ramène l’affichage à un maximum de 50 correspondances ; « Voir plus » en ajoute jusqu’à 50 à chaque clic."
+          "Le filtre s’applique à toute la liste non réciproque chargée avant de limiter le nombre de lignes affichées. Un profil au-delà des premières lignes peut donc être retrouvé directement. Une nouvelle saisie ramène l’affichage à un maximum de 50 correspondances ; « Afficher la suite » en ajoute jusqu’à 50 à chaque clic."
         ],
         "sources": [
           1
@@ -49,7 +49,7 @@
           "Vérifiez le compte concerné et la date du dernier scan complet.",
           "Saisissez une partie du nom ou le pseudonyme sans @.",
           "Si plusieurs profils correspondent, comparez leurs pseudonymes et ouvrez le profil voulu.",
-          "Effacez la recherche pour retrouver la liste complète ; utilisez « Voir plus » si nécessaire."
+          "Effacez la recherche pour retrouver la liste complète ; utilisez « Afficher la suite » si nécessaire."
         ]
       },
       {
