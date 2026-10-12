@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "slug": "check-unfollowtracker-extension-permissions",
+  "intent": "vérifier les permissions d’UnfollowTracker avant installation et distinguer accès au site, stockage et actions déclenchées",
+  "status": "published",
+  "publishedAt": "2026-10-12",
+  "updatedAt": "2026-10-12",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/4ed16702e8fd0a8992837ed451ade342ba6248f5/manifest.json",
+      "title": "UnfollowTracker — manifest.json, version 1.1.0",
+      "checkedAt": "2026-10-12"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/4ed16702e8fd0a8992837ed451ade342ba6248f5/src/scripts/popup.js",
+      "title": "UnfollowTracker — popup.js : connexion, actions manuelles et export",
+      "checkedAt": "2026-10-12"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/4ed16702e8fd0a8992837ed451ade342ba6248f5/src/scripts/background.js",
+      "title": "UnfollowTracker — background.js : panneau et stockage des scans",
+      "checkedAt": "2026-10-12"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/4ed16702e8fd0a8992837ed451ade342ba6248f5/src/scripts/content.js",
+      "title": "UnfollowTracker — content.js : session et requêtes Instagram",
+      "checkedAt": "2026-10-12"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/extensions/develop/concepts/declare-permissions",
+      "title": "Chrome for Developers — Declare permissions",
+      "checkedAt": "2026-10-12"
+    },
+    {
+      "url": "https://support.google.com/chrome_webstore/answer/2664769?hl=fr",
+      "title": "Aide Chrome Web Store — Installer et gérer des extensions",
+      "checkedAt": "2026-10-12"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/tabs",
+      "title": "Chrome for Developers — Tabs API, permissions",
+      "checkedAt": "2026-10-12"
+    }
+  ],
+  "fr": {
+    "title": "Permissions d’UnfollowTracker : que vérifier avant l’installation ?",
+    "description": "Comprenez les permissions storage, scripting et sidePanel, l’accès à Instagram et les vérifications à faire dans Chrome avant d’utiliser UnfollowTracker.",
+    "lead": "Le manifeste public d’UnfollowTracker 1.1.0 déclare trois permissions : storage, scripting et sidePanel. L’accès aux pages est limité à https://www.instagram.com/*. Avant l’installation, vérifiez le site concerné et l’usage de chaque permission ; leur nombre seul ne dit pas quelles données sont traitées.",
+    "sections": [
+      {
+        "heading": "Un accès à Instagram, avec un périmètre précis",
+        "paragraphs": [
+          "Le manifeste utilise https://www.instagram.com/* pour l’autorisation de site et pour le script exécuté dans ses pages. L’astérisque couvre les chemins de ce site ; il ne désigne pas tous les sites Web. Ce droit porte sur les pages Instagram, pas uniquement sur une catégorie de données comme les abonnés.",
+          "Exemple fictif : vous lancez un scan puis ouvrez un site de notes dans un autre onglet. Le panneau peut rester visible, mais sa présence ne lui accorde pas un accès au contenu de ce site. Le scan continue à utiliser l’onglet Instagram connecté, que vous devez garder ouvert."
+        ],
+        "sources": [1, 2, 3, 5]
+      },
+      {
+        "heading": "À quoi servent les trois permissions déclarées ?",
+        "paragraphs": [
+          "Voici leur usage dans le code consulté le 12 octobre 2026. Ces noms techniques permettent de comparer cette explication au manifeste de la version utilisée."
+        ],
+        "bullets": [
+          "storage : conserver localement le dernier scan complet de chaque compte et les préférences de langue et de thème. L’état temporaire du scan utilise le stockage de session. Le code n’utilise pas le stockage synchronisé de Chrome pour ces résultats.",
+          "scripting : charger le script livré avec l’extension dans l’onglet Instagram lorsqu’il n’y répond pas encore, notamment si cet onglet était ouvert avant l’installation.",
+          "sidePanel : afficher l’interface dans le panneau latéral du navigateur, accessible lorsque vous changez d’onglet."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "Vérifier la demande dans Chrome",
+        "paragraphs": [
+          "Chrome présente des avertissements pour certaines permissions ; le dialogue d’installation ne reproduit donc pas nécessairement toutes les lignes du manifeste. Les vérifications suivantes concernent Chrome sur ordinateur."
+        ],
+        "steps": [
+          "Ouvrez la fiche de l’extension depuis le lien de notre guide d’utilisation.",
+          "Lisez les autorisations affichées avant de confirmer l’ajout à Chrome.",
+          "Si l’extension est déjà installée, ouvrez Extensions, puis Gérer les extensions et Détails pour UnfollowTracker. Examinez les autorisations d’accès aux sites.",
+          "Comparez le périmètre affiché à celui de la version documentée ici. Consultez aussi la politique de confidentialité pour comprendre les données traitées et conservées."
+        ],
+        "sources": [1, 5, 6]
+      },
+      {
+        "heading": "Une permission absente ne signifie pas une fonction impossible",
+        "paragraphs": [
+          "Le manifeste ne demande pas tabs. Pourtant, le panneau peut ouvrir Instagram et retrouver son onglet : Chrome autorise plusieurs opérations sur les onglets sans cette permission, et l’autorisation de site permet de consulter les informations des onglets correspondants. Le panneau recherche précisément ceux de www.instagram.com.",
+          "Il ne demande pas non plus cookies. Cela ne signifie pas que la session est ignorée : le script dans Instagram lit l’identifiant du compte et le jeton anti-CSRF accessibles dans cette page, puis effectue ses requêtes avec la session existante. Vous vous connectez directement sur Instagram.",
+          "Enfin, l’absence de downloads n’empêche pas l’export. Le bouton crée le JSON dans le navigateur et déclenche son téléchargement par un lien. Ce mécanisme est distinct du stockage des scans dans l’extension."
+        ],
+        "sources": [1, 2, 4, 7]
+      },
+      {
+        "heading": "Distinguer autorisation et action demandée",
+        "paragraphs": [
+          "L’autorisation de site permet au code d’interagir avec Instagram ; ce n’est pas un accès réservé à la lecture. Dans cette version, vous lancez le scan manuellement, et un désabonnement individuel demande une confirmation. Accorder les permissions ne lance pas une série de désabonnements.",
+          "Les permissions ne prouvent ni la fraîcheur d’un résultat ni un désabonnement passé : UnfollowTracker compare les listes lues pendant le scan. Si une version ultérieure demande un nouveau périmètre, comparez sa documentation et sa politique de données avant de l’accepter. Cette explication porte sur le manifeste public 1.1.0 cité ci-dessous."
+        ],
+        "sources": [1, 2, 4]
+      }
+    ],
+    "related": [
+      {
+        "label": "Ouvrir la fiche officielle et installer l’extension",
+        "route": "getting-started/"
+      },
+      {
+        "label": "Lire la politique de confidentialité",
+        "route": "privacy/"
+      },
+      {
+        "label": "Effacer les scans enregistrés",
+        "route": "blog/delete-saved-instagram-scans/"
+      },
+      {
+        "label": "Comprendre la confirmation d’un désabonnement",
+        "route": "blog/confirm-individual-instagram-unfollow/"
+      }
+    ]
+  },
+  "en": {
+    "title": "UnfollowTracker permissions: what to check before installing",
+    "description": "Understand storage, scripting, sidePanel and Instagram site access, then check the permissions in Chrome before using UnfollowTracker.",
+    "lead": "UnfollowTracker’s public manifest for version 1.1.0 declares three permissions: storage, scripting and sidePanel. Page access is limited to https://www.instagram.com/*. Before installing, check the site involved and what each permission is used for; the number of permissions alone does not tell you what data is processed.",
+    "sections": [
+      {
+        "heading": "Instagram access has a defined scope",
+        "paragraphs": [
+          "The manifest uses https://www.instagram.com/* for both its site permission and the script that runs on those pages. The asterisk covers paths on that site, not every website. This permission applies to Instagram pages, rather than only one type of data such as followers.",
+          "Fictional example: you start a scan, then open a notes website in another tab. The panel can stay visible, but its presence does not grant access to that website’s content. The scan still uses the signed-in Instagram tab, which you need to keep open."
+        ],
+        "sources": [1, 2, 3, 5]
+      },
+      {
+        "heading": "What are the three declared permissions used for?",
+        "paragraphs": [
+          "Here is how the code checked on 12 October 2026 uses them. These technical names let you compare the explanation with the manifest for the version you use."
+        ],
+        "bullets": [
+          "storage: saves each account’s latest complete scan locally, along with language and theme preferences. Temporary scan state uses session storage. The code does not use Chrome’s synced storage for these results.",
+          "scripting: loads the script bundled with the extension into an Instagram tab when it is not yet responding there, for example if the tab was open before installation.",
+          "sidePanel: displays the interface in the browser’s side panel, which remains available when you switch tabs."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "Check the request in Chrome",
+        "paragraphs": [
+          "Chrome shows warnings for some permissions, so its installation prompt does not necessarily list every entry in the manifest. The following checks apply to desktop Chrome."
+        ],
+        "steps": [
+          "Open the extension’s store listing through the link in our getting started guide.",
+          "Read the displayed permissions before confirming that you want to add it to Chrome.",
+          "If it is already installed, open Extensions, then Manage extensions and Details for UnfollowTracker. Review its site access permissions.",
+          "Compare the displayed scope with the version documented here. Also read the privacy policy to understand what data is processed and kept."
+        ],
+        "sources": [1, 5, 6]
+      },
+      {
+        "heading": "A missing permission does not rule out a feature",
+        "paragraphs": [
+          "The manifest does not request tabs. Yet the panel can open Instagram and find its tab: Chrome allows several tab operations without that permission, while site permission provides access to information about matching tabs. The panel specifically searches for tabs on www.instagram.com.",
+          "It does not request cookies either. That does not mean it ignores your session: the script inside Instagram reads the account ID and anti-CSRF token available to that page, then makes requests using the existing session. You sign in directly on Instagram.",
+          "Likewise, the absence of downloads does not prevent export. The button creates JSON in the browser and triggers a download through a link. This is separate from saving scans in extension storage."
+        ],
+        "sources": [1, 2, 4, 7]
+      },
+      {
+        "heading": "Separate permission from the action you request",
+        "paragraphs": [
+          "Site permission lets the code interact with Instagram; it is not restricted to reading. In this version, you start scans manually, and each individual unfollow requires confirmation. Granting permissions does not start a sequence of unfollows.",
+          "Permissions establish neither how fresh a result is nor whether someone unfollowed you in the past: UnfollowTracker compares the lists read during a scan. If a later version requests a broader scope, compare its documentation and data policy before accepting it. This explanation covers the public 1.1.0 manifest cited below."
+        ],
+        "sources": [1, 2, 4]
+      }
+    ],
+    "related": [
+      {
+        "label": "Open the official listing and install the extension",
+        "route": "getting-started/"
+      },
+      {
+        "label": "Read the privacy policy",
+        "route": "privacy/"
+      },
+      {
+        "label": "Delete saved scans",
+        "route": "blog/delete-saved-instagram-scans/"
+      },
+      {
+        "label": "Understand individual unfollow confirmation",
+        "route": "blog/confirm-individual-instagram-unfollow/"
+      }
+    ]
+  }
+}
