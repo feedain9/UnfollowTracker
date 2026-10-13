@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "slug": "close-panel-instagram-tab-scan",
+  "intent": "retrouver la progression ou le résultat après fermeture du panneau et distinguer cette fermeture d’une interruption de l’onglet Instagram",
+  "status": "published",
+  "publishedAt": "2026-10-13",
+  "updatedAt": "2026-10-13",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/53ec927d3b5d01774b7caf670b42355755149d63/src/scripts/content.js",
+      "title": "UnfollowTracker — content.js : exécution du scan dans l’onglet Instagram",
+      "checkedAt": "2026-10-13"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/53ec927d3b5d01774b7caf670b42355755149d63/src/scripts/popup.js",
+      "title": "UnfollowTracker — popup.js : connexion, progression et résultat chargé à la réouverture",
+      "checkedAt": "2026-10-13"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/53ec927d3b5d01774b7caf670b42355755149d63/src/scripts/background.js",
+      "title": "UnfollowTracker — background.js : interruption d’un onglet et sauvegarde des résultats complets",
+      "checkedAt": "2026-10-13"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/53ec927d3b5d01774b7caf670b42355755149d63/tests/popup.test.js",
+      "title": "UnfollowTracker — tests de fermeture, réouverture et conservation du résultat daté",
+      "checkedAt": "2026-10-13"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/sidePanel",
+      "title": "Chrome for Developers — Side Panel API",
+      "checkedAt": "2026-10-13"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/storage",
+      "title": "Chrome for Developers — stockage local et stockage de session des extensions",
+      "checkedAt": "2026-10-13"
+    }
+  ],
+  "fr": {
+    "title": "Fermer le panneau ou l’onglet Instagram : que devient le scan ?",
+    "description": "Retrouvez un scan après avoir fermé le panneau, distinguez une interruption de l’onglet Instagram et vérifiez le dernier résultat complet.",
+    "lead": "Vous pouvez fermer le panneau UnfollowTracker pendant un scan : la lecture continue dans l’onglet Instagram connecté. Rouvrir le panneau permet de retrouver sa progression ou le résultat terminé. En revanche, fermer ou recharger cet onglet interrompt le scan ; il faudra en lancer un nouveau manuellement.",
+    "sections": [
+      {
+        "heading": "Trois actions, trois conséquences à distinguer",
+        "paragraphs": [
+          "Le panneau affiche les informations, tandis que le scan s’exécute dans la page Instagram. La possibilité de garder un panneau ouvert en changeant d’onglet est prévue par Chrome et utilisée par UnfollowTracker. Voici ce que cela change pendant une lecture en cours."
+        ],
+        "bullets": [
+          "Passer à un autre onglet dans la même fenêtre : le panneau reste accessible et le scan continue à utiliser son onglet Instagram.",
+          "Fermer seulement le panneau : le scan continue. Cette fermeture ne met pas la lecture en pause et n’annule pas les requêtes déjà lancées.",
+          "Fermer ou recharger l’onglet Instagram utilisé par le scan : la lecture est interrompue. Laisser le panneau ouvert ne suffit pas à la maintenir."
+        ],
+        "sources": [1, 2, 3, 5]
+      },
+      {
+        "heading": "Retrouver le scan après avoir fermé le panneau",
+        "paragraphs": [
+          "Rouvrez UnfollowTracker dans la fenêtre qui contient l’onglet Instagram utilisé pour le scan. Le panneau recherche les onglets Instagram de sa propre fenêtre ; un onglet ouvert dans une autre fenêtre n’est pas rattaché automatiquement.",
+          "La réouverture consulte l’état du scan et le résultat enregistré. Elle ne déclenche pas une nouvelle comparaison. Si plusieurs onglets du même compte existent dans cette fenêtre, le panneau peut retrouver celui qui porte le scan encore actif."
+        ],
+        "steps": [
+          "Gardez l’onglet Instagram connecté ouvert, sans le recharger ni changer de compte pendant le scan.",
+          "Cliquez sur l’icône UnfollowTracker pour rouvrir le panneau dans cette fenêtre.",
+          "Si la progression s’affiche encore, laissez le scan continuer ; le bouton de scan reste désactivé pendant la lecture.",
+          "Si le résultat est affiché, vérifiez la date du dernier scan complet. Si un message d’erreur apparaît, lisez-le avant de demander une actualisation."
+        ],
+        "sources": [2, 4]
+      },
+      {
+        "heading": "Un exemple fictif : revenir après avoir pris des notes",
+        "paragraphs": [
+          "Supposons que compte_exemple possède un résultat complet du 12 octobre 2026. Le 13 octobre, vous lancez une actualisation, fermez seulement le panneau et écrivez dans un autre onglet. À votre retour, le panneau retrouve soit la lecture encore en cours, soit le nouveau résultat si le scan s’est terminé et a été enregistré.",
+          "Si vous avez plutôt rechargé l’onglet Instagram avant la fin de la lecture, cette actualisation est interrompue. Le résultat complet du 12 octobre reste conservé. Le retrouver ne signifie pas que le scan du 13 octobre a réussi : sa date permet de distinguer les deux situations. Cet exemple ne suppose aucune durée de scan."
+        ],
+        "sources": [1, 2, 3, 4]
+      },
+      {
+        "heading": "Rouvrir Instagram ne reprend pas une lecture interrompue",
+        "paragraphs": [
+          "Après la fermeture de l’onglet, rouvrez Instagram dans la même fenêtre, vérifiez le compte connecté et attendez que la page soit chargée. Le panneau peut alors se reconnecter. Pour obtenir une comparaison récente, lancez « Scanner mon compte » ou « Actualiser le scan », selon le résultat déjà enregistré.",
+          "Ce nouveau scan recommence la lecture des listes ; il ne reprend pas au pourcentage affiché avant l’interruption. Sans onglet Instagram, le panneau propose « Ouvrir Instagram ». Ce bouton ouvre le site, sans démarrer automatiquement un scan.",
+          "Fermer puis rouvrir le panneau ne lève pas une limitation d’Instagram. Si un délai ou une vérification est indiqué, respectez le message et consultez le guide de dépannage avant de relancer."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "Fermer le navigateur et retrouver un résultat sauvegardé",
+        "paragraphs": [
+          "Quitter entièrement le navigateur met fin au scan exécuté dans son onglet. L’état temporaire conservé en session n’est pas une sauvegarde permettant de reprendre la lecture au redémarrage : Chrome vide ce stockage lorsque le navigateur redémarre.",
+          "Le dernier résultat complet est enregistré séparément dans le stockage local de l’extension. Fermer le panneau, l’onglet ou le navigateur ne correspond pas à la commande « Effacer les scans enregistrés ». Pour retrouver ce résultat, rouvrez le panneau avec un onglet Instagram connecté au même compte, dans la même installation de l’extension.",
+          "L’absence d’onglet connecté à la réouverture ne prouve donc pas que le résultat a été effacé. Une fois chargé, sa date reste celle du dernier scan complet. Le résultat décrit les listes lues lors de ce scan, sans établir un historique des désabonnements."
+        ],
+        "sources": [1, 2, 3, 6]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre le message d’un scan interrompu",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Retrouver le résultat du bon compte Instagram",
+        "route": "blog/switch-instagram-account-saved-results/"
+      },
+      {
+        "label": "Effacer volontairement les scans enregistrés",
+        "route": "blog/delete-saved-instagram-scans/"
+      },
+      {
+        "label": "Ouvrir le panneau et lancer un premier scan",
+        "route": "getting-started/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Close the panel or the Instagram tab: what happens to your scan?",
+    "description": "Find your scan after closing the panel, understand what closing the Instagram tab interrupts, and check your latest complete result.",
+    "lead": "You can close the UnfollowTracker panel during a scan: it keeps reading the lists in the connected Instagram tab. Reopening the panel restores its progress or the completed result. Closing or reloading that Instagram tab interrupts the scan; you will need to start a new one manually.",
+    "sections": [
+      {
+        "heading": "Three actions with different effects",
+        "paragraphs": [
+          "The panel displays information while the scan runs in the Instagram page. Chrome supports keeping a side panel open when you switch tabs, and UnfollowTracker uses that capability. Here is what each action means while a scan is running."
+        ],
+        "bullets": [
+          "Switch to another tab in the same window: the panel stays available and the scan keeps using its Instagram tab.",
+          "Close only the panel: the scan continues. Closing it does not pause the scan or cancel requests already underway.",
+          "Close or reload the Instagram tab used by the scan: the scan is interrupted. Keeping the panel open does not keep the scan running."
+        ],
+        "sources": [1, 2, 3, 5]
+      },
+      {
+        "heading": "Find your scan after closing the panel",
+        "paragraphs": [
+          "Reopen UnfollowTracker in the window containing the Instagram tab used for the scan. The panel looks for Instagram tabs in its own window; it does not automatically attach to one in a different window.",
+          "Reopening checks the scan state and saved result. It does not start a new comparison. If several tabs for the same account are open in that window, the panel can reconnect to the tab running the active scan."
+        ],
+        "steps": [
+          "Keep the signed-in Instagram tab open without reloading it or changing accounts during the scan.",
+          "Click the UnfollowTracker icon to reopen the panel in that window.",
+          "If progress is still showing, let the scan continue; the scan button stays disabled while the lists are being read.",
+          "If results appear, check the latest complete scan date. If an error message appears, read it before requesting a refresh."
+        ],
+        "sources": [2, 4]
+      },
+      {
+        "heading": "A fictional example: returning after taking notes",
+        "paragraphs": [
+          "Suppose example_account has a complete result from October 12, 2026. On October 13, you start a refresh, close only the panel and write in another tab. When you return, the panel shows either the scan still in progress or the new result if the scan finished and was saved.",
+          "If you reloaded the Instagram tab before the scan finished instead, that refresh is interrupted. The complete result from October 12 stays saved. Seeing it again does not mean the October 13 scan succeeded: its date distinguishes the two situations. This example assumes no particular scan duration."
+        ],
+        "sources": [1, 2, 3, 4]
+      },
+      {
+        "heading": "Reopening Instagram does not resume an interrupted scan",
+        "paragraphs": [
+          "After closing the tab, reopen Instagram in the same window, check the signed-in account and let the page load. The panel can then reconnect. To get a fresh comparison, choose “Scan my account” or “Refresh scan”, depending on whether a result is already saved.",
+          "That new scan reads the lists again; it does not resume from the percentage shown before the interruption. With no Instagram tab open, the panel offers “Open Instagram”. This button opens the website without automatically starting a scan.",
+          "Closing and reopening the panel does not remove an Instagram restriction. If a delay or verification is shown, follow that message and consult the troubleshooting guide before trying again."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "Closing the browser and finding a saved result",
+        "paragraphs": [
+          "Fully quitting the browser ends the scan running in its tab. Temporary session state is not a checkpoint that lets the scan resume after a restart: Chrome clears that storage when the browser restarts.",
+          "The latest complete result is saved separately in the extension’s local storage. Closing the panel, tab or browser does not perform the “Delete saved scans” action. To retrieve that result, reopen the panel with an Instagram tab signed in to the same account, using the same extension installation.",
+          "Having no connected tab when you reopen the panel therefore does not prove the result was deleted. Once loaded, its date still belongs to the latest complete scan. The result describes the lists read during that scan, without establishing a history of unfollows."
+        ],
+        "sources": [1, 2, 3, 6]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand an interrupted scan message",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Find the right Instagram account’s saved result",
+        "route": "blog/switch-instagram-account-saved-results/"
+      },
+      {
+        "label": "Deliberately delete saved scans",
+        "route": "blog/delete-saved-instagram-scans/"
+      },
+      {
+        "label": "Open the panel and start your first scan",
+        "route": "getting-started/"
+      }
+    ]
+  }
+}
