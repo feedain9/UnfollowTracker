@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "slug": "move-unfollowtracker-chrome-to-brave",
+  "intent": "préparer le passage de Chrome à Brave en distinguant installation du panneau, session Instagram et conservation des résultats sans transfert automatique",
+  "status": "published",
+  "publishedAt": "2026-10-14",
+  "updatedAt": "2026-10-14",
+  "sources": [
+    {
+      "url": "https://support.brave.app/hc/en-us/articles/360017909112-How-can-I-add-extensions-to-Brave",
+      "title": "Brave Help Center — How can I add extensions to Brave?",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "url": "https://chromewebstore.google.com/detail/unfollowtracker/ckkgnnifiojkmmfmeejeebafldholdnc",
+      "title": "Chrome Web Store — UnfollowTracker, version 1.1.0, Yadulink",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/262038ac047b84c538074b3832c995f7e68e20a1/manifest.json",
+      "title": "UnfollowTracker — manifeste 1.1.0 : navigateur minimum et panneau latéral",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/sidePanel",
+      "title": "Chrome for Developers — Side Panel API",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/262038ac047b84c538074b3832c995f7e68e20a1/src/scripts/popup.js",
+      "title": "UnfollowTracker — connexion à Instagram, lecture locale et export JSON",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/262038ac047b84c538074b3832c995f7e68e20a1/src/scripts/background.js",
+      "title": "UnfollowTracker — ouverture du panneau et sauvegarde locale par compte",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/storage",
+      "title": "Chrome for Developers — stockage local et stockage synchronisé des extensions",
+      "checkedAt": "2026-10-14"
+    }
+  ],
+  "fr": {
+    "title": "Passer de Chrome à Brave : installer UnfollowTracker et garder ses résultats",
+    "description": "Préparez le passage à Brave : installation, panneau latéral, connexion Instagram et conservation de vos résultats Chrome sans transfert automatique.",
+    "lead": "Pour passer à Brave, vérifiez l’installation d’UnfollowTracker et l’ouverture de son panneau, puis connectez Instagram dans ce navigateur. Une installation neuve ne récupère pas vos scans Chrome simplement parce que vous utilisez le même compte Instagram. Vous pouvez conserver un export JSON pour le consulter, mais cette version ne le réimporte pas.",
+    "sections": [
+      {
+        "heading": "Vérifier le navigateur et le panneau latéral",
+        "paragraphs": [
+          "Brave indique prendre en charge la plupart des extensions compatibles avec Chromium et permet leur installation depuis le Chrome Web Store. UnfollowTracker 1.1.0 utilise l’API de panneau latéral et déclare Chrome 116 minimum. Ce numéro concerne Chrome ; il ne faut pas le comparer directement au numéro de version de Brave.",
+          "Sur Brave pour ordinateur, vérifiez donc deux choses : la possibilité d’installer l’extension, puis l’ouverture effective de son panneau depuis son icône. La compatibilité générale annoncée par Brave ne garantit pas à elle seule tout le parcours UnfollowTracker. Ce guide repose sur la documentation et le code consultés, sans présenter un essai de bout en bout sur un compte réel dans Brave."
+        ],
+        "sources": [1, 3, 4]
+      },
+      {
+        "heading": "Avant de quitter Chrome, garder une copie consultable",
+        "paragraphs": [
+          "Le dernier scan complet est enregistré dans le stockage local de l’extension, séparément pour chaque compte. UnfollowTracker n’utilise pas le stockage synchronisé pour transférer ces résultats vers une autre installation. Installer l’extension dans Brave ne constitue donc pas une restauration de vos scans Chrome.",
+          "Si vous souhaitez conserver une liste, exportez-la depuis Chrome avant de supprimer l’ancienne extension : Chrome efface son stockage local lors de la désinstallation. Le JSON reste un fichier indépendant. Il contient les comptes non réciproques du résultat chargé, mais pas toutes les listes nécessaires pour restaurer un scan dans le panneau."
+        ],
+        "steps": [
+          "Attendez la fin de tout scan en cours dans Chrome et vérifiez le compte ainsi que la date du résultat.",
+          "Cliquez sur « Exporter » si la liste non réciproque contient des profils ; le bouton est désactivé si elle est vide.",
+          "Retrouvez le fichier téléchargé et vérifiez account et lastScan pour identifier le compte et le scan conservés. Gardez-le comme copie à lire, sans prévoir de le réimporter."
+        ],
+        "sources": [5, 6, 7]
+      },
+      {
+        "heading": "Installer l’extension et connecter Instagram dans Brave",
+        "paragraphs": [
+          "La fiche officielle consultée le 14 octobre 2026 présente UnfollowTracker 1.1.0, proposé par Yadulink. Ouvrez son lien depuis notre guide d’utilisation dans Brave. Le panneau recherche un onglet Instagram dans sa propre fenêtre de navigateur : un onglet resté ouvert dans Chrome ne lui sert pas de connexion."
+        ],
+        "steps": [
+          "Sur la fiche du Chrome Web Store ouverte dans Brave, utilisez le bouton d’ajout et lisez les autorisations avant de confirmer.",
+          "Cliquez sur l’icône UnfollowTracker pour vérifier que le panneau s’ouvre.",
+          "Si le panneau propose « Ouvrir Instagram », utilisez ce bouton. Vérifiez le compte connecté sur Instagram dans Brave et connectez-vous sur le site si nécessaire.",
+          "Dans cette installation neuve, lancez « Scanner mon compte » lorsque vous souhaitez obtenir un résultat. Gardez l’onglet Instagram connecté ouvert pendant la lecture."
+        ],
+        "sources": [1, 2, 5, 6]
+      },
+      {
+        "heading": "Un exemple fictif : le même compte, deux installations",
+        "paragraphs": [
+          "Supposons que compte_atelier possède un résultat du 13 octobre dans Chrome. Le 14 octobre, vous installez UnfollowTracker dans un profil Brave neuf et vous connectez le même compte Instagram. L’absence de résultat enregistré dans Brave ne signifie pas que la liste non réciproque est devenue vide : aucun scan n’a encore été enregistré dans cette installation.",
+          "Si vous lancez ensuite un scan et qu’il se termine correctement, Brave conserve son propre résultat du 14 octobre. Le résultat Chrome du 13 octobre et le JSON que vous avez téléchargé ne sont pas actualisés par ce scan. Ces copies datées peuvent différer ; l’extension ne les compare pas pour établir un historique des désabonnements."
+        ],
+        "sources": [5, 6]
+      },
+      {
+        "heading": "Si l’installation, le panneau ou le scan bloque",
+        "paragraphs": [
+          "Si le panneau ne s’ouvre pas, vérifiez dans la gestion des extensions de Brave qu’UnfollowTracker est installé et activé. Notez les versions du navigateur et de l’extension ainsi que le message affiché. Gardez votre installation Chrome et ses résultats tant que vous souhaitez pouvoir les consulter.",
+          "Si le panneau s’ouvre mais ne détecte pas Instagram, vérifiez l’onglet et le compte connecté dans la même fenêtre Brave. Si Instagram impose une vérification ou limite les requêtes, suivez son message et le guide de dépannage. Changer de navigateur ne garantit pas de lever cette restriction ; ne lancez pas des scans dans les deux navigateurs pour tenter de la contourner."
+        ],
+        "sources": [1, 2, 5]
+      }
+    ],
+    "related": [
+      {
+        "label": "Ouvrir la fiche officielle et démarrer avec le panneau",
+        "route": "getting-started/"
+      },
+      {
+        "label": "Lire et conserver un export JSON",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Vérifier les permissions avant l’installation",
+        "route": "blog/check-unfollowtracker-extension-permissions/"
+      },
+      {
+        "label": "Comprendre un scan bloqué ou interrompu",
+        "route": "guides/scan-troubleshooting/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Moving from Chrome to Brave: install UnfollowTracker and keep your results",
+    "description": "Prepare to move to Brave: installation, the side panel, signing into Instagram and keeping your Chrome results without an automatic transfer.",
+    "lead": "To move to Brave, check that UnfollowTracker installs and its panel opens, then sign into Instagram in that browser. A fresh installation does not retrieve your Chrome scans just because you use the same Instagram account. You can keep a JSON export to read, but this version cannot import it back into the extension.",
+    "sections": [
+      {
+        "heading": "Check the browser and its side panel",
+        "paragraphs": [
+          "Brave says it supports most Chromium-compatible extensions and allows installation from the Chrome Web Store. UnfollowTracker 1.1.0 uses the Side Panel API and declares Chrome 116 as its minimum. That number refers to Chrome; do not compare it directly with Brave’s version number.",
+          "On desktop Brave, check both that the extension can be installed and that clicking its icon opens the panel. Brave’s general compatibility statement does not by itself guarantee the entire UnfollowTracker workflow. This guide is based on the documentation and code consulted, without claiming an end-to-end test on a real Instagram account in Brave."
+        ],
+        "sources": [1, 3, 4]
+      },
+      {
+        "heading": "Keep a readable copy before leaving Chrome",
+        "paragraphs": [
+          "The latest complete scan is saved in the extension’s local storage, separately for each account. UnfollowTracker does not use synced storage to transfer these results to another installation. Installing it in Brave therefore does not restore your Chrome scans.",
+          "If you want to keep a list, export it from Chrome before removing the old extension: Chrome clears its local storage when it is uninstalled. The JSON remains an independent file. It contains the non-reciprocal accounts from the loaded result, but not all the lists needed to restore a scan in the panel."
+        ],
+        "steps": [
+          "Wait for any scan running in Chrome to finish, then check the account and the result’s date.",
+          "Click “Export” if the non-reciprocal list contains profiles; the button is disabled when the list is empty.",
+          "Find the downloaded file and check account and lastScan to identify the account and scan you kept. Treat it as a copy to read, without expecting to import it back."
+        ],
+        "sources": [5, 6, 7]
+      },
+      {
+        "heading": "Install the extension and connect Instagram in Brave",
+        "paragraphs": [
+          "The official listing consulted on 14 October 2026 shows UnfollowTracker 1.1.0, offered by Yadulink. Open its link from our getting started guide in Brave. The panel looks for an Instagram tab in its own browser window: a tab left open in Chrome cannot provide that connection."
+        ],
+        "steps": [
+          "On the Chrome Web Store listing opened in Brave, use the add button and read the permissions before confirming.",
+          "Click the UnfollowTracker icon to check that the panel opens.",
+          "If the panel offers “Open Instagram”, use that button. Check the signed-in account on Instagram in Brave and sign in on the site if needed.",
+          "In this fresh installation, choose “Scan my account” when you want a result. Keep the signed-in Instagram tab open while the lists are read."
+        ],
+        "sources": [1, 2, 5, 6]
+      },
+      {
+        "heading": "A fictional example: one account, two installations",
+        "paragraphs": [
+          "Suppose studio_account has a result from 13 October in Chrome. On 14 October, you install UnfollowTracker in a fresh Brave profile and sign into the same Instagram account. Having no saved result in Brave does not mean the non-reciprocal list is now empty: no scan has been saved in this installation yet.",
+          "If you then run a scan and it completes successfully, Brave saves its own result from 14 October. That scan does not update the 13 October result in Chrome or your downloaded JSON. These dated copies can differ; the extension does not compare them to build an unfollow history."
+        ],
+        "sources": [5, 6]
+      },
+      {
+        "heading": "If installation, the panel or a scan gets stuck",
+        "paragraphs": [
+          "If the panel does not open, check Brave’s extension manager to confirm that UnfollowTracker is installed and enabled. Note the browser and extension versions and any message shown. Keep your Chrome installation and its results for as long as you want to consult them.",
+          "If the panel opens but cannot find Instagram, check the tab and signed-in account in the same Brave window. If Instagram requires verification or limits requests, follow its message and the troubleshooting guide. Switching browsers does not guarantee that the restriction will disappear; do not run scans in both browsers to try to get around it."
+        ],
+        "sources": [1, 2, 5]
+      }
+    ],
+    "related": [
+      {
+        "label": "Open the official listing and get started with the panel",
+        "route": "getting-started/"
+      },
+      {
+        "label": "Read and keep a JSON export",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Check permissions before installing",
+        "route": "blog/check-unfollowtracker-extension-permissions/"
+      },
+      {
+        "label": "Understand a stuck or interrupted scan",
+        "route": "guides/scan-troubleshooting/"
+      }
+    ]
+  }
+}
