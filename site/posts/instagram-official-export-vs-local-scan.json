@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "slug": "instagram-official-export-vs-local-scan",
+  "intent": "choisir entre l’export officiel de ses informations Instagram et une comparaison locale des abonnements, sans prévoir d’importer une archive dans UnfollowTracker",
+  "status": "published",
+  "publishedAt": "2026-10-15",
+  "updatedAt": "2026-10-15",
+  "sources": [
+    {
+      "url": "https://www.meta.com/help/meta-account/1575911950009923/",
+      "title": "Meta Help Center — Manage settings for your profiles and devices in your Meta Account",
+      "checkedAt": "2026-10-15"
+    },
+    {
+      "url": "https://about.fb.com/news/2023/10/manage-your-information-across-apps/",
+      "title": "Meta — Making It Easier To Manage Your Information Across Meta’s Apps",
+      "checkedAt": "2026-10-15"
+    },
+    {
+      "url": "https://about.fb.com/news/2026/04/meta-account/",
+      "title": "Meta — Meta Account: The Simpler Way to Access Your Apps and Devices",
+      "checkedAt": "2026-10-15"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/2e7e8205e1a8f41d5923945692793ed6295aa109/src/scripts/popup.js",
+      "title": "UnfollowTracker — panneau, lancement manuel du scan et exportResults",
+      "checkedAt": "2026-10-15"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/2e7e8205e1a8f41d5923945692793ed6295aa109/src/scripts/content.js",
+      "title": "UnfollowTracker — lecture des listes Instagram et comparaison des identifiants",
+      "checkedAt": "2026-10-15"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/2e7e8205e1a8f41d5923945692793ed6295aa109/src/scripts/background.js",
+      "title": "UnfollowTracker — sauvegarde locale du dernier résultat complet par compte",
+      "checkedAt": "2026-10-15"
+    }
+  ],
+  "fr": {
+    "title": "Export officiel Instagram ou scan UnfollowTracker : que choisir ?",
+    "description": "Choisissez entre une copie de vos informations Instagram et une comparaison de vos abonnements. UnfollowTracker ne permet pas d’importer l’archive officielle.",
+    "lead": "Pour conserver une copie de vos informations Instagram, utilisez l’export officiel de Meta. Pour repérer les comptes que vous suivez sans retour, UnfollowTracker compare les listes renvoyées par votre session Instagram. Ces démarches sont indépendantes : cette version de l’extension n’importe pas l’archive officielle.",
+    "sections": [
+      {
+        "heading": "Choisir selon ce que vous voulez obtenir",
+        "paragraphs": [
+          "L’export de Meta sert à récupérer vos informations Instagram, par exemple des photos publiées. Le scan UnfollowTracker répond à une question plus précise : quels comptes suivez-vous sans retour dans les listes lues ?"
+        ],
+        "bullets": [
+          "Une copie de vos informations ou de vos photos Instagram : partez de l’outil officiel de Meta.",
+          "Une liste de comptes que vous suivez et qui ne figurent pas parmi vos abonnés : lancez une comparaison dans UnfollowTracker.",
+          "Une copie du résultat non réciproque déjà chargé dans le panneau : utilisez « Exporter ». Ce JSON contient cette liste, le compte concerné et les dates du scan et de l’export ; il ne sauvegarde pas vos publications ni vos messages."
+        ],
+        "sources": [1, 2, 4, 5]
+      },
+      {
+        "heading": "Où trouver l’export officiel de Meta ?",
+        "paragraphs": [
+          "Meta a regroupé le téléchargement des informations dans l’Espace Comptes, accessible depuis les paramètres d’Instagram. Son aide actuelle situe le téléchargement ou l’export dans la rubrique consacrée à vos informations et autorisations. Vérifiez le profil Instagram concerné lorsque vous gérez plusieurs profils.",
+          "Le nom de cet espace peut évoluer : en avril 2026, Meta a annoncé le remplacement progressif d’Accounts Center par Meta Account. L’aide précise que ce déploiement se fait individuellement, et peut donc différer entre vos comptes. Utilisez les réglages et l’aide affichés par Meta pour poursuivre la demande."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "Une archive ne peut pas être chargée dans UnfollowTracker",
+        "paragraphs": [
+          "Le panneau ne possède pas de commande d’import de fichier. Pour produire un résultat, l’extension lit les abonnements et les abonnés du compte connecté, puis compare leurs identifiants. Elle n’utilise ni une archive téléchargée chez Meta ni un fichier fourni par l’utilisateur comme entrée du scan.",
+          "Cela vaut aussi pour son propre JSON : « Exporter » crée une copie à consulter, sans fonction de restauration dans le panneau. Un fichier portant l’extension .json n’est donc pas automatiquement compatible avec UnfollowTracker. Si votre besoin est d’analyser une archive sans utiliser une session Instagram connectée, cette version ne propose pas ce parcours."
+        ],
+        "sources": [4, 5, 6]
+      },
+      {
+        "heading": "Un exemple fictif : un album et une liste à examiner",
+        "paragraphs": [
+          "Camille veut conserver ses photos de voyage et examiner les comptes qu’elle suit sans retour. Pour les photos, elle utilise l’export officiel. Pour la seconde question, elle lance séparément un scan UnfollowTracker depuis son compte connecté. Aucun fichier de l’archive n’est nécessaire à ce scan.",
+          "Si le résultat contient profil_atelier parmi les non-réciproques, un export du panneau peut conserver cette entrée. Il ne contiendra pas les photos de voyage de Camille. Télécharger l’archive officielle ne met pas non plus à jour le résultat enregistré dans l’extension : seule une nouvelle comparaison relit les deux listes. Tous les noms de cet exemple sont fictifs."
+        ],
+        "sources": [2, 4, 5, 6]
+      },
+      {
+        "heading": "Si votre besoin est la comparaison, partir du panneau",
+        "paragraphs": [
+          "Vous pouvez lancer un scan sans demander d’archive au préalable. Le panneau conserve le dernier résultat complet localement pour chaque compte. Si un nouveau scan échoue, l’ancien résultat peut rester disponible : relisez sa date avant de l’utiliser."
+        ],
+        "steps": [
+          "Ouvrez Instagram dans la même fenêtre de navigateur et vérifiez le compte connecté sur le site.",
+          "Ouvrez UnfollowTracker, puis lancez « Scanner mon compte » ou « Actualiser le scan » selon le résultat déjà enregistré.",
+          "Gardez l’onglet Instagram connecté ouvert pendant la lecture. Si Instagram impose une vérification ou une limitation, respectez le message affiché.",
+          "Après un scan terminé, vérifiez la date et consultez la liste. Si elle contient des comptes, « Exporter » permet d’en conserver une copie JSON."
+        ],
+        "sources": [4, 5, 6]
+      },
+      {
+        "heading": "La comparaison reste une observation datée",
+        "paragraphs": [
+          "Le scan décrit les listes renvoyées par Instagram pendant leur lecture, avec les limites de ces données. Il ne prouve pas qu’un compte vous suivait auparavant. UnfollowTracker ne compare pas des archives ou plusieurs scans pour établir un historique de désabonnements.",
+          "Pour décider quoi faire d’une entrée, consultez le profil et la date du résultat. Vous pouvez garder la liste pour information ; un désabonnement dans le panneau reste une action individuelle à confirmer."
+        ],
+        "sources": [4, 5, 6]
+      }
+    ],
+    "related": [
+      {
+        "label": "Lire les champs du JSON exporté par UnfollowTracker",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Installer l’extension et lancer un premier scan",
+        "route": "getting-started/"
+      },
+      {
+        "label": "Distinguer un non-réciproque d’un désabonnement passé",
+        "route": "guides/unfollowers-vs-non-followers/"
+      },
+      {
+        "label": "Comprendre un scan interrompu",
+        "route": "guides/scan-troubleshooting/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Instagram’s official export or an UnfollowTracker scan: which do you need?",
+    "description": "Choose between a copy of your Instagram information and a comparison of your following. UnfollowTracker cannot import Instagram’s official archive.",
+    "lead": "To keep a copy of your Instagram information, use Meta’s official export. To find accounts you follow that do not follow you back, UnfollowTracker compares the lists returned through your Instagram session. These are separate processes: this version of the extension does not import the official archive.",
+    "sections": [
+      {
+        "heading": "Choose based on what you want to keep",
+        "paragraphs": [
+          "Meta’s export lets you retrieve your Instagram information, such as photos you have posted. An UnfollowTracker scan answers a more specific question: which accounts do you follow without a follow back in the lists that were read?"
+        ],
+        "bullets": [
+          "A copy of your Instagram information or photos: start with Meta’s official tool.",
+          "A list of accounts you follow that are absent from your followers: run a comparison in UnfollowTracker.",
+          "A copy of the non-reciprocal result already loaded in the panel: use “Export”. This JSON contains that list, the account concerned, and the scan and export dates; it does not back up your posts or messages."
+        ],
+        "sources": [1, 2, 4, 5]
+      },
+      {
+        "heading": "Where is Meta’s official export?",
+        "paragraphs": [
+          "Meta centralized information downloads in Accounts Center, accessible from Instagram’s settings. Its current help documentation places downloading or exporting under “Your information and permissions” in account settings. Check which Instagram profile is concerned when you manage several profiles.",
+          "The name of this area may change: in April 2026, Meta announced the gradual replacement of Accounts Center with Meta Account. Its help page says the rollout happens individually, so your accounts may be updated at different times. Follow Meta’s settings and help for the rest of your request."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "You cannot load an archive into UnfollowTracker",
+        "paragraphs": [
+          "The panel has no file import command. To produce a result, the extension reads the signed-in account’s following and followers, then compares their account IDs. Neither a Meta archive nor a file supplied by the user is used as input to the scan.",
+          "This also applies to its own JSON: “Export” creates a copy you can read, without a way to restore it in the panel. A file ending in .json is not automatically compatible with UnfollowTracker. If you want to analyze an archive without using a signed-in Instagram session, this version does not offer that workflow."
+        ],
+        "sources": [4, 5, 6]
+      },
+      {
+        "heading": "A fictional example: a photo album and a list to review",
+        "paragraphs": [
+          "Camille wants to keep her travel photos and review accounts she follows that do not follow her back. For the photos, she uses the official export. For the second question, she separately starts an UnfollowTracker scan with her account signed in. The scan does not need any files from the archive.",
+          "If the result includes studio_example among the non-reciprocal accounts, a panel export can keep that entry. It will not contain Camille’s travel photos. Downloading the official archive does not refresh the extension’s saved result either: a new comparison is needed to read both lists again. All names in this example are fictional."
+        ],
+        "sources": [2, 4, 5, 6]
+      },
+      {
+        "heading": "If you need a comparison, start in the panel",
+        "paragraphs": [
+          "You can start a scan without requesting an archive first. The panel keeps the latest complete result locally for each account. If a new scan fails, the older result may still be available, so check its date before using it."
+        ],
+        "steps": [
+          "Open Instagram in the same browser window and check the signed-in account on the website.",
+          "Open UnfollowTracker, then choose “Scan my account” or “Refresh scan”, depending on whether a result is already saved.",
+          "Keep the signed-in Instagram tab open while the lists are being read. If Instagram requires verification or imposes a limit, follow the message shown.",
+          "After a completed scan, check the date and review the list. If it contains accounts, “Export” lets you keep a JSON copy."
+        ],
+        "sources": [4, 5, 6]
+      },
+      {
+        "heading": "The comparison is still a dated observation",
+        "paragraphs": [
+          "The scan describes the lists Instagram returned while they were being read, subject to the limits of those data. It does not prove an account used to follow you. UnfollowTracker does not compare archives or multiple scans to build a history of unfollows.",
+          "Before deciding what to do with an entry, check the profile and the result’s date. You can simply keep the list for reference; unfollowing through the panel remains an individual action that requires confirmation."
+        ],
+        "sources": [4, 5, 6]
+      }
+    ],
+    "related": [
+      {
+        "label": "Read the fields in an UnfollowTracker JSON export",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Install the extension and run your first scan",
+        "route": "getting-started/"
+      },
+      {
+        "label": "Tell non-reciprocal following from a past unfollow",
+        "route": "guides/unfollowers-vs-non-followers/"
+      },
+      {
+        "label": "Understand an interrupted scan",
+        "route": "guides/scan-troubleshooting/"
+      }
+    ]
+  }
+}
