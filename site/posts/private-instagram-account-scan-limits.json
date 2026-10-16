@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "slug": "private-instagram-account-scan-limits",
+  "intent": "comprendre si son propre compte Instagram peut rester privé pendant un scan et distinguer cette comparaison de l’accès aux relations d’un autre profil privé",
+  "status": "published",
+  "publishedAt": "2026-10-16",
+  "updatedAt": "2026-10-16",
+  "sources": [
+    {
+      "url": "https://help.instagram.com/517073653436611?helpref=faq_content",
+      "title": "Instagram — Différences entre les comptes publics et privés sur Instagram",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/323564a3b974986c4a48276c4c4ccb9022ecec07/src/scripts/content.js",
+      "title": "UnfollowTracker — content.js : compte connecté, comparaison et restrictions des listes",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/323564a3b974986c4a48276c4c4ccb9022ecec07/src/scripts/popup.js",
+      "title": "UnfollowTracker — popup.js : connexion du panneau, scan manuel et recherche locale",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/323564a3b974986c4a48276c4c4ccb9022ecec07/src/scripts/background.js",
+      "title": "UnfollowTracker — background.js : conservation du dernier résultat complet par compte",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/323564a3b974986c4a48276c4c4ccb9022ecec07/tests/scanner.test.js",
+      "title": "UnfollowTracker — tests des listes restreintes et des changements de session",
+      "checkedAt": "2026-10-16"
+    }
+  ],
+  "fr": {
+    "title": "Compte Instagram privé : que peut comparer UnfollowTracker ?",
+    "description": "Votre compte peut rester privé : comprenez le périmètre du scan, les profils présents dans vos résultats et les limites d’accès aux listes Instagram.",
+    "lead": "UnfollowTracker compare les abonnés et les abonnements du compte connecté dans son onglet Instagram. Son code n’exige pas que ce compte soit public : vous pouvez lancer la comparaison en conservant votre réglage privé. Le résultat dépend toutefois des listes qu’Instagram accepte de renvoyer ; l’extension ne permet pas de choisir un autre profil privé à scanner.",
+    "sections": [
+      {
+        "heading": "Votre propre compte peut rester privé",
+        "paragraphs": [
+          "Le scan identifie le compte de la session Instagram, puis demande ses listes d’abonnements et d’abonnés. Il ne comporte ni condition exigeant un profil public ni action modifiant la confidentialité du compte. C’est ce que montre le code consulté le 16 octobre 2026 ; cela ne garantit pas que chaque compte privé obtiendra un scan complet.",
+          "Vous vous connectez directement sur Instagram, puis lancez le scan depuis le panneau. Une session reconnue et des réponses exploitables restent nécessaires. Passer votre compte en public ne fait pas partie du parcours et ne constitue pas une solution garantie à une erreur de lecture."
+        ],
+        "sources": [2, 3]
+      },
+      {
+        "heading": "Le mode privé ne rend pas toutes les informations invisibles",
+        "paragraphs": [
+          "L’aide officielle distingue plusieurs niveaux de visibilité pour un compte privé. Cette distinction évite d’interpréter la présence d’un pseudonyme comme un accès à tous les contenus du profil."
+        ],
+        "bullets": [
+          "Vous approuvez vos nouveaux abonnés ; vos photos et vidéos sur votre profil sont réservées à vos abonnés.",
+          "L’identité du profil, notamment le pseudonyme et la bio, reste consultable publiquement.",
+          "Les liens avec des comptes publics restent visibles sur Instagram et Threads. Pour les comptes privés que vous suivez ou qui vous suivent, l’aide réserve cette visibilité à vos abonnés."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "Un profil privé dans vos résultats n’est pas un compte scanné séparément",
+        "paragraphs": [
+          "Exemple entièrement fictif : vous êtes connecté à compte_photo, défini comme privé. Si Instagram renvoie profil_atelier dans vos abonnements et pas dans vos abonnés, UnfollowTracker le classe comme non réciproque. Le calcul compare les identifiants présents dans ces deux listes ; il ne filtre pas les profils selon leur caractère public ou privé.",
+          "Même si profil_atelier est privé, cette ligne ne signifie pas que l’extension a lu sa propre liste d’abonnés ou ses publications. Elle décrit sa relation avec compte_photo dans les données lues. Elle ne prouve pas non plus que profil_atelier vous suivait auparavant.",
+          "Le champ de recherche du panneau filtre le résultat déjà chargé. Saisir le pseudonyme d’une autre personne ne lance pas un scan de son compte. Ouvrir son profil sur Instagram ne remplace pas non plus le compte connecté. Même si vous êtes un abonné approuvé de cette personne, cette version ne propose pas de comparer ses deux listes à sa place."
+        ],
+        "sources": [2, 3]
+      },
+      {
+        "heading": "Lancer votre comparaison sans changer la visibilité du compte",
+        "paragraphs": [
+          "Le parcours est celui d’un scan de votre compte connecté. Aucun réglage de confidentialité n’a besoin d’être modifié dans UnfollowTracker."
+        ],
+        "steps": [
+          "Ouvrez Instagram dans la même fenêtre que le panneau et vérifiez le compte connecté sur le site.",
+          "Dans UnfollowTracker, choisissez « Scanner mon compte » ou « Actualiser le scan » si un résultat est déjà enregistré.",
+          "Gardez l’onglet Instagram connecté ouvert pendant la lecture, sans le recharger ni changer de compte. Vous pouvez utiliser un autre onglet.",
+          "Après la fin du scan, vérifiez la date du résultat avant d’examiner les profils. Un désabonnement reste une action individuelle à confirmer."
+        ],
+        "sources": [2, 3, 4]
+      },
+      {
+        "heading": "Si Instagram restreint une liste, le scan ne la reconstitue pas",
+        "paragraphs": [
+          "Le code détecte notamment les réponses signalant une liste limitée ou des abonnements masqués. Dans ces cas, il arrête la comparaison et conserve le dernier résultat complet. Les tests vérifient aussi ce comportement lorsqu’une réponse contient quelques profils mais indique que d’autres sont cachés : une liste non vide n’est pas forcément exploitable comme liste complète.",
+          "L’extension ne peut pas déduire les entrées qu’Instagram ne fournit pas. Une erreur ne permet donc ni de conclure que tous vos abonnements sont réciproques, ni d’attribuer le blocage au seul réglage privé. Si un ancien résultat reste affiché, sa date ne devient pas celle de cette tentative.",
+          "Respectez les limitations ou vérifications demandées par Instagram et consultez le guide de dépannage. Ne multipliez pas les scans ni les changements de confidentialité pour tenter de contourner une restriction."
+        ],
+        "sources": [2, 3, 4, 5]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre ce qu’indique un compte non réciproque",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Lire le message d’un scan bloqué ou incomplet",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Retrouver le résultat du bon compte connecté",
+        "route": "blog/switch-instagram-account-saved-results/"
+      },
+      {
+        "label": "Comprendre le stockage local des données",
+        "route": "privacy/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Private Instagram accounts: what can UnfollowTracker compare?",
+    "description": "Keep your account private while understanding what the scan reads, why private profiles can appear in your results and how Instagram limits list access.",
+    "lead": "UnfollowTracker compares the followers and following of the account signed in to its Instagram tab. Its code does not require that account to be public: you can start a comparison while keeping it private. Results still depend on the lists Instagram returns; the extension does not let you select someone else’s private profile to scan.",
+    "sections": [
+      {
+        "heading": "Your own account can stay private",
+        "paragraphs": [
+          "The scan identifies the account in your Instagram session, then requests its following and follower lists. It neither requires a public profile nor changes the account’s privacy setting. That is what the code reviewed on October 16, 2026 shows; it does not guarantee a complete scan for every private account.",
+          "Sign in directly on Instagram, then start the scan from the panel. The extension still needs a recognized session and usable responses. Making your account public is not part of this process and is not a guaranteed fix for a failed request."
+        ],
+        "sources": [2, 3]
+      },
+      {
+        "heading": "A private account does not make every detail invisible",
+        "paragraphs": [
+          "Instagram’s help page distinguishes several kinds of visibility for private accounts. Seeing a username does not mean you have access to everything on that profile."
+        ],
+        "bullets": [
+          "You approve new followers; photos and videos on your profile are available to your followers.",
+          "Profile details, including your username and bio, remain publicly visible.",
+          "Connections with public accounts remain visible on Instagram and Threads. For private accounts you follow or that follow you, the help page limits that visibility to your followers."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "A private profile in your results is not a separately scanned account",
+        "paragraphs": [
+          "An entirely fictional example: you are signed in as photo_account, which is private. If Instagram returns studio_profile in your following list but not in your followers, UnfollowTracker marks it as non-reciprocal. The comparison uses account IDs in those two lists; it does not filter profiles by whether they are public or private.",
+          "Even if studio_profile is private, that row does not mean the extension has read its own follower list or posts. It describes its relationship with photo_account in the data returned. It also does not prove that studio_profile used to follow you.",
+          "The panel’s search field filters the result already loaded. Entering someone else’s username does not start a scan of their account. Opening their Instagram profile does not change the signed-in account either. Even if you are one of their approved followers, this version offers no way to compare their two lists on their behalf."
+        ],
+        "sources": [2, 3]
+      },
+      {
+        "heading": "Start your comparison without changing account visibility",
+        "paragraphs": [
+          "Follow the usual process for scanning your signed-in account. There is no privacy setting you need to change in UnfollowTracker."
+        ],
+        "steps": [
+          "Open Instagram in the same browser window as the panel and check which account is signed in on the website.",
+          "In UnfollowTracker, choose “Scan my account”, or “Refresh scan” if a result is already saved.",
+          "Keep the connected Instagram tab open while the lists are read, without reloading it or switching accounts. You can use another tab.",
+          "Once the scan finishes, check the result’s date before reviewing profiles. Unfollowing remains an individual action that requires confirmation."
+        ],
+        "sources": [2, 3, 4]
+      },
+      {
+        "heading": "A restricted list cannot be reconstructed by the scan",
+        "paragraphs": [
+          "The code detects responses that flag a limited list or hidden following accounts. In these cases, it stops the comparison and preserves the last complete result. Tests also check this behavior when a response contains some profiles but says others are hidden: a non-empty list is not necessarily usable as a complete one.",
+          "The extension cannot infer entries Instagram does not provide. An error therefore does not mean everyone follows you back, or establish that your private setting alone caused the problem. If an older result remains on screen, its date does not become the date of this attempt.",
+          "Respect any limits or verification requests from Instagram and consult the troubleshooting guide. Avoid repeated scans or privacy changes intended to bypass a restriction."
+        ],
+        "sources": [2, 3, 4, 5]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand what a non-reciprocal account tells you",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Understand a blocked or incomplete scan",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Find the result for the right signed-in account",
+        "route": "blog/switch-instagram-account-saved-results/"
+      },
+      {
+        "label": "Understand how data is stored locally",
+        "route": "privacy/"
+      }
+    ]
+  }
+}
