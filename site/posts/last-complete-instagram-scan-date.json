@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "slug": "last-complete-instagram-scan-date",
+  "intent": "interpréter la date du dernier scan complet après une actualisation échouée et distinguer résultat conservé, scan sans résultat et export récent",
+  "status": "published",
+  "publishedAt": "2026-10-19",
+  "updatedAt": "2026-10-19",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/24658337db479823472d546d56f1739fea597b1b/src/scripts/content.js",
+      "title": "UnfollowTracker — content.js : lecture successive des listes et création de lastScan",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/24658337db479823472d546d56f1739fea597b1b/src/scripts/background.js",
+      "title": "UnfollowTracker — background.js : sauvegarde complète et conservation du résultat après erreur",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/24658337db479823472d546d56f1739fea597b1b/src/scripts/popup.js",
+      "title": "UnfollowTracker — popup.js : date affichée, résultats conservés et exportResults",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/24658337db479823472d546d56f1739fea597b1b/tests/popup.test.js",
+      "title": "UnfollowTracker — tests du panneau : actualisation échouée et résultat vide complet",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/24658337db479823472d546d56f1739fea597b1b/tests/scanner.test.js",
+      "title": "UnfollowTracker — tests du scan : erreurs, listes restreintes et sauvegarde sans non-réciproque",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString",
+      "title": "MDN — Date.toLocaleString : affichage dans le fuseau local",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString",
+      "title": "MDN — Date.toISOString : date ISO et suffixe UTC",
+      "checkedAt": "2026-10-19"
+    }
+  ],
+  "fr": {
+    "title": "Dernier scan complet Instagram : pourquoi la date reste ancienne après une erreur",
+    "description": "Une actualisation a échoué ? Lisez la date du résultat conservé, distinguez zéro non-réciproque d’un scan absent et vérifiez la fraîcheur d’un export.",
+    "lead": "Après une actualisation échouée, « Dernier scan complet » garde la date du résultat précédent. Le message d’erreur décrit la nouvelle tentative ; la liste retrouvée décrit toujours l’ancienne lecture. Voir des profils après une erreur ne signifie donc pas que le scan vient de réussir.",
+    "sections": [
+      {
+        "heading": "La date correspond à la fin de la lecture des listes",
+        "paragraphs": [
+          "Le code crée la date du résultat après avoir lu les abonnements, puis les abonnés. Il demande ensuite son enregistrement avant d’annoncer la fin du scan au panneau. La date ne correspond ni au clic sur « Actualiser le scan », ni à l’ouverture du panneau, ni à la dernière tentative de connexion.",
+          "Cette heure ne signifie pas que toutes les relations ont été observées simultanément : la lecture se fait en plusieurs requêtes successives et des changements peuvent survenir entre elles. « Complet » désigne ici une lecture terminée sans erreur détectée par l’extension ; cela ne garantit pas l’accès à des données qu’Instagram ne fournit pas."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "Un exemple fictif : une erreur aujourd’hui, une liste d’hier",
+        "paragraphs": [
+          "Supposons que compte_exemple possède un résultat complet du 18 octobre 2026 à 17 h 42, heure de Zurich. Le 19 octobre, une actualisation s’arrête parce qu’Instagram demande de se reconnecter. Le panneau peut afficher cette erreur et rendre de nouveau disponible la liste du 18 octobre avec sa date.",
+          "Les profils et les compteurs de ce résultat ne combinent pas les données d’hier avec les pages reçues aujourd’hui. La tentative échouée ne remplace pas le résultat complet conservé. Les tests du panneau vérifient que l’erreur fait disparaître la progression et laisse l’ancien résultat accessible."
+        ],
+        "steps": [
+          "Lisez le message du panneau pour connaître l’issue de la nouvelle tentative.",
+          "Vérifiez le compte connecté et la ligne « Dernier scan complet » avant d’utiliser les profils affichés.",
+          "Si la date reste celle du résultat précédent, considérez la liste comme cette observation ancienne, même si vous venez de cliquer sur actualiser."
+        ],
+        "sources": [2, 3, 4]
+      },
+      {
+        "heading": "Zéro non-réciproque et aucun scan enregistré sont deux situations différentes",
+        "paragraphs": [
+          "Un nouveau scan terminé peut trouver zéro compte non réciproque. Ce résultat vide est bien enregistré et remplace le précédent avec sa nouvelle date. Il signifie qu’aucun compte non réciproque n’a été trouvé dans les listes lues. Le bouton d’export est alors désactivé, ce qui n’indique pas un échec.",
+          "À l’inverse, si aucun résultat complet n’était enregistré pour ce compte avant l’erreur, l’extension n’a pas d’ancienne liste à retrouver. Des compteurs non renseignés ou l’absence de résultat ne permettent pas de conclure que tout le monde vous suit en retour. Une progression partielle n’est pas non plus un résultat à interpréter."
+        ],
+        "sources": [3, 4, 5]
+      },
+      {
+        "heading": "Un export récent peut conserver une date de scan plus ancienne",
+        "paragraphs": [
+          "Si l’ancienne liste contient des profils, un export après l’erreur copie ce résultat chargé. Le champ lastScan conserve la date du scan ; exportDate indique la création du fichier. Télécharger la liste aujourd’hui ne relit pas Instagram.",
+          "Le panneau affiche l’heure dans le fuseau local du navigateur, avec un format adapté à la langue choisie. Le JSON écrit les dates en UTC, signalé par Z. Dans notre exemple, le 18 octobre 2026 à 17 h 42 à Zurich correspond à 2026-10-18T15:42:00.000Z. Ces deux écritures peuvent donc désigner le même scan. Changer la langue du panneau ne lance pas une actualisation."
+        ],
+        "sources": [3, 6, 7]
+      },
+      {
+        "heading": "Comment obtenir une observation plus récente",
+        "paragraphs": [
+          "Traitez d’abord le message affiché : une connexion ou une vérification se fait directement sur Instagram ; une limitation de requêtes demande de respecter les indications reçues. Aucun délai universel ne garantit la réussite. Effacer le résultat conservé ne corrige pas une restriction et vous prive de cette copie locale.",
+          "Lorsque vous demandez un nouveau scan, gardez l’onglet Instagram connecté ouvert, sans le recharger. Attendez la fin de la lecture, puis vérifiez son état et la date du résultat. L’extension compare les listes de ce scan : même une date plus récente ne fournit ni l’heure d’un désabonnement ni un historique des personnes qui vous ont quitté."
+        ],
+        "sources": [1, 2, 3]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre le message d’un scan bloqué",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Lire les champs du fichier JSON exporté",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Retrouver le résultat du bon compte Instagram",
+        "route": "blog/switch-instagram-account-saved-results/"
+      },
+      {
+        "label": "Distinguer non-réciprocité et désabonnement passé",
+        "route": "guides/unfollowers-vs-non-followers/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Last complete Instagram scan: why the date stays old after an error",
+    "description": "Did a refresh fail? Check the saved result’s date, distinguish zero non-reciprocal accounts from no saved scan, and assess how current an export is.",
+    "lead": "After a failed refresh, “Last complete scan” keeps the previous result’s date. The error message describes the new attempt; the list that reappears still comes from the earlier scan. Seeing profiles after an error therefore doesn’t mean the latest scan succeeded.",
+    "sections": [
+      {
+        "heading": "The timestamp marks the end of reading the lists",
+        "paragraphs": [
+          "The code creates the result’s timestamp after reading following, then followers. It then requests that the result be saved before telling the panel the scan has finished. This timestamp doesn’t mark the click on “Refresh scan”, opening the panel or the latest connection attempt.",
+          "It doesn’t mean every relationship was observed at the same instant: the lists are read through successive requests, and relationships may change between them. Here, “complete” means the reading finished without an error detected by the extension; it doesn’t guarantee access to data Instagram doesn’t provide."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "A fictional example: today’s error and yesterday’s list",
+        "paragraphs": [
+          "Suppose example_account has a complete result from 18 October 2026 at 17:42 in Zurich. On 19 October, a refresh stops because Instagram asks you to sign in again. The panel can show that error and make the 18 October list available again, with its original date.",
+          "The profiles and counters in that result don’t combine yesterday’s data with pages received today. The failed attempt doesn’t replace the saved complete result. Panel tests verify that an error clears the progress display and leaves the earlier result available."
+        ],
+        "steps": [
+          "Read the panel’s message to check the outcome of the new attempt.",
+          "Check the signed-in account and the “Last complete scan” line before using the profiles shown.",
+          "If the date still belongs to the previous result, treat the list as that earlier observation, even if you just clicked refresh."
+        ],
+        "sources": [2, 3, 4]
+      },
+      {
+        "heading": "Zero non-reciprocal accounts and no saved scan mean different things",
+        "paragraphs": [
+          "A new completed scan can find zero non-reciprocal accounts. This empty result is saved and replaces the previous one with its new timestamp. It means no non-reciprocal accounts were found in the lists that were read. Export is disabled in this case; that doesn’t indicate a failed scan.",
+          "By contrast, if no complete result was saved for this account before the error, there is no earlier list to restore. Unset counters or a missing result don’t establish that everyone follows you back. Partial progress isn’t a result you can interpret either."
+        ],
+        "sources": [3, 4, 5]
+      },
+      {
+        "heading": "A recent export can still contain an older scan date",
+        "paragraphs": [
+          "If the earlier list contains profiles, exporting after the error copies that loaded result. The lastScan field keeps the scan timestamp; exportDate records when the file is created. Downloading the list today doesn’t read Instagram again.",
+          "The panel displays the time in the browser’s local time zone, formatted for the selected language. The JSON writes dates in UTC, indicated by Z. In our example, 18 October 2026 at 17:42 in Zurich corresponds to 2026-10-18T15:42:00.000Z. These two representations can therefore refer to the same scan. Switching the panel’s language doesn’t start a refresh."
+        ],
+        "sources": [3, 6, 7]
+      },
+      {
+        "heading": "How to get a more recent observation",
+        "paragraphs": [
+          "First address the message shown: sign-in or verification happens directly on Instagram, while a request limit calls for following the instructions received. No universal waiting period guarantees success. Deleting the saved result won’t fix a restriction and removes that local copy.",
+          "When you request a new scan, keep the signed-in Instagram tab open without reloading it. Wait for reading to finish, then check the outcome and the result’s date. The extension compares the lists from that scan: even a newer timestamp provides neither the time of an unfollow nor a history of people who stopped following you."
+        ],
+        "sources": [1, 2, 3]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand a blocked scan message",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Read the exported JSON fields",
+        "route": "blog/export-instagram-results-json/"
+      },
+      {
+        "label": "Find the saved result for the right Instagram account",
+        "route": "blog/switch-instagram-account-saved-results/"
+      },
+      {
+        "label": "Tell non-reciprocal following from a past unfollow",
+        "route": "guides/unfollowers-vs-non-followers/"
+      }
+    ]
+  }
+}
