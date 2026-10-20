@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "slug": "instagram-scan-progress-phases",
+  "intent": "comprendre les phases de lecture, le compteur de profils et la barre de progression du scan sans les confondre avec un temps restant ou un résultat",
+  "status": "published",
+  "publishedAt": "2026-10-20",
+  "updatedAt": "2026-10-20",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/e6be659109cbc87024840c34196966ed2338e3a5/src/scripts/content.js",
+      "title": "UnfollowTracker — content.js : phases de lecture, progression et attente avant une nouvelle tentative",
+      "checkedAt": "2026-10-20"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/e6be659109cbc87024840c34196966ed2338e3a5/src/scripts/popup.js",
+      "title": "UnfollowTracker — popup.js : affichage de la barre, du compteur et du résultat terminé",
+      "checkedAt": "2026-10-20"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/e6be659109cbc87024840c34196966ed2338e3a5/src/scripts/i18n.js",
+      "title": "UnfollowTracker — i18n.js : libellés français et anglais des phases et du délai de réessai",
+      "checkedAt": "2026-10-20"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/e6be659109cbc87024840c34196966ed2338e3a5/src/scripts/background.js",
+      "title": "UnfollowTracker — background.js : enregistrement du résultat complet et gestion des interruptions",
+      "checkedAt": "2026-10-20"
+    }
+  ],
+  "fr": {
+    "title": "Progression du scan Instagram : comprendre les phases et la barre",
+    "description": "Que compte le scan Instagram ? Comprenez les deux phases, la barre de progression et le délai avant un réessai, sans les confondre avec le résultat final.",
+    "lead": "Dans UnfollowTracker, le nombre affiché pendant le scan compte les profils déjà lus dans la phase en cours : d’abord les abonnements, puis les abonnés. La barre donne un repère de progression, sans mesurer le temps restant. Seul un scan terminé fournit la comparaison des deux listes.",
+    "sections": [
+      {
+        "heading": "Deux lectures successives, avec un compteur pour chacune",
+        "paragraphs": [
+          "« Lecture des abonnements » concerne les comptes que vous suivez. « Lecture des abonnés » concerne les comptes qui vous suivent. Le scan lit ces listes dans cet ordre, en plusieurs réponses d’Instagram si nécessaire.",
+          "Le nombre à côté du libellé compte les profils distincts reçus dans cette liste. Il repart de zéro au début de la seconde phase : ce changement ne supprime pas les abonnements déjà lus. Ce nombre n’est pas celui des comptes non réciproques, car leur calcul nécessite les deux listes."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "La barre ne permet pas de calculer une heure de fin",
+        "paragraphs": [
+          "Le scan ne dispose pas d’un total de profils à lire pour calculer sa progression. La barre utilise un indicateur calculé à partir de la phase et du nombre de profils reçus, avec une plage réservée à chaque lecture. Elle ne représente donc pas la fraction exacte de toutes vos relations déjà vérifiées.",
+          "Une barre à mi-course ne signifie pas que la moitié du temps s’est écoulée. Sa vitesse peut changer entre les deux listes ou devenir moins visible alors que le compteur augmente. Une liste peut aussi se terminer avant que sa partie de barre soit remplie ; le passage à la phase suivante fait alors avancer l’indicateur. La durée dépend des réponses et des attentes, sans estimation de fin affichée."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "Un exemple fictif : de 150 abonnements à zéro abonné lu",
+        "paragraphs": [
+          "Supposons que le panneau affiche « Lecture des abonnements : 150 », puis « Lecture des abonnés : 0 », puis « Lecture des abonnés : 50 ». Il a changé de liste : il avait lu 150 comptes suivis et a ensuite commencé à lire les personnes qui suivent le compte scanné.",
+          "Le zéro intermédiaire ne signifie ni que ce compte n’a aucun abonné, ni que le scan a perdu les 150 entrées. Les 50 indiquent seulement l’avancement de la seconde lecture. Aucun de ces nombres ne permet encore de connaître le nombre de non-réciproques. Cet exemple est inventé et ne correspond pas à un compte Instagram réel."
+        ],
+        "steps": [
+          "Lisez le nom de la phase avant d’interpréter son compteur.",
+          "Gardez l’onglet Instagram connecté ouvert, sans le recharger ni changer de compte pendant la lecture.",
+          "Attendez l’issue du scan, puis consultez les compteurs du résultat et la date du dernier scan complet."
+        ],
+        "sources": [1, 2, 3, 4]
+      },
+      {
+        "heading": "Un compteur immobile et un délai de réessai n’ont pas le même sens",
+        "paragraphs": [
+          "Le compteur se met à jour lorsque des pages de profils sont reçues. Le code prévoit des pauses entre certaines requêtes ; une réponse peut aussi prendre du temps. Un nombre momentanément inchangé ne suffit donc pas à diagnostiquer une erreur.",
+          "Si Instagram limite les requêtes et que l’extension prévoit une nouvelle tentative, le texte affiche un décompte en secondes. Celui-ci indique le délai avant le réessai de la requête, pas le temps restant pour terminer tout le scan. Les tentatives sont limitées : la lecture s’arrête si la restriction persiste ou si l’attente demandée dépasse la limite prévue.",
+          "Laissez le délai affiché se terminer. Si une erreur apparaît, suivez son message et le guide de dépannage ; ouvrir plusieurs scans pour accélérer la lecture ne résout pas une restriction Instagram."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "Reconnaître le résultat après la progression",
+        "paragraphs": [
+          "Après les deux lectures, l’extension compare les identifiants, demande l’enregistrement du résultat complet, puis annonce « Scan terminé ». Le panneau affiche alors les compteurs et la liste des comptes qui ne vous suivent pas en retour. Utilisez ce résultat et sa date plutôt que la position finale de la barre.",
+          "Une barre avancée ne garantit pas la réussite : une restriction, une réponse invalide ou une interruption peut encore arrêter le scan. Un échec ne remplace pas le dernier résultat complet enregistré. Cette comparaison reste limitée aux listes renvoyées par Instagram pendant la lecture et ne constitue pas un historique des désabonnements."
+        ],
+        "sources": [1, 2, 3, 4]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre le message d’un scan bloqué",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Lire la date du dernier scan complet après une erreur",
+        "route": "blog/last-complete-instagram-scan-date/"
+      },
+      {
+        "label": "Fermer le panneau ou l’onglet Instagram pendant un scan",
+        "route": "blog/close-panel-instagram-tab-scan/"
+      },
+      {
+        "label": "Comprendre les comptes non réciproques",
+        "route": "guides/non-followers/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Instagram scan progress: understand the phases and progress bar",
+    "description": "What does an Instagram scan count? Understand both phases, the progress bar and the retry countdown without confusing them with your final result.",
+    "lead": "During an UnfollowTracker scan, the number shown counts profiles already read in the current phase: following first, then followers. The bar indicates progress without measuring time remaining. The comparison of both lists is available only when the scan finishes successfully.",
+    "sections": [
+      {
+        "heading": "Two lists read in sequence, each with its own counter",
+        "paragraphs": [
+          "“Fetching following” reads the accounts you follow. “Fetching followers” reads the accounts that follow you. The scan reads these lists in that order, using multiple Instagram responses where needed.",
+          "The number beside the phase label counts distinct profiles received for that list. It starts again at zero when the second phase begins; this doesn’t discard the following list already read. It isn’t a count of non-reciprocal accounts, since calculating those requires both lists."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "The bar cannot tell you when the scan will finish",
+        "paragraphs": [
+          "The scan doesn’t have a total number of profiles to read for calculating progress. Its bar uses an indicator based on the phase and the number of profiles received, with a separate range reserved for each list. It therefore doesn’t represent the exact fraction of all your relationships already checked.",
+          "A bar halfway across doesn’t mean half the waiting time has passed. Its speed can change between lists, or movement can become less noticeable while the counter keeps increasing. A list can also finish before filling its allocated part of the bar; moving to the next phase then advances the indicator. Duration depends on responses and pauses, with no estimated finish time displayed."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "A fictional example: from 150 following to zero followers read",
+        "paragraphs": [
+          "Suppose the panel shows “Fetching following: 150”, then “Fetching followers: 0”, then “Fetching followers: 50”. It has switched lists: it read 150 followed accounts, then began reading the people who follow the scanned account.",
+          "The zero between those readings means neither that the account has no followers nor that the scan lost the 150 entries. The 50 only indicates progress through the second list. None of these numbers tells you the non-reciprocal count yet. This example is invented and uses no real Instagram account."
+        ],
+        "steps": [
+          "Read the phase label before interpreting its counter.",
+          "Keep the signed-in Instagram tab open without reloading it or switching accounts during the scan.",
+          "Wait for the scan’s outcome, then check the result counters and the last complete scan date."
+        ],
+        "sources": [1, 2, 3, 4]
+      },
+      {
+        "heading": "An unchanged count and a retry countdown mean different things",
+        "paragraphs": [
+          "The counter updates as pages of profiles arrive. The code includes pauses between some requests, and a response can also take time. A temporarily unchanged number alone therefore doesn’t establish that an error occurred.",
+          "If Instagram limits requests and the extension schedules another attempt, the text shows a countdown in seconds. This is the delay before retrying the request, rather than the time needed to finish the whole scan. Retries are bounded: reading stops if the restriction persists or the requested wait exceeds the configured limit.",
+          "Let the displayed countdown finish. If an error appears, follow its message and the troubleshooting guide; starting several scans to speed up reading won’t resolve an Instagram restriction."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "Recognize the result after the progress display",
+        "paragraphs": [
+          "After reading both lists, the extension compares account IDs, requests that the complete result be saved, then announces “Scan complete”. The panel displays the result counters and the accounts that don’t follow you back. Use that result and its date rather than the bar’s final position.",
+          "An advanced bar doesn’t guarantee success: a restriction, invalid response or interruption can still stop the scan. A failed attempt doesn’t replace the last saved complete result. The comparison remains limited to the lists Instagram returned during reading and doesn’t provide an unfollow history."
+        ],
+        "sources": [1, 2, 3, 4]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand a blocked scan message",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Read the last complete scan date after an error",
+        "route": "blog/last-complete-instagram-scan-date/"
+      },
+      {
+        "label": "Close the panel or the Instagram tab during a scan",
+        "route": "blog/close-panel-instagram-tab-scan/"
+      },
+      {
+        "label": "Understand non-reciprocal accounts",
+        "route": "guides/non-followers/"
+      }
+    ]
+  }
+}
