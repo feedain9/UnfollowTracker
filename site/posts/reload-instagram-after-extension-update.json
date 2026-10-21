@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "slug": "reload-instagram-after-extension-update",
+  "intent": "reconnecter le panneau après une mise à jour quand il demande de recharger Instagram, sans confondre rechargement de page, nouveau scan et réinstallation",
+  "status": "published",
+  "publishedAt": "2026-10-21",
+  "updatedAt": "2026-10-21",
+  "sources": [
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/8f6af72a52aec73ca7e42828f6eb64d0c5ebea1b/src/scripts/popup.js",
+      "title": "UnfollowTracker — connexion du panneau, rechargement de l’onglet et lecture du résultat enregistré",
+      "checkedAt": "2026-10-21"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/8f6af72a52aec73ca7e42828f6eb64d0c5ebea1b/src/scripts/i18n.js",
+      "title": "UnfollowTracker — messages de connexion et bouton Recharger Instagram en français et en anglais",
+      "checkedAt": "2026-10-21"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/8f6af72a52aec73ca7e42828f6eb64d0c5ebea1b/src/scripts/background.js",
+      "title": "UnfollowTracker — conservation du résultat complet et interruption lors du rechargement d’Instagram",
+      "checkedAt": "2026-10-21"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/8f6af72a52aec73ca7e42828f6eb64d0c5ebea1b/tests/sidepanel.test.js",
+      "title": "UnfollowTracker — test du rechargement proposé pour un ancien script de page",
+      "checkedAt": "2026-10-21"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts",
+      "title": "Chrome for Developers — Content scripts",
+      "checkedAt": "2026-10-21"
+    },
+    {
+      "url": "https://developer.chrome.com/docs/extensions/reference/api/storage",
+      "title": "Chrome for Developers — stockage local et stockage de session des extensions",
+      "checkedAt": "2026-10-21"
+    }
+  ],
+  "fr": {
+    "title": "« Recharger Instagram » après une mise à jour : que faire ?",
+    "description": "Reconnectez UnfollowTracker après une mise à jour : quand recharger Instagram, ce qui arrive au scan et pourquoi éviter une réinstallation inutile.",
+    "lead": "Si UnfollowTracker affiche « Rechargez Instagram pour connecter la nouvelle version de l’extension », utilisez « Recharger Instagram » pour recharger l’onglet associé au panneau. Attendez d’abord la fin de tout scan ou désabonnement en cours. Cette action sert à reconnecter le panneau à la page ; elle ne lance pas un nouveau scan et ne supprime pas le dernier résultat complet enregistré.",
+    "sections": [
+      {
+        "heading": "Pourquoi rouvrir seulement le panneau peut ne pas suffire",
+        "paragraphs": [
+          "L’extension comporte une interface dans le panneau et un script qui travaille dans la page Instagram. Chrome documente cette exécution dans les pages autorisées. Le panneau vérifie que le script de son onglet sait communiquer avec lui avant de permettre un scan.",
+          "Le code prévoit le cas d’un ancien script incompatible : il propose le rechargement au lieu d’annoncer une connexion prête. Rouvrir uniquement le panneau ne recharge pas cette page. Le message n’indique donc pas, à lui seul, que votre session Instagram a expiré ou que vos résultats ont été effacés."
+        ],
+        "sources": [1, 2, 4, 5]
+      },
+      {
+        "heading": "Recharger l’onglet associé, puis vérifier la connexion",
+        "paragraphs": [
+          "Le bouton « Recharger Instagram » ramène au premier plan l’onglet associé au panneau et le recharge. Le panneau recherche Instagram dans sa propre fenêtre. Si plusieurs onglets Instagram sont ouverts, activer un autre onglet ne garantit pas qu’il deviendra sa source.",
+          "Avant de recharger, attendez la fin de toute opération encore en cours. Recharger l’onglet qui exécute un scan interrompt sa lecture ; l’extension ne peut pas reprendre ce scan au pourcentage précédent."
+        ],
+        "steps": [
+          "Lisez le message exact du panneau et vérifiez qu’aucun scan ni désabonnement n’est encore en cours.",
+          "Cliquez sur « Recharger Instagram » lorsque ce bouton est proposé.",
+          "Attendez le chargement d’Instagram et vérifiez le compte connecté directement sur le site.",
+          "Revenez au panneau. Une fois la connexion reconnue, consultez le résultat enregistré ou lancez manuellement « Scanner mon compte » ou « Actualiser le scan » si vous souhaitez une nouvelle comparaison.",
+          "Si vous lancez un scan, gardez son onglet Instagram ouvert sans le recharger pendant la lecture."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "Un exemple fictif : reconnecter sans actualiser les listes",
+        "paragraphs": [
+          "Supposons que compte_atelier possède un résultat complet du 20 octobre 2026. Le 21 octobre, le panneau demande de recharger Instagram après une mise à jour. Une fois la page rechargée et le même compte reconnu, il peut retrouver ce résultat du 20 octobre. Sa date ne devient pas le 21 octobre par cette seule reconnexion.",
+          "Le test automatisé du dépôt simule un ancien script, vérifie que le panneau propose le rechargement et que ce bouton ne déclenche aucune requête de scan. Cet exemple décrit le code et ses tests ; il ne présente pas un essai sur un compte Instagram réel. Pour relire les listes actuelles, il faut demander un nouveau scan."
+        ],
+        "sources": [1, 4]
+      },
+      {
+        "heading": "Recharger la page ne revient pas à réinstaller l’extension",
+        "paragraphs": [
+          "Le dernier résultat complet est enregistré dans le stockage local de l’extension, séparément pour chaque compte. Recharger Instagram ne l’efface pas. L’état temporaire d’une lecture est distinct : Chrome précise que son stockage de session est vidé lors d’une mise à jour de l’extension. Il ne faut donc pas le considérer comme une sauvegarde permettant de reprendre un scan.",
+          "Évitez de désinstaller l’extension pour ce seul message : Chrome supprime son stockage local à la désinstallation. Pour conserver une liste non réciproque déjà disponible, vous pouvez en télécharger un export JSON avant une désinstallation volontaire. Cette copie reste à consulter séparément ; cette version ne la réimporte pas dans le panneau."
+        ],
+        "sources": [1, 3, 6]
+      },
+      {
+        "heading": "Si le panneau ne se reconnecte toujours pas",
+        "paragraphs": [
+          "Vérifiez qu’Instagram a fini de charger dans la même fenêtre et que vous êtes connecté au compte voulu. « Ouvrir Instagram », « Aller sur Instagram » et « Recharger Instagram » correspondent à des situations différentes ; le texte du message aide à choisir l’étape utile. Un échec général de connexion peut aussi proposer le rechargement : ce bouton ne prouve pas à lui seul qu’une mise à jour est la cause.",
+          "Si le problème persiste après le rechargement, relevez le message exact et les versions de l’extension et du navigateur pour le diagnostic. Une demande de connexion ou de vérification se traite sur Instagram. Une limitation de requêtes ne se résout pas en rechargeant en boucle : respectez les indications affichées et consultez le guide de dépannage."
+        ],
+        "sources": [1, 2]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre les autres messages d’un scan bloqué",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Distinguer fermeture du panneau et interruption d’Instagram",
+        "route": "blog/close-panel-instagram-tab-scan/"
+      },
+      {
+        "label": "Lire la date du dernier scan complet",
+        "route": "blog/last-complete-instagram-scan-date/"
+      },
+      {
+        "label": "Conserver une copie JSON des résultats",
+        "route": "blog/export-instagram-results-json/"
+      }
+    ]
+  },
+  "en": {
+    "title": "“Reload Instagram” after an extension update: what to do",
+    "description": "Reconnect UnfollowTracker after an update: when to reload Instagram, what happens to a scan and why an unnecessary reinstall can lose saved results.",
+    "lead": "If UnfollowTracker says “Reload Instagram to connect the updated extension,” use “Reload Instagram” to reload the tab linked to the panel. First wait for any scan or unfollow request to finish. This action is meant to reconnect the panel to the page; it does not start a new scan or delete your latest saved complete result.",
+    "sections": [
+      {
+        "heading": "Why reopening only the panel may not be enough",
+        "paragraphs": [
+          "The extension has an interface in the panel and a script that works inside the Instagram page. Chrome documents how these scripts run in permitted web pages. Before allowing a scan, the panel checks that the script in its tab can communicate with it.",
+          "The code handles an older, incompatible script by offering a reload rather than reporting a ready connection. Reopening only the panel does not reload that page. The message alone therefore does not mean your Instagram session has expired or your results have been deleted."
+        ],
+        "sources": [1, 2, 4, 5]
+      },
+      {
+        "heading": "Reload the linked tab, then check the connection",
+        "paragraphs": [
+          "The “Reload Instagram” button brings the tab linked to the panel to the foreground and reloads it. The panel looks for Instagram in its own browser window. If several Instagram tabs are open, activating a different one does not guarantee that it will become the panel’s source.",
+          "Wait for any ongoing operation to finish before reloading. Reloading the tab that runs a scan interrupts its reading; the extension cannot resume that scan from its previous percentage."
+        ],
+        "steps": [
+          "Read the exact panel message and check that no scan or unfollow request is still running.",
+          "Click “Reload Instagram” when that button is offered.",
+          "Wait for Instagram to load and check the signed-in account on the website.",
+          "Return to the panel. Once connected, review the saved result or manually choose “Scan my account” or “Refresh scan” if you want a new comparison.",
+          "If you start a scan, keep its Instagram tab open without reloading it while the lists are being read."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "A fictional example: reconnecting without refreshing the lists",
+        "paragraphs": [
+          "Suppose example_studio has a complete result from 20 October 2026. On 21 October, the panel asks you to reload Instagram after an update. Once the page has reloaded and the same account is recognized, the panel can retrieve that result from 20 October. Reconnecting alone does not change its date to 21 October.",
+          "The repository’s automated test simulates an older script, checks that the panel offers a reload and verifies that the button triggers no scan requests. This example describes the code and its tests; it does not report a trial on a real Instagram account. Reading the current lists requires a new scan that you start yourself."
+        ],
+        "sources": [1, 4]
+      },
+      {
+        "heading": "Reloading the page is different from reinstalling the extension",
+        "paragraphs": [
+          "The latest complete result is kept in local extension storage, separately for each account. Reloading Instagram does not delete it. Temporary scan state is separate: Chrome specifies that session storage is cleared when the extension is updated. It should not be treated as a backup from which to resume a scan.",
+          "Avoid uninstalling the extension just because of this message: Chrome removes its local storage on uninstall. To keep an available non-reciprocal list before a deliberate uninstall, you can download a JSON export. That copy remains available to read separately; this version does not import it back into the panel."
+        ],
+        "sources": [1, 3, 6]
+      },
+      {
+        "heading": "If the panel still cannot connect",
+        "paragraphs": [
+          "Check that Instagram has finished loading in the same window and that you are signed in to the intended account. “Open Instagram,” “Go to Instagram” and “Reload Instagram” describe different situations; the message helps you choose the useful next step. A general connection failure can also offer a reload, so the button alone does not prove that an update caused the issue.",
+          "If the problem persists after reloading, record the exact message and your extension and browser versions for diagnosis. Handle sign-in or verification requests on Instagram itself. A request limit is not resolved by repeatedly reloading: follow the instructions shown and consult the troubleshooting guide."
+        ],
+        "sources": [1, 2]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand other messages when a scan is stuck",
+        "route": "guides/scan-troubleshooting/"
+      },
+      {
+        "label": "Distinguish closing the panel from interrupting Instagram",
+        "route": "blog/close-panel-instagram-tab-scan/"
+      },
+      {
+        "label": "Read the last complete scan date",
+        "route": "blog/last-complete-instagram-scan-date/"
+      },
+      {
+        "label": "Keep a JSON copy of your results",
+        "route": "blog/export-instagram-results-json/"
+      }
+    ]
+  }
+}
