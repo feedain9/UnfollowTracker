@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "slug": "instagram-unfollow-vs-remove-follower",
+  "intent": "choisir entre se désabonner et supprimer un abonné Instagram, puis comprendre pourquoi un abonné retiré peut apparaître dans les non-réciproques",
+  "status": "published",
+  "publishedAt": "2026-10-22",
+  "updatedAt": "2026-10-22",
+  "sources": [
+    {
+      "url": "https://help.instagram.com/286340048138725",
+      "title": "Instagram — Ne plus suivre un utilisateur / Unfollow someone",
+      "checkedAt": "2026-10-22"
+    },
+    {
+      "url": "https://help.instagram.com/413012278753813",
+      "title": "Instagram — Supprimer un follower / Remove a follower",
+      "checkedAt": "2026-10-22"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/4c0455b5f3400c5fa42ddf864ee0a50817437c39/src/scripts/content.js",
+      "title": "UnfollowTracker — comparaison des deux listes et désabonnement individuel",
+      "checkedAt": "2026-10-22"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/4c0455b5f3400c5fa42ddf864ee0a50817437c39/src/scripts/popup.js",
+      "title": "UnfollowTracker — liste des résultats et confirmation avant désabonnement",
+      "checkedAt": "2026-10-22"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/4c0455b5f3400c5fa42ddf864ee0a50817437c39/src/scripts/background.js",
+      "title": "UnfollowTracker — mise à jour du résultat après un désabonnement confirmé",
+      "checkedAt": "2026-10-22"
+    }
+  ],
+  "fr": {
+    "title": "Se désabonner ou supprimer un abonné Instagram : quelle différence ?",
+    "description": "Distinguez vos abonnements de vos abonnés, choisissez l’action adaptée et comprenez le résultat après le retrait d’un abonné sur Instagram.",
+    "lead": "Se désabonner signifie que vous cessez de suivre un compte. Supprimer un abonné met fin à son suivi de votre compte. Dans UnfollowTracker, « Ne plus suivre » agit sur vos abonnements ; pour retirer une personne de vos abonnés, utilisez les commandes d’Instagram.",
+    "sections": [
+      {
+        "heading": "Choisir l’action selon le sens de la relation",
+        "paragraphs": [
+          "Vos abonnements regroupent les comptes que vous suivez. Vos abonnés sont les comptes qui vous suivent. Deux personnes peuvent se suivre mutuellement, mais chacune de ces relations existe dans un sens précis.",
+          "Pour cesser de suivre quelqu’un directement sur Instagram, l’aide officielle indique d’ouvrir son profil, puis de choisir « Suivi(e) » et « Ne plus suivre ». C’est cette action de désabonnement que propose aussi UnfollowTracker pour un compte présent dans ses résultats."
+        ],
+        "sources": [1, 3, 4]
+      },
+      {
+        "heading": "Retirer un abonné depuis votre propre profil",
+        "paragraphs": [
+          "L’aide Instagram consultée décrit le retrait d’un abonné pour un compte privé. Son parcours sur ordinateur part de votre profil, et non du bouton de désabonnement sur le profil de l’autre personne."
+        ],
+        "steps": [
+          "Ouvrez votre profil Instagram et sa liste d’abonnés, appelée « Followers » dans l’aide.",
+          "Repérez le pseudonyme concerné, puis choisissez « Supprimer » à côté.",
+          "Relisez votre choix et confirmez le retrait avec « Supprimer » si c’est bien l’action souhaitée."
+        ],
+        "sources": [2]
+      },
+      {
+        "heading": "Un exemple fictif : l’abonné retiré devient non réciproque",
+        "paragraphs": [
+          "Supposons que compte_atelier et profil_camille se suivent mutuellement. Depuis compte_atelier, vous retirez profil_camille de vos abonnés tout en continuant à le suivre. Si aucune autre relation ne change, profil_camille reste dans vos abonnements mais n’est plus dans vos abonnés.",
+          "On peut donc déduire du calcul d’UnfollowTracker qu’il apparaîtra parmi les non-réciproques lors d’un nouveau scan complet qui retrouve cette situation. Sa présence ne prouve pas que Camille a décidé de se désabonner : dans cet exemple, vous avez vous-même retiré son suivi.",
+          "À l’inverse, un compte que vous ne suivez pas ne fait pas partie de ce résultat, même s’il figure parmi vos abonnés. La liste non réciproque ne peut donc pas servir de liste générale des personnes à retirer de vos abonnés. Ces comptes sont fictifs ; l’exemple illustre la comparaison, sans rapporter un essai sur un compte réel."
+        ],
+        "sources": [2, 3]
+      },
+      {
+        "heading": "Ce que le bouton d’UnfollowTracker change réellement",
+        "paragraphs": [
+          "Dans le panneau, « Ne plus suivre » demande une confirmation individuelle. Après confirmation par Instagram et enregistrement réussi, l’extension retire le compte concerné des abonnements et des non-réciproques du résultat enregistré. Cette mise à jour laisse la liste des abonnés enregistrée inchangée. L’extension ne propose pas de commande pour supprimer un abonné.",
+          "Si vous avez modifié vos relations directement sur Instagram, demandez manuellement un nouveau scan pour les comparer à nouveau. Gardez l’onglet Instagram connecté ouvert pendant la lecture et respectez les restrictions éventuelles. Vérifiez la date du dernier scan complet avant d’interpréter la liste : un résultat conservé décrit encore l’ancienne observation.",
+          "Vous pouvez aussi garder un abonnement qui vous intéresse sans attendre de retour. Le résultat vous informe sur les deux listes lues ; il ne recommande pas de supprimer une relation et ne constitue pas un historique des désabonnements."
+        ],
+        "sources": [3, 4, 5]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre les comptes non réciproques",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Vérifier ou annuler une confirmation de désabonnement",
+        "route": "blog/confirm-individual-instagram-unfollow/"
+      },
+      {
+        "label": "Distinguer non-réciprocité et désabonnement passé",
+        "route": "guides/unfollowers-vs-non-followers/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Unfollow or remove an Instagram follower: what’s the difference?",
+    "description": "Understand following versus followers, choose the right action and see why someone you removed can appear in your non-reciprocal results.",
+    "lead": "Unfollowing means you stop following an account. Removing a follower ends that account’s follow of you. In UnfollowTracker, “Unfollow” changes who you follow; to remove someone from your followers, use Instagram’s own controls.",
+    "sections": [
+      {
+        "heading": "Choose the action for the right direction",
+        "paragraphs": [
+          "Your following list contains accounts you follow. Your followers list contains accounts that follow you. Two people can follow each other, but each of those relationships has its own direction.",
+          "To stop following someone on Instagram itself, the official help page says to open their profile, choose “Following”, then “Unfollow”. This is also the unfollow action UnfollowTracker offers for an account in its results."
+        ],
+        "sources": [1, 3, 4]
+      },
+      {
+        "heading": "Remove a follower from your own profile",
+        "paragraphs": [
+          "The Instagram help page consulted describes removing followers for a private account. Its desktop instructions start from your own profile, rather than the unfollow button on the other person’s profile."
+        ],
+        "steps": [
+          "Open your Instagram profile and its “Followers” list.",
+          "Find the relevant username and choose “Remove” beside it.",
+          "Check your choice and confirm with “Remove” if that is the action you intended."
+        ],
+        "sources": [2]
+      },
+      {
+        "heading": "A fictional example: a removed follower becomes non-reciprocal",
+        "paragraphs": [
+          "Suppose example_studio and example_camille follow each other. From example_studio, you remove example_camille as a follower while continuing to follow them. If nothing else changes, example_camille remains in your following list but is no longer in your followers list.",
+          "It follows from UnfollowTracker’s comparison that this account will appear in the non-reciprocal results of a new complete scan that finds this situation. That does not establish that Camille chose to unfollow you: in this example, you removed their follow yourself.",
+          "Conversely, an account you do not follow is outside these results even if it follows you. The non-reciprocal list therefore cannot serve as a general list of people to remove from your followers. These accounts are fictional; the example illustrates the comparison without reporting a test on a real account."
+        ],
+        "sources": [2, 3]
+      },
+      {
+        "heading": "What UnfollowTracker’s button actually changes",
+        "paragraphs": [
+          "In the panel, “Unfollow” asks you to confirm one account. Once Instagram confirms the action and the update is saved successfully, the extension removes that account from the saved result’s following and non-reciprocal lists. This update leaves the saved followers list unchanged. The extension has no command to remove a follower.",
+          "If you changed your relationships directly on Instagram, manually request a new scan to compare them again. Keep the signed-in Instagram tab open while the lists are read and respect any restrictions. Check the last complete scan date before interpreting the list: a retained result still describes the earlier observation.",
+          "You can also keep following an account you enjoy without expecting a follow back. The result describes the two lists read during the scan; it does not recommend ending a relationship or provide a history of unfollows."
+        ],
+        "sources": [3, 4, 5]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand non-reciprocal accounts",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Check or cancel an unfollow confirmation",
+        "route": "blog/confirm-individual-instagram-unfollow/"
+      },
+      {
+        "label": "Distinguish non-reciprocal following from a past unfollow",
+        "route": "guides/unfollowers-vs-non-followers/"
+      }
+    ]
+  }
+}
