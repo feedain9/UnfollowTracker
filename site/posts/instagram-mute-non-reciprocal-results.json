@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "slug": "instagram-mute-non-reciprocal-results",
+  "intent": "comprendre pourquoi la mise en sourdine ne retire pas un compte des non-réciproques et pourquoi un scan ne révèle pas qui vous a mis en sourdine",
+  "status": "published",
+  "publishedAt": "2026-10-23",
+  "updatedAt": "2026-10-23",
+  "sources": [
+    {
+      "url": "https://mydigitalworld.fb.com/ssa/lesson/options-for-controlling-your-experience-on-instagram-facebook-messenger-and-whatsapp/",
+      "title": "Meta — My Digital World, Options for Controlling Your Experience, section Mute",
+      "checkedAt": "2026-10-23"
+    },
+    {
+      "url": "https://about.fb.com/wp-content/uploads/2021/11/Time-Management-Tools-on-FB_IG-1.pdf",
+      "title": "Meta — Time Management Tools on Facebook & Instagram, 5 novembre 2021, page 2",
+      "checkedAt": "2026-10-23"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/69ec4fe669b4c56ad8a29a5b8fd557df360a7e10/src/scripts/content.js",
+      "title": "UnfollowTracker — lecture des relations, comparaison des identifiants et données de profil conservées",
+      "checkedAt": "2026-10-23"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/69ec4fe669b4c56ad8a29a5b8fd557df360a7e10/src/scripts/popup.js",
+      "title": "UnfollowTracker — affichage des résultats, confirmation du désabonnement et export JSON",
+      "checkedAt": "2026-10-23"
+    }
+  ],
+  "fr": {
+    "title": "Sourdine Instagram : pourquoi le compte reste dans vos résultats",
+    "description": "Mettre un compte en sourdine conserve votre abonnement. Comprenez pourquoi il peut rester non réciproque et ce qu’UnfollowTracker permet de vérifier.",
+    "lead": "Mettre les publications ou les stories d’un compte en sourdine sur Instagram ne vous désabonne pas de ce compte. S’il ne vous suit pas en retour, il peut donc rester dans la liste non réciproque d’UnfollowTracker. L’extension compare les abonnements et les abonnés ; elle n’indique ni vos réglages de sourdine ni ceux des autres personnes.",
+    "sections": [
+      {
+        "heading": "La sourdine change ce que vous voyez",
+        "paragraphs": [
+          "Meta décrit la sourdine comme une façon de masquer les publications du fil ou les stories d’un compte suivi. Son document sur la gestion du temps précise que masquer ces publications ne retire pas l’abonnement. Vous pouvez ensuite lever la sourdine sur Instagram.",
+          "Le réglage de visibilité et la relation d’abonnement sont donc deux informations différentes. Un profil peut rester dans vos abonnements même si vous avez choisi de ne plus voir ses publications dans votre fil."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "Un exemple fictif : deux comptes mis en sourdine, un seul résultat",
+        "paragraphs": [
+          "Supposons que compte_atelier suive profil_camille et profil_lou. Camille suit compte_atelier en retour ; Lou ne le suit pas. Vous mettez les publications de ces deux profils en sourdine, sans modifier les abonnements. Tous les noms de cet exemple sont fictifs.",
+          "On peut déduire du calcul d’UnfollowTracker que, si les listes renvoyées lors du scan reflètent cette situation, seul profil_lou apparaît parmi les non-réciproques. Son identifiant figure dans les abonnements et pas dans les abonnés. Camille reste réciproque, même si ses publications sont elles aussi masquées.",
+          "Retrouver Lou dans le résultat ne signale donc pas un échec de la sourdine. Le scan répond à la question « ce compte figure-t-il parmi mes abonnés ? » pour les profils que vous suivez ; il ne vérifie pas leur visibilité dans votre fil."
+        ],
+        "sources": [2, 3]
+      },
+      {
+        "heading": "Le scan ne révèle pas qui vous a mis en sourdine",
+        "paragraphs": [
+          "Le code compare les identifiants des deux listes et conserve les informations de profil utiles à l’affichage. Il n’enregistre aucun indicateur de sourdine et ne consulte pas les vues de stories ou les interactions pour établir ce résultat. Une présence dans la liste ne permet donc pas de conclure qu’une personne vous a mis en sourdine.",
+          "L’absence d’un profil dans les non-réciproques ne répond pas non plus à cette question. Le JSON exporté ne contient aucun champ de sourdine : il reprend la liste non réciproque chargée, des informations de profil et les dates du scan et de l’export. Ni le panneau ni ce fichier ne constituent un détecteur de sourdine."
+        ],
+        "sources": [3, 4]
+      },
+      {
+        "heading": "Vérifier votre choix avant de modifier un abonnement",
+        "paragraphs": [
+          "Si votre objectif est seulement de masquer des publications, vérifiez les réglages de sourdine directement sur Instagram. UnfollowTracker ne propose pas cette commande. Dans le panneau, « Ne plus suivre » demande la confirmation d’un désabonnement individuel : confirmer cette action change votre abonnement.",
+          "Un résultat enregistré reste une observation datée des listes renvoyées par Instagram. L’extension ne constitue pas un historique des désabonnements et ne peut pas expliquer les intentions d’une personne à partir de sa présence ou de son absence."
+        ],
+        "steps": [
+          "Vérifiez le compte Instagram connecté et la date du dernier scan complet.",
+          "Ouvrez le profil concerné depuis son pseudonyme pour vérifier votre abonnement sur Instagram.",
+          "Si vous voulez conserver cet abonnement, laissez la commande « Ne plus suivre » de côté ; si sa confirmation est déjà ouverte, choisissez « Annuler » avant tout envoi.",
+          "Si vous avez changé vos relations sur Instagram et souhaitez les comparer à nouveau, lancez manuellement un scan. Gardez son onglet Instagram connecté ouvert et respectez toute restriction affichée. Un nouveau scan ne révélera pas davantage les réglages de sourdine."
+        ],
+        "sources": [1, 3, 4]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre ce que signifie un compte non réciproque",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Distinguer désabonnement et suppression d’un abonné",
+        "route": "blog/instagram-unfollow-vs-remove-follower/"
+      },
+      {
+        "label": "Annuler ou confirmer un désabonnement individuel",
+        "route": "blog/confirm-individual-instagram-unfollow/"
+      },
+      {
+        "label": "Lire les champs de l’export JSON",
+        "route": "blog/export-instagram-results-json/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Muting on Instagram: why an account stays in your results",
+    "description": "Muting an Instagram account keeps your follow in place. Learn why it can stay in your non-reciprocal results and what UnfollowTracker can actually check.",
+    "lead": "Muting an account’s posts or stories on Instagram does not unfollow that account. If it does not follow you back, it can therefore remain in UnfollowTracker’s non-reciprocal list. The extension compares following and followers; it does not show your mute settings or anyone else’s.",
+    "sections": [
+      {
+        "heading": "Muting changes what you see",
+        "paragraphs": [
+          "Meta describes mute as a way to hide feed posts or stories from an account you follow. Its time management document explicitly says that hiding these posts does not unfollow the account. You can later unmute it on Instagram.",
+          "Content visibility and the follow relationship are separate pieces of information. A profile can remain in your following list even when you have chosen to hide its posts from your feed."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "A fictional example: two muted accounts, one result",
+        "paragraphs": [
+          "Suppose studio_account follows camille_profile and lou_profile. Camille follows studio_account back; Lou does not. You mute both profiles’ posts without changing either follow relationship. All account names in this example are fictional.",
+          "From UnfollowTracker’s comparison logic, we can infer that only lou_profile will appear in the non-reciprocal list if the lists returned during the scan reflect this situation. Lou’s account ID is in following but absent from followers. Camille remains a mutual follow even though you have also hidden Camille’s posts.",
+          "Finding Lou in the results therefore does not mean muting failed. For the accounts you follow, the scan checks whether they are present in your followers list; it does not check whether their posts appear in your feed."
+        ],
+        "sources": [2, 3]
+      },
+      {
+        "heading": "A scan cannot reveal who muted you",
+        "paragraphs": [
+          "The code compares IDs in the two lists and keeps the profile information used to display results. It stores no mute indicator and does not check story views or interactions to produce this result. An account appearing in the list therefore does not establish that its owner muted you.",
+          "A profile’s absence from the non-reciprocal list does not answer that question either. The JSON export has no mute field: it copies the loaded non-reciprocal list, profile information, and the scan and export dates. Neither the panel nor the file is a mute detector."
+        ],
+        "sources": [3, 4]
+      },
+      {
+        "heading": "Check your choice before changing a follow",
+        "paragraphs": [
+          "If you only want to hide posts, check the mute settings directly on Instagram. UnfollowTracker does not provide a mute control. In the panel, “Unfollow” asks you to confirm an individual unfollow: confirming that action changes your follow relationship.",
+          "A saved result remains a dated observation of the lists Instagram returned. The extension does not build an unfollow history or explain someone’s intentions from their presence or absence in a list."
+        ],
+        "steps": [
+          "Check the signed-in Instagram account and the last complete scan date.",
+          "Open the relevant profile from its username to check your follow on Instagram.",
+          "If you want to keep following the account, leave “Unfollow” alone. If its confirmation is already open, choose “Cancel” before sending a request.",
+          "If you have changed your relationships on Instagram and want to compare them again, start a scan manually. Keep its signed-in Instagram tab open and respect any restriction shown. A new scan will still not reveal mute settings."
+        ],
+        "sources": [1, 3, 4]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand what a non-reciprocal account means",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Tell unfollowing apart from removing a follower",
+        "route": "blog/instagram-unfollow-vs-remove-follower/"
+      },
+      {
+        "label": "Cancel or confirm an individual unfollow",
+        "route": "blog/confirm-individual-instagram-unfollow/"
+      },
+      {
+        "label": "Read the JSON export fields",
+        "route": "blog/export-instagram-results-json/"
+      }
+    ]
+  }
+}
