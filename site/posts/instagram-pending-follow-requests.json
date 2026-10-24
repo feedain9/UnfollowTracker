@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "slug": "instagram-pending-follow-requests",
+  "intent": "comprendre pourquoi une demande de suivi reçue et encore en attente ne rend pas un abonnement réciproque, et où la vérifier sur Instagram",
+  "status": "published",
+  "publishedAt": "2026-10-24",
+  "updatedAt": "2026-10-24",
+  "sources": [
+    {
+      "url": "https://help.instagram.com/207917546007234",
+      "title": "Instagram — Accepter ou refuser une demande de suivi, aide sur ordinateur",
+      "checkedAt": "2026-10-24"
+    },
+    {
+      "url": "https://help.instagram.com/1765287610702547/?cms_platform=android-app&helpref=platform_switcher",
+      "title": "Instagram — Confirmer automatiquement les demandes de suivi réciproques, aide Android",
+      "checkedAt": "2026-10-24"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/817865f9173cf3c2d6dfed5df4164c45a18055ce/src/scripts/content.js",
+      "title": "UnfollowTracker — lecture des abonnements et abonnés, comparaison des identifiants",
+      "checkedAt": "2026-10-24"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/817865f9173cf3c2d6dfed5df4164c45a18055ce/src/scripts/popup.js",
+      "title": "UnfollowTracker — résultat chargé, actualisation manuelle et export JSON",
+      "checkedAt": "2026-10-24"
+    }
+  ],
+  "fr": {
+    "title": "Demandes de suivi Instagram : pourquoi un compte reste non réciproque",
+    "description": "Une demande reçue en attente n’est pas un abonnement confirmé. Vérifiez-la sur Instagram avant d’interpréter une présence dans les non-réciproques.",
+    "lead": "Si votre compte Instagram est privé, une demande de suivi reçue et encore en attente ne signifie pas que la personne est déjà votre abonnée. Si vous la suivez, elle peut donc rester dans les non-réciproques d’UnfollowTracker. Le scan compare les abonnements et les abonnés renvoyés par Instagram ; il ne consulte pas les demandes en attente.",
+    "sections": [
+      {
+        "heading": "Le résultat ne constitue pas une liste de demandes",
+        "paragraphs": [
+          "Dans le code, chaque profil retenu doit être présent dans les abonnements lus et absent des abonnés lus. Aucun indicateur ne précise qu’il a envoyé une demande de suivi. Sa présence ne permet donc pas de conclure qu’il ne souhaite pas vous suivre.",
+          "Réciproquement, une personne que vous ne suivez pas n’entre pas dans ce résultat, même si elle vous a envoyé une demande. La recherche du panneau filtre seulement les non-réciproques enregistrés : elle ne permet pas de retrouver toutes les demandes reçues ou envoyées."
+        ],
+        "sources": [3, 4]
+      },
+      {
+        "heading": "Un exemple fictif : Camille a demandé à vous suivre",
+        "paragraphs": [
+          "Supposons que compte_atelier, privé, suive profil_camille. Une demande de Camille attend encore votre réponse sur Instagram. Lors du scan, Instagram renvoie Camille dans les abonnements de compte_atelier, mais pas dans ses abonnés. Tous les comptes et toutes les situations de cet exemple sont fictifs.",
+          "On déduit du calcul de l’extension que Camille apparaît alors parmi les non-réciproques. Ce résultat décrit les deux listes reçues ; il n’indique pas que Camille a ignoré votre compte ou s’en est désabonné.",
+          "Si vous acceptez ensuite sa demande et qu’un nouveau scan retrouve Camille dans les deux listes, ce profil disparaît des non-réciproques. L’ancienne liste, elle, n’est pas une preuve de la situation après votre acceptation."
+        ],
+        "sources": [1, 3, 4]
+      },
+      {
+        "heading": "Vérifier les demandes reçues directement sur Instagram",
+        "paragraphs": [
+          "Pour un compte privé, l’aide Instagram décrit ce parcours sur ordinateur. Vous décidez d’accepter ou de refuser une demande sur Instagram ; UnfollowTracker ne propose aucune de ces deux actions."
+        ],
+        "steps": [
+          "Vérifiez que vous utilisez le bon compte Instagram.",
+          "Ouvrez « Notifications », puis « Demandes de suivi ».",
+          "Repérez le pseudonyme concerné. « Confirmer » accepte la demande ; « Supprimer » la refuse. Vous pouvez aussi laisser la demande en attente."
+        ],
+        "sources": [1, 4]
+      },
+      {
+        "heading": "Certaines demandes peuvent être confirmées automatiquement",
+        "paragraphs": [
+          "Instagram documente aussi une option de confirmation automatique, sur mobile, pour les personnes que vous suivez déjà et qui souhaitent vous suivre en retour. Si elle est activée, ces demandes peuvent être acceptées sans validation manuelle. L’aide précise une exception : une nouvelle demande d’un abonné que vous avez supprimé n’est pas confirmée automatiquement.",
+          "Ces réglages appartiennent à Instagram. UnfollowTracker ne les affiche pas et ne les modifie pas : il faut vérifier l’état réel de la demande ou de l’abonnement sur Instagram."
+        ],
+        "sources": [2, 3, 4]
+      },
+      {
+        "heading": "Après une acceptation, vérifier la date du résultat",
+        "paragraphs": [
+          "Accepter une demande sur Instagram ne relance pas le scan du panneau. Pour comparer les listes à nouveau, choisissez manuellement « Actualiser le scan », ou « Scanner mon compte » si aucun résultat n’est enregistré. Gardez l’onglet Instagram connecté ouvert pendant la lecture et respectez toute restriction affichée.",
+          "Vérifiez ensuite la date du dernier scan complet. Si la nouvelle lecture échoue, un ancien résultat peut rester disponible. Un export JSON de cette ancienne liste ne la rend pas plus récente et n’ajoute aucun statut de demande de suivi.",
+          "Le scan reste une observation des listes obtenues, sans historique des désabonnements. Il ne permet ni de savoir qui a refusé une demande que vous avez envoyée, ni de déterminer pourquoi une demande reste sans réponse."
+        ],
+        "sources": [3, 4]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre les limites d’un scan de compte privé",
+        "route": "blog/private-instagram-account-scan-limits/"
+      },
+      {
+        "label": "Distinguer désabonnement et suppression d’un abonné",
+        "route": "blog/instagram-unfollow-vs-remove-follower/"
+      },
+      {
+        "label": "Interpréter la date du dernier scan complet",
+        "route": "blog/last-complete-instagram-scan-date/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Pending Instagram follow requests: why a follow can still be non-reciprocal",
+    "description": "A pending request is not a confirmed follow. Check received requests on Instagram before interpreting an account in your non-reciprocal results.",
+    "lead": "If your Instagram account is private, a pending request to follow you does not mean the person is already your follower. If you follow them, they can therefore remain in UnfollowTracker’s non-reciprocal results. The scan compares the following and follower lists Instagram returns; it does not check pending requests.",
+    "sections": [
+      {
+        "heading": "Your results are not a list of follow requests",
+        "paragraphs": [
+          "In the code, each account in the result must be present in the following list that was read and absent from the follower list. No indicator says whether that account has sent a follow request. Its presence therefore does not establish that the person does not want to follow you.",
+          "Conversely, someone you do not follow will not appear in this result, even if they have requested to follow you. The panel’s search only filters saved non-reciprocal accounts; it cannot find all received or sent requests."
+        ],
+        "sources": [3, 4]
+      },
+      {
+        "heading": "A fictional example: Camille has requested to follow you",
+        "paragraphs": [
+          "Suppose studio_account is private and follows camille_profile. Camille’s request is still waiting for your response on Instagram. During the scan, Instagram returns Camille in studio_account’s following list, but not in its followers. Every account and situation in this example is fictional.",
+          "From the extension’s comparison logic, we can infer that Camille appears in the non-reciprocal results. This describes the two lists received; it does not show that Camille ignored your account or unfollowed you.",
+          "If you then accept the request and a new scan finds Camille in both lists, that profile drops out of the non-reciprocal results. The older result is not evidence of the relationship after your approval."
+        ],
+        "sources": [1, 3, 4]
+      },
+      {
+        "heading": "Check received requests directly on Instagram",
+        "paragraphs": [
+          "For a private account, Instagram’s help gives this desktop workflow. You choose whether to approve or deny a request on Instagram; UnfollowTracker offers neither action."
+        ],
+        "steps": [
+          "Check that you are using the right Instagram account.",
+          "Open “Notifications”, then “Follow requests”.",
+          "Find the relevant username. “Confirm” approves the request; “Delete” denies it. You can also leave it pending."
+        ],
+        "sources": [1, 4]
+      },
+      {
+        "heading": "Some requests can be confirmed automatically",
+        "paragraphs": [
+          "Instagram also documents a mobile auto-confirm option for people you already follow who want to follow you back. When enabled, these requests can be accepted without manual approval. Its help notes an exception: a new request from a follower you removed is not automatically confirmed.",
+          "These are Instagram settings. UnfollowTracker neither displays nor changes them: check the actual request or follow status on Instagram."
+        ],
+        "sources": [2, 3, 4]
+      },
+      {
+        "heading": "After approving a request, check the result’s date",
+        "paragraphs": [
+          "Approving a request on Instagram does not start another scan in the panel. To compare the lists again, manually choose “Refresh scan”, or “Scan my account” if no result is saved. Keep the signed-in Instagram tab open while the scan runs and respect any restriction shown.",
+          "Then check the last complete scan date. If the new attempt fails, an older result may still be available. Exporting that older list as JSON does not make it current or add a follow-request status.",
+          "The scan remains an observation of the lists received, without an unfollow history. It cannot tell you who denied a request you sent or why a request remains unanswered."
+        ],
+        "sources": [3, 4]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand the limits of scanning a private account",
+        "route": "blog/private-instagram-account-scan-limits/"
+      },
+      {
+        "label": "Tell unfollowing apart from removing a follower",
+        "route": "blog/instagram-unfollow-vs-remove-follower/"
+      },
+      {
+        "label": "Understand the last complete scan date",
+        "route": "blog/last-complete-instagram-scan-date/"
+      }
+    ]
+  }
+}
