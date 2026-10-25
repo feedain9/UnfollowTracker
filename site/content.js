@@ -131,12 +131,12 @@ module.exports = {
     guideLink: "Lire le guide",
     guideTitles: [
       "Qui ne me suit pas en retour sur Instagram ?",
-      "Unfollower ou non réciproque : quelle différence ?",
+      "Qui s’est désabonné de moi sur Instagram ?",
       "Mon scan Instagram est bloqué : que faire ?",
     ],
     guideDescriptions: [
-      "Ce que la comparaison de vos deux listes permet vraiment de savoir.",
-      "Pourquoi une liste actuelle ne raconte pas tout l’historique.",
+      "Trois façons fiables de le savoir, avec ou sans extension.",
+      "Instagram ne prévient pas. Comment le repérer, et ses limites.",
       "Session, limitation temporaire et résultats conservés : les bons réflexes.",
     ],
     closingTitle: "Vos abonnements.<br>Enfin plus clairs.",
@@ -295,12 +295,12 @@ module.exports = {
     guideLink: "Read the guide",
     guideTitles: [
       "Who doesn’t follow me back on Instagram?",
-      "Unfollowers vs. non-followers: what’s the difference?",
+      "Who unfollowed me on Instagram?",
       "Instagram scan stuck? Here’s what to check.",
     ],
     guideDescriptions: [
-      "What comparing your two lists can actually tell you.",
-      "Why a current list doesn’t tell the whole story.",
+      "Three reliable ways to find out, with or without an extension.",
+      "Instagram won’t tell you. How to spot it, and the limits.",
       "Sessions, temporary limits and saved results: practical next steps.",
     ],
     closingTitle: "Your following.<br>A little clearer.",

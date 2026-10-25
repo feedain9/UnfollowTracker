@@ -9,7 +9,7 @@ Mis en place le 25 octobre 2026, sur décision du propriétaire du 24 octobre : 
 | Trafic du site, provenance, pages lues, pays, clics vers le store | Plausible [`unfollow.yadulink.com`](https://analytics.krilup.com/unfollow.yadulink.com) |
 | Installations, usage, échecs de scan, désinstallations et leurs raisons | Plausible [`extension.unfollow.yadulink.com`](https://analytics.krilup.com/extension.unfollow.yadulink.com) (domaine virtuel, aucune page n’y est servie) |
 | Totaux officiels : installations, désinstallations, utilisateurs hebdomadaires ; vues de la fiche par paramètre UTM | Tableau de bord développeur Chrome Web Store → Analytics (*Installs & Uninstalls*, *Impressions*, *Weekly Users*) |
-| Requêtes Google, impressions, positions | Search Console (un enregistrement de vérification Google existe sur yadulink.com ; vérifier que la propriété couvre le sous-domaine) |
+| Requêtes Google, impressions, positions, indexation | Search Console : propriété **domaine** `yadulink.com` du compte Google de l’éditeur, qui couvre le sous-domaine. Filtrer *Performances* sur « Page contient `unfollow.yadulink.com` ». Sitemap `https://unfollow.yadulink.com/sitemap.xml` envoyé le 25 octobre 2026 |
 
 Le Chrome Web Store reste la référence pour les **totaux** : il compte tout le monde, y compris les utilisateurs qui ont désactivé les statistiques ou bloquent Plausible. Plausible sert à **comprendre** : pays, navigateurs, langues, profils de comptes, erreurs, raisons de départ, pages qui convertissent.
 

@@ -1497,6 +1497,12 @@ details > p {
   letter-spacing: -0.02em;
   margin: 42px 0 16px;
 }
+.article h3 {
+  font-size: 17px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin: 28px 0 8px;
+}
 .article p,
 .article li {
   font-size: 15px;

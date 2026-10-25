@@ -57,6 +57,8 @@ if (
   throw new Error(
     "analyticsScript must be a Plausible pa-*.js HTTPS URL, with analyticsExtensionDomain.",
   );
+if (config.indexNowKey && !/^[a-f0-9]{32}$/.test(config.indexNowKey))
+  throw new Error("indexNowKey must be 32 lowercase hexadecimal characters.");
 // Previews and local tests never load Plausible or send events.
 const analytics = production ? analyticsScript : null;
 // Opened by the extension itself: never indexed, no pageview of their own.
@@ -214,7 +216,7 @@ function uninstalled(lang) {
 }
 const routes = [];
 const lastModified = new Map();
-function documentPage(lang, route, title, description, body, article = false, post = null) {
+function documentPage(lang, route, title, description, body, article = false, post = null, updatedAt = null) {
   const url = `${base.origin}/${lang}/${route}`;
   const t = copy[lang];
   const schema = article
@@ -223,10 +225,12 @@ function documentPage(lang, route, title, description, body, article = false, po
         "@type": post ? "BlogPosting" : "Article",
         headline: title,
         inLanguage: lang,
-        dateModified: post ? post.updatedAt : "2026-10-05",
-        ...(post ? { datePublished: post.publishedAt, image: `${base.origin}/assets/og-${lang}.png` } : {}),
+        datePublished: post ? post.publishedAt : "2026-10-05",
+        dateModified: post ? post.updatedAt : updatedAt || "2026-10-05",
+        image: `${base.origin}/assets/og-${lang}.png`,
         mainEntityOfPage: url,
         author: { "@type": "Organization", name: config.publisherName, url: `${base.origin}/${lang}/legal/` },
+        publisher: { "@type": "Organization", name: config.publisherName, url: base.origin },
       }
     : route
       ? null
@@ -255,7 +259,7 @@ function documentPage(lang, route, title, description, body, article = false, po
   const tracking = analytics
     ? ` data-analytics="${analytics.origin}" data-analytics-host="${base.host}" data-extension-domain="${esc(config.analyticsExtensionDomain)}"${utility ? ' data-pageview="off"' : ""}`
     : "";
-  const html = `<!doctype html><html lang="${lang}"${tracking}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="${production && !utility ? "index,follow" : "noindex,nofollow"}"><link rel="canonical" href="${url}"><link rel="alternate" hreflang="fr" href="${base.origin}/fr/${route}"><link rel="alternate" hreflang="en" href="${base.origin}/en/${route}"><link rel="alternate" hreflang="x-default" href="${base.origin}/fr/${route}"><meta name="theme-color" content="#fffcfa"><meta property="og:type" content="${article ? "article" : "website"}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url}"><meta property="og:site_name" content="UnfollowTracker"><meta property="og:locale" content="${lang === "fr" ? "fr_FR" : "en_US"}"><meta property="og:image" content="${base.origin}/assets/og-${lang}.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/png" href="/assets/icon32.png"><link rel="preload" href="/assets/manrope-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/${assetFiles.css}">${schema ? `<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>` : ""}<script defer src="/assets/${assetFiles.js}"></script>${analytics ? `<script async src="${analytics.href}" referrerpolicy="no-referrer"></script>` : ""}</head><body>${header(lang, route)}${body}${footer(lang)}</body></html>`;
+  const html = `<!doctype html><html lang="${lang}"${tracking}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="${production && !utility ? "index,follow" : "noindex,nofollow"}"><link rel="canonical" href="${url}"><link rel="alternate" hreflang="fr" href="${base.origin}/fr/${route}"><link rel="alternate" hreflang="en" href="${base.origin}/en/${route}"><link rel="alternate" hreflang="x-default" href="${base.origin}/en/${route}"><meta name="theme-color" content="#fffcfa"><meta property="og:type" content="${article ? "article" : "website"}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url}"><meta property="og:site_name" content="UnfollowTracker"><meta property="og:locale" content="${lang === "fr" ? "fr_FR" : "en_US"}"><meta property="og:image" content="${base.origin}/assets/og-${lang}.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/png" href="/assets/icon32.png"><link rel="preload" href="/assets/manrope-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/${assetFiles.css}">${schema ? `<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>` : ""}<script defer src="/assets/${assetFiles.js}"></script>${analytics ? `<script async src="${analytics.href}" referrerpolicy="no-referrer"></script>` : ""}</head><body>${header(lang, route)}${body}${footer(lang)}</body></html>`;
   const dest = path.join(out, lang, route);
   fs.mkdirSync(dest, { recursive: true });
   fs.writeFileSync(path.join(dest, "index.html"), html);
@@ -359,6 +363,8 @@ for (const lang of ["fr", "en"]) {
       page.description,
       body,
       page.route.startsWith("guides/"),
+      null,
+      page.updatedAt,
     );
     if (page.updatedAt)
       lastModified.set(`${base.origin}/${lang}/${page.route}`, page.updatedAt);
@@ -377,9 +383,10 @@ for (const post of posts) {
     }
   }
 }
+// functions/index.js picks /fr/ or /en/ from Accept-Language; these are fallbacks.
 fs.writeFileSync(
   path.join(out, "index.html"),
-  '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=/fr/"><title>UnfollowTracker</title></head><body><a href="/fr/">Français</a> · <a href="/en/">English</a></body></html>',
+  '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=/en/"><title>UnfollowTracker</title></head><body><a href="/en/">English</a> · <a href="/fr/">Français</a></body></html>',
 );
 fs.writeFileSync(
   path.join(out, "404.html"),
@@ -395,7 +402,10 @@ fs.writeFileSync(
   path.join(out, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${(production ? routes.filter((url) => !url.endsWith("/legal/") && !utilityRoutes.has(url.split("/").slice(4).join("/"))) : []).map((url) => `<url><loc>${url}</loc>${lastModified.has(url) ? `<lastmod>${lastModified.get(url)}</lastmod>` : ""}</url>`).join("")}</urlset>`,
 );
-fs.writeFileSync(path.join(out, "_redirects"), "/ /fr/ 302\n");
+fs.writeFileSync(path.join(out, "_redirects"), "/ /en/ 302\n");
+// IndexNow ownership proof for Bing and other participating engines.
+if (production && config.indexNowKey)
+  fs.writeFileSync(path.join(out, `${config.indexNowKey}.txt`), config.indexNowKey);
 fs.writeFileSync(
   path.join(out, "_headers"),
   `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Content-Security-Policy: default-src 'self'; script-src 'self'${analytics ? ` ${analytics.origin}` : ""}; style-src 'self'; img-src 'self'; font-src 'self'; connect-src ${analytics ? analytics.origin : "'none'"}; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'\n/assets/*\n  Cache-Control: public, max-age=3600\n`,

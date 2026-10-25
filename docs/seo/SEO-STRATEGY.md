@@ -25,12 +25,30 @@ Ne pas viser les recherches d’achat d’abonnés, d’accès aux profils priv�
 ## Bases déjà implémentées
 
 - HTML statique complet par langue ; pas de dépendance JavaScript pour le contenu éditorial.
-- Titres et descriptions propres, une H1 par page, canonique absolue et alternates `fr`, `en`, `x-default` réciproques.
+- Titres et descriptions propres, une H1 par page, canonique absolue et alternates `fr`, `en`, `x-default` réciproques ; `x-default` pointe sur l’anglais depuis le 25 octobre 2026.
 - Trois guides complets dans chaque langue, aide de démarrage, confidentialité et mentions légales.
 - Liens contextuels entre guides et vers le produit ; pages accessibles via le footer.
 - Schémas `SoftwareApplication` et `Article`, sans faux avis ni notes. L’offre gratuite et le lien de téléchargement ne sont ajoutés qu’avec une URL de boutique réelle.
 - Images sociales FR/EN, police auto-hébergée, trois photographies locales, mesure d’audience Plausible sans cookie depuis le 25 octobre 2026, pas de vidéo tiers.
 - Build d’aperçu `noindex` + robots fermé. Build de production avec sitemap, avec l’identité publique Yadulink renseignée.
+
+## Point de départ mesuré (25 octobre 2026)
+
+Search Console (propriété domaine `yadulink.com`, filtre `unfollow.yadulink.com`, 3 mois) : **82 impressions, 1 clic, position moyenne 31**, 14 pages vues dans les résultats. Requêtes déjà associées : « who doesn’t follow me back instagram », « unfollowers », « non followers », mais aussi « instagram insights to json », qui ne correspond pas au produit.
+
+| Page | État Google le 25 octobre 2026 |
+|---|---|
+| `/en/guides/non-followers/`, `/en/guides/unfollowers-vs-non-followers/`, `/en/blog/missing-instagram-profile-photo/`, `/en/blog/export-instagram-results-json/` | Indexées |
+| `/`, `/fr/`, `/en/` | Explorées, actuellement non indexées (explorées les 6, 10 et 11 octobre) |
+| `/fr/guides/non-followers/` | Détectée, actuellement non indexée (jamais explorée) |
+
+Bing et DuckDuckGo ne renvoyaient aucune page du sous-domaine. Aucun lien de yadulink.com ne pointait vers le site. Réponses le même jour :
+
+- Sitemap envoyé dans Search Console ; IndexNow (clé `site/publication.json`, script `npm run indexnow`) pour Bing et les moteurs participants.
+- `x-default` en anglais et racine selon la langue du navigateur.
+- Guides principaux réécrits sur les requêtes réelles : « qui ne me suit pas en retour », « how to see who doesn’t follow you back », « qui s’est désabonné », « how to see who unfollowed you » ; trois méthodes vérifiées sur l’aide d’Instagram, tableau comparatif, FAQ et liens vers les articles.
+- Demandes d’indexation des pages d’accueil et des guides après déploiement.
+- Prochains leviers : lien depuis yadulink.com, nom de la fiche du store avec mots-clés (version 1.2.1), blog réorienté vers les requêtes réelles ([KEYWORDS.md](KEYWORDS.md)).
 
 ## Mesures et objectif des 90 premiers jours
 

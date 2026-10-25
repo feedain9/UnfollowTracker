@@ -15,7 +15,7 @@ Hôte proposé : `https://unfollow.yadulink.com`. Arborescence identique en FR e
     └── mêmes routes, textes anglais
 ```
 
-La racine renvoie vers le français (règle de redirection fournie et document HTML de repli). Elle n’est pas une troisième landing indexable. `x-default` pointe sur le français. Le menu de langue conserve la route courante au lieu de renvoyer systématiquement à l’accueil.
+Depuis le 25 octobre 2026, la racine redirige vers `/fr/` ou `/en/` selon la langue préférée du navigateur (`functions/index.js`, en-tête `Accept-Language`), l’anglais par défaut ; `_redirects` et le document HTML de repli renvoient vers l’anglais si la fonction n’est pas active. Elle n’est pas une troisième landing indexable. `x-default` pointe sur l’anglais : un visiteur espagnol ou allemand reçoit la version anglaise, pas la française. Le menu de langue conserve la route courante au lieu de renvoyer systématiquement à l’accueil.
 
 | Type | Canonique | Hreflang | Schéma | Maillage |
 |---|---|---|---|---|
