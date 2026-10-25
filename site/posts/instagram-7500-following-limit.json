@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "slug": "instagram-7500-following-limit",
+  "intent": "comprendre le plafond de 7 500 comptes suivis et examiner ses abonnements sans confondre ce plafond avec une restriction de requêtes",
+  "status": "published",
+  "publishedAt": "2026-10-25",
+  "updatedAt": "2026-10-25",
+  "sources": [
+    {
+      "url": "https://www.facebook.com/help/instagram/408167069251249/",
+      "title": "Instagram Help Center — How many accounts you can follow on Instagram",
+      "checkedAt": "2026-10-25"
+    },
+    {
+      "url": "https://www.facebook.com/help/instagram/286340048138725/",
+      "title": "Instagram Help Center — Unfollow someone on Instagram",
+      "checkedAt": "2026-10-25"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/24de618727c2e6cd9069b65b8e02f535b8085bdb/src/scripts/content.js",
+      "title": "UnfollowTracker — comparaison des listes, limitations de requêtes et désabonnement individuel",
+      "checkedAt": "2026-10-25"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/24de618727c2e6cd9069b65b8e02f535b8085bdb/src/scripts/popup.js",
+      "title": "UnfollowTracker — compteurs du résultat, recherche et confirmation dans le panneau",
+      "checkedAt": "2026-10-25"
+    }
+  ],
+  "fr": {
+    "title": "Limite de 7 500 abonnements Instagram : que vérifier ?",
+    "description": "Comprenez le plafond des comptes suivis sur Instagram, examinez vos abonnements et distinguez cette limite d’une restriction temporaire pendant un scan.",
+    "lead": "Instagram fixe un plafond de 7 500 comptes suivis. Il concerne vos abonnements, quel que soit votre nombre d’abonnés. UnfollowTracker peut vous aider à examiner les comptes que vous suivez sans retour, mais ne relève pas ce plafond.",
+    "sections": [
+      {
+        "heading": "Vérifier le compteur « Abonnements » sur Instagram",
+        "paragraphs": [
+          "L’aide officielle explique cette limite par la lutte contre le spam. Elle précise que les comptes dépassant déjà ce plafond ont pu le faire avant l’instauration de la règle.",
+          "Pour examiner votre situation actuelle, partez de votre profil Instagram. Dans UnfollowTracker, le compteur « Abonnements » correspond à la liste du résultat chargé : il peut être plus ancien que votre consultation. Le compteur des non-réciproques, lui, ne représente qu’une partie de ces abonnements."
+        ],
+        "sources": [1, 4]
+      },
+      {
+        "heading": "Un exemple fictif : 7 500 abonnements et 120 non-réciproques",
+        "paragraphs": [
+          "Supposons que compte_atelier suive 7 500 profils et qu’un scan complet en retrouve 120 absents de ses abonnés. Les 120 font déjà partie des 7 500 : il ne faut pas additionner ces deux nombres. Ces chiffres et ce compte sont fictifs.",
+          "Le calcul d’UnfollowTracker permet de repérer ces 120 relations, sans dire lesquelles vous devriez supprimer. Vous pouvez apprécier les publications d’un compte qui ne vous suit pas. La présence dans le résultat ne prouve pas non plus que cette personne vous suivait auparavant.",
+          "Si vous cessez volontairement de suivre un profil et qu’aucune autre relation ne change, votre nombre d’abonnements diminue de un. En revanche, effacer un scan enregistré ou exporter la liste ne change aucun abonnement Instagram."
+        ],
+        "sources": [3, 4]
+      },
+      {
+        "heading": "Examiner les profils avant de choisir un désabonnement",
+        "paragraphs": [
+          "Vous pouvez gérer un abonnement directement sur Instagram : l’aide indique d’ouvrir le profil, de cliquer sur « Suivi(e) », puis sur « Ne plus suivre » pour confirmer. Cette démarche ne nécessite pas de scan préalable.",
+          "Si vous souhaitez d’abord consulter les non-réciproques dans UnfollowTracker, le panneau propose une recherche et des liens vers les profils. Il ne présente pas tous vos abonnements dans cette liste et ne propose pas de désabonnement en masse."
+        ],
+        "steps": [
+          "Vérifiez le compte Instagram connecté et la date du dernier scan complet dans le panneau.",
+          "Si vous avez besoin d’un résultat récent, lancez manuellement un scan et gardez l’onglet Instagram connecté ouvert pendant la lecture.",
+          "Recherchez un profil dans le résultat et ouvrez-le pour vérifier son pseudonyme et votre choix.",
+          "Pour un retrait depuis le panneau, choisissez « Ne plus suivre », relisez la confirmation individuelle, puis confirmez ou annulez. Attendez la réponse affichée avant toute autre action."
+        ],
+        "sources": [2, 3, 4]
+      },
+      {
+        "heading": "Une limitation de requêtes pendant le scan est un autre message",
+        "paragraphs": [
+          "Pendant un scan, Instagram peut limiter les requêtes de lecture. Le code d’UnfollowTracker traite notamment la réponse HTTP 429 avec une attente et un nombre de tentatives limités. Ce message ne mesure pas votre nombre d’abonnements et ne démontre pas que vous avez atteint le plafond.",
+          "Regardez donc où l’erreur apparaît : lors de l’ajout d’un abonnement sur Instagram, ou pendant la lecture des listes dans le panneau. Suivez le message propre à cette action. UnfollowTracker ne dispose d’aucune commande pour lever une restriction Instagram et ne garantit pas qu’un désabonnement permettra aussitôt de suivre un nouveau compte.",
+          "Si le scan s’arrête, le dernier résultat complet reste conservé. Vérifiez sa date avant de l’utiliser et respectez les délais ou vérifications demandés. Relancer les scans en boucle ou multiplier les désabonnements ne constitue pas une procédure de dépannage."
+        ],
+        "sources": [3, 4]
+      }
+    ],
+    "related": [
+      {
+        "label": "Comprendre les comptes qui ne vous suivent pas en retour",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Vérifier et confirmer un désabonnement individuel",
+        "route": "blog/confirm-individual-instagram-unfollow/"
+      },
+      {
+        "label": "Que faire si le scan est interrompu ?",
+        "route": "guides/scan-troubleshooting/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Instagram’s 7,500 following limit: what to check",
+    "description": "Understand Instagram’s limit on accounts you follow, review your following and distinguish the cap from a temporary request limit during a scan.",
+    "lead": "Instagram caps the number of accounts you follow at 7,500, regardless of how many followers you have. UnfollowTracker can help you review accounts you follow that do not follow back, but it cannot raise that cap.",
+    "sections": [
+      {
+        "heading": "Check your “Following” count on Instagram",
+        "paragraphs": [
+          "Instagram’s help page describes the cap as an anti-spam measure. It explains that accounts already above it were able to follow that many people before the rule was introduced.",
+          "Start with your Instagram profile to check your current situation. In UnfollowTracker, the “Following” counter reflects the list in the loaded result, which may be older than your visit. The non-reciprocal count represents only a subset of those accounts."
+        ],
+        "sources": [1, 4]
+      },
+      {
+        "heading": "A fictional example: 7,500 following, 120 not following back",
+        "paragraphs": [
+          "Suppose example_studio follows 7,500 profiles and a complete scan finds that 120 are absent from its followers. Those 120 are already included in the 7,500; do not add the two counts together. This account and these numbers are fictional.",
+          "UnfollowTracker’s comparison identifies those 120 relationships without deciding which you should remove. You may enjoy posts from an account that does not follow you. Appearing in the result also does not prove that the person used to follow you.",
+          "If you choose to unfollow one profile and no other relationship changes, your following count drops by one. Deleting a saved scan or exporting the list, however, does not change any Instagram follow."
+        ],
+        "sources": [3, 4]
+      },
+      {
+        "heading": "Review profiles before deciding to unfollow",
+        "paragraphs": [
+          "You can manage a follow directly on Instagram: its help page says to open the profile, click “Following”, then “Unfollow” to confirm. You do not need to run a scan first.",
+          "To review non-reciprocal accounts in UnfollowTracker first, use the panel’s search and profile links. This result does not list every account you follow, and the extension has no bulk unfollow command."
+        ],
+        "steps": [
+          "Check the signed-in Instagram account and the last complete scan date in the panel.",
+          "If you need a recent result, start a scan manually and keep the connected Instagram tab open while the lists are read.",
+          "Search for a profile in the result and open it to check the username and decide whether to keep following it.",
+          "To remove a follow through the panel, choose “Unfollow”, read the confirmation for that individual account, then confirm or cancel. Wait for the displayed response before taking another action."
+        ],
+        "sources": [2, 3, 4]
+      },
+      {
+        "heading": "A request limit during a scan is a different message",
+        "paragraphs": [
+          "Instagram can limit requests while a scan reads your lists. UnfollowTracker’s code handles HTTP 429 responses with a bounded wait and a limited number of retries. That message does not measure your following count or establish that you have reached the cap.",
+          "Check where the error appears: when adding a follow on Instagram, or while the panel reads your lists. Follow the message for that action. UnfollowTracker has no command to lift an Instagram restriction and cannot guarantee that unfollowing an account will immediately let you follow another one.",
+          "If the scan stops, the latest complete result stays saved. Check its date before using it and respect any required waits or verification. Repeatedly restarting scans or unfollowing more accounts is not a troubleshooting procedure."
+        ],
+        "sources": [3, 4]
+      }
+    ],
+    "related": [
+      {
+        "label": "Understand accounts that do not follow you back",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Check and confirm an individual unfollow",
+        "route": "blog/confirm-individual-instagram-unfollow/"
+      },
+      {
+        "label": "What to do when a scan stops",
+        "route": "guides/scan-troubleshooting/"
+      }
+    ]
+  }
+}
