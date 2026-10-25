@@ -78,7 +78,7 @@ module.exports = {
     ],
     privacyTitle: "Vos abonnements ne<br>regardent que vous.",
     privacyBody:
-      "La comparaison se fait dans votre navigateur. Vos listes ne sont pas envoyées à un serveur UnfollowTracker. Pas de compte supplémentaire, pas de publicité, pas d’outil de suivi intégré.",
+      "La comparaison se fait dans votre navigateur. Vos listes ne sont pas envoyées à un serveur UnfollowTracker. Pas de compte supplémentaire, pas de publicité : seulement des statistiques d’usage anonymes, désactivables dans le panneau.",
     privacyLink: "Lire la politique de confidentialité",
     privacyPoints: [
       [
@@ -87,7 +87,7 @@ module.exports = {
       ],
       [
         "Sous votre contrôle",
-        "Exportez vos résultats ou effacez les scans depuis le panneau.",
+        "Exportez vos résultats, effacez les scans ou coupez les statistiques depuis le panneau.",
       ],
       [
         "Avec votre session Instagram",
@@ -242,7 +242,7 @@ module.exports = {
     ],
     privacyTitle: "Your following is<br>your business.",
     privacyBody:
-      "The comparison happens in your browser. Your lists aren’t sent to an UnfollowTracker server. No extra account, no advertising, no built-in tracking.",
+      "The comparison happens in your browser. Your lists aren’t sent to an UnfollowTracker server. No extra account, no advertising: only anonymous usage statistics you can turn off in the panel.",
     privacyLink: "Read the privacy policy",
     privacyPoints: [
       [
@@ -251,7 +251,7 @@ module.exports = {
       ],
       [
         "Under your control",
-        "Export your results or delete saved scans in the panel.",
+        "Export your results, delete saved scans or turn statistics off in the panel.",
       ],
       [
         "With your Instagram session",

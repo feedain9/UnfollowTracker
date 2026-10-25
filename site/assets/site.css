@@ -1506,7 +1506,7 @@ details > p {
 .article p + p {
   margin-top: 16px;
 }
-.article a:not(.text-link) {
+.article a:not(.text-link):not(.button) {
   color: var(--coral);
 }
 .article ol {
@@ -1541,11 +1541,62 @@ details > p {
   padding-top: 28px;
   border-top: 1px solid var(--line);
 }
+.article .welcome-steps li {
+  margin-bottom: 22px;
+}
+.article .welcome-steps h2 {
+  font-size: 19px;
+  margin: 0 0 4px;
+}
+.welcome-action {
+  margin-top: 30px;
+}
+.survey-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.survey-option {
+  border: 1px solid #997da6;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: left;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition:
+    background 180ms var(--ease),
+    border-color 180ms var(--ease);
+}
+.survey-option[aria-pressed="true"] {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--action-ink);
+  opacity: 1;
+}
+.survey-option:disabled {
+  cursor: default;
+}
+.survey-option:disabled:not([aria-pressed="true"]) {
+  opacity: 0.5;
+}
+.article .survey-status {
+  min-height: 1.9em;
+  margin-top: 16px;
+  color: var(--coral);
+  font-weight: 600;
+}
 @media (hover: hover) {
   .button:hover {
     background: var(--action-hover);
   }
-  .button-outline:hover {
+  .button-outline:hover,
+  .survey-option:not(:disabled):hover {
     background: var(--lavender);
     color: var(--text);
     border-color: var(--purple);

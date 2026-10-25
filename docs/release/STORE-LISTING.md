@@ -1,6 +1,6 @@
 # Chrome Web Store — contenus soumis
 
-Version **1.1.0 soumise le 6 octobre 2026**, puis **publiée le 7 octobre 2026** : la fiche publique affiche « Add to Chrome ». Descriptions et captures française et anglaise enregistrées ; publication automatique après approbation activée. Fiche : `ckkgnnifiojkmmfmeejeebafldholdnc`. Le produit et toutes les fonctionnalités décrites sont gratuits. Ne pas ajouter de faux avis, de promesse « aucun risque » ou de suivi historique.
+Textes mis à jour le 25 octobre 2026 pour la **version 1.2.0** (statistiques d’usage anonymes), à enregistrer dans la console avec cette version. Version **1.1.0 soumise le 6 octobre 2026**, puis **publiée le 7 octobre 2026** : la fiche publique affiche « Add to Chrome ». Descriptions et captures française et anglaise enregistrées ; publication automatique après approbation activée. Fiche : `ckkgnnifiojkmmfmeejeebafldholdnc`. Le produit et toutes les fonctionnalités décrites sont gratuits. Ne pas ajouter de faux avis, de promesse « aucun risque » ou de suivi historique.
 
 ## Français
 
@@ -22,7 +22,7 @@ Pour commencer :
 
 Le dernier scan complet est conservé localement et daté, séparément pour chaque compte Instagram. Un scan interrompu ou détecté comme incomplet ne le remplace pas. Les scans enregistrés peuvent être effacés depuis le panneau.
 
-L’extension utilise votre session Instagram existante, sans formulaire de mot de passe. Les requêtes vont directement à Instagram et les photos de profil à ses serveurs d’images. Vos listes ne sont pas envoyées à un serveur UnfollowTracker. Aucun outil publicitaire ou analytique n’est intégré.
+L’extension utilise votre session Instagram existante, sans formulaire de mot de passe. Les requêtes vont directement à Instagram et les photos de profil à ses serveurs d’images. Vos listes ne sont pas envoyées à un serveur UnfollowTracker. Aucun outil publicitaire n’est intégré ; des statistiques d’usage anonymes, sans aucune donnée Instagram, nous aident à améliorer l’extension et se désactivent dans le panneau.
 
 Important : cette version compare les listes actuelles ; elle ne fournit pas l’historique des personnes qui se sont désabonnées. Instagram peut limiter les requêtes, demander une vérification ou modifier son fonctionnement. La durée d’un scan dépend de vos listes et des réponses d’Instagram.
 
@@ -48,7 +48,7 @@ Getting started:
 
 The latest complete scan is saved locally and dated, separately for each Instagram account. Interrupted scans or results detected as incomplete never replace it. Saved scans can be deleted from the panel.
 
-The extension uses your existing Instagram session, with no password form. Requests go directly to Instagram and profile photos load from its image servers. Your lists aren’t sent to an UnfollowTracker server. No advertising or analytics service is included.
+The extension uses your existing Instagram session, with no password form. Requests go directly to Instagram and profile photos load from its image servers. Your lists aren’t sent to an UnfollowTracker server. No advertising service is included; anonymous usage statistics, without any Instagram data, help us improve the extension and can be turned off in the panel.
 
 Please note: this version compares current lists; it does not provide a history of people who unfollowed you. Instagram may limit requests, ask for verification or change its behavior. Scan duration depends on your lists and Instagram’s responses.
 

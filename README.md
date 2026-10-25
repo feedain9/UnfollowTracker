@@ -1,6 +1,6 @@
 # UnfollowTracker
 
-Free Instagram follower/following comparison in a persistent browser side panel. Version **1.1.0**, French and English, dark and light themes.
+Free Instagram follower/following comparison in a persistent browser side panel. Version **1.2.0**, French and English, dark and light themes.
 
 The extension identifies accounts you follow that do not follow you back **in the current lists**. It does not track historical unfollow events. It uses your existing Instagram session; complete results stay in local extension storage, separately for each account. Requests still go to Instagram and profile photos come from Meta image servers.
 
@@ -11,6 +11,8 @@ The extension identifies accounts you follow that do not follow you back **in th
 3. If Instagram is not open in that window, choose **Open Instagram** and sign in directly on the website.
 4. Start a scan. Keep the Instagram tab open; switching tabs or closing the panel is fine.
 5. Search all results, show more rows, open a profile or export JSON. Unfollowing is individual and requires confirmation. Saved scans can be deleted from the panel.
+
+Store installs send anonymous usage statistics (installs, scans, errors, uninstall survey; value ranges only, never Instagram identifiers or lists) to the publisher's self-hosted Plausible. The panel has a toggle to turn them off; unpacked builds never send anything. The website measures its audience with the same cookieless Plausible, in production builds only. See [measurement](docs/analytics/MEASUREMENT.md).
 
 After an update, reload the extension **from the folder actually loaded by the browser**, then reload Instagram. Reloading does not copy files between Git worktrees. The old popup file names are retained for compatibility, but the manifest now uses `side_panel.default_path`, not `action.default_popup`.
 
@@ -38,7 +40,7 @@ npm run assets:store
 npm run build
 ```
 
-`npm run build` produces `dist/site/` and `dist/unfollowtracker-1.1.0.zip` with a SHA-256 file. The archive contains only extension files and relevant third-party notices. Native canvas is only needed for the historical optional icon generator, not normal builds.
+`npm run build` produces `dist/site/` and `dist/unfollowtracker-1.2.0.zip` with a SHA-256 file. The archive contains only extension files and relevant third-party notices. Native canvas is only needed for the historical optional icon generator, not normal builds.
 
 ## Publication and daily articles
 
@@ -54,7 +56,7 @@ The landing page is live at [unfollow.yadulink.com](https://unfollow.yadulink.co
 
 A Superset Codex automation writes and publishes one article in French and English daily at 09:00 Europe/Zurich, in a fresh project workspace. It runs on the configured Mac, which must be available with Superset. The first run published the JSON export guide. See the [editorial workflow](docs/seo/DAILY-PUBLISHING.md) and [topic calendar](docs/seo/CONTENT-CALENDAR.md). Posts are structured JSON in `site/posts/`; the builder validates both languages, dates, citations, unique intent and internal links. Drafts and future-dated posts stay out of the public build.
 
-UnfollowTracker **1.1.0 is published** on the [Chrome Web Store](https://chromewebstore.google.com/detail/unfollowtracker/ckkgnnifiojkmmfmeejeebafldholdnc). The public listing, publisher Yadulink and “Add to Chrome” button were verified on 7 October 2026. The landing page and its French/English installation links use that official listing. See the [publication record](docs/release/SUBMIT-NOW.md).
+Version 1.2.0 (anonymous statistics, welcome and uninstall pages) is prepared, not yet submitted: see the [1.2.0 submission sheet](docs/release/SUBMIT-1.2.0.md). UnfollowTracker **1.1.0 is published** on the [Chrome Web Store](https://chromewebstore.google.com/detail/unfollowtracker/ckkgnnifiojkmmfmeejeebafldholdnc). The public listing, publisher Yadulink and “Add to Chrome” button were verified on 7 October 2026. The landing page and its French/English installation links use that official listing. See the [publication record](docs/release/SUBMIT-NOW.md).
 
 ## Files
 

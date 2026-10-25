@@ -1,6 +1,6 @@
 {
   "name": "unfollowtracker",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Compare current Instagram followers and following in a persistent browser side panel",
   "scripts": {
     "generate-icons": "node scripts/generate-icons.js",

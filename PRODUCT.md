@@ -1,10 +1,13 @@
 # UnfollowTracker
 
 ## Product truth
-Free desktop browser extension comparing the current Instagram following and follower lists. It identifies accounts that do not follow the signed-in account back. It does not identify historical unfollow events. Complete snapshots are stored locally per Instagram account; partial scans never overwrite them. Scans are explicit, use the existing Instagram session and respect bounded backoff. A user can export results and individually confirm an unfollow. No bulk automation, accounts, paid plans, analytics or developer-operated data service.
+Free desktop browser extension comparing the current Instagram following and follower lists. It identifies accounts that do not follow the signed-in account back. It does not identify historical unfollow events. Complete snapshots are stored locally per Instagram account; partial scans never overwrite them. Scans are explicit, use the existing Instagram session and respect bounded backoff. A user can export results and individually confirm an unfollow. No bulk automation, accounts or paid plans. Since version 1.2.0, store installs send anonymous usage statistics (value ranges only, never Instagram identifiers, usernames or lists) to the publisher's self-hosted Plausible; users can turn them off in the panel. The website measures its audience with the same cookieless Plausible. No other developer-operated data service.
 
 ## Confirmed brief — updated 7 October 2026
 The owner authorized hosting, store submission and automatic daily article publication on 5 October. The persistent browser side panel replaces the transient popup. When no Instagram tab exists, offer to open one, never open or scan automatically. French and English for the extension and marketing site. Product name: UnfollowTracker. The site is live on unfollow.yadulink.com; version 1.1.0 is publicly installable from the Chrome Web Store as of 7 October 2026.
+
+## Measurement — decided 24 October 2026
+The owner asked to see site traffic, installs, usage and uninstalls. Chosen: anonymous Plausible statistics only (no Instagram account identity, no install identifier), an opt-out toggle in the panel, a welcome page opened on install and a one-click uninstall survey. Collecting Instagram usernames would require a new owner decision, explicit consent and new store declarations. Details: `docs/analytics/MEASUREMENT.md`.
 
 ## Audience and success
 People who use Instagram on desktop and want a clear, practical way to compare reciprocal follows. Explain the exact result within seconds, demonstrate the panel, earn trust through visible behavior and clear local-data handling, and lead to a free installation when the store listing exists.

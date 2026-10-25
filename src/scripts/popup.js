@@ -24,6 +24,7 @@ class UnfollowTrackerPopup {
         "showMoreBtn",
         "clearDataBtn",
         "privacyLink",
+        "statsToggle",
         "confirmDialog",
         "dialogTitle",
         "dialogBody",
@@ -71,10 +72,17 @@ class UnfollowTrackerPopup {
       await chrome.storage.local.set({ language: this.language });
       await this.requestSync();
     });
-    const { theme, language } = await chrome.storage.local.get([
+    e.statsToggle.addEventListener("change", () => {
+      chrome.storage.local
+        .set({ shareUsageStats: e.statsToggle.checked })
+        .catch(() => {});
+    });
+    const { theme, language, shareUsageStats } = await chrome.storage.local.get([
       "theme",
       "language",
+      "shareUsageStats",
     ]);
+    e.statsToggle.checked = shareUsageStats !== false;
     this.language =
       language || (chrome.i18n.getUILanguage().startsWith("fr") ? "fr" : "en");
     if (!["fr", "en"].includes(this.language)) this.language = "en";
@@ -130,6 +138,14 @@ class UnfollowTrackerPopup {
     });
     await this.requestSync();
     document.body.dataset.ready = "true";
+    this.track("Active");
+  }
+
+  // The service worker applies the opt-out and only ever sends anonymous ranges.
+  track(event, details = {}) {
+    chrome.runtime
+      .sendMessage({ action: "telemetry", event, ...details })
+      .catch(() => {});
   }
 
   translate() {
@@ -639,6 +655,7 @@ class UnfollowTrackerPopup {
     this.clearResults();
     this.resetScanButton();
     this.setStatus(this.isConnected ? "online" : "offline", this.t("cleared"));
+    this.track("Clear Data");
   }
 
   exportResults() {
@@ -662,6 +679,7 @@ class UnfollowTrackerPopup {
     link.download = `unfollowers-${new Date().toISOString().split("T")[0]}.json`;
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
+    this.track("Export", { count: this.results.length });
   }
 
   setStatus(type, text) {

@@ -6,5 +6,7 @@
   "supportEmail": "support@yadulink.com",
   "publisherAddress": "40 rue Alexandre Dumas, 75011 Paris, France",
   "hostingName": "Cloudflare, Inc. — Cloudflare Pages",
-  "hostingPrivacyUrl": "https://www.cloudflare.com/privacypolicy/"
+  "hostingPrivacyUrl": "https://www.cloudflare.com/privacypolicy/",
+  "analyticsScript": "https://analytics.krilup.com/js/pa-CYCq8khhn9zvMFcPYZPC-.js",
+  "analyticsExtensionDomain": "extension.unfollow.yadulink.com"
 }

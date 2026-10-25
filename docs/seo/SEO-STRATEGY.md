@@ -29,7 +29,7 @@ Ne pas viser les recherches d’achat d’abonnés, d’accès aux profils priv�
 - Trois guides complets dans chaque langue, aide de démarrage, confidentialité et mentions légales.
 - Liens contextuels entre guides et vers le produit ; pages accessibles via le footer.
 - Schémas `SoftwareApplication` et `Article`, sans faux avis ni notes. L’offre gratuite et le lien de téléchargement ne sont ajoutés qu’avec une URL de boutique réelle.
-- Images sociales FR/EN, police auto-hébergée, trois photographies locales, pas de script analytics ni de vidéo tiers.
+- Images sociales FR/EN, police auto-hébergée, trois photographies locales, mesure d’audience Plausible sans cookie depuis le 25 octobre 2026, pas de vidéo tiers.
 - Build d’aperçu `noindex` + robots fermé. Build de production avec sitemap, avec l’identité publique Yadulink renseignée.
 
 ## Mesures et objectif des 90 premiers jours
@@ -40,11 +40,11 @@ Ne pas viser les recherches d’achat d’abonnés, d’accès aux profils priv�
 | Couverture | Non mesurée | Toutes les pages éditoriales utiles découvertes ; enquêter sur les exclusions, sans exiger l’indexation de pages légales |
 | Impressions hors marque | Non mesurées | Identifier les premières requêtes qui correspondent au produit et les comparer sur fenêtres de 28 jours |
 | Clics organiques | Non mesurés | Améliorer les pages déjà vues selon leur intention réelle ; pas de volume garanti |
-| Installations | Non publiées | Suivre les statistiques agrégées du Chrome Web Store après mise en ligne |
-| Conversion site → store | Non instrumentée | D’abord vérifier le parcours ; décider explicitement d’une mesure respectueuse des données avant d’ajouter un outil |
+| Installations | Publiées le 7 octobre 2026 | Totaux dans le Chrome Web Store ; pays, langues et activation dans Plausible à partir de la 1.2.0 |
+| Conversion site → store | Instrumentée le 25 octobre 2026 : `Install Click` par page et emplacement (Plausible), vues de la fiche par `utm_campaign` (store) | Comparer pages et emplacements sur 28 jours, puis améliorer ceux qui convertissent mal |
 | Expérience | Tests locaux, pas de données terrain | Viser de bons CWV sur mobile/desktop, puis vérifier avec Search Console/CrUX quand les données existent |
 
-Ne pas inventer un taux de conversion ou attribuer les installations à une campagne sans dispositif qui permet cette attribution. Le site livré ne collecte pas d’événement : l’absence d’analytics est un choix réel, pas un paramètre caché.
+Ne pas inventer un taux de conversion ou attribuer les installations à une campagne sans dispositif qui permet cette attribution. Depuis le 25 octobre 2026, le site mesure ses pages vues et les clics vers le store avec Plausible, sans cookie et avec des adresses nettoyées ; voir [la mesure d’audience](../analytics/MEASUREMENT.md).
 
 ## Acquisition et autorité
 

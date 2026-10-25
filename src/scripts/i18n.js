@@ -38,6 +38,7 @@ globalThis.TrackerI18n = {
     footer:
       "Keep the Instagram tab open during the scan. You can switch tabs or close this panel.",
     privacy: "Privacy",
+    shareStats: "Share anonymous usage statistics (never your Instagram data)",
     clear: "Delete saved scans",
     clearTitle: "Delete saved scans?",
     clearBody:
@@ -106,6 +107,8 @@ globalThis.TrackerI18n = {
     footer:
       "Gardez l’onglet Instagram ouvert pendant le scan. Vous pouvez changer d’onglet ou fermer ce panneau.",
     privacy: "Confidentialité",
+    shareStats:
+      "Partager des statistiques d’usage anonymes (jamais vos données Instagram)",
     clear: "Effacer les scans enregistrés",
     clearTitle: "Effacer les scans enregistrés ?",
     clearBody:

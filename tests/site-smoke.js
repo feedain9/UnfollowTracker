@@ -164,6 +164,53 @@ async function main() {
         await page.locator('script[type="application/ld+json"]').textContent(),
       ).headline,
     );
+    // Store links name their placement and carry a UTM campaign per page.
+    await page.goto(`${origin}/fr/`);
+    assert.deepEqual(
+      await page
+        .locator("a[data-install]")
+        .evaluateAll((links) => links.map((link) => link.dataset.install)),
+      ["header", "hero", "closing", "installation"],
+    );
+    const hero = new URL(
+      await page.locator('a[data-install="hero"]').getAttribute("href"),
+    );
+    assert.equal(hero.searchParams.get("utm_source"), "unfollow.yadulink.com");
+    assert.equal(hero.searchParams.get("utm_medium"), "website");
+    assert.equal(hero.searchParams.get("utm_campaign"), "fr-home");
+    await page.goto(`${origin}/en/blog/export-instagram-results-json/`);
+    const article = new URL(
+      await page.locator('a[data-install="article"]').getAttribute("href"),
+    );
+    assert.equal(
+      article.searchParams.get("utm_campaign"),
+      "en-blog-export-instagram-results-json",
+    );
+    // Pages opened by the extension: welcome without a store CTA, survey without
+    // usage details left in the address bar.
+    for (const lang of ["fr", "en"]) {
+      await page.goto(`${origin}/${lang}/welcome/`);
+      assert.equal(await page.locator("h1").count(), 1);
+      assert.equal(await page.locator("a[data-install]").count(), 0);
+      await page.goto(
+        `${origin}/${lang}/uninstalled/?v=1.2.0&b=chrome&i=2026-10-01&s=1&x=complete`,
+      );
+      assert.equal(new URL(page.url()).search, "");
+      await page.locator('[data-reason="done"]').click();
+      assert.equal(
+        await page.locator('[data-reason="done"]').getAttribute("aria-pressed"),
+        "true",
+      );
+      assert.equal(await page.locator('[data-reason="other"]').isDisabled(), true);
+      assert.match(
+        await page.locator("[data-survey-status]").textContent(),
+        /noté|noted/,
+      );
+      assert.equal(
+        await page.locator('a[data-install="uninstalled"]').count(),
+        1,
+      );
+    }
     assert.equal(errors.length, 0, errors.join("\n"));
     assert.equal(external.length, 0, external.join("\n"));
     const noJs = await browser.newContext({ javaScriptEnabled: false });

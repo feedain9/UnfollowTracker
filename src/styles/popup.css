@@ -377,6 +377,22 @@ input::placeholder {
   color: var(--muted);
   font-size: 10px;
 }
+.stats-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.stats-toggle input {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  margin: 1px 0 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
 .footer-links {
   display: flex;
   justify-content: space-between;

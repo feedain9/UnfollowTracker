@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const { randomUUID } = require('node:crypto');
-const { parseHTML } = require('linkedom');
+const { parseHTML, Event } = require('linkedom');
 
 const root = path.resolve(__dirname, '..');
 const source = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -40,7 +40,7 @@ function user(id, extra = {}) {
   return { pk: id, username: `user${id}`, full_name: `User ${id}`, ...extra };
 }
 
-function createHarness() {
+function createHarness({ store = false, uiLanguage = 'en' } = {}) {
   const records = { local: {}, session: {} };
   const storageChanged = event();
   const storage = { onChanged: storageChanged };
@@ -63,6 +63,7 @@ function createHarness() {
         for (const key of keys) { changes[key] = { oldValue: records[area][key] }; delete records[area][key]; }
         storageChanged.emit(changes, area);
       },
+      getBytesInUse: async (key) => (key in records[area] ? JSON.stringify(records[area][key]).length : 0),
     };
   }
   const backgroundMessages = event();
@@ -81,10 +82,39 @@ function createHarness() {
     return deliver(tab.messages.listeners, message, {});
   };
   const baseTabs = { sendMessage: sendToTab, onRemoved, onUpdated, onCreated, onActivated };
+  // Chrome adds update_url only to store installs; the harness is unpacked by default.
+  const manifest = JSON.parse(source('manifest.json'));
+  if (store) manifest.update_url = 'https://clients2.google.com/service/update2/crx';
+  const runtime = {
+    id: 'extension-id',
+    getURL: (file = '') => `chrome-extension://extension-id/${file}`,
+    getManifest: () => clone(manifest),
+  };
+  const i18n = { getUILanguage: () => uiLanguage };
+  const analytics = [];
+  const uninstallUrls = [];
+  const opened = [];
+  const installed = event();
   const background = vm.createContext({
-    chrome: { runtime: { onMessage: backgroundMessages }, storage, tabs: baseTabs },
-    URL, console,
+    chrome: {
+      runtime: {
+        ...runtime,
+        onMessage: backgroundMessages,
+        onInstalled: installed,
+        setUninstallURL: async (url) => { uninstallUrls.push(url); },
+      },
+      storage,
+      tabs: { ...baseTabs, create: async ({ url }) => { opened.push(url); return { id: 99 }; } },
+      i18n,
+    },
+    navigator: { userAgentData: { brands: [{ brand: 'Chromium', version: '130' }, { brand: 'Google Chrome', version: '130' }] } },
+    fetch: async (url, options) => {
+      analytics.push({ url, options, body: JSON.parse(options.body) });
+      return new Response(null, { status: 202 });
+    },
+    AbortSignal, URL, console,
   });
+  background.importScripts = (file) => vm.runInContext(source(`src/scripts/${file}`), background);
   vm.runInContext(source('src/scripts/background.js'), background);
 
   function inject(tab) {
@@ -132,10 +162,15 @@ function createHarness() {
     const { document } = parseHTML(source('src/popup.html'));
     const surface = { document, messages: event() };
     popups.add(surface);
+    const panelSender = { id: runtime.id, url: runtime.getURL('src/popup.html') };
     const context = vm.createContext({
       chrome: {
-        runtime: { onMessage: surface.messages },
-        i18n: { getUILanguage: () => 'en' },
+        runtime: {
+          ...runtime,
+          onMessage: surface.messages,
+          sendMessage: (message) => deliver(backgroundMessages.listeners, message, panelSender),
+        },
+        i18n,
         windows: { getCurrent: async () => ({ id: 1 }) },
         storage,
         tabs: {
@@ -170,9 +205,14 @@ function createHarness() {
     await vm.runInContext('updateQueue', background);
     await new Promise((resolve) => setImmediate(resolve));
     await vm.runInContext('updateQueue', background);
+    // Statistics are sent without blocking the queue.
+    await new Promise((resolve) => setImmediate(resolve));
   }
 
-  return { records, storage, background, requests, notifications, addTab, popup, flush, inject, onRemoved, onUpdated, onActivated, onCreated, tabs };
+  return {
+    records, storage, background, requests, notifications, addTab, popup, flush, inject, onRemoved, onUpdated, onActivated, onCreated, tabs,
+    analytics, uninstallUrls, opened, installed, Event,
+  };
 }
 
 module.exports = { createHarness, json, user };
