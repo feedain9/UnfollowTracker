@@ -1,6 +1,6 @@
 # Soumission UnfollowTracker 1.2.0 — fiche à recopier
 
-État au 25 octobre 2026 : **préparée, non soumise**. La 1.2.0 ajoute des statistiques d’usage anonymes, désactivables dans le panneau, une page de bienvenue après l’installation et un sondage de désinstallation. Aucune permission n’est ajoutée : la mise à jour automatique n’exige pas de nouvelle approbation des utilisateurs.
+État au 25 octobre 2026 : **site déployé, version non soumise**. Le site (politique de confidentialité, `/welcome/`, `/uninstalled/`, mesure Plausible) est en ligne depuis le commit `454a6fd`, vérifié en production. Archive : `dist/unfollowtracker-1.2.0.zip`, 23 fichiers, 88 564 octets, SHA-256 `7592d913d50bf7f7d1684b9ab4d2f6f8d23da0af909099df850655afcf49697d`. La console du store ne peut pas être pilotée par l’extension Claude pour Chrome (Chrome bloque les extensions sur le Web Store) : soumission à faire depuis la session du propriétaire. La 1.2.0 ajoute des statistiques d’usage anonymes, désactivables dans le panneau, une page de bienvenue après l’installation et un sondage de désinstallation. Aucune permission n’est ajoutée : la mise à jour automatique n’exige pas de nouvelle approbation des utilisateurs.
 
 ## Avant la soumission
 
