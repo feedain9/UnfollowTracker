@@ -1,6 +1,6 @@
-# Calendrier éditorial quotidien
+# Calendrier éditorial
 
-Cadence autorisée le 5 octobre 2026 : un nouveau sujet par jour, décliné en français et anglais. Publication automatique à 09:00 Europe/Zurich via l’agent Codex de Superset et le déploiement Git Cloudflare. Le protocole exécutable est dans [DAILY-PUBLISHING.md](DAILY-PUBLISHING.md).
+**Cycle initial terminé le 25 octobre 2026** : les quatorze sujets ci-dessous sont publiés, puis six autres. Depuis le 26 octobre, le réservoir de sujets est [KEYWORDS.md](KEYWORDS.md), classé par requêtes réelles ; cette page reste l’historique du premier cycle. Cadence et protocole : [DAILY-PUBLISHING.md](DAILY-PUBLISHING.md).
 
 Les trois guides piliers existants gardent leurs URL : non-followers, unfollowers-vs-non-followers et scan-troubleshooting. Le blog répond à des questions complémentaires. Cet ordre est un réservoir de sujets, pas une promesse de volumes de recherche ; vérifier l’intention et les sources avant de retenir un sujet.
 
