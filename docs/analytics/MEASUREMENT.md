@@ -84,5 +84,5 @@ Identifiant ou pseudonyme Instagram, listes, noms, photos, cookies ou jetons, ad
 ## Ordre de mise en production
 
 1. Déployer le site (fusion dans `main`) : politique de confidentialité, pages de bienvenue et de désinstallation et mesure du site doivent être en ligne avant la diffusion de la 1.2.0.
-2. Soumettre `dist/unfollowtracker-1.2.0.zip`, en mettant à jour les descriptions ([STORE-LISTING.md](../release/STORE-LISTING.md)) et les pratiques de confidentialité ([PRIVACY-AND-PERMISSIONS.md](../release/PRIVACY-AND-PERMISSIONS.md)).
+2. Soumettre `dist/unfollowtracker-1.2.0.zip`, en mettant à jour les descriptions ([STORE-LISTING.md](../release/STORE-LISTING.md)) et les pratiques de confidentialité ([PRIVACY-AND-PERMISSIONS.md](../release/PRIVACY-AND-PERMISSIONS.md)). Fait le 25 octobre 2026 : version en attente d’examen, publication automatique après approbation.
 3. Après publication : vérifier l’arrivée des premiers `Update`, `Active` et `Install`.

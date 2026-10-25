@@ -2,7 +2,7 @@
 
 Le site est publié sur https://unfollow.yadulink.com depuis le 5 octobre 2026. La version 1.1.0 a été soumise au Chrome Web Store le 6 octobre via le pilotage natif CUA dans Brave. La [fiche officielle](https://chromewebstore.google.com/detail/unfollowtracker/ckkgnnifiojkmmfmeejeebafldholdnc) a été vérifiée publiquement installable le 7 octobre 2026 : bouton « Add to Chrome », version 1.1.0, éditeur Yadulink. Les liens d’installation FR/EN sont configurés vers cette fiche.
 
-La **version 1.2.0** (statistiques d’usage anonymes, page de bienvenue, sondage de désinstallation) est préparée depuis le 25 octobre 2026. Déployer d’abord le site, puis suivre [SUBMIT-1.2.0.md](SUBMIT-1.2.0.md). La mesure est décrite dans [MEASUREMENT.md](../analytics/MEASUREMENT.md).
+La **version 1.2.0** (statistiques d’usage anonymes, page de bienvenue, sondage de désinstallation) a été envoyée pour examen le 25 octobre 2026, après le déploiement du site ; elle sera publiée automatiquement après approbation. Détails dans [SUBMIT-1.2.0.md](SUBMIT-1.2.0.md). La mesure est décrite dans [MEASUREMENT.md](../analytics/MEASUREMENT.md).
 
 ## Artefacts et commandes
 

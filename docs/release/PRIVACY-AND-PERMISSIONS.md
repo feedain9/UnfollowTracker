@@ -1,6 +1,6 @@
 # Déclarations de données et permissions
 
-**Version 1.2.0 (préparée le 25 octobre 2026)** : ajoute des statistiques d’usage anonymes, une page de bienvenue et un sondage de désinstallation. Aucune permission n’est ajoutée. Les déclarations de la console doivent être mises à jour lors de sa soumission, selon la section « Déclaration dans la console » ci-dessous et [SUBMIT-1.2.0.md](SUBMIT-1.2.0.md).
+**Version 1.2.0 (envoyée pour examen le 25 octobre 2026)** : ajoute des statistiques d’usage anonymes, une page de bienvenue et un sondage de désinstallation. Aucune permission n’est ajoutée. Les déclarations de la console ont été mises à jour avec cet envoi (Localisation et Activité de l’utilisateur cochées en plus), selon la section « Déclaration dans la console » ci-dessous et [SUBMIT-1.2.0.md](SUBMIT-1.2.0.md).
 
 État 1.1.0 : déclarations du code 1.1.0 enregistrées dans la console puis soumises le 6 octobre 2026. La fiche officielle est publiquement installable depuis le 7 octobre 2026. Ce document décrit les déclarations du développeur ; l’approbation du store ne garantit pas la disponibilité des réponses Instagram.
 

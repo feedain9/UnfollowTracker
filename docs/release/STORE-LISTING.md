@@ -1,6 +1,6 @@
 # Chrome Web Store — contenus soumis
 
-Textes mis à jour le 25 octobre 2026 pour la **version 1.2.0** (statistiques d’usage anonymes), à enregistrer dans la console avec cette version. Version **1.1.0 soumise le 6 octobre 2026**, puis **publiée le 7 octobre 2026** : la fiche publique affiche « Add to Chrome ». Descriptions et captures française et anglaise enregistrées ; publication automatique après approbation activée. Fiche : `ckkgnnifiojkmmfmeejeebafldholdnc`. Le produit et toutes les fonctionnalités décrites sont gratuits. Ne pas ajouter de faux avis, de promesse « aucun risque » ou de suivi historique.
+Textes mis à jour le 25 octobre 2026 pour la **version 1.2.0** (statistiques d’usage anonymes), enregistrés dans la console et envoyés pour examen avec cette version le même jour. Version **1.1.0 soumise le 6 octobre 2026**, puis **publiée le 7 octobre 2026** : la fiche publique affiche « Add to Chrome ». Descriptions et captures française et anglaise enregistrées ; publication automatique après approbation activée. Fiche : `ckkgnnifiojkmmfmeejeebafldholdnc`. Le produit et toutes les fonctionnalités décrites sont gratuits. Ne pas ajouter de faux avis, de promesse « aucun risque » ou de suivi historique.
 
 ## Français
 
