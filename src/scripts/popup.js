@@ -25,6 +25,9 @@ class UnfollowTrackerPopup {
         "clearDataBtn",
         "privacyLink",
         "statsToggle",
+        "reviewCard",
+        "reviewLink",
+        "reviewDismiss",
         "confirmDialog",
         "dialogTitle",
         "dialogBody",
@@ -72,6 +75,13 @@ class UnfollowTrackerPopup {
       await chrome.storage.local.set({ language: this.language });
       await this.requestSync();
     });
+    e.reviewLink.addEventListener("click", () => {
+      this.closeReview("clicked");
+      this.track("Review Click");
+    });
+    e.reviewDismiss.addEventListener("click", () =>
+      this.closeReview("dismissed"),
+    );
     e.statsToggle.addEventListener("change", () => {
       chrome.storage.local
         .set({ shareUsageStats: e.statsToggle.checked })
@@ -115,6 +125,7 @@ class UnfollowTrackerPopup {
       if (change.status === "complete" || change.url) this.requestSync();
     });
     chrome.storage.onChanged.addListener((changes, area) => {
+      if (area === "local" && changes.usage) this.updateReviewCard();
       if (!this.accountId) return;
       const state = changes[`scanState:${this.accountId}`]?.newValue;
       if (
@@ -137,8 +148,30 @@ class UnfollowTrackerPopup {
       once: true,
     });
     await this.requestSync();
+    await this.updateReviewCard();
     document.body.dataset.ready = "true";
     this.track("Active");
+  }
+
+  // Usage counters only exist for store installs: the card appears there, once,
+  // beside a complete result after three complete scans. No reward is offered.
+  async updateReviewCard() {
+    const { usage, reviewPrompt } = await chrome.storage.local.get([
+      "usage",
+      "reviewPrompt",
+    ]);
+    this.elements.reviewCard.classList.toggle(
+      "hidden",
+      !(usage?.scans >= 3) ||
+        Boolean(reviewPrompt) ||
+        this.isScanning ||
+        !this.snapshot,
+    );
+  }
+
+  closeReview(outcome) {
+    this.elements.reviewCard.classList.add("hidden");
+    chrome.storage.local.set({ reviewPrompt: outcome }).catch(() => {});
   }
 
   // The service worker applies the opt-out and only ever sends anonymous ranges.
@@ -338,9 +371,11 @@ class UnfollowTrackerPopup {
       this.elements[name].textContent = "--";
     this.elements.resultsSection.classList.add("hidden");
     this.elements.scanDetails.classList.add("hidden");
+    this.elements.reviewCard.classList.add("hidden");
   }
 
   showScanning() {
+    this.elements.reviewCard.classList.add("hidden");
     this.isScanning = true;
     this.elements.clearDataBtn.disabled = true;
     this.setStatus("scanning", this.t("scanningStatus"));
@@ -419,6 +454,7 @@ class UnfollowTrackerPopup {
     this.elements.scanDetails.classList.remove("hidden");
     this.elements.exportBtn.disabled = data.unfollowers.length === 0;
     if (!this.isScanning) this.showResults(data.unfollowers);
+    this.updateReviewCard();
   }
 
   showResults(unfollowers) {

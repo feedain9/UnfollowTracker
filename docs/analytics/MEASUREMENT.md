@@ -36,6 +36,7 @@ Envoyés par `src/scripts/telemetry.js` (service worker) ; `Uninstall` et `Unins
 | `Export` | Export JSON | `count` |
 | `Unfollow` | Désabonnement confirmé par Instagram | — |
 | `Clear Data` | Suppression des scans enregistrés | — |
+| `Review Click` | Clic sur « Laisser un avis » dans le panneau (à partir de la 1.2.1) | — |
 | `Uninstall` | Page de désinstallation ouverte | `version`, `browser`, `age`, `scans`, `last` |
 | `Uninstall Reason` | Raison choisie dans le sondage | `reason` (+ les propriétés de `Uninstall` si disponibles) |
 

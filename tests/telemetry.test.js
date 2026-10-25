@@ -1,6 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { createHarness, json, user } = require('./harness');
+const { version } = require('../manifest.json');
 
 const today = () => new Date().toISOString().slice(0, 10);
 const events = (h) => h.analytics.map(({ body }) => body.name);
@@ -52,10 +53,10 @@ test('a store install sends one anonymous event, opens the welcome page and prep
     name: 'Install',
     domain: 'extension.unfollow.yadulink.com',
     url: 'app://unfollowtracker/install',
-    props: { version: '1.2.0', browser: 'chrome', ui_lang: 'fr' },
+    props: { version, browser: 'chrome', ui_lang: 'fr' },
   });
   assert.deepEqual(h.opened, ['https://unfollow.yadulink.com/fr/welcome/']);
-  assert.equal(h.uninstallUrls.at(-1), `https://unfollow.yadulink.com/fr/uninstalled/?v=1.2.0&b=chrome&i=${today()}&s=0&x=none`);
+  assert.equal(h.uninstallUrls.at(-1), `https://unfollow.yadulink.com/fr/uninstalled/?v=${version}&b=chrome&i=${today()}&s=0&x=none`);
 });
 
 test('a completed scan reports ranges only, never the account, usernames or exact counts', async () => {
@@ -64,9 +65,9 @@ test('a completed scan reports ranges only, never the account, usernames or exac
   const tab = h.addTab({ accountId: '987654321', fetch: lists(150, [1, 2, 3]) });
   await scan(h, tab);
   assert.deepEqual(events(h), ['Install', 'Scan Start', 'Scan Complete']);
-  assert.deepEqual(props(h, 'Scan Start'), { version: '1.2.0', browser: 'chrome', ui_lang: 'en', first: 'yes' });
+  assert.deepEqual(props(h, 'Scan Start'), { version, browser: 'chrome', ui_lang: 'en', first: 'yes' });
   assert.deepEqual(props(h, 'Scan Complete'), {
-    version: '1.2.0', browser: 'chrome', ui_lang: 'en',
+    version, browser: 'chrome', ui_lang: 'en',
     first: 'yes', followers: '0-99', following: '100-299', non_reciprocal: '50-199', duration: '0-1min', accounts: '1',
   });
   const sent = JSON.stringify(h.analytics.map(({ body }) => body));
@@ -117,7 +118,7 @@ test('the panel reports one active day, export ranges and data deletion', async 
   panel = await h.popup();
   await h.flush();
   assert.deepEqual(events(h), ['Install', 'Active']);
-  assert.deepEqual(props(h, 'Active'), { version: '1.2.0', browser: 'chrome', ui_lang: 'en', age: '0d', scans: '0', accounts: '0' });
+  assert.deepEqual(props(h, 'Active'), { version, browser: 'chrome', ui_lang: 'en', age: '0d', scans: '0', accounts: '0' });
   assert.equal(h.records.local.usage.activeDay, today());
 
   panel.controller.exportResults();
@@ -129,6 +130,21 @@ test('the panel reports one active day, export ranges and data deletion', async 
   await h.flush();
   assert.equal(events(h).at(-1), 'Clear Data');
   assert.equal(h.records.local.usage.accounts, 0);
+});
+
+test('a click on the review invitation is reported without details', async () => {
+  const h = createHarness({ store: true });
+  await install(h);
+  h.records.local.usage = { ...h.records.local.usage, scans: 3, accounts: 1 };
+  h.addTab();
+  const panel = await h.popup();
+  await h.flush();
+  panel.document.getElementById('reviewLink').dispatchEvent(new h.Event('click'));
+  await h.flush();
+  assert.equal(events(h).at(-1), 'Review Click');
+  assert.deepEqual(props(h, 'Review Click'), { version, browser: 'chrome', ui_lang: 'en' });
+  assert.equal(h.records.local.usage.accounts, 1);
+  assert.equal(h.records.local.reviewPrompt, 'clicked');
 });
 
 test('turning statistics off stops events and removes details from the survey link', async () => {
@@ -162,7 +178,7 @@ test('updating from a version without statistics keeps the install date unknown'
   assert.equal(props(h, 'Update').from, '1.1.0');
   assert.deepEqual(h.opened, []);
   assert.deepEqual(h.records.local.usage, { installedAt: null, scans: 1, accounts: 1, lastScan: 'complete', activeDay: null });
-  assert.equal(h.uninstallUrls.at(-1), 'https://unfollow.yadulink.com/fr/uninstalled/?v=1.2.0&b=chrome&i=0&s=1&x=complete');
+  assert.equal(h.uninstallUrls.at(-1), `https://unfollow.yadulink.com/fr/uninstalled/?v=${version}&b=chrome&i=0&s=1&x=complete`);
 });
 
 test('content scripts and unknown events cannot report panel statistics', async () => {

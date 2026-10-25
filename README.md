@@ -1,6 +1,6 @@
 # UnfollowTracker
 
-Free Instagram follower/following comparison in a persistent browser side panel. Version **1.2.0**, French and English, dark and light themes.
+Free Instagram follower/following comparison in a persistent browser side panel. Version **1.2.1**, French and English, dark and light themes.
 
 The extension identifies accounts you follow that do not follow you back **in the current lists**. It does not track historical unfollow events. It uses your existing Instagram session; complete results stay in local extension storage, separately for each account. Requests still go to Instagram and profile photos come from Meta image servers.
 

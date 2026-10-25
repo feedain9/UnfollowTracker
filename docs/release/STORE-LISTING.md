@@ -4,7 +4,7 @@ Textes mis à jour le 25 octobre 2026 pour la **version 1.2.0** (statistiques d�
 
 ## Français
 
-**Nom :** UnfollowTracker
+**Nom :** UnfollowTracker. À partir de la 1.2.1, le nom vient du package et devient « UnfollowTracker – Qui ne vous suit pas en retour sur Instagram » ([SUBMIT-1.2.1.md](SUBMIT-1.2.1.md)).
 
 **Description courte :** Découvrez qui ne vous suit pas en retour sur Instagram, dans un panneau latéral. Gratuit, résultats conservés localement.
 
@@ -30,7 +30,7 @@ Français et anglais, thème sombre et clair. Chrome 116 minimum, sur ordinateur
 
 ## English
 
-**Name:** UnfollowTracker
+**Name:** UnfollowTracker. From 1.2.1, the package name becomes “UnfollowTracker – Who doesn’t follow you back on Instagram” ([SUBMIT-1.2.1.md](SUBMIT-1.2.1.md)).
 
 **Short description:** See who doesn’t follow you back on Instagram, in a persistent side panel. Free, with results stored locally.
 

@@ -377,6 +377,39 @@ input::placeholder {
   color: var(--muted);
   font-size: 10px;
 }
+.review-card {
+  padding: 14px 14px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+}
+.review-title {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 650;
+}
+.review-body {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.review-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 10px;
+}
+.review-actions a {
+  text-decoration: none;
+}
+.review-dismiss {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 11px;
+  padding: 4px 0;
+}
 .stats-toggle {
   display: flex;
   align-items: flex-start;

@@ -38,6 +38,10 @@ globalThis.TrackerI18n = {
     footer:
       "Keep the Instagram tab open during the scan. You can switch tabs or close this panel.",
     privacy: "Privacy",
+    reviewTitle: "Is UnfollowTracker useful to you?",
+    reviewBody: "A review on the Chrome Web Store helps other people find it.",
+    reviewCta: "Leave a review",
+    reviewDismiss: "No thanks",
     shareStats: "Share anonymous usage statistics (never your Instagram data)",
     clear: "Delete saved scans",
     clearTitle: "Delete saved scans?",
@@ -107,6 +111,11 @@ globalThis.TrackerI18n = {
     footer:
       "Gardez l’onglet Instagram ouvert pendant le scan. Vous pouvez changer d’onglet ou fermer ce panneau.",
     privacy: "Confidentialité",
+    reviewTitle: "UnfollowTracker vous est utile ?",
+    reviewBody:
+      "Un avis sur le Chrome Web Store aide d’autres personnes à le trouver.",
+    reviewCta: "Laisser un avis",
+    reviewDismiss: "Non merci",
     shareStats:
       "Partager des statistiques d’usage anonymes (jamais vos données Instagram)",
     clear: "Effacer les scans enregistrés",

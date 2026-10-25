@@ -1,4 +1,7 @@
 {
+  "extensionName": {
+    "message": "UnfollowTracker – Who doesn’t follow you back on Instagram"
+  },
   "extensionDescription": {
     "message": "See who doesn’t follow you back on Instagram, in a persistent side panel. Free, with results stored locally."
   }

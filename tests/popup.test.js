@@ -189,3 +189,44 @@ test('account names render as text and missing avatar URLs render initials witho
   assert.equal(popup.document.querySelectorAll('.user-item img').length, 0);
   assert.ok(popup.document.querySelector('.user-avatar-fallback').textContent.length > 0);
 });
+
+test('the review invitation appears after three complete store scans, until it is dismissed', async () => {
+  const h = createHarness({ store: true });
+  h.records.local['scanResult:100'] = snapshot();
+  h.records.local.usage = { scans: 2 };
+  h.addTab();
+  let popup = await h.popup();
+  const card = () => popup.document.getElementById('reviewCard');
+  assert.equal(card().classList.contains('hidden'), true);
+  popup.close();
+  h.records.local.usage = { scans: 3 };
+  popup = await h.popup();
+  assert.equal(card().classList.contains('hidden'), false);
+  assert.equal(popup.document.getElementById('reviewLink').getAttribute('href'), 'https://chromewebstore.google.com/detail/unfollowtracker/ckkgnnifiojkmmfmeejeebafldholdnc/reviews');
+  popup.controller.showScanning();
+  assert.equal(card().classList.contains('hidden'), true);
+  await popup.controller.updateReviewCard();
+  popup.document.getElementById('reviewDismiss').dispatchEvent(new h.Event('click'));
+  await h.flush();
+  assert.equal(h.records.local.reviewPrompt, 'dismissed');
+  assert.equal(card().classList.contains('hidden'), true);
+  popup.close();
+  popup = await h.popup();
+  assert.equal(card().classList.contains('hidden'), true);
+});
+
+test('the review invitation stays hidden without a displayed result', async () => {
+  const h = createHarness({ store: true });
+  h.records.local.usage = { scans: 5 };
+  h.addTab();
+  const popup = await h.popup();
+  assert.equal(popup.document.getElementById('reviewCard').classList.contains('hidden'), true);
+});
+
+test('unpacked builds never show the review invitation', async () => {
+  const h = createHarness();
+  h.records.local['scanResult:100'] = snapshot();
+  h.addTab();
+  const popup = await h.popup();
+  assert.equal(popup.document.getElementById('reviewCard').classList.contains('hidden'), true);
+});

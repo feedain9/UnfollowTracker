@@ -3,7 +3,7 @@
   const endpoint = 'https://analytics.krilup.com/api/event';
   const domain = 'extension.unfollow.yadulink.com';
   const site = 'https://unfollow.yadulink.com';
-  const panelEvents = new Set(['Active', 'Export', 'Clear Data']);
+  const panelEvents = new Set(['Active', 'Export', 'Review Click', 'Clear Data']);
   const defaults = { installedAt: null, scans: 0, accounts: 0, lastScan: 'none', activeDay: null };
 
   // Ranges keep the account profile anonymous: exact counts never leave the browser.
@@ -133,6 +133,8 @@
       track('Active', { age: age(state.installedAt), scans: scanCount(state.scans), accounts: accountCount(state.accounts) });
     } else if (event === 'Export') {
       track('Export', { count: resultSize(Number.isSafeInteger(count) && count > 0 ? count : 0) });
+    } else if (event === 'Review Click') {
+      track('Review Click');
     } else {
       await saveUsage({ accounts: 0 });
       track('Clear Data');
