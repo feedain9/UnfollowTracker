@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "slug": "compare-instagram-lists-excel",
+  "intent": "préparer les listes de son export Instagram puis comparer abonnements et abonnés dans Excel avec une formule et un exemple reproductible",
+  "status": "published",
+  "publishedAt": "2026-10-26",
+  "updatedAt": "2026-10-26",
+  "sources": [
+    {
+      "url": "https://help.instagram.com/181231772500920",
+      "title": "Instagram — Consulter vos informations Instagram et en exporter une copie",
+      "checkedAt": "2026-10-26"
+    },
+    {
+      "url": "https://support.microsoft.com/fr-fr/excel/get-started/use-the-countif-function-in-microsoft-excel",
+      "title": "Microsoft — Utiliser la fonction NB.SI dans Excel",
+      "checkedAt": "2026-10-26"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/excel/get-started/use-the-countif-function-in-microsoft-excel",
+      "title": "Microsoft — Use the COUNTIF function in Excel",
+      "checkedAt": "2026-10-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/power-query/connectors/json",
+      "title": "Microsoft Learn — Power Query JSON connector",
+      "checkedAt": "2026-10-26"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/cebc5d597dc02123ad028393e5f7fe21d3f340ed/src/scripts/popup.js",
+      "title": "UnfollowTracker — panneau, scan manuel et exportResults",
+      "checkedAt": "2026-10-26"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/cebc5d597dc02123ad028393e5f7fe21d3f340ed/src/scripts/content.js",
+      "title": "UnfollowTracker — comparaison des identifiants dans runScan",
+      "checkedAt": "2026-10-26"
+    }
+  ],
+  "fr": {
+    "title": "Comparer ses abonnés Instagram : la méthode Excel pas à pas",
+    "description": "Comparez vos abonnements et abonnés Instagram dans Excel : préparation de l’export, formule NB.SI, exemple fictif et erreurs à vérifier.",
+    "lead": "Pour comparer vos listes Instagram dans Excel, placez les comptes que vous suivez en colonne A et vos abonnés en colonne B, puis cherchez chaque nom de A dans toute la liste B avec NB.SI. Un résultat de zéro signale un abonnement absent des abonnés du relevé. Utilisez les noms d’utilisateur issus de votre export officiel ; ce calcul ne prouve pas que la personne vous suivait auparavant.",
+    "sections": [
+      {
+        "heading": "1. Demander l’export de votre propre compte",
+        "paragraphs": [
+          "L’aide Instagram situe l’export dans « Vos informations et autorisations », dans l’Espace Comptes ou le Compte Meta selon le déploiement. Sur ordinateur, partez de Plus, puis Paramètres. Vérifiez le profil sélectionné avant de poursuivre."
+        ],
+        "steps": [
+          "Ouvrez « Exporter vos informations », puis « Créer une exportation ».",
+          "Sélectionnez votre profil Instagram, puis l’export vers votre appareil.",
+          "Choisissez les informations relatives aux abonnés et abonnements dans les catégories proposées. Pour cette comparaison, privilégiez toute la période disponible.",
+          "Choisissez le format, lancez la demande et conservez les indications de date avec les fichiers téléchargés."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "2. Récupérer une liste de noms d’utilisateur par fichier",
+        "paragraphs": [
+          "Pour une préparation manuelle, choisissez HTML si ce format vous est proposé. Décompressez l’archive téléchargée, puis repérez les documents consacrés aux abonnés et aux abonnements. Ouvrez les fichiers HTML dans votre navigateur pour les lire. Les noms et le découpage des fichiers peuvent évoluer : identifiez leur contenu plutôt que de vous fier uniquement au nom du premier fichier.",
+          "Copiez chaque liste séparément dans une feuille de travail. Un collage peut inclure des dates, des titres et des adresses de profil : retirez ces éléments pour obtenir un nom d’utilisateur par cellule. Si une liste est répartie entre plusieurs fichiers, rassemblez toutes ses parties avant de comparer. Gardez l’archive originale intacte pour pouvoir contrôler la préparation.",
+          "Comparez des pseudonymes comme atelier_iris, pas le nom affiché « Atelier Iris ». Utilisez le même format des deux côtés, sans @, sans adresse de profil et sans espace ajouté. Conservez les points et les tirets bas : atelier.iris et atelier_iris ne sont pas le même texte. Préformatez les colonnes en Texte avant le collage, notamment pour préserver un pseudonyme composé de chiffres."
+        ]
+      },
+      {
+        "heading": "Si votre export est déjà en JSON",
+        "paragraphs": [
+          "Ne renommez pas un fichier .json en .csv : changer son extension ne transforme pas son contenu. Si votre version d’Excel propose le connecteur JSON de Power Query, choisissez JSON dans « Obtenir des données », puis ouvrez le fichier local. Microsoft documente l’ouverture de l’éditeur et la transformation des données en tableau ; les possibilités varient selon le produit.",
+          "Vérifiez l’aperçu et gardez la colonne contenant réellement les noms d’utilisateur, à partir de quelques entrées contrôlées dans le fichier original. Préparez séparément abonnés et abonnements, puis utilisez les deux colonnes ci-dessous. Si l’aperçu conserve des listes ou des objets imbriqués, leur développement reste nécessaire : un import réussi ne garantit pas une liste prête à comparer."
+        ],
+        "sources": [4]
+      },
+      {
+        "heading": "3. Préparer les colonnes avec un exemple fictif",
+        "paragraphs": [
+          "Créez une feuille avec A1 = Abonnements, B1 = Abonnés et C1 = Présences dans les abonnés. Les colonnes A et B sont deux listes indépendantes : leurs lignes n’ont pas à correspondre. Il n’est pas nécessaire de les trier dans le même ordre.",
+          "Pour essayer la méthode, saisissez les données fictives suivantes. Elles ne proviennent d’aucun compte Instagram réel. Pour vos propres données, remplacez ces listes et notez le compte concerné ainsi que la date de l’export dans une feuille séparée."
+        ],
+        "bullets": [
+          "A2 à A5, un nom par cellule : atelier_iris ; jardin_lou ; photo_noe ; studio_zoe.",
+          "B2 à B4, un nom par cellule : jardin_lou ; studio_zoe ; carnet_eli.",
+          "C2 à C5 : laissez ces cellules disponibles pour les formules."
+        ]
+      },
+      {
+        "heading": "4. Appliquer NB.SI et repérer les zéros",
+        "paragraphs": [
+          "Dans C2, saisissez cette formule pour l’exemple : =NB.SI($B$2:$B$4;A2)",
+          "Elle compte combien de fois le pseudonyme de A2 apparaît entre B2 et B4. Les signes $ maintiennent la plage de recherche lorsque vous recopiez la formule. Dans Excel en anglais, la formule correspondante est =COUNTIF($B$2:$B$4,A2). Le séparateur peut dépendre des réglages régionaux de votre tableur."
+        ],
+        "steps": [
+          "Pour vos propres listes, remplacez $B$4 par la dernière cellule remplie de la colonne B. La plage doit inclure tous vos abonnés, sans l’en-tête.",
+          "Recopiez C2 vers le bas jusqu’à la dernière ligne des abonnements : C5 dans l’exemple. Ne prolongez pas le calcul sur des lignes A vides.",
+          "Repérez les valeurs 0 en C, ou activez un filtre sur votre tableau pour les afficher. Les pseudonymes correspondants sont en colonne A.",
+          "Conservez les listes sources : masquer des lignes avec un filtre ne doit pas devenir une suppression de vos données de référence."
+        ],
+        "sources": [2, 3]
+      },
+      {
+        "heading": "Lire le résultat de l’exemple",
+        "paragraphs": [
+          "Vous devez obtenir 0, 1, 0 et 1 de C2 à C5. atelier_iris et photo_noe sont absents des abonnés fournis. jardin_lou et studio_zoe figurent dans les deux listes. carnet_eli vous suit, mais vous ne le suivez pas dans cet exemple : il n’apparaît donc pas dans le résultat recherché.",
+          "Les quatre abonnements moins les trois abonnés donnent un écart de un, alors que deux comptes ne suivent pas en retour. La formule cherche les correspondances entre les noms ; soustraire les totaux répond à une autre question. Si votre essai ne produit pas ces quatre valeurs, corrigez la feuille avant d’y placer vos propres listes."
+        ]
+      },
+      {
+        "heading": "5. Vérifier les résultats surprenants",
+        "paragraphs": [
+          "Un zéro signifie « ce texte n’a pas été trouvé dans cette plage ». Avant d’en tirer une conclusion sur Instagram, contrôlez la préparation des données. NB.SI ignore les différences de majuscules et minuscules, mais un espace parasite peut empêcher une correspondance."
+        ],
+        "bullets": [
+          "Presque tout vaut zéro : vérifiez que vous comparez des pseudonymes dans les deux colonnes, et non des liens dans une colonne et des noms dans l’autre.",
+          "Des profils connus manquent : vérifiez toutes les parties de l’archive, le compte choisi et la dernière ligne incluse dans la formule.",
+          "Un résultat dépasse un : le même nom apparaît plusieurs fois dans la plage des abonnés. Il est bien présent ; le nombre n’indique pas plusieurs relations avec ce compte.",
+          "La formule reste affichée comme du texte : vérifiez le format de la colonne C, puis ressaisissez la formule. Le format Texte conseillé pour les pseudonymes ne doit pas être appliqué aux formules."
+        ],
+        "sources": [2]
+      },
+      {
+        "heading": "Comparer deux dates change la question",
+        "paragraphs": [
+          "Pour chercher les noms disparus entre deux relevés, utilisez une autre feuille : anciens abonnés en A, nouveaux abonnés en B. Adaptez la plage, appliquez la même formule et recherchez les zéros. Vous obtenez des noms absents du relevé récent, pas des comptes qui ne vous suivent pas en retour parmi vos abonnements.",
+          "La comparaison porte sur des textes et des fichiers datés. Un changement de pseudonyme, une préparation incomplète ou des périmètres différents peuvent produire une absence apparente. Sans relevé antérieur, ce calcul ne reconstitue aucun passé ; même avec deux relevés, il ne donne ni l’heure ni la raison d’un changement. Vérifiez la situation actuelle avant d’agir."
+        ]
+      },
+      {
+        "heading": "Ce qu’UnfollowTracker peut faire à la place",
+        "paragraphs": [
+          "Sur ordinateur, UnfollowTracker compare les identifiants des abonnements et des abonnés renvoyés par votre session Instagram. Vous lancez le scan manuellement depuis son panneau persistant et gardez l’onglet Instagram connecté ouvert. Il respecte les restrictions rencontrées et ne garantit pas l’accès à des données qu’Instagram ne fournit pas.",
+          "L’extension n’importe pas votre archive. Son bouton « Exporter » produit un JSON des comptes non réciproques, pas un fichier Excel ni les deux listes complètes à placer en A et B. Elle ne construit pas d’historique des désabonnements et chaque désabonnement proposé reste individuel, avec confirmation.",
+          "Pour garder votre comparaison sur l’appareil, enregistrez le classeur dans un dossier local dont vous maîtrisez la synchronisation. Un tableur en ligne ou un convertisseur de fichiers implique un autre traitement de vos données. Vous pouvez conserver le résultat pour information : aucun calcul ne vous oblige à vous désabonner."
+        ],
+        "sources": [5, 6]
+      }
+    ],
+    "related": [
+      {
+        "label": "Qui ne me suit pas en retour : les trois méthodes",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Choisir entre l’export officiel Instagram et un scan local",
+        "route": "blog/instagram-official-export-vs-local-scan/"
+      },
+      {
+        "label": "Comprendre les champs du JSON exporté par UnfollowTracker",
+        "route": "blog/export-instagram-results-json/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Export Instagram followers list to Excel: compare your two lists",
+    "description": "Compare your Instagram following and followers in Excel: prepare your export, use COUNTIF, check a fictional example and avoid misleading results.",
+    "lead": "To compare your Instagram lists in Excel, put the accounts you follow in column A and your followers in column B, then use COUNTIF to look for each A username throughout B. A zero means that account is missing from the followers in your snapshot. Start with usernames from your official export; this calculation does not prove someone used to follow you.",
+    "sections": [
+      {
+        "heading": "1. Request an export of your own account",
+        "paragraphs": [
+          "Instagram’s help places the export under “Your information and permissions” in Accounts Center or Meta Account, depending on the rollout. On desktop, start with More, then Settings. Check which profile you have selected."
+        ],
+        "steps": [
+          "Open “Export your information”, then “Create export”.",
+          "Select your Instagram profile and the option to export to your device.",
+          "Choose the follower and following information among the available categories. For this comparison, use the full available date range.",
+          "Select the format, submit the request and keep the date information with the downloaded files."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "2. Turn each file into a list of usernames",
+        "paragraphs": [
+          "For manual preparation, choose HTML if that format is offered. Extract the downloaded archive and locate the documents covering followers and following. Open the HTML files in your browser to read them. File names and the way lists are split may change, so identify the contents rather than relying on the name of the first file.",
+          "Copy each list separately into a working sheet. Pasting may bring along dates, headings and profile addresses: remove those so you have one username per cell. If a list spans several files, combine all its parts before comparing. Keep the original archive untouched so you can check your preparation against it.",
+          "Compare usernames such as atelier_iris, not the display name “Atelier Iris”. Use the same format on both sides, without @, profile addresses or added spaces. Keep periods and underscores: atelier.iris and atelier_iris are different strings. Set the username columns to Text before pasting, especially to preserve usernames made entirely of digits."
+        ]
+      },
+      {
+        "heading": "If you already have a JSON export",
+        "paragraphs": [
+          "Do not rename a .json file to .csv: a new extension does not convert its contents. If your Excel version offers the Power Query JSON connector, select JSON under Get Data and open the local file. Microsoft documents how this opens the editor and turns the data into a table; available capabilities depend on the product.",
+          "Check the preview and retain the column that actually contains usernames, using a few entries in the original file as a reference. Prepare followers and following separately, then use the two columns below. If the preview still contains nested lists or records, those need expanding: a successful import does not guarantee a list that is ready to compare."
+        ],
+        "sources": [4]
+      },
+      {
+        "heading": "3. Set up your columns with a fictional example",
+        "paragraphs": [
+          "Create a sheet with A1 = Following, B1 = Followers and C1 = Matches in followers. A and B are independent lists: entries on the same row do not need to match. There is no need to sort both lists into the same order.",
+          "Try the method with the fictional data below. None comes from a real Instagram account. For your own comparison, replace these lists and record the account and export date on a separate sheet so you can identify the snapshot later."
+        ],
+        "bullets": [
+          "A2 through A5, one username per cell: atelier_iris; jardin_lou; photo_noe; studio_zoe.",
+          "B2 through B4, one username per cell: jardin_lou; studio_zoe; carnet_eli.",
+          "C2 through C5: leave these cells available for the formulas."
+        ]
+      },
+      {
+        "heading": "4. Apply COUNTIF and find the zeros",
+        "paragraphs": [
+          "In C2, enter this formula for the example: =COUNTIF($B$2:$B$4,A2)",
+          "It counts how many times the username in A2 appears between B2 and B4. The $ signs keep the search range fixed when you copy the formula down. In French Excel, the equivalent is =NB.SI($B$2:$B$4;A2). Your spreadsheet’s regional settings may require a different argument separator."
+        ],
+        "steps": [
+          "For your own lists, replace $B$4 with the last populated cell in column B. The range must cover all your followers and exclude the header.",
+          "Fill the formula down from C2 to the last following entry: C5 in this example. Do not extend the calculation into rows where A is empty.",
+          "Find the zeros in C, or enable a filter on your table to display them. Read the corresponding usernames in column A.",
+          "Keep the source lists intact: hiding rows with a filter should not turn into deleting your reference data."
+        ],
+        "sources": [3, 2]
+      },
+      {
+        "heading": "Read the example’s result",
+        "paragraphs": [
+          "You should get 0, 1, 0 and 1 in C2 through C5. atelier_iris and photo_noe are missing from the supplied followers. jardin_lou and studio_zoe appear in both lists. carnet_eli follows you, but you do not follow that account in this example, so it does not belong in the result you are looking for.",
+          "Four following minus three followers gives a difference of one, yet two accounts do not follow back. The formula checks membership by username; subtracting totals answers a different question. If your practice sheet does not produce those four values, correct it before adding your own lists."
+        ]
+      },
+      {
+        "heading": "5. Check unexpected results",
+        "paragraphs": [
+          "A zero means “this text was not found in this range”. Check your data preparation before treating it as a finding about Instagram. COUNTIF ignores differences in letter case, but an unwanted space can prevent a match."
+        ],
+        "bullets": [
+          "Almost everything returns zero: make sure both columns contain usernames, rather than profile links on one side and names on the other.",
+          "Familiar profiles are missing: check every part of the archive, the selected account and the last row covered by your formula.",
+          "A result is greater than one: that name occurs more than once in the followers range. It is present; the count does not mean several follow relationships with that account.",
+          "The formula is displayed as text: check column C’s format, then enter the formula again. The Text format recommended for usernames should not be used for formulas."
+        ],
+        "sources": [3]
+      },
+      {
+        "heading": "Comparing two dates answers a different question",
+        "paragraphs": [
+          "To look for names that disappeared between snapshots, use another sheet: older followers in A and newer followers in B. Adjust the range, apply the same formula and find the zeros. This identifies names missing from the newer snapshot, rather than accounts among your following that do not follow you back.",
+          "The comparison works on text and dated files. A changed username, incomplete preparation or different export scopes can create an apparent disappearance. Without an older snapshot, the calculation cannot reconstruct the past. Even with two snapshots, it cannot establish when or why a change happened. Check the current situation before acting on the result."
+        ]
+      },
+      {
+        "heading": "What UnfollowTracker can do instead",
+        "paragraphs": [
+          "On desktop, UnfollowTracker compares account IDs in the following and follower lists returned through your Instagram session. You start the scan manually in its persistent side panel and keep the signed-in Instagram tab open. It respects restrictions it encounters and cannot guarantee access to information Instagram does not provide.",
+          "The extension does not import your archive. Its Export button produces a JSON file of non-reciprocal accounts, not an Excel workbook or the two complete lists to put into A and B. It does not build an unfollow history, and any unfollow action remains individual and requires confirmation.",
+          "To keep your comparison on your device, save the workbook in a local folder whose sync settings you control. Using an online spreadsheet or file converter involves another service handling your data. You can also keep the result simply for reference: a calculation does not require you to unfollow anyone."
+        ],
+        "sources": [5, 6]
+      }
+    ],
+    "related": [
+      {
+        "label": "Who doesn’t follow you back: three ways to check",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Choose between Instagram’s official export and a local scan",
+        "route": "blog/instagram-official-export-vs-local-scan/"
+      },
+      {
+        "label": "Understand the fields in UnfollowTracker’s JSON export",
+        "route": "blog/export-instagram-results-json/"
+      }
+    ]
+  }
+}
