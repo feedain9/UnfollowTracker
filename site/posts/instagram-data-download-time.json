@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "slug": "instagram-data-download-time",
+  "intent": "comprendre les délais de préparation et de téléchargement de l’export Instagram, suivre une demande en attente et agir si le lien manque ou a expiré",
+  "status": "published",
+  "publishedAt": "2026-10-30",
+  "updatedAt": "2026-10-30",
+  "sources": [
+    {
+      "url": "https://help.instagram.com/181231772500920/",
+      "title": "Instagram — Consulter vos informations Instagram et en exporter une copie",
+      "checkedAt": "2026-10-30"
+    },
+    {
+      "url": "https://help.instagram.com/381579045265733/",
+      "title": "Instagram — Signaler un problème technique sur Instagram",
+      "checkedAt": "2026-10-30"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/ca7c401f5f4e693c02a5163dd735b682c6c1adba/src/scripts/popup.js",
+      "title": "UnfollowTracker — panneau, scan manuel, export JSON et confirmation individuelle",
+      "checkedAt": "2026-10-30"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/ca7c401f5f4e693c02a5163dd735b682c6c1adba/src/scripts/content.js",
+      "title": "UnfollowTracker — comparaison des listes et respect des restrictions Instagram",
+      "checkedAt": "2026-10-30"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/ca7c401f5f4e693c02a5163dd735b682c6c1adba/src/scripts/background.js",
+      "title": "UnfollowTracker — conservation locale du dernier scan complet par compte",
+      "checkedAt": "2026-10-30"
+    }
+  ],
+  "fr": {
+    "title": "Télécharger ses données Instagram : combien de temps faut-il attendre ?",
+    "description": "Instagram annonce jusqu’à 30 jours pour envoyer le lien, puis 4 jours pour télécharger l’export prêt. Voici comment suivre votre demande et vérifier un blocage.",
+    "lead": "Pour télécharger vos données Instagram, prévoyez jusqu’à 30 jours pour recevoir le lien d’exportation par e-mail, selon l’aide officielle. Une fois l’export prêt, vous avez quatre jours pour le récupérer. Ces délais concernent deux étapes différentes : vérifiez aussi les téléchargements disponibles dans vos paramètres, sans attendre uniquement un e-mail.",
+    "sections": [
+      {
+        "heading": "Deux délais à distinguer dès la demande",
+        "paragraphs": [
+          "L’aide d’Instagram consultée le 30 octobre 2026 indique que l’envoi du lien peut prendre jusqu’à 30 jours. Ce n’est ni une durée moyenne ni une obligation d’attendre un mois avant de vérifier. Cette page ne donne pas de délai habituel selon le nombre d’abonnés ou le type de fichier demandé.",
+          "Les quatre jours commencent lorsque l’exportation est prête, pas lorsque vous faites la demande. Il ne faut donc pas additionner ces chiffres pour décider de revenir dans 34 jours : une archive préparée plus tôt peut déjà ne plus être disponible à ce moment-là."
+        ],
+        "bullets": [
+          "Avant la disponibilité : attente de la préparation et de l’e-mail contenant le lien, jusqu’à 30 jours selon Instagram.",
+          "Après la disponibilité : quatre jours pour télécharger les fichiers depuis l’outil d’exportation.",
+          "Pendant le téléchargement sur l’appareil : le transfert du fichier est une autre étape, sans durée fixe annoncée dans cette aide."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "1. Faire une demande que vous pourrez retrouver",
+        "paragraphs": [
+          "Pour une copie sur votre ordinateur, partez des paramètres d’Instagram. L’aide mentionne l’Espace Comptes ou le Compte Meta selon le déploiement. Le parcours ci-dessous reprend la documentation publique ; il ne correspond pas à un test effectué sur votre compte.",
+          "Notez la date de demande, le profil choisi, les catégories, la période et le format. Si vous gérez plusieurs profils, cette petite fiche évite de chercher l’export du mauvais compte ou de confondre deux demandes."
+        ],
+        "steps": [
+          "Sur instagram.com, ouvrez « Plus », puis « Paramètres » et les paramètres du Compte Meta ou de l’Espace Comptes.",
+          "Dans « Vos informations et autorisations », choisissez « Exporter vos informations », puis « Créer une exportation ».",
+          "Sélectionnez le profil Instagram concerné, continuez et choisissez « Exporter sur mon appareil ».",
+          "Réglez les informations à inclure, la période, le format, l’e-mail de notification et la qualité des médias si nécessaire.",
+          "Vérifiez que vous pouvez consulter l’adresse e-mail choisie, puis lancez l’exportation."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "2. Vérifier la disponibilité sans se fier uniquement à l’e-mail",
+        "paragraphs": [
+          "Revenez à l’outil « Exporter vos informations » du même profil et consultez « Téléchargements disponibles ». Instagram décrit cette rubrique comme l’endroit où récupérer une exportation prête. La rubrique « Demandes passées » permet aussi de consulter les demandes de fichiers antérieures.",
+          "Vérifier les courriers indésirables et la boîte choisie pour les notifications est une précaution utile, mais l’absence d’un e-mail ne prouve pas que l’archive est encore en préparation. Comparez ce que vous voyez dans les paramètres avec votre date de demande.",
+          "Si un fichier est disponible, passez au téléchargement. Si la demande est encore en cours, conservez ses détails. L’aide consultée ne donne aucune méthode garantissant d’accélérer la préparation : annuler et recommencer en boucle ne constitue pas une solution documentée."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "3. Si rien n’arrive ou si le téléchargement échoue",
+        "paragraphs": [
+          "Après 30 jours sans lien ni fichier disponible, ou en présence d’une erreur explicite, décrivez le problème à Instagram. Ce repère vient du délai annoncé pour l’envoi du lien ; ce n’est pas la promesse qu’un signalement débloquera immédiatement la demande.",
+          "Sur ordinateur, l’aide officielle décrit un signalement depuis votre profil, puis « Plus » et « Signaler un problème ». Indiquez la date de demande, l’étape qui échoue, le message affiché et le navigateur utilisé. Une capture de l’erreur peut aider ; ne joignez pas votre archive complète pour illustrer un bouton qui ne fonctionne pas.",
+          "Si le fichier est déjà proposé mais que le transfert échoue, vérifiez aussi l’espace libre sur l’appareil. Instagram précise que les catégories choisies et la qualité des médias influencent la taille des fichiers. Cela justifie de prévoir du stockage, pas de promettre qu’un export plus petit sera préparé en quelques minutes."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "4. Télécharger l’archive prête avant son expiration",
+        "paragraphs": [
+          "Récupérez l’export dès que possible dans « Téléchargements disponibles » et vérifiez les indications de disponibilité affichées. Instagram précise que l’exportation est protégée par mot de passe : effectuez cette étape dans le parcours officiel, sans transmettre votre mot de passe à un convertisseur ou à un outil d’analyse.",
+          "Une fois le téléchargement terminé, vérifiez que le fichier s’ouvre, puis conservez l’original dans un dossier dont vous maîtrisez l’accès et la synchronisation. La fenêtre de quatre jours concerne sa récupération chez Instagram ; elle ne signifie pas que votre copie locale s’effacera automatiquement.",
+          "Si l’export a expiré et n’est plus téléchargeable, revenez à l’outil pour créer une nouvelle demande. Ne comptez pas sur une prolongation de l’ancien lien ni sur une livraison immédiate du nouvel export : gardez la nouvelle date de demande."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "Un calendrier fictif : demander le 6, télécharger le 9",
+        "paragraphs": [
+          "Camille, un personnage fictif, demande une copie de ses informations le 6 octobre. Dans cet exemple, l’export devient disponible le 9 octobre et Camille le télécharge le jour même. Les trois jours écoulés sont inventés pour illustrer le parcours ; ils ne constituent pas une estimation du délai réel.",
+          "Si Camille ne consulte la demande que le 15 octobre, plus de quatre jours se sont écoulés depuis sa disponibilité : elle ne peut plus compter sur cette fenêtre de téléchargement. Attendre le trentième jour aurait donc été une mauvaise façon de suivre la demande.",
+          "Camille conserve trois repères avec son fichier : demande le 6, disponibilité le 9, téléchargement le 9. Aucun de ces repères ne prouve à lui seul l’heure exacte à laquelle chaque relation d’abonnement a été relevée."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "Les limites à vérifier avant d’attendre davantage",
+        "paragraphs": [
+          "L’aide distingue aussi des profils qui ne peuvent pas être exportés parce qu’ils ont été désactivés ou que leur suppression est programmée. Elle indique respectivement la réactivation ou l’annulation de la suppression pour permettre l’export. Ce sont des états de compte à examiner, pas simplement des délais supplémentaires à attendre.",
+          "Une archive n’est pas non plus une garantie de retrouver tout ce qui a été supprimé : Instagram précise que certaines informations supprimées, même conservées temporairement pour la sécurité, n’apparaissent pas dans les informations consultables ou téléchargées. Attendre plus longtemps ne suffit donc pas à promettre leur retour.",
+          "Pour comparer vos abonnés et abonnements, vérifiez surtout le profil, les catégories et la période retenus. Un fichier reçu rapidement mais hors du périmètre voulu ne répond pas à votre question. Le tutoriel de comparaison dans Excel, lié ci-dessous, prend le relais une fois les listes récupérées."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "Le scan UnfollowTracker n’accélère pas l’export Meta",
+        "paragraphs": [
+          "UnfollowTracker propose une démarche indépendante sur ordinateur : vous lancez manuellement un scan dans son panneau persistant, en conservant l’onglet Instagram connecté ouvert. Il compare les listes actuelles renvoyées par Instagram et respecte les restrictions rencontrées. Il n’importe pas votre archive et ne peut pas modifier le délai de préparation chez Meta.",
+          "Son bouton « Exporter » crée un JSON du résultat non réciproque chargé dans le panneau. Ce fichier n’est pas l’archive officielle de vos informations. Le dernier scan complet reste enregistré localement par compte ; l’extension ne construit pas d’historique des désabonnements. Chaque désabonnement proposé reste individuel et demande confirmation.",
+          "Si vous voulez une copie de vos informations, poursuivez l’export officiel. Si votre question porte sur les comptes qui ne vous suivent pas en retour, le guide principal ci-dessous présente les méthodes possibles et leurs limites."
+        ],
+        "sources": [3, 4, 5]
+      }
+    ],
+    "related": [
+      {
+        "label": "Qui ne me suit pas en retour : les méthodes et leurs limites",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Comparer ses listes Instagram dans Excel après le téléchargement",
+        "route": "blog/compare-instagram-lists-excel/"
+      },
+      {
+        "label": "Choisir entre l’export officiel Instagram et le scan UnfollowTracker",
+        "route": "blog/instagram-official-export-vs-local-scan/"
+      }
+    ]
+  },
+  "en": {
+    "title": "How long does it take for Instagram to download data?",
+    "description": "Instagram says the export link can take up to 30 days, followed by 4 days to download the ready files. Check your request, missing links and expired exports.",
+    "lead": "Instagram’s official help says it can take up to 30 days to email you a data export link. Once the export is ready, you have four days to download it. These are two separate deadlines: check the available downloads in your account settings as well as your email, so you do not miss a file that is already ready.",
+    "sections": [
+      {
+        "heading": "Understand the two deadlines before you wait",
+        "paragraphs": [
+          "Instagram’s help page, checked on October 30, 2026, says emailing the link may take up to 30 days. That is not an average turnaround or an instruction to wait a month before checking. The page gives no typical processing time based on your follower count or the type of file you request.",
+          "The four-day download window starts when the export is ready, not when you request it. Do not add the two figures together and plan to return in 34 days: an archive prepared earlier may no longer be available by then."
+        ],
+        "bullets": [
+          "Before it is available: wait for preparation and the email containing the link, which Instagram says may take up to 30 days.",
+          "Once it is available: you have four days to download the files from the export tool.",
+          "While saving it to your device: transferring the file is a separate step, with no fixed duration stated in this help page."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "1. Make a request you can identify later",
+        "paragraphs": [
+          "To save a copy on your computer, start in Instagram’s settings. Its help page refers to Accounts Center or Meta Account, depending on the rollout. The steps below follow the public documentation; they do not describe a test performed on your account.",
+          "Keep a note of the request date, selected profile, information categories, date range and format. If you manage several profiles, this makes it easier to distinguish requests and avoids looking for an export under the wrong account."
+        ],
+        "steps": [
+          "On instagram.com, open More, then Settings, and go to Meta Account or Accounts Center settings.",
+          "Under Your information and permissions, choose Export your information, then Create export.",
+          "Select the Instagram profile, continue and choose Export to device.",
+          "Choose the information to include, date range, format, notification email and media quality where relevant.",
+          "Check that you can access the selected email inbox, then start the export."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "2. Check availability as well as your inbox",
+        "paragraphs": [
+          "Return to Export your information for the same profile and check Available downloads. Instagram identifies that section as the place to collect a ready export. The Past requests section also lets you review earlier file requests.",
+          "Checking spam and the inbox you selected for notifications is a useful precaution, but a missing email does not prove that preparation is still underway. Compare what the settings show with your record of the request date.",
+          "If a file is available, move on to downloading it. If the request is still pending, keep its details. The help page offers no method guaranteed to speed up preparation; repeatedly cancelling and starting over is not a documented fix."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "3. What to do if nothing arrives or a download fails",
+        "paragraphs": [
+          "If 30 days pass with no link or available file, or you see an explicit error, report the problem to Instagram. That checkpoint comes from its stated time for emailing the link; it does not mean a report will immediately release your export.",
+          "On desktop, Instagram’s reporting guide describes opening your profile, then More and Report a problem. Include the request date, the step that fails, the displayed error and your browser. A screenshot of the error can help; there is no need to attach your entire archive to demonstrate a broken download button.",
+          "If the file is already offered but the transfer fails, also check the free storage on your device. Instagram explains that the information categories and media quality affect file size. That is a reason to allow enough storage, not evidence that a smaller request will be prepared within minutes."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "4. Save the ready archive before it expires",
+        "paragraphs": [
+          "Download the export from Available downloads as soon as practical and check the availability information displayed there. Instagram says exporting files is password-protected. Complete that step through the official process, without giving your password to a file converter or analysis service.",
+          "After the download finishes, check that the file opens and keep the original in a folder whose access and sync settings you control. The four-day window concerns collecting the export from Instagram; it does not mean the copy on your device will automatically delete itself.",
+          "If the export has expired and can no longer be downloaded, return to the tool to create a new request. Do not rely on an extension of the old link or immediate delivery of the replacement. Record the new request date so you can follow that request separately."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "A fictional timeline: request on the 6th, download on the 9th",
+        "paragraphs": [
+          "Camille is a fictional person who requests a copy of her information on October 6. In this example, the export becomes available on October 9 and she downloads it that day. The three-day wait is invented to explain the process; it is not an estimate of the time a real request will take.",
+          "If Camille only checks on October 15, more than four days have passed since the file became available. She can no longer rely on that download window. Waiting until the thirtieth day would therefore have been a poor way to track the request.",
+          "She keeps three dates with the file: requested on the 6th, available on the 9th and downloaded on the 9th. None of those dates alone establishes the exact time at which every follow relationship was recorded."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "Limits to check before waiting longer",
+        "paragraphs": [
+          "Instagram’s help also describes profiles that cannot be exported because they have been deactivated or are scheduled for deletion. It points to reactivating the profile or cancelling deletion, respectively, to allow an export. These are account states to review, rather than extra processing time to wait out.",
+          "An archive is not a guarantee of recovering everything you deleted. Instagram says some deleted information may be held temporarily for safety and security but will not appear when you access or download your information. Waiting longer therefore cannot be promised as a way to retrieve it.",
+          "If you want to compare followers and following, check the profile, information categories and date range you selected. A file delivered quickly but covering the wrong information will not answer your question. The Excel comparison tutorial linked below picks up once you have retrieved the lists."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "An UnfollowTracker scan cannot speed up Meta’s export",
+        "paragraphs": [
+          "UnfollowTracker offers a separate desktop workflow: manually start a scan in its persistent side panel and keep the signed-in Instagram tab open. It compares the current lists returned by Instagram and respects the restrictions it encounters. It does not import your archive and cannot change Meta’s export processing time.",
+          "Its Export button creates a JSON file of the non-reciprocal result loaded in the panel. That file is not Instagram’s official information archive. The latest complete scan stays saved locally for each account; the extension does not build an unfollow history. Any unfollow action remains individual and requires confirmation.",
+          "If you need a copy of your information, continue with the official export. If you want to find accounts that do not follow you back, the main guide below explains the available methods and their limits."
+        ],
+        "sources": [3, 4, 5]
+      }
+    ],
+    "related": [
+      {
+        "label": "Who doesn’t follow you back: the methods and their limits",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Compare your Instagram lists in Excel after downloading them",
+        "route": "blog/compare-instagram-lists-excel/"
+      },
+      {
+        "label": "Choose between Instagram’s official export and an UnfollowTracker scan",
+        "route": "blog/instagram-official-export-vs-local-scan/"
+      }
+    ]
+  }
+}
