@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "slug": "safe-instagram-unfollow-app-checklist",
+  "intent": "évaluer la sécurité d’une application ou extension unfollow avant de l’installer, comparer ses accès et ses données, puis savoir retirer son accès",
+  "status": "published",
+  "publishedAt": "2026-11-02",
+  "updatedAt": "2026-11-02",
+  "sources": [
+    {
+      "url": "https://about.fb.com/news/2022/10/protecting-people-from-malicious-account-compromise-apps/",
+      "title": "Meta — Protecting People From Malicious Account Compromise Apps (2022)",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "url": "https://support.google.com/chrome_webstore/answer/186213?hl=en",
+      "title": "Chrome Web Store Help — Permissions requested by apps and extensions",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "url": "https://support.google.com/chrome/answer/2664769?hl=en",
+      "title": "Google Chrome Help — Install and manage extensions",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "url": "https://help.instagram.com/1144624522593085",
+      "title": "Instagram — Gérer les paramètres de confidentialité des applications et sites Web connectés",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "url": "https://about.fb.com/news/2026/04/meta-account/",
+      "title": "Meta — Meta Account: The Simpler Way to Access Your Apps and Devices (avril 2026)",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/672540d3969cd13d3e62c7be9aa77b610138cee0/PRODUCT.md",
+      "title": "UnfollowTracker — fonctionnement et limites du produit dans le dépôt public",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/672540d3969cd13d3e62c7be9aa77b610138cee0/src/scripts/content.js",
+      "title": "UnfollowTracker — session Instagram, comparaison et arrêt sur restriction",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/672540d3969cd13d3e62c7be9aa77b610138cee0/src/scripts/telemetry.js",
+      "title": "UnfollowTracker — statistiques d’usage, catégories transmises et désactivation",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "url": "https://unfollow.yadulink.com/fr/privacy/",
+      "title": "UnfollowTracker — politique de confidentialité publiée, mise à jour le 25 octobre 2026",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/672540d3969cd13d3e62c7be9aa77b610138cee0/manifest.json",
+      "title": "UnfollowTracker — manifeste 1.2.0 et périmètre des permissions",
+      "checkedAt": "2026-11-02"
+    }
+  ],
+  "fr": {
+    "title": "Application unfollow Instagram gratuit : que vérifier avant d’installer ?",
+    "description": "Avant de choisir une appli unfollow gratuite, vérifiez les accès, les données et les actions proposées. Une liste de contrôle avec les limites d’UnfollowTracker.",
+    "lead": "Pour choisir une application unfollow Instagram gratuite, vérifiez son éditeur, son mode de connexion, ses autorisations, les données transmises et les actions qu’elle peut lancer. « Gratuit » et « sans mot de passe » ne garantissent pas la sécurité. Si ces informations restent floues, vous pouvez vérifier quelques comptes directement sur Instagram sans installer d’outil. Voici les points à examiner avant de donner un accès.",
+    "sections": [
+      {
+        "heading": "1. Définir le résultat dont vous avez besoin",
+        "paragraphs": [
+          "Cherchez-vous les comptes qui ne vous suivent pas en retour aujourd’hui, ou les personnes qui ont cessé de vous suivre depuis une date précise ? Le premier résultat compare vos abonnements et vos abonnés actuels. Le second exige des observations antérieures : une liste actuelle ne reconstitue pas ce passé.",
+          "Cette distinction évite d’accepter des accès supplémentaires pour une fonction qui ne répond pas à votre question. UnfollowTracker compare les listes actuelles ; il ne fournit pas d’historique des désabonnements. Pour quelques profils seulement, commencez par la vérification manuelle décrite dans le guide principal lié en fin d’article."
+        ],
+        "sources": [6, 7]
+      },
+      {
+        "heading": "2. Identifier l’éditeur derrière la fiche",
+        "paragraphs": [
+          "Comparez le nom de l’éditeur, son site, sa politique de confidentialité et la fonction annoncée. Vous devriez pouvoir comprendre qui fournit l’outil et comment le contacter avant d’installer quoi que ce soit. Si vous arrivez par une recommandation Reddit ou un comparatif, ouvrez aussi la documentation de l’éditeur : la recommandation ne décrit pas forcément la version actuelle.",
+          "Meta a documenté en 2022 des applications présentes dans des boutiques officielles qui volaient des identifiants Facebook. Cela ne désigne pas toutes les applications « unfollow », mais rappelle qu’une présence en boutique ne suffit pas à établir la sécurité. Les avis peuvent compléter vos vérifications ; ils ne remplacent pas l’examen des accès."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "3. Comprendre ce que « sans mot de passe » signifie",
+        "paragraphs": [
+          "Distinguez une connexion effectuée directement sur Instagram d’un formulaire appartenant à un outil tiers. Ne transmettez pas votre mot de passe, vos codes de connexion ou vos cookies à un service de comparaison. Une demande de copier un cookie de session doit vous faire interrompre ce parcours, même si le service se présente comme « sans mot de passe ».",
+          "Une extension peut utiliser une session déjà ouverte et disposer malgré tout d’un accès utile sur Instagram. C’est le cas d’UnfollowTracker : son script utilise la session de l’onglet pour lire les listes et envoyer un désabonnement individuel confirmé. L’absence de formulaire de connexion ne signifie donc ni absence d’accès, ni lecture seule. Consultez aussi les permissions et les actions proposées."
+        ],
+        "sources": [1, 7]
+      },
+      {
+        "heading": "4. Examiner les permissions avant de confirmer",
+        "paragraphs": [
+          "Chrome distingue notamment l’accès aux données de sites précis et celui aux données de tous les sites visités. Un avertissement ne prouve pas qu’une extension est malveillante ; il décrit une capacité à examiner. Pour un outil consacré à Instagram, demandez une justification claire si le périmètre annoncé s’étend à d’autres sites.",
+          "Voici les contrôles documentés pour Chrome sur ordinateur. Modifier un accès peut empêcher une fonction de marcher : si l’explication ne vous convient pas, renoncez à l’installation."
+        ],
+        "steps": [
+          "Lisez les autorisations affichées lors de l’ajout, avant de confirmer.",
+          "Pour une extension déjà installée, ouvrez Extensions, puis Gérer les extensions et Détails.",
+          "Examinez l’accès aux sites et comparez-le à la fonction annoncée. Vous pouvez désactiver ou supprimer l’extension depuis sa gestion."
+        ],
+        "sources": [2, 3]
+      },
+      {
+        "heading": "5. Suivre les données, pas seulement le mot « local »",
+        "paragraphs": [
+          "Avant d’accepter, cherchez des réponses à quatre questions : quelles données sont lues, où vont-elles, combien de temps restent-elles et comment les supprimer ? Distinguez les listes Instagram, les fichiers téléchargés et les statistiques d’usage. Une comparaison locale peut coexister avec une mesure d’audience ; une politique qui l’explique est plus informative qu’une simple mention « privé ».",
+          "Pour UnfollowTracker, la politique publiée décrit des listes conservées dans le navigateur, des requêtes envoyées à Instagram et des photos chargées depuis les serveurs d’images de Meta. Depuis la version 1.2.0, les installations du store transmettent aussi à Plausible des statistiques d’usage anonymes, avec des catégories et des tranches de valeurs. Elles n’incluent ni pseudonymes, ni identifiants Instagram, ni listes.",
+          "Le réglage « Partager des statistiques d’usage anonymes », activé par défaut, se désactive dans le panneau. Effacer les scans et désactiver les statistiques sont deux commandes distinctes. Les exports JSON déjà téléchargés restent des fichiers indépendants à gérer dans leur dossier."
+        ],
+        "sources": [8, 9]
+      },
+      {
+        "heading": "6. Garder la décision sur chaque action",
+        "paragraphs": [
+          "Avant de lancer une analyse, vérifiez si elle se contente de lire des données ou déclenche aussi des modifications d’abonnements. Cherchez un déclenchement explicite et une confirmation compréhensible. Écartez une offre qui vous demande de contourner une restriction Instagram pour continuer.",
+          "Dans le code d’UnfollowTracker, les scans sont manuels et les désabonnements individuels sont confirmés. Face à une limitation de requêtes, la lecture attend dans des limites définies, puis s’arrête si nécessaire ; une vérification de compte se traite directement sur Instagram. Ces mécanismes ne garantissent ni l’absence de restrictions, ni la disponibilité permanente du service. Un résultat enregistré après un échec peut rester celui d’un ancien scan."
+        ],
+        "sources": [6, 7]
+      },
+      {
+        "heading": "Un exemple fictif : choisir sans se fier à une promesse",
+        "paragraphs": [
+          "Camille veut vérifier cinq profils. Dans cet exemple entièrement fictif, une première fiche promet un nettoyage immédiat, demande un cookie et n’explique pas où les listes seront conservées. Camille s’arrête avant de fournir quoi que ce soit : les informations nécessaires à sa décision manquent.",
+          "Une seconde fiche imaginaire explique ses accès, ses données et ses commandes. Camille peut alors les comparer à son besoin, sans en déduire une garantie de sécurité. Comme seuls cinq profils l’intéressent, elle décide finalement de les vérifier directement sur Instagram. Le bon résultat de la liste de contrôle peut être de ne rien installer."
+        ]
+      },
+      {
+        "heading": "Appliquer ces critères à UnfollowTracker",
+        "paragraphs": [
+          "Ce site présente notre propre extension : les éléments ci-dessous décrivent son code public et sa politique consultés le 2 novembre 2026. Ils ne constituent pas un audit de sécurité indépendant ni un classement de la « meilleure » application."
+        ],
+        "bullets": [
+          "Périmètre : une extension gratuite sur ordinateur, conçue pour Chrome et les navigateurs Chromium compatibles avec le panneau latéral ; aucune version mobile n’est annoncée.",
+          "Accès : le manifeste 1.2.0 déclare storage, scripting et sidePanel, avec un accès aux pages https://www.instagram.com/*.",
+          "Utilisation : vous lancez le scan depuis le panneau persistant et gardez l’onglet Instagram connecté ouvert. Le dernier scan complet est conservé localement par compte.",
+          "Résultat : une comparaison actuelle, avec export JSON des non-réciproques, sans import d’archive Instagram ni historique automatique.",
+          "Contrôle : chaque désabonnement demande une confirmation individuelle. Les restrictions d’Instagram sont respectées ; aucune absence de risque n’est garantie."
+        ],
+        "sources": [6, 7, 9, 10]
+      },
+      {
+        "heading": "Retirer un accès et réagir si vous avez partagé vos identifiants",
+        "paragraphs": [
+          "Pour une application connectée à Instagram, l’aide officielle décrit sur ordinateur : Plus, Paramètres, Autorisations sites Web, Applications et sites Web, Actif, puis Supprimer à côté de l’application. Le retrait n’efface pas nécessairement les informations qu’elle avait déjà enregistrées. Une extension de navigateur se gère séparément dans Chrome : cette rubrique Instagram n’est pas un inventaire de vos extensions.",
+          "Si vous avez transmis vos identifiants à une application suspecte, supprimez-la et sécurisez votre compte depuis les réglages officiels : nouveau mot de passe unique, authentification à deux facteurs et examen des sessions. Meta recommande ces mesures après une possible compromission. Le Compte Meta remplace progressivement l’Espace Comptes depuis avril 2026 ; les intitulés peuvent donc varier.",
+          "Pour choisir une méthode adaptée à votre besoin, poursuivez avec le guide principal ci-dessous. Les deux articles proches détaillent les permissions d’UnfollowTracker et son utilisation de la session Instagram."
+        ],
+        "sources": [1, 3, 4, 5]
+      }
+    ],
+    "related": [
+      {
+        "label": "Qui ne me suit pas en retour : choisir sa méthode",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Comprendre les permissions d’UnfollowTracker",
+        "route": "blog/check-unfollowtracker-extension-permissions/"
+      },
+      {
+        "label": "Pourquoi l’extension utilise votre session sans demander de mot de passe",
+        "route": "blog/instagram-session-without-password/"
+      },
+      {
+        "label": "Lire la politique de confidentialité actuelle",
+        "route": "privacy/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Safe unfollow app for Instagram: what to check before installing",
+    "description": "Choosing a free Instagram unfollow app? Check access, data handling and actions before installing. A practical checklist, including UnfollowTracker’s limits.",
+    "lead": "To assess a safe unfollow app for Instagram, check its publisher, sign-in method, permissions, data sharing and the actions it can perform. Being free or requiring no password does not guarantee safety. If those details are unclear, you can check a few accounts directly on Instagram without installing another tool. Use the checks below before granting access.",
+    "sections": [
+      {
+        "heading": "1. Decide which result you actually need",
+        "paragraphs": [
+          "Do you want to find accounts that do not follow you back today, or people who stopped following you since a particular date? The first result compares your current following and followers. The second needs earlier observations: a current list cannot reconstruct that history.",
+          "Making this distinction helps you avoid granting extra access for a feature that does not answer your question. UnfollowTracker compares current lists; it does not provide an unfollow history. If you only want to check a few profiles, start with the manual method in the main guide linked at the end of this article."
+        ],
+        "sources": [6, 7]
+      },
+      {
+        "heading": "2. Identify the publisher behind the listing",
+        "paragraphs": [
+          "Compare the publisher’s name, website, privacy policy and advertised function. You should be able to understand who provides the tool and how to contact them before installing anything. If you found it through Reddit or a comparison article, open the publisher’s documentation too: the recommendation may not describe the current version.",
+          "In 2022, Meta documented apps in official stores that stole Facebook credentials. That finding does not describe every unfollow app, but it shows why a store listing alone cannot establish safety. Reviews can add context; they do not replace checking what access you are about to grant."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "3. Understand what “no password required” means",
+        "paragraphs": [
+          "Distinguish signing in directly on Instagram from entering credentials into a third-party tool’s form. Do not send your password, login codes or cookies to a comparison service. A request to copy a session cookie is a reason to stop, even if the service advertises itself as requiring no password.",
+          "An extension can use an existing session and still have meaningful access to Instagram. UnfollowTracker does this: its script uses the tab’s session to read lists and send an individually confirmed unfollow request. Having no sign-in form therefore means neither having no access nor being read-only. Review the permissions and available actions as well."
+        ],
+        "sources": [1, 7]
+      },
+      {
+        "heading": "4. Review permissions before confirming",
+        "paragraphs": [
+          "Chrome distinguishes access to data on specific websites from access to data on every site you visit. A warning does not prove an extension is malicious; it describes a capability to assess. For a tool focused on Instagram, look for a clear explanation if its requested scope extends to other websites.",
+          "The following checks are documented for desktop Chrome. Changing site access may stop a feature from working: if the explanation does not meet your needs, you can decide against installing."
+        ],
+        "steps": [
+          "Read the permissions displayed when adding the extension, before confirming.",
+          "For an installed extension, open Extensions, then Manage extensions and Details.",
+          "Check site access against the advertised function. You can turn the extension off or remove it through extension management."
+        ],
+        "sources": [2, 3]
+      },
+      {
+        "heading": "5. Follow the data beyond the word “local”",
+        "paragraphs": [
+          "Before accepting, look for answers to four questions: what data is read, where does it go, how long is it kept, and how can you delete it? Separate Instagram lists, downloaded files and usage statistics. Local comparison can coexist with analytics; a policy that explains this tells you more than a generic “private” label.",
+          "UnfollowTracker’s published policy describes lists kept in the browser, requests sent to Instagram and photos loaded from Meta’s image servers. Since version 1.2.0, store installations also send anonymous usage statistics to Plausible, using categories and value ranges. Those events contain no usernames, Instagram IDs or lists.",
+          "The “Share anonymous usage statistics” setting is on by default and can be turned off in the panel. Deleting scans and turning off statistics are separate controls. JSON exports already downloaded remain independent files that you manage in their folder."
+        ],
+        "sources": [8, 9]
+      },
+      {
+        "heading": "6. Keep control of each action",
+        "paragraphs": [
+          "Before starting an analysis, check whether it only reads data or also changes your following. Look for an explicit start action and a confirmation you can understand. Reject an offer that asks you to bypass an Instagram restriction to continue.",
+          "In UnfollowTracker’s code, scans start manually and individual unfollows require confirmation. If Instagram limits requests, the scan waits within defined bounds, then stops if necessary; an account verification must be handled directly on Instagram. These mechanisms guarantee neither freedom from restrictions nor permanent availability. After an unsuccessful attempt, a saved result may still come from an older scan."
+        ],
+        "sources": [6, 7]
+      },
+      {
+        "heading": "A fictional example: choosing without relying on a promise",
+        "paragraphs": [
+          "Camille wants to check five profiles. In this entirely fictional example, the first listing promises an instant cleanup, asks for a cookie and does not explain where lists will be stored. Camille stops before providing anything: information needed to make the decision is missing.",
+          "A second imaginary listing explains its access, data handling and controls. Camille can compare those details with the task, without treating them as a safety guarantee. Since only five profiles matter, Camille ultimately decides to check them directly on Instagram. A useful outcome of the checklist can be installing nothing."
+        ]
+      },
+      {
+        "heading": "Applying the checks to UnfollowTracker",
+        "paragraphs": [
+          "This website presents our own extension: the points below describe its public code and policy checked on 2 November 2026. They are not an independent security audit or a ranking of the “safest” app."
+        ],
+        "bullets": [
+          "Scope: a free desktop extension designed for Chrome and Chromium browsers that support its side panel; no mobile version is advertised.",
+          "Access: the 1.2.0 manifest declares storage, scripting and sidePanel, with page access to https://www.instagram.com/*.",
+          "Use: you start a scan from the persistent panel and keep the signed-in Instagram tab open. The latest complete scan is stored locally for each account.",
+          "Result: a current comparison, with JSON export of non-reciprocal accounts, without Instagram archive import or an automatic history.",
+          "Control: every unfollow needs individual confirmation. Instagram restrictions are respected; there is no guarantee of zero risk."
+        ],
+        "sources": [6, 7, 9, 10]
+      },
+      {
+        "heading": "Remove access and respond if you shared credentials",
+        "paragraphs": [
+          "For an app connected to Instagram, its desktop help describes More, Settings, Website permissions, Apps and websites, Active, then Remove next to the app. Removal does not necessarily erase information it already saved. A browser extension is managed separately in Chrome: Instagram’s connected-apps page is not an inventory of your browser extensions.",
+          "If you gave credentials to a suspicious app, remove it and secure your account through the official settings: a new unique password, two-factor authentication and a review of your sessions. Meta recommends these steps after a possible compromise. Meta Account has been gradually replacing Accounts Center since April 2026, so labels may differ.",
+          "To choose a method for your needs, continue with the main guide below. The two related articles explain UnfollowTracker’s permissions and its use of your Instagram session in more detail."
+        ],
+        "sources": [1, 3, 4, 5]
+      }
+    ],
+    "related": [
+      {
+        "label": "Who doesn’t follow you back: choose your method",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Understand UnfollowTracker’s permissions",
+        "route": "blog/check-unfollowtracker-extension-permissions/"
+      },
+      {
+        "label": "Why the extension uses your session without asking for a password",
+        "route": "blog/instagram-session-without-password/"
+      },
+      {
+        "label": "Read the current privacy policy",
+        "route": "privacy/"
+      }
+    ]
+  }
+}
