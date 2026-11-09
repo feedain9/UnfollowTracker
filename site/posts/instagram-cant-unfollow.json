@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "slug": "instagram-cant-unfollow",
+  "intent": "diagnostiquer un désabonnement Instagram impossible en distinguant restriction du compte, problème de session et action indisponible dans le panneau, sans inventer de quota ou de délai de déblocage",
+  "status": "published",
+  "publishedAt": "2026-11-09",
+  "updatedAt": "2026-11-09",
+  "sources": [
+    {
+      "url": "https://about.fb.com/wp-content/uploads/2023/05/Meta-Q1-2023-Quarterly-Update-on-the-Oversight-Board.pdf",
+      "title": "Meta — rapport de mai 2023 au Conseil de surveillance : restrictions et Account Status sur Instagram",
+      "checkedAt": "2026-11-09"
+    },
+    {
+      "url": "https://about.fb.com/news/2026/03/boosting-your-support-and-safety-on-metas-apps-with-ai/",
+      "title": "Meta — Boosting Your Support and Safety on Meta’s Apps With AI, mars 2026",
+      "checkedAt": "2026-11-09"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/e50a64e4f49df0f125d67d4eb2695cc5103b7d03/src/scripts/content.js",
+      "title": "UnfollowTracker — réponses Instagram, vérification de session et désabonnement individuel",
+      "checkedAt": "2026-11-09"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/e50a64e4f49df0f125d67d4eb2695cc5103b7d03/src/scripts/popup.js",
+      "title": "UnfollowTracker — disponibilité des boutons, confirmation et erreurs dans le panneau",
+      "checkedAt": "2026-11-09"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/e50a64e4f49df0f125d67d4eb2695cc5103b7d03/src/scripts/background.js",
+      "title": "UnfollowTracker — conservation des scans et mise à jour après désabonnement confirmé",
+      "checkedAt": "2026-11-09"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/e50a64e4f49df0f125d67d4eb2695cc5103b7d03/PRODUCT.md",
+      "title": "UnfollowTracker — fonctionnement et limites de l’extension dans le dépôt public",
+      "checkedAt": "2026-11-09"
+    }
+  ],
+  "fr": {
+    "title": "Pourquoi je ne peux pas me désabonner sur Instagram ?",
+    "description": "Désabonnement Instagram impossible : distinguez restriction, problème de session et bouton indisponible, puis suivez les étapes adaptées sans quota inventé.",
+    "lead": "Si vous ne pouvez pas vous désabonner sur Instagram, lisez d’abord le message affiché : une restriction Instagram, une demande de connexion et un bouton grisé dans une extension demandent des réponses différentes. Arrêtez les essais répétés, vérifiez le compte concerné et respectez les indications d’Instagram. Aucun quota par heure ni délai de déblocage universel n’est établi par les sources officielles consultées pour cet article.",
+    "sections": [
+      {
+        "heading": "1. Repérer où le désabonnement échoue",
+        "paragraphs": [
+          "Avant de chercher une limite, distinguez une action que vous ne pouvez pas lancer d’une demande envoyée puis refusée. Notez si le problème apparaît dans Instagram ou dans le panneau UnfollowTracker. Un bouton indisponible dans ce panneau ne prouve pas qu’Instagram a restreint votre compte.",
+          "Le code de l’extension distingue plusieurs situations : opération déjà en cours, compte connecté différent, limitation de requêtes, demande de connexion ou réponse inexploitable. Ce sont des pistes de diagnostic, pas une lecture des raisons internes d’Instagram. La liste des comptes non réciproques ne fournit aucun diagnostic de sanction."
+        ],
+        "steps": [
+          "Relevez le texte exact du message, l’heure et l’endroit où il apparaît.",
+          "Vérifiez le compte connecté et le pseudonyme du profil concerné.",
+          "Si Instagram affiche une restriction ou une vérification, suivez cette indication avant toute nouvelle tentative."
+        ],
+        "sources": [3, 4]
+      },
+      {
+        "heading": "2. Consulter le Statut du compte et l’aide officielle",
+        "paragraphs": [
+          "Dans son rapport de mai 2023, Meta présente le Statut du compte, ou Account Status, comme un espace permettant de comprendre les mesures et restrictions appliquées sur Instagram. Cherchez cette rubrique dans les paramètres de votre compte et lisez les indications disponibles. Ce document explique sa fonction ; il ne permet pas de conclure que chaque erreur de désabonnement y sera détaillée.",
+          "Si les informations affichées ne répondent pas à votre problème, passez par l’aide intégrée à Instagram. Meta décrit en mars 2026 son dispositif d’assistance dans Facebook et Instagram, avec un déploiement selon les pays et services disponibles. Utilisez les options effectivement proposées dans votre compte, sans considérer l’ouverture d’une demande comme une levée de restriction."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "3. Limite de désabonnement par jour ou par heure : que sait-on ?",
+        "paragraphs": [
+          "Les sources officielles consultées ici ne donnent pas de nombre de désabonnements garanti pour tous les comptes, par jour ou par heure. Un chiffre trouvé dans un forum ou un comparatif ne devient donc pas un quota officiel. Nous ne proposons pas de cadence censée vous maintenir juste sous une limite.",
+          "Distinguez aussi le nombre total de comptes suivis du nombre d’actions effectuées pendant une période. Notre article sur le plafond des abonnements, lié plus bas, traite du premier sujet. Ce plafond ne constitue pas un calendrier de désabonnement.",
+          "Les pauses prévues dans le code d’UnfollowTracker concernent notamment la lecture des listes. Elles ne définissent pas un rythme de désabonnement autorisé par Instagram. Copier ces pauses pour organiser une série d’actions serait une interprétation erronée du fonctionnement de l’extension."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "4. Respecter le message sans inventer une durée d’attente",
+        "paragraphs": [
+          "Si Instagram indique une date, une attente ou une étape à effectuer, prenez cette indication comme repère. Sans indication précise, cet article ne peut pas annoncer à quelle heure l’action redeviendra disponible. Une reconnexion réussie ne prouve pas non plus qu’une restriction d’action a disparu.",
+          "Pendant un scan, le décompte « Nouvel essai dans… » d’UnfollowTracker concerne la prochaine tentative de lecture. Il ne mesure pas la durée d’un blocage des désabonnements. Le code limite ces tentatives et ne relance pas automatiquement une demande de désabonnement refusée. Ne transformez pas l’attente en une série de tests depuis plusieurs outils."
+        ],
+        "sources": [3, 4]
+      },
+      {
+        "heading": "5. Si seul le panneau UnfollowTracker semble bloqué",
+        "paragraphs": [
+          "UnfollowTracker désactive les boutons de désabonnement lorsque le panneau est déconnecté, pendant un scan ou pendant un autre désabonnement. Attendez la fin de l’opération en cours. Pour un problème de connexion, vérifiez l’onglet Instagram associé et le compte connecté ; saisissez vos identifiants uniquement sur Instagram.",
+          "Un message demandant une connexion ou une vérification doit être traité sur Instagram. Un message signalant des résultats devenus incompatibles avec le compte ou le scan impose de retrouver le bon contexte avant d’agir. Si une nouvelle comparaison est nécessaire, lancez-la manuellement lorsque les conditions le permettent et gardez l’onglet Instagram ouvert.",
+          "L’extension compare les listes actuelles, conserve le dernier scan complet et exporte les non-réciproques en JSON. Elle n’importe pas l’archive Instagram et ne construit pas d’historique des désabonnements. Son panneau persistant ne lui donne aucun pouvoir de lever une restriction ; chaque désabonnement reste individuel et confirmé."
+        ],
+        "sources": [3, 4, 5, 6]
+      },
+      {
+        "heading": "Un exemple fictif : deux blocages, deux décisions",
+        "paragraphs": [
+          "Camille utilise le compte fictif atelier_lilas. Pendant un scan, le bouton « Ne plus suivre » de profil_ceramique est grisé. Camille attend la fin de la lecture : ce premier blocage correspond à l’état du panneau. Il ne permet pas de déduire qu’un quota Instagram a été dépassé.",
+          "Plus tard, dans ce scénario inventé, une tentative de désabonnement rencontre un message de restriction Instagram. Camille relève le message, arrête les essais et consulte les indications de son compte. Elle ne lance pas de nouveaux scans pour faire disparaître la restriction.",
+          "Ces deux observations peuvent se succéder sans avoir la même cause. L’exemple ne fixe aucun nombre d’actions autorisées, aucune durée d’attente et aucun résultat garanti. Il illustre seulement comment choisir l’étape suivante à partir du message réellement affiché."
+        ],
+        "sources": [1, 3, 4]
+      },
+      {
+        "heading": "6. Préparer une demande d’aide utile si le problème persiste",
+        "paragraphs": [
+          "Pour décrire le problème à l’assistance officielle disponible, préparez un court relevé : appareil, version de l’application ou du navigateur, heure, message exact et action tentée. Précisez si l’erreur est apparue directement dans Instagram ou seulement dans une extension. Une capture du message peut clarifier la situation ; masquez les informations sans rapport avec le problème.",
+          "Si le problème concerne le panneau, ajoutez la version d’UnfollowTracker, l’état de sa connexion et la date du dernier scan complet. Ces informations distinguent un résultat ancien d’une action récente. N’envoyez pas de mots de passe, cookies de session ou listes privées dans un rapport public. L’assistance ne justifie pas de reproduire l’erreur en boucle."
+        ],
+        "sources": [2, 4, 6]
+      },
+      {
+        "heading": "7. Après une erreur, vérifier avant de recommencer",
+        "paragraphs": [
+          "Un message d’échec ne prouve pas toujours que l’abonnement est resté inchangé. Dans UnfollowTracker, une erreur peut survenir lors de la mise à jour locale après qu’Instagram a confirmé le désabonnement. Consultez l’état du profil sur Instagram avant d’envoyer une nouvelle demande, en respectant toute restriction encore affichée.",
+          "Une ligne conservée dans un ancien résultat n’est pas une vérification en direct. De même, télécharger son JSON aujourd’hui ne rend pas le scan plus récent. Utilisez le guide de dépannage ci-dessous pour interpréter le message du panneau, puis les articles proches pour distinguer le plafond des abonnements et la confirmation d’une action individuelle."
+        ],
+        "sources": [3, 4, 5]
+      }
+    ],
+    "related": [
+      { "label": "Scan Instagram bloqué : interpréter le message du panneau", "route": "guides/scan-troubleshooting/" },
+      { "label": "Comprendre le plafond de 7 500 abonnements Instagram", "route": "blog/instagram-7500-following-limit/" },
+      { "label": "Vérifier et confirmer un désabonnement individuel", "route": "blog/confirm-individual-instagram-unfollow/" }
+    ]
+  },
+  "en": {
+    "title": "Why can’t I unfollow someone on Instagram?",
+    "description": "Can’t unfollow on Instagram? Distinguish an account restriction, a session problem and a disabled button, then choose the next step without invented limits.",
+    "lead": "If you can’t unfollow someone on Instagram, start with the message on screen: an Instagram restriction, a sign-in request and a disabled extension button need different responses. Stop repeated attempts, check which account is signed in and follow Instagram’s instructions. The official sources consulted for this article establish neither a universal hourly quota nor a guaranteed time for restrictions to end.",
+    "sections": [
+      {
+        "heading": "1. Identify where the unfollow fails",
+        "paragraphs": [
+          "Before looking for a limit, distinguish an action you cannot start from a request that was sent and rejected. Note whether the problem appears in Instagram itself or in the UnfollowTracker panel. An unavailable button in the panel does not establish that Instagram has restricted your account.",
+          "The extension’s code distinguishes several situations: an operation already running, a different signed-in account, a request limit, a sign-in requirement or an unusable response. These are diagnostic clues, not access to Instagram’s internal reasoning. The list of accounts that do not follow you back contains no account enforcement diagnosis."
+        ],
+        "steps": [
+          "Record the exact message, the time and where it appears.",
+          "Check the signed-in account and the username of the profile concerned.",
+          "If Instagram displays a restriction or verification requirement, follow that instruction before making another attempt."
+        ],
+        "sources": [3, 4]
+      },
+      {
+        "heading": "2. Check Account Status and official support",
+        "paragraphs": [
+          "In its May 2023 report, Meta describes Account Status as a place to understand enforcement and restrictions affecting an Instagram account. Look for that section in your account settings and read the information available. The document explains its purpose; it does not establish that every failed unfollow will be explained there.",
+          "If the information does not address your problem, use Instagram’s built-in help. In March 2026, Meta describes its support service within Facebook and Instagram, with availability depending on supported countries and services. Use the options actually offered for your account. Opening a support request does not itself mean a restriction has been lifted."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "3. Instagram unfollow limit per day or per hour: what is verified?",
+        "paragraphs": [
+          "The official sources consulted here provide no guaranteed number of unfollows per day or per hour that applies to every account. A number shared in a forum or comparison article therefore does not become an official allowance. We do not recommend a schedule intended to keep activity just below an assumed threshold.",
+          "Also distinguish the total number of accounts you follow from the number of actions performed within a period. Our article about the following cap, linked below, covers the first question. That cap is not an unfollowing schedule.",
+          "Some pauses in UnfollowTracker’s code apply to reading the lists. They do not define an Instagram-approved pace for unfollowing. Copying those pauses to organize a sequence of unfollows would misinterpret what the extension does. Its request handling is a product behavior, not a published Instagram quota."
+        ],
+        "sources": [1, 2, 3]
+      },
+      {
+        "heading": "4. Follow the notice without inventing a waiting period",
+        "paragraphs": [
+          "If Instagram gives you a date, a waiting instruction or a verification step, use that information as your reference. Without a specific instruction, this article cannot tell you when the action will become available again. Successfully signing in also does not establish that an action restriction has ended.",
+          "During a scan, UnfollowTracker’s “Retrying in…” countdown refers to the next attempt to read data. It does not measure how long an unfollow restriction will last. The code bounds those retries and does not automatically repeat a rejected unfollow request. Do not turn the wait into a series of tests through different tools."
+        ],
+        "sources": [3, 4]
+      },
+      {
+        "heading": "5. If only the UnfollowTracker panel appears stuck",
+        "paragraphs": [
+          "UnfollowTracker disables unfollow buttons when the panel is disconnected, during a scan or while another unfollow is running. Wait for the current operation to finish. For a connection problem, check the associated Instagram tab and the signed-in account; enter your login details only on Instagram.",
+          "A message asking you to sign in or complete verification must be handled on Instagram. If a message says the results no longer match the account or scan, restore the correct context before acting. If you need a new comparison, start it manually when conditions allow and keep the Instagram tab open throughout the scan.",
+          "The extension compares current lists, keeps the last complete scan and exports non-reciprocal accounts as JSON. It does not import Instagram archives or build an unfollow history. Its persistent panel cannot lift an Instagram restriction; each unfollow remains an individually confirmed action. A saved list is available for review, not a promise that every action is currently possible."
+        ],
+        "sources": [3, 4, 5, 6]
+      },
+      {
+        "heading": "A fictional example: two obstacles, two decisions",
+        "paragraphs": [
+          "Camille uses the fictional account lilac_studio. During a scan, the “Unfollow” button beside pottery_profile is disabled. Camille waits for the reading to finish: this first obstacle reflects the panel’s state. It does not show that an Instagram quota has been exceeded.",
+          "Later, in this invented scenario, an unfollow attempt encounters an Instagram restriction notice. Camille records the message, stops trying and checks the instructions available for the account. She does not start new scans in an attempt to make the restriction disappear.",
+          "These two observations can happen in sequence without having the same cause. The example establishes no permitted action count, waiting time or guaranteed outcome. It simply illustrates how the message actually displayed helps you decide what to do next. None of these accounts or events comes from a real Instagram session."
+        ],
+        "sources": [1, 3, 4]
+      },
+      {
+        "heading": "6. Prepare a useful support request if the problem persists",
+        "paragraphs": [
+          "To explain the issue through the official support options available, prepare a short record: device, app or browser version, time, exact message and attempted action. Say whether the error appeared directly in Instagram or only inside an extension. A screenshot of the message can help; hide information unrelated to the issue.",
+          "For a panel problem, add the UnfollowTracker version, its connection state and the last complete scan date. These details distinguish an older result from a recent action. Do not put passwords, session cookies or private account lists in a public report. Collecting useful details does not require reproducing the failure repeatedly."
+        ],
+        "sources": [2, 4, 6]
+      },
+      {
+        "heading": "7. After an error, check before trying again",
+        "paragraphs": [
+          "An error message does not always prove that the following relationship stayed unchanged. In UnfollowTracker, the local update can fail after Instagram has confirmed the unfollow. Check the profile’s state on Instagram before sending another request, while respecting any restriction still displayed.",
+          "A row remaining in an older result is not a live check. Downloading its JSON today does not make the scan more recent either. Use the troubleshooting guide below to interpret the panel’s message, then the related articles to understand the following cap and how an individual unfollow is confirmed. Reading those explanations does not require another scan or another attempt at the blocked action."
+        ],
+        "sources": [3, 4, 5]
+      }
+    ],
+    "related": [
+      { "label": "Instagram scan stuck: understand the panel’s message", "route": "guides/scan-troubleshooting/" },
+      { "label": "Understand Instagram’s 7,500 following cap", "route": "blog/instagram-7500-following-limit/" },
+      { "label": "Check and confirm an individual unfollow", "route": "blog/confirm-individual-instagram-unfollow/" }
+    ]
+  }
+}
