@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "slug": "instagram-ghost-followers-meaning",
+  "intent": "comprendre les abonnés fantômes, distinguer absence d’interaction, spam et absence de suivi en retour, puis choisir une vérification adaptée sans attribuer une mesure d’activité au scan",
+  "status": "published",
+  "publishedAt": "2026-11-11",
+  "updatedAt": "2026-11-11",
+  "sources": [
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/d08aad22dab72a1b53d4aab80f8cbbb776f92d56/src/scripts/content.js",
+      "title": "UnfollowTracker — listes lues, comparaison des identifiants et données conservées par le scan",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "url": "https://github.com/feedain9/UnfollowTracker/blob/d08aad22dab72a1b53d4aab80f8cbbb776f92d56/src/scripts/popup.js",
+      "title": "UnfollowTracker — résultat affiché, confirmation individuelle et contenu de l’export JSON",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "url": "https://about.fb.com/ltam/news/2023/12/protegiendo-a-los-creadores-de-interacciones-no-deseadas-con-nuevas-herramientas-proactivas-de-seguridad/",
+      "title": "Meta — outils de détection et de modération des abonnés suspects, annonce du 13 décembre 2023",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "url": "https://about.fb.com/news/2023/04/instagram-reels-trending-audio-and-gifts-updates/",
+      "title": "Meta — statistiques des Reels et durée de visionnage, annonce du 14 avril 2023",
+      "checkedAt": "2026-11-11"
+    },
+    {
+      "url": "https://about.fb.com/news/2024/10/best-practices-education-hub-creators-instagram/",
+      "title": "Meta — Best Practices dans le tableau de bord professionnel, annonce du 1er octobre 2024",
+      "checkedAt": "2026-11-11"
+    }
+  ],
+  "fr": {
+    "title": "Abonné fantôme Instagram : c’est quoi et que peut-on vérifier ?",
+    "description": "Un abonné silencieux n’est pas forcément un faux compte. Distinguez interactions, spam et suivi en retour, avec un exemple et des vérifications utiles.",
+    "lead": "Un « abonné fantôme » Instagram désigne couramment un compte qui vous suit mais dont vous ne voyez pas, ou peu, d’interactions avec vos contenus. Ce terme ne suffit pas à prouver que le compte est faux ou inactif. UnfollowTracker ne détecte pas les abonnés fantômes : il trouve les comptes que vous suivez et qui ne vous suivent pas en retour. Voici comment vérifier la bonne information avant de retirer quelqu’un.",
+    "sections": [
+      {
+        "heading": "Trois questions différentes derrière le mot « fantôme »",
+        "paragraphs": [
+          "Commencez par préciser ce qui vous gêne. Une personne qui ne commente pas vos publications, un profil soupçonné de spam et un compte qui ne vous suit pas en retour ne posent pas la même question. Les regrouper sous une seule étiquette peut conduire à supprimer une relation pour une raison que les données ne démontrent pas.",
+          "Dans cet article, « fantôme » décrit l’absence d’interaction que vous observez. Ce n’est pas un diagnostic d’inactivité sur tout Instagram. Une personne peut lire sans réagir ; votre observation de quelques publications ne permet pas de connaître toutes ses habitudes. Aucun seuil de jours ou de likes n’est utilisé ici pour classer automatiquement les abonnés."
+        ],
+        "bullets": [
+          "Abonné silencieux : il vous suit, mais vous ne constatez pas d’interaction dans les contenus et la période examinés.",
+          "Compte suspect : vous avez une raison de vérifier une possible activité indésirable ; l’absence de likes ne suffit pas à établir cette suspicion.",
+          "Compte non réciproque : vous le suivez, mais il est absent de la liste de vos abonnés lue par le scan. Ce résultat ne mesure pas son activité."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "Un exemple fictif : un seul résultat, aucune mesure d’activité",
+        "paragraphs": [
+          "Imaginons quatre profils fictifs autour de votre compte. Camille et Noor vous suivent, et vous les suivez. Lou vous suit, mais vous ne suivez pas Lou. Vous suivez Alex, qui ne vous suit pas. Pour cet exemple seulement, supposons que Camille et Lou n’aient laissé aucun like sur les publications observées, tandis qu’Alex et Noor aient commenté.",
+          "Un scan complet qui lit exactement ces relations affiche Alex parmi les comptes non réciproques. Camille et Noor sont absents du résultat parce que le suivi est mutuel. Lou en est absent parce que vous ne le suivez pas. Le calcul donne la même réponse avec ou sans les commentaires imaginés."
+        ],
+        "bullets": [
+          "Camille peut être silencieux tout en vous suivant en retour.",
+          "Lou peut être silencieux sans même appartenir aux comptes que vous suivez.",
+          "Alex peut interagir avec votre contenu tout en apparaissant dans les non-réciproques."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "Ce qu’un scan et son export permettent réellement de savoir",
+        "paragraphs": [
+          "Le code d’UnfollowTracker lit les abonnements et les abonnés du compte connecté, puis compare les identifiants. Il ne consulte pas les likes, les commentaires ou le temps passé à regarder vos contenus. Il ne calcule donc ni score d’engagement ni liste de personnes inactives. Relancer le scan ne lui ajoute pas ces mesures.",
+          "Le bouton « Exporter » enregistre les résultats non réciproques en JSON, avec le compte concerné et les dates du scan et de l’export. Ce fichier ne contient pas un relevé d’activité des abonnés. La recherche du panneau filtre également les non-réciproques : un nom introuvable dans ce champ n’est pas une preuve qu’il a quitté vos abonnés.",
+          "Si votre question porte sur le suivi en retour, le guide principal lié en fin d’article présente les méthodes adaptées. Si elle porte sur l’intérêt de votre audience pour vos publications, il faut examiner des informations sur ces publications."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "Vérifier une impression de silence, pas à pas",
+        "paragraphs": [
+          "Pour quelques comptes, une observation limitée et clairement formulée vaut mieux qu’une liste présentée comme certaine. Vous pouvez examiner vos propres contenus sans installer un service de « nettoyage ». L’objectif est de décrire ce que vous avez vu, puis de décider si une action est utile."
+        ],
+        "steps": [
+          "Notez votre question : voulez-vous vérifier un suivi, comprendre les réactions à un contenu ou examiner un compte indésirable ?",
+          "Choisissez les publications et la période que vous allez observer. Gardez ce périmètre écrit pour ne pas transformer une courte observation en conclusion permanente.",
+          "Consultez les interactions qu’Instagram vous permet de voir sur ces contenus. Notez les faits précis, par exemple « aucun commentaire sur les trois publications examinées ».",
+          "Si vous avez accès aux statistiques de votre compte ou de vos contenus, regardez aussi les mesures disponibles au-delà des likes. Respectez leur définition et leur période.",
+          "Vérifiez séparément la relation de suivi si elle compte dans votre décision. Une comparaison des listes répond à cette question distincte.",
+          "Laissez le statut indéterminé lorsque les informations manquent. Rien ne vous oblige à retirer une personne parce qu’elle reste silencieuse."
+        ]
+      },
+      {
+        "heading": "Peu de likes ne signifie pas que personne ne regarde",
+        "paragraphs": [
+          "Les indicateurs peuvent mesurer des comportements différents. Meta a notamment présenté des statistiques de durée totale et moyenne de visionnage pour les Reels en avril 2023. Regarder et réagir sont donc deux dimensions à distinguer ; un total de likes ne décrit pas, à lui seul, la consommation d’un contenu. Cette distinction ne permet toutefois pas d’identifier les lecteurs silencieux un par un.",
+          "Pour les comptes qui disposent du tableau de bord professionnel, Meta décrit aussi une rubrique Best Practices consacrée notamment à la compréhension des indicateurs d’engagement. Consultez les explications disponibles dans votre interface plutôt que d’appliquer une règle trouvée dans une promesse de suppression d’abonnés.",
+          "Un autre piège est purement arithmétique. Dans un exemple fictif, 50 likes divisés par 1 000 abonnés donnent 5 %. Avec les mêmes 50 likes et 800 abonnés, le calcul donne 6,25 %. Le pourcentage monte uniquement parce que le dénominateur baisse. Cela ne prouve ni une hausse du nombre de lecteurs ni une meilleure diffusion. Ce calcul illustratif n’est pas une formule officielle d’Instagram."
+        ],
+        "sources": [4, 5]
+      },
+      {
+        "heading": "Un compte suspect demande une vérification différente",
+        "paragraphs": [
+          "Dans son annonce du 13 décembre 2023, Meta décrit un espace de vérification des comptes soupçonnés de spam ou d’automatisation, avec la possibilité d’approuver ceux considérés comme légitimes. Cette modération concerne des soupçons de spam ; elle ne constitue pas une liste de personnes qui ne likent pas vos publications.",
+          "Si Instagram vous propose cette vérification, examinez les comptes et les explications avant de choisir une action. Ne transposez pas automatiquement une étiquette « fantôme » en verdict de faux compte."
+        ],
+        "sources": [3]
+      },
+      {
+        "heading": "Choisir une action et respecter les limites du résultat",
+        "paragraphs": [
+          "Se désabonner modifie les comptes que vous suivez. Retirer un abonné concerne les personnes qui vous suivent. Le bouton « Ne plus suivre » d’UnfollowTracker demande une confirmation pour un seul abonnement ; il ne supprime pas vos abonnés silencieux. Les articles liés ci-dessous expliquent la différence entre ces actions et les vérifications utiles avant d’installer un outil.",
+          "Pour comparer vos relations avec UnfollowTracker sur ordinateur, ouvrez son panneau, lancez le scan manuellement et gardez l’onglet Instagram connecté ouvert. Lisez ensuite la date du dernier scan complet. Instagram peut limiter les requêtes ou ne pas fournir certaines données ; une tentative interrompue ne transforme pas un ancien résultat en observation récente.",
+          "La liste décrit les relations lues à un moment donné. Elle ne fournit pas d’historique automatique des désabonnements, n’importe pas l’archive officielle Instagram et ne révèle pas qui regarde vos publications sans réagir. Gardez un abonnement si son contenu vous intéresse : la réciprocité et l’activité ne sont pas des obligations."
+        ],
+        "sources": [1, 2]
+      }
+    ],
+    "related": [
+      {
+        "label": "Qui ne me suit pas en retour : choisir la bonne méthode",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Se désabonner ou supprimer un abonné : comprendre l’action",
+        "route": "blog/instagram-unfollow-vs-remove-follower/"
+      },
+      {
+        "label": "Que vérifier avant d’installer une application unfollow ?",
+        "route": "blog/safe-instagram-unfollow-app-checklist/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Instagram ghost followers meaning: what can you actually check?",
+    "description": "A quiet follower is not necessarily fake. Understand engagement, suspected spam and follow-backs, with a fictional example and practical checks.",
+    "lead": "Instagram “ghost followers” commonly means accounts that follow you but show little or no interaction with your content. The label alone does not prove that an account is fake or inactive. UnfollowTracker does not detect ghost followers: it finds accounts you follow that do not follow you back. Before removing anyone, separate the question about engagement from the question about who follows whom.",
+    "sections": [
+      {
+        "heading": "Three different questions behind the word “ghost”",
+        "paragraphs": [
+          "Start by naming the concern. Someone who does not comment on your posts, an account suspected of spam and someone who does not follow you back raise different questions. Grouping them under one label can lead you to remove a relationship for a reason the available information does not establish.",
+          "Here, “ghost” describes the lack of interaction you observe. It is not a diagnosis of inactivity across Instagram. A person can read without responding; looking at a few of your posts cannot reveal all of their habits. This article uses no threshold of days or likes to classify followers automatically."
+        ],
+        "bullets": [
+          "Quiet follower: they follow you, but you see no interaction within the content and time period you examined.",
+          "Suspicious account: you have a reason to review potentially unwanted activity; an absence of likes is not enough to establish that suspicion.",
+          "Non-reciprocal account: you follow them, but they are missing from the followers list read by the scan. This result does not measure their activity."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "A fictional example: one result, no activity measurement",
+        "paragraphs": [
+          "Imagine four fictional accounts connected to yours. You and Camille follow each other, as do you and Noor. Lou follows you, but you do not follow Lou. You follow Alex, who does not follow you. For this example only, suppose Camille and Lou have left no likes on the posts examined, while Alex and Noor have commented.",
+          "A complete scan that reads exactly those relationships lists Alex as non-reciprocal. Camille and Noor are absent from the result because the follows are mutual. Lou is absent because you do not follow Lou. The calculation produces the same answer whether or not the imagined comments exist."
+        ],
+        "bullets": [
+          "Camille can be quiet while still following you back.",
+          "Lou can be quiet without even belonging to the accounts you follow.",
+          "Alex can interact with your content while appearing in the non-reciprocal results."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "What a scan and its export can actually tell you",
+        "paragraphs": [
+          "UnfollowTracker’s code reads the signed-in account’s following and follower lists, then compares account IDs. It does not inspect likes, comments or time spent watching your content. It therefore calculates neither an engagement score nor a list of inactive people. Running another scan does not add those measurements.",
+          "“Export” saves the non-reciprocal results as JSON, with the relevant account and separate scan and export dates. That file is not a follower activity report. The panel’s search also filters non-reciprocal accounts: a name missing from that search is not evidence that the person has left your followers.",
+          "If you want to check follow-backs, the main guide linked below explains suitable methods. If you want to understand your audience’s interest in your posts, you need information about those posts. A tool should make clear which question its data can answer before you use the result to make decisions."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "How to check an impression of low activity",
+        "paragraphs": [
+          "For a few accounts, a limited observation described accurately is more useful than a list presented as certain. You can review your own content without installing a follower “cleaner.” The aim is to record what you saw, then decide whether any action would help."
+        ],
+        "steps": [
+          "Write down your question: are you checking a follow, understanding responses to a post or reviewing an unwanted account?",
+          "Choose the posts and time period to examine. Keep that scope in your notes so a brief observation does not turn into a permanent judgment.",
+          "Review the interactions Instagram lets you see on those posts. Record specific facts, such as “no comments on the three posts examined.”",
+          "If you have access to account or content insights, also look at the available measures beyond likes. Check what each metric means and which period it covers.",
+          "Check the follow relationship separately if it matters to your decision. Comparing the lists answers that distinct question.",
+          "Leave the conclusion open when information is missing. You do not have to remove someone because they are quiet."
+        ]
+      },
+      {
+        "heading": "Few likes does not mean nobody is watching",
+        "paragraphs": [
+          "Metrics can describe different behaviors. For example, Meta introduced total and average watch time for Reels in April 2023. Watching and reacting are separate dimensions: a like count alone does not describe how content is consumed. That distinction does not, however, identify individual silent viewers.",
+          "For accounts with a professional dashboard, Meta also describes a Best Practices section that includes guidance on understanding engagement metrics. Read the explanations available in your interface instead of applying a rule from a service promising to remove ghost followers.",
+          "Another trap is simple arithmetic. In a fictional example, 50 likes divided by 1,000 followers gives 5%. The same 50 likes divided by 800 followers gives 6.25%. The percentage rises solely because the denominator shrinks. It proves neither an increase in readers nor wider distribution. This illustration is not an official Instagram formula. If you compare percentages over time, keep track of the underlying counts too; a nicer ratio can describe exactly the same number of interactions."
+        ],
+        "sources": [4, 5]
+      },
+      {
+        "heading": "Suspected spam calls for a different review",
+        "paragraphs": [
+          "In its December 13, 2023 announcement, Meta describes a separate review area for accounts suspected of spam or bot activity, with an option to approve accounts considered legitimate. That moderation concerns suspected spam; it is not a list of people who fail to like your posts.",
+          "If Instagram offers you this review, examine the accounts and explanations before choosing an action. Do not automatically turn a “ghost follower” label into a verdict that an account is fake."
+        ],
+        "sources": [3]
+      },
+      {
+        "heading": "Choose an action that matches the result’s limits",
+        "paragraphs": [
+          "Unfollowing changes the accounts you follow. Removing a follower concerns accounts that follow you. UnfollowTracker’s “Unfollow” button asks for confirmation for one following relationship; it does not remove quiet followers. The related articles below explain these actions and what to check before installing an unfollow tool.",
+          "To compare relationships with UnfollowTracker on a computer, open its panel, start a scan manually and keep the signed-in Instagram tab open. Then check the last complete scan date. Instagram may limit requests or withhold data; an interrupted attempt does not turn an older result into a fresh observation. Follow Instagram’s instructions if a restriction appears, rather than repeatedly trying to force a new result.",
+          "The list describes the relationships read at a particular time. It does not provide an automatic unfollow history, import Instagram’s official archive or reveal who watches your posts without reacting. You can keep following someone because you enjoy their content. Neither reciprocal following nor visible activity is an obligation, and this comparison cannot tell you what another person thinks about your posts."
+        ],
+        "sources": [1, 2]
+      }
+    ],
+    "related": [
+      {
+        "label": "Who does not follow you back: choose the right method",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Unfollow or remove a follower: understand the action",
+        "route": "blog/instagram-unfollow-vs-remove-follower/"
+      },
+      {
+        "label": "What to check before installing an unfollow app",
+        "route": "blog/safe-instagram-unfollow-app-checklist/"
+      }
+    ]
+  }
+}
