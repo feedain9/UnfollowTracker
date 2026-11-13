@@ -24,7 +24,7 @@ Règles :
 | P2 | Abonnés fantômes | abonnés fantômes instagram ; abonné fantôme c’est quoi | instagram ghost followers (check, meaning) | Nouvel article explicatif : ce que le scan voit et ne voit pas (pas de mesure d’activité) | Publié le 11/11/2026 |
 | P2 | Demandes de suivi en attente | instagram demande de suivi en attente | instagram follow request pending (how long, list) | `blog/instagram-pending-follow-requests/` | Publié le 24/10/2026 |
 | P2 | Compteurs incohérents | — | instagram follower count wrong / incorrect ; why is my instagram follower count wrong | `blog/instagram-counts-vs-non-reciprocal-accounts/` ; article distinct seulement si la cause diffère | Partiel |
-| P2 | Ordre des listes | voir abonnements instagram dans l’ordre (chronologique) | instagram following list order (meaning) | Nouvel article, uniquement avec une source officielle sur le tri des listes | À faire |
+| P2 | Ordre des listes | voir abonnements instagram dans l’ordre (chronologique) | instagram following list order (meaning) | Nouvel article, uniquement avec une source officielle sur le tri des listes | Publié le 13/11/2026 |
 
 ## À ne pas viser
 

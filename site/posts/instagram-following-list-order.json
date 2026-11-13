@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "slug": "instagram-following-list-order",
+  "intent": "comprendre le tri chronologique de ses propres abonnements Instagram, distinguer ordre de la liste et ordre du fil, et interpréter l’ordre des résultats du scan sans inventer de dates de suivi",
+  "status": "published",
+  "publishedAt": "2026-11-13",
+  "updatedAt": "2026-11-13",
+  "sources": [
+    {
+      "url": "https://x.com/instagram/status/1225479453481897985",
+      "title": "Instagram — annonce officielle du tri du plus ancien au plus récent, 6 février 2020 (consultée via l’intégration officielle X)",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "url": "https://x.com/instagram/status/1225479451183439872",
+      "title": "Instagram — annonce officielle de la gestion de la liste Following, 6 février 2020 (consultée via l’intégration officielle X)",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "url": "https://about.instagram.com/blog/announcements/favorites-and-following",
+      "title": "Instagram — Control your Instagram Feed with Favorites and Following, 23 mars 2022",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/9afc023afe7440a28b5af3f61db188bade08febf/src/scripts/content.js",
+      "title": "UnfollowTracker — lecture des listes, champs conservés et comparaison des identifiants",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/9afc023afe7440a28b5af3f61db188bade08febf/src/scripts/popup.js",
+      "title": "UnfollowTracker — ordre d’affichage, recherche et dates du fichier JSON exporté",
+      "checkedAt": "2026-11-13"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/feedain9/UnfollowTracker/9afc023afe7440a28b5af3f61db188bade08febf/PRODUCT.md",
+      "title": "UnfollowTracker — fonctionnement et limites du produit dans le dépôt public",
+      "checkedAt": "2026-11-13"
+    }
+  ],
+  "fr": {
+    "title": "Voir les abonnements Instagram dans l’ordre chronologique",
+    "description": "Où chercher le tri de vos abonnements Instagram, ce que confirme la source officielle et pourquoi l’ordre des résultats ne prouve pas une date de suivi.",
+    "lead": "Pour voir vos abonnements Instagram dans l’ordre chronologique, cherchez un tri par date dans la liste « Abonnements » de votre profil et utilisez-le s’il est proposé. Instagram a annoncé le tri du plus ancien au plus récent en 2020 ; cela ne garantit pas sa présence dans toutes les interfaces actuelles. Sans un tri explicitement fondé sur la date d’abonnement, la place d’un compte ne suffit pas à dater votre suivi.",
+    "sections": [
+      {
+        "heading": "Ce qu’Instagram a officiellement confirmé",
+        "paragraphs": [
+          "Le 6 février 2020, le compte officiel Instagram a annoncé la possibilité de classer les comptes suivis du plus ancien au plus récent. La publication précédente de ce même fil indiquait de passer par « Following », la liste de vos abonnements, pour gérer les comptes suivis. Ces annonces ont été consultées le 13 novembre 2026 via leur intégration officielle X.",
+          "Il faut distinguer la date de cette annonce de celle de notre vérification. Elle confirme l’existence de cette fonction à son lancement, sans décrire chaque interface actuelle. Elle n’explique pas non plus le calcul de l’ordre par défaut ni le classement de la liste d’un autre profil. Nous n’en déduisons donc aucune règle sur ces classements."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "Chercher le tri sur votre propre liste, pas à pas",
+        "paragraphs": [
+          "Commencez par distinguer vos abonnements, les comptes que vous suivez, de vos abonnés, les comptes qui vous suivent. Le tri annoncé concerne les premiers. Les étapes suivantes sont conditionnelles à ce que votre interface propose : aucun intitulé ou emplacement précis du bouton n’est garanti ici.",
+          "Un tri du plus ancien au plus récent place les abonnements les plus anciens avant les suivants. Si votre interface propose aussi le sens inverse, les plus récents passent avant les anciens. Dans les deux cas, un ordre relatif ne donne pas à lui seul une date de calendrier pour chaque ligne."
+        ],
+        "steps": [
+          "Ouvrez votre propre profil Instagram et vérifiez le compte connecté.",
+          "Ouvrez « Abonnements » et repérez un éventuel contrôle de tri.",
+          "Lisez les choix proposés. S’il existe un classement par date d’abonnement, sélectionnez le sens qui correspond à votre recherche.",
+          "Vérifiez le mode sélectionné avant d’interpréter la première ligne. Si aucun tri par date n’est proposé, ne supposez pas que l’ordre affiché est chronologique."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "Si le contrôle de tri est absent",
+        "paragraphs": [
+          "L’absence de ce contrôle ne permet pas, à elle seule, de diagnostiquer un bug, une restriction de votre compte ou une suppression générale de la fonction. L’annonce de 2020 ne suffit pas à départager ces possibilités. Vérifiez d’abord que vous regardez bien vos propres abonnements ; si le fonctionnement vous semble anormal, consultez l’aide proposée par Instagram.",
+          "Pour retrouver un compte précis, cherchez son pseudonyme plutôt que sa position supposée dans la liste. Si votre question porte sur une date exacte, une simple position ne constitue pas une preuve. N’attribuez pas une date aux lignes en supposant que la première correspond à aujourd’hui ou que deux lignes voisines correspondent à deux jours consécutifs."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "Un exemple fictif : les mêmes comptes, deux ordres",
+        "paragraphs": [
+          "Imaginons que Camille ait commencé à suivre atelier_silex le 10 janvier, photo_brule le 20 avril et carnet_nacre le 4 novembre 2026. Ces pseudonymes, dates et relations sont entièrement fictifs. Dans ce scénario, un classement du plus ancien au plus récent donne atelier_silex, photo_brule, puis carnet_nacre. Le classement inverse commence par carnet_nacre.",
+          "Supposons maintenant que photo_brule soit le seul des trois comptes à suivre Camille en retour. Quelle que soit la façon de ranger ses abonnements, cette relation reste la même. Changer l’ordre ne transforme pas atelier_silex ou carnet_nacre en abonnés de Camille.",
+          "Les dates de l’exemple sont connues parce que nous les avons fixées dans le scénario. Si Camille ne possède que les trois noms dans un ordre non expliqué, elle ne peut pas retrouver ces dates par déduction. De même, la première ligne ne désigne pas automatiquement un compte qui vient de se désabonner."
+        ]
+      },
+      {
+        "heading": "Le fil « Abonnements » répond à une autre question",
+        "paragraphs": [
+          "Le mot « Abonnements » peut aussi désigner une vue du fil de publications. Dans son annonce du 23 mars 2022 sur Favorites et Following, Instagram décrit un affichage chronologique des publications des comptes suivis. Le critère est alors la publication du contenu, pas le moment où vous avez commencé à suivre son auteur.",
+          "Un créateur suivi depuis longtemps peut donc publier quelque chose de récent. Voir cette publication en haut d’un fil chronologique ne signifie pas que vous venez de vous abonner à ce créateur. Pour examiner vos relations, revenez à la liste du profil ; pour lire des contenus récents, la question porte sur le fil."
+        ],
+        "sources": [3]
+      },
+      {
+        "heading": "Dans quel ordre UnfollowTracker affiche-t-il les résultats ?",
+        "paragraphs": [
+          "Le code actuel lit vos abonnements, puis vos abonnés. Il conserve les comptes suivis dont l’identifiant manque dans les abonnés lus. Cette sélection garde l’ordre de réception des abonnements, et le panneau affiche les entrées restantes sans les trier par date de suivi. Le scan ne conserve d’ailleurs aucun champ indiquant la date à laquelle vous avez suivi chaque profil.",
+          "L’ordre reçu ne doit donc pas être présenté comme une chronologie garantie. Le premier résultat est le premier compte non réciproque dans cette sélection, pas nécessairement votre abonnement le plus récent. Modifier un tri dans l’interface Instagram n’est pas une commande de tri du panneau.",
+          "La recherche du panneau filtre les noms et pseudonymes du résultat chargé. Elle permet de retrouver un profil sans lui attribuer une signification particulière parce qu’il apparaît tout en haut. Elle ne transforme pas non plus la sélection en classement d’activité, de visites ou de désabonnements passés."
+        ],
+        "sources": [4, 5]
+      },
+      {
+        "heading": "Les dates de l’export ne datent pas vos abonnements",
+        "paragraphs": [
+          "Le JSON d’UnfollowTracker contient lastScan, la date du scan, et exportDate, celle de la création du fichier. Ses lignes de profils contiennent le pseudonyme, le nom affiché et le lien du profil. Aucune date individuelle d’abonnement n’y figure. Trier ces lignes dans un autre outil ne peut pas créer l’information manquante.",
+          "Ce JSON porte sur les comptes non réciproques du résultat chargé. Il ne contient pas les deux listes complètes et ne remplace pas l’archive officielle Instagram. L’extension n’importe pas cette archive. Le guide d’export lié ci-dessous détaille les champs pour éviter de confondre une observation récente avec une relation récente."
+        ],
+        "sources": [5, 6]
+      },
+      {
+        "heading": "Choisir la vérification qui répond à votre question",
+        "paragraphs": [
+          "Pour parcourir vos abonnements par ancienneté, utilisez le tri par date si Instagram le propose dans votre interface. Pour savoir qui ne vous suit pas en retour, comparez vos abonnements et vos abonnés : leur ordre n’est pas nécessaire au calcul. Pour établir un changement dans le temps, il faut des observations datées ; déplacer une ligne ne constitue pas un historique.",
+          "Si vous choisissez UnfollowTracker pour la comparaison actuelle sur ordinateur, lancez le scan manuellement depuis son panneau persistant et gardez l’onglet Instagram connecté ouvert. Vérifiez la date du dernier scan complet. L’extension respecte les restrictions rencontrées et ne garantit pas l’accès à des données qu’Instagram ne fournit pas.",
+          "Vous pouvez consulter les résultats sans modifier vos relations. Chaque désabonnement depuis le panneau reste individuel et demande confirmation. La position d’un profil dans la liste ne constitue pas une raison de le supprimer, et la comparaison ne prouve pas qu’il vous suivait auparavant."
+        ],
+        "sources": [4, 6]
+      }
+    ],
+    "related": [
+      {
+        "label": "Qui ne me suit pas en retour : choisir sa méthode",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Retrouver un profil par nom ou pseudonyme",
+        "route": "blog/search-instagram-results-name-username/"
+      },
+      {
+        "label": "Comprendre les champs et les dates de l’export JSON",
+        "route": "blog/export-instagram-results-json/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Instagram following list order: what does it mean?",
+    "description": "Where to look for Instagram’s following sort, what the official announcement confirms, and why a result’s position does not prove when you followed an account.",
+    "lead": "To view your Instagram following list in chronological order, look for a date-based sort in Following on your own profile and use it if available. Instagram announced earliest-to-latest sorting in 2020; that does not guarantee the control is present in every current interface. Unless a sort explicitly uses the date followed, an account’s position alone is not enough to date your follow.",
+    "sections": [
+      {
+        "heading": "What Instagram officially confirmed",
+        "paragraphs": [
+          "On February 6, 2020, Instagram’s official account announced that people could sort followed accounts from earliest to latest. The preceding post in the same thread pointed to Following as the place to manage followed accounts. We consulted these announcements on November 13, 2026 through X’s official embed service.",
+          "The announcement date is different from our verification date. It confirms the feature at launch without documenting every current interface. It also does not explain how the default order is calculated or how another profile’s list is arranged. We therefore do not infer rules for those rankings from this announcement."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "Look for sorting on your own list, step by step",
+        "paragraphs": [
+          "First distinguish Following, the accounts you follow, from Followers, the accounts that follow you. The announced sort concerns Following. The steps below depend on the controls available in your interface; they do not promise a particular button label or location.",
+          "An earliest-to-latest sort puts older follows before newer ones. If your interface also offers the reverse direction, newer follows come before older ones. Either way, a relative order does not by itself provide a calendar date for each row."
+        ],
+        "steps": [
+          "Open your own Instagram profile and check which account is signed in.",
+          "Open Following and look for a sorting control.",
+          "Read the available choices. If there is a sort based on the date you followed accounts, choose the direction that matches your task.",
+          "Check the selected mode before interpreting the first row. If no date-based sort is offered, do not assume the displayed order is chronological."
+        ],
+        "sources": [1, 2]
+      },
+      {
+        "heading": "If the sort control is missing",
+        "paragraphs": [
+          "A missing control alone does not diagnose a bug, an account restriction or the removal of the feature for everyone. The 2020 announcement cannot settle those possibilities. First check that you are viewing your own Following list. If something seems wrong, consult the help available through Instagram.",
+          "To find a specific account, search for its username instead of relying on where you expect it to appear. If you need an exact date, a position is not evidence of one. Do not assign dates to rows by assuming that the first means today or that two neighboring rows represent two consecutive days."
+        ],
+        "sources": [1]
+      },
+      {
+        "heading": "A fictional example: the same accounts in two orders",
+        "paragraphs": [
+          "Imagine that Camille followed silex_studio on January 10, ember_photo on April 20 and nacre_notebook on November 4, 2026. These usernames, dates and relationships are entirely fictional. In this scenario, earliest-to-latest order gives silex_studio, ember_photo and then nacre_notebook. The reverse order starts with nacre_notebook.",
+          "Now suppose ember_photo is the only one of those three accounts that follows Camille back. However she arranges her Following list, that relationship stays the same. Changing the order does not turn silex_studio or nacre_notebook into Camille’s followers.",
+          "We know the dates because we defined them for this example. If Camille only has three names in an unexplained order, she cannot work out those dates from their positions. Likewise, the first row does not automatically identify an account that has just unfollowed her."
+        ]
+      },
+      {
+        "heading": "The Following feed answers a different question",
+        "paragraphs": [
+          "Following can also refer to a feed of posts. In its March 23, 2022 announcement about Favorites and Following, Instagram described a chronological view of posts from followed accounts. In that context, chronology concerns when content was published, rather than when you started following its author.",
+          "A creator you have followed for years can publish a new post. Seeing that post at the top of a chronological feed does not mean you recently followed the creator. To examine your connections, return to the profile list; to read recent content, the relevant question concerns the feed."
+        ],
+        "sources": [3]
+      },
+      {
+        "heading": "How are UnfollowTracker results ordered?",
+        "paragraphs": [
+          "The current code reads your following and then your followers. It selects followed accounts whose IDs are missing from the followers it read. This selection preserves the order in which followed accounts were received, and the panel displays the remaining entries without sorting them by follow date. The scan does not store a field recording when you followed each profile.",
+          "That received order should not be presented as a guaranteed timeline. The first result is the first non-reciprocal account in the selection, not necessarily your newest follow. Changing a sort inside Instagram’s interface is not a command to sort the extension’s panel.",
+          "Panel search filters names and usernames in the loaded result. It lets you find an account without attaching special significance to its position at the top. It does not turn the selection into an activity ranking, a list of profile visitors or a history of past unfollows."
+        ],
+        "sources": [4, 5]
+      },
+      {
+        "heading": "Export dates do not date your follows",
+        "paragraphs": [
+          "UnfollowTracker’s JSON includes lastScan, the scan date, and exportDate, the file creation date. Its profile entries contain a username, display name and profile link. There is no individual follow date. Sorting those rows in another tool cannot create the missing information.",
+          "This JSON covers non-reciprocal accounts in the loaded result. It does not include both complete lists and does not replace Instagram’s official data archive. The extension cannot import that archive. The export guide linked below explains the fields so that a recent observation is not mistaken for a recent relationship."
+        ],
+        "sources": [5, 6]
+      },
+      {
+        "heading": "Choose the check that answers your question",
+        "paragraphs": [
+          "To browse your own following by age, use a date-based sort if Instagram offers one in your interface. To find who does not follow you back, compare following with followers: their order is unnecessary for that calculation. Establishing a change over time requires dated observations; moving a row does not create a history.",
+          "If you choose UnfollowTracker for a current comparison on desktop, start the scan manually from its persistent side panel and keep the signed-in Instagram tab open. Check the last complete scan date. The extension respects restrictions it encounters and cannot guarantee access to information Instagram does not provide.",
+          "You can review the results without changing your connections. Each unfollow from the panel is an individual action requiring confirmation. An account’s position is not a reason to remove it, and the comparison does not prove that it ever followed you before."
+        ],
+        "sources": [4, 6]
+      }
+    ],
+    "related": [
+      {
+        "label": "Who does not follow me back: choose a method",
+        "route": "guides/non-followers/"
+      },
+      {
+        "label": "Find a profile by display name or username",
+        "route": "blog/search-instagram-results-name-username/"
+      },
+      {
+        "label": "Understand the fields and dates in the JSON export",
+        "route": "blog/export-instagram-results-json/"
+      }
+    ]
+  }
+}
